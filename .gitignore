@@ -1,0 +1,31 @@
+# OS and tooling
+.DS_Store
+node_modules/
+__pycache__/
+*.pyc
+
+# Renders and QA output: rebuilt from code
+frames/
+stills/
+*.mp4
+*.m4a
+*.zip
+dist/
+examples/*/audio/mix.wav
+
+# Third-party media: kept local only, not redistributed in this public repo
+research/references/
+research/shirusekaii/frames/
+research/shirusekaii/guide/
+skill/content-short/assets/guide/
+examples/*/audio/sfx/
+examples/*/audio/music/
+
+# Raw ElevenLabs API responses (large caches; vo.mp3 and the word timings are committed)
+examples/*/audio/vo-take-*.json
+archive/water-short/assets/eleven-*.json
+
+# Secrets never live in the repo
+*API Key*.txt
+.env
+.env.*

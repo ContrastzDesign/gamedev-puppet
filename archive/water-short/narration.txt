@@ -1,0 +1,13 @@
+The water you see in games isn’t real.
+
+Think about the last time you went swimming in GTA. Your character dives in, water splashes everywhere, and somehow your screen is still dry.
+
+So how does the game make it feel like you went underwater?
+
+First, it draws a surface that ripples and catches the light. When your character jumps in, the game adds a splash and switches them to a swimming animation.
+
+Then the camera goes under. The light changes. The sound gets muffled. Suddenly, you feel like you’re underwater too.
+
+Even those little droplets you sometimes see on the screen? The game draws them right over the picture.
+
+It’s a whole stack of tiny tricks. Put them together, and you’ll hold your breath without even realizing it.
