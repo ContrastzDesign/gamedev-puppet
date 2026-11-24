@@ -1,6 +1,12 @@
 # Game Dev Puppet
 
-A Claude skill and toolkit for making narrated YouTube Shorts about game development. Each film is a toy-like toon-3D world built in Three.js, with ink outlines, hard blue shadows and a cast of household objects with googly eyes. Every frame is a deterministic function of its frame number, rendered at exactly 24 fps.
+A skill for making narrated YouTube Shorts about game development. Each film is a toy-like toon-3D world built in Three.js, with ink outlines, hard blue shadows and a cast of household objects with googly eyes. Every frame is a deterministic function of its frame number, rendered at exactly 24 fps.
+
+## How it's meant to run
+
+This is just a skill, not a standalone app or a command-line tool. It is meant to run inside your Grokbot, which then hands the work to the Cursor agent. The agent reads `skill/content-short/SKILL.md` and follows the workflow step by step, writing and running the code itself. Nothing here is a one-click generator.
+
+The skill's flow is drawn in [`docs/skill-flow.html`](docs/skill-flow.html): eleven steps from script tab to finished Short. Download it and open it in a browser.
 
 ## What's in the repo
 

@@ -1,0 +1,426 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Content Short Skill Flow</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one reading column; the flowchart is the toy-world panel (ink outline, hard blue shadow), details follow in step order. */
+:root {
+  --bg: #edf0f5;
+  --surface: #ffffff;
+  --band: #e1e6ee;
+  --ink: #1c1c20;
+  --muted: #586070;
+  --line: #c7cfdb;
+  --shadow: #3d518c;
+  --lime: #bbd935;
+  --red: #c93b23;
+  --mint: #54d890;
+  --data: #2c63c6;
+  --on-sig: #1c1c20;
+  --f-display: "Montserrat", "Arial Black", system-ui, sans-serif;
+  --f-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121419; --surface: #1e2128; --band: #181b21; --ink: #e8eaf0; --muted: #a2a9b6;
+    --line: #343946; --shadow: #4b63b0; --red: #ff6b4f; --data: #7ea9ff; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121419; --surface: #1e2128; --band: #181b21; --ink: #e8eaf0; --muted: #a2a9b6;
+  --line: #343946; --shadow: #4b63b0; --red: #ff6b4f; --data: #7ea9ff; color-scheme: dark;
+}
+
+body { background: var(--bg); color: var(--ink); font: 400 17px/1.55 var(--f-body); }
+.wrap {
+  max-width: 840px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 44px 72px;
+  display: grid; gap: 48px;
+}
+header { display: grid; gap: 10px; }
+.eyebrow { font: 700 12px/1 var(--f-display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0; }
+h1 { font: 800 clamp(30px, 6vw, 48px)/1.02 var(--f-display); letter-spacing: -.02em; margin: 0; text-wrap: balance; }
+.lede { margin: 0; max-width: 62ch; color: var(--muted); font-size: 18px; }
+.lede b { color: var(--ink); font-weight: 600; }
+h2 { font: 800 26px/1.15 var(--f-display); letter-spacing: -.01em; margin: 0; text-wrap: balance; }
+code { font: 500 .82em var(--f-mono); }
+
+/* Flowchart panel */
+figure { margin: 0; display: grid; gap: 14px; }
+.panel { background: var(--surface); border: 2.5px solid var(--ink); border-radius: 18px; box-shadow: 7px 7px 0 var(--shadow); overflow: hidden; }
+.scroll { overflow-x: auto; padding: 14px 10px 10px; }
+.scroll svg { display: block; width: 100%; min-width: 600px; height: auto; }
+figcaption { display: grid; gap: 10px; font-size: 15px; color: var(--muted); }
+figcaption p { margin: 0; max-width: 70ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; list-style: none; margin: 0; padding: 0; font-size: 14px; }
+.legend li { display: flex; align-items: center; gap: 8px; }
+.sw { width: 26px; height: 14px; border-radius: 4px; border: 2px solid var(--ink); flex: none; }
+.sw.lime { background: var(--lime); } .sw.mint { background: var(--mint); }
+.sw.red { border: 0; height: 0; border-top: 3px solid var(--red); border-radius: 0; }
+.sw.data { border: 0; height: 0; border-top: 3px solid var(--data); border-radius: 0; }
+.sw.dash { border: 0; height: 0; border-top: 2px dashed var(--muted); border-radius: 0; }
+
+/* SVG parts */
+.band { fill: var(--band); }
+.shadow { fill: var(--shadow); }
+.box { fill: var(--surface); stroke: var(--ink); stroke-width: 2.5; }
+.box.done { fill: var(--mint); }
+.loopbox { stroke: var(--red); }
+.tag { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+.numc { fill: var(--ink); }
+.ln { stroke: var(--ink); stroke-width: 2; fill: none; }
+.ln-red { stroke: var(--red); stroke-width: 2.5; fill: none; }
+.ln-muted { stroke: var(--muted); stroke-width: 2; fill: none; }
+.rail { stroke: var(--data); stroke-width: 2.5; fill: none; }
+.dash { stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 4 4; fill: none; }
+.f-ink { fill: var(--ink); } .f-red { fill: var(--red); } .f-data { fill: var(--data); } .f-muted { fill: var(--muted); }
+.t-title { font: 700 14px var(--f-display); fill: var(--ink); }
+.t-sub { font: 400 12.5px var(--f-body); fill: var(--muted); }
+.t-num { font: 800 12.5px var(--f-display); fill: var(--surface); }
+.t-tag { font: 500 11px var(--f-mono); fill: var(--ink); }
+.t-head { font: 700 10.5px var(--f-display); letter-spacing: .12em; fill: var(--muted); }
+.t-phase { font: 800 11px var(--f-display); letter-spacing: .16em; fill: var(--muted); }
+.t-red { font: 700 11.5px var(--f-body); fill: var(--red); }
+.t-muted { font: 600 11.5px var(--f-body); fill: var(--muted); }
+.t-loop { font: 600 12.5px var(--f-body); fill: var(--ink); }
+.t-loop.strong { font-weight: 700; }
+.t-data { font: 700 12.5px var(--f-body); fill: var(--data); }
+.t-note { font: 400 12px var(--f-body); fill: var(--muted); }
+.on-sig { fill: var(--on-sig); }
+.node { cursor: pointer; outline: none; }
+.node .box { transition: fill .12s ease; }
+.node:hover .box, .node:focus-visible .box { fill: var(--lime); }
+.node:hover .t-title, .node:hover .t-sub, .node:focus-visible .t-title, .node:focus-visible .t-sub { fill: var(--on-sig); }
+.node:focus-visible .box { stroke-width: 4; }
+
+/* Step details */
+.steps-sec { display: grid; gap: 28px; }
+.phase { display: grid; gap: 4px; }
+.phase h3 { margin: 0 0 6px; font: 800 13px/1 var(--f-display); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); display: flex; gap: 10px; align-items: baseline; }
+.phase h3 small { font: 600 13px var(--f-body); letter-spacing: 0; text-transform: none; }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; }
+.step { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 16px; padding: 18px 14px; border-top: 1.5px solid var(--line); border-radius: 12px; scroll-margin-top: 20px; transition: background .2s ease; }
+.step:target { background: color-mix(in srgb, var(--lime) 30%, var(--surface)); border-top-color: transparent; }
+.badge { width: 32px; height: 32px; border-radius: 50%; background: var(--ink); color: var(--surface); display: grid; place-items: center; font: 800 14px var(--f-display); margin-top: 1px; }
+.sbody { display: grid; gap: 10px; min-width: 0; }
+.sbody h4 { margin: 0; font: 700 18px/1.25 var(--f-display); }
+.sbody p { margin: 0; max-width: 66ch; }
+.meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.k { font: 700 11px/1 var(--f-display); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-right: 4px; }
+.chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.chips li { border: 1.5px solid var(--line); background: var(--surface); border-radius: 6px; padding: 2px 8px; font-size: 15px; }
+.fail { font-size: 16px; }
+.fail .k { color: var(--red); }
+
+/* Files and rules */
+.files { display: grid; gap: 14px; }
+.tablewrap { overflow-x: auto; border: 1.5px solid var(--line); border-radius: 12px; background: var(--surface); }
+table { width: 100%; border-collapse: collapse; font-size: 15.5px; min-width: 560px; }
+th, td { text-align: left; padding: 10px 14px; vertical-align: top; border-top: 1px solid var(--line); }
+thead th { border-top: 0; font: 700 11px var(--f-display); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+td:first-child { white-space: nowrap; }
+td.num { font-variant-numeric: tabular-nums; color: var(--muted); }
+.rules { display: grid; gap: 14px; }
+.rules ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px 28px; }
+.rules li { padding-top: 10px; border-top: 2.5px solid var(--ink); }
+.rules li b { display: block; font: 700 15.5px/1.3 var(--f-display); margin-bottom: 2px; }
+footer { color: var(--muted); font-size: 14px; }
+footer p { margin: 0; }
+@media (prefers-reduced-motion: reduce) { .node .box, .step { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">content-short · version 2</p>
+    <h1>Content Short Skill Flow</h1>
+    <p class="lede">How the skill turns one script tab into a finished, captioned 24-fps Short. <b>SKILL.md</b> runs eleven steps in order and opens a reference file only at the step that needs it. The review and the z-fighting pass loop back until they pass, and nothing renders on your Mac before that.</p>
+  </header>
+
+  <figure>
+    <div class="panel"><div class="scroll">
+<svg viewBox="0 0 760 1260" role="group" aria-labelledby="chart-cap" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="f-ink"/></marker>
+<marker id="ah-red" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="f-red"/></marker>
+<marker id="ah-data" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="f-data"/></marker>
+<marker id="ah-muted" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="f-muted"/></marker>
+</defs>
+<rect x="8" y="88" width="744" height="278" rx="14" class="band"/>
+<text x="24" y="107" class="t-phase">PREP</text>
+<rect x="8" y="382" width="744" height="366" rx="14" class="band"/>
+<text x="24" y="401" class="t-phase">BUILD</text>
+<rect x="8" y="764" width="744" height="190" rx="14" class="band"/>
+<text x="24" y="783" class="t-phase">CHECK</text>
+<rect x="8" y="970" width="744" height="190" rx="14" class="band"/>
+<text x="24" y="989" class="t-phase">SHIP</text>
+<text x="116" y="18" class="t-head" text-anchor="middle">READS</text>
+<text x="366" y="18" class="t-head" text-anchor="middle">STEPS IN SKILL.md</text>
+<text x="667" y="18" class="t-head" text-anchor="middle">IF A CHECK FAILS</text>
+<rect x="241" y="37" width="260" height="44" rx="22" class="shadow"/>
+<rect x="236" y="32" width="260" height="44" rx="22" class="box"/>
+<text x="366" y="50" class="t-title" text-anchor="middle">Scripts Google Doc</text>
+<text x="366" y="67" class="t-sub" text-anchor="middle">one tab per Short</text>
+<path d="M366,76 V116" class="ln" marker-end="url(#ah)"/>
+<path d="M496,233 H556 V703" class="rail"/>
+<path d="M556,321 H496" class="rail" marker-end="url(#ah-data)"/>
+<path d="M556,703 H496" class="rail" marker-end="url(#ah-data)"/>
+<circle cx="556" cy="321" r="3.5" class="f-data"/>
+<text x="574" y="227" class="t-data">VO word timings</text>
+<text x="574" y="243" class="t-note">set the beat frames</text>
+<text x="574" y="258" class="t-note">and the caption spans</text>
+<path d="M366,174 V204" class="ln" marker-end="url(#ah)"/>
+<rect x="241" y="121" width="260" height="58" rx="12" class="shadow"/>
+<a href="#step-1" class="node" aria-label="Step 1: Lock the script">
+<rect x="236" y="116" width="260" height="58" rx="12" class="box"/>
+<circle cx="260" cy="145" r="13" class="numc"/>
+<text x="260" y="149.5" class="t-num" text-anchor="middle">1</text>
+<text x="284" y="141" class="t-title">Lock the script</text>
+<text x="284" y="159" class="t-sub">first unticked tab, as written</text>
+</a>
+<path d="M496,135 H590" class="ln-red" marker-end="url(#ah-red)"/>
+<text x="543" y="129" class="t-red" text-anchor="middle">has ✅</text>
+<path d="M590,156 H496" class="ln-muted" marker-end="url(#ah-muted)"/>
+<text x="543" y="171" class="t-muted" text-anchor="middle">next tab</text>
+<rect x="595" y="121" width="154" height="58" rx="12" class="shadow"/>
+<rect x="590" y="116" width="154" height="58" rx="12" class="box loopbox"/>
+<text x="667" y="141" class="t-loop" text-anchor="middle">Already posted:</text>
+<text x="667" y="158" class="t-loop" text-anchor="middle">skip to the next tab</text>
+<path d="M366,262 V292" class="ln" marker-end="url(#ah)"/>
+<rect x="241" y="209" width="260" height="58" rx="12" class="shadow"/>
+<a href="#step-2" class="node" aria-label="Step 2: Voice-over">
+<rect x="236" y="204" width="260" height="58" rx="12" class="box"/>
+<circle cx="260" cy="233" r="13" class="numc"/>
+<text x="260" y="237.5" class="t-num" text-anchor="middle">2</text>
+<text x="284" y="229" class="t-title">Voice-over</text>
+<text x="284" y="247" class="t-sub">paid VO with word timings</text>
+</a>
+<path d="M366,350 V410" class="ln" marker-end="url(#ah)"/>
+<path d="M196,306 L236,321" class="dash"/>
+<rect x="36" y="294" width="160" height="24" rx="6" class="tag"/>
+<text x="116" y="310" class="t-tag" text-anchor="middle">script-ladder.md</text>
+<path d="M196,336 L236,321" class="dash"/>
+<rect x="36" y="324" width="160" height="24" rx="6" class="tag"/>
+<text x="116" y="340" class="t-tag" text-anchor="middle">script-writing.md §4</text>
+<rect x="241" y="297" width="260" height="58" rx="12" class="shadow"/>
+<a href="#step-3" class="node" aria-label="Step 3: Beat map">
+<rect x="236" y="292" width="260" height="58" rx="12" class="box"/>
+<circle cx="260" cy="321" r="13" class="numc"/>
+<text x="260" y="325.5" class="t-num" text-anchor="middle">3</text>
+<text x="284" y="317" class="t-title">Beat map</text>
+<text x="284" y="335" class="t-sub">a visible change per sentence</text>
+</a>
+<path d="M366,468 V498" class="ln" marker-end="url(#ah)"/>
+<path d="M196,439 L236,439" class="dash"/>
+<rect x="36" y="427" width="160" height="24" rx="6" class="tag"/>
+<text x="116" y="443" class="t-tag" text-anchor="middle">style.md</text>
+<rect x="241" y="415" width="260" height="58" rx="12" class="shadow"/>
+<a href="#step-4" class="node" aria-label="Step 4: World and props">
+<rect x="236" y="410" width="260" height="58" rx="12" class="box"/>
+<circle cx="260" cy="439" r="13" class="numc"/>
+<text x="260" y="443.5" class="t-num" text-anchor="middle">4</text>
+<text x="284" y="435" class="t-title">World and props</text>
+<text x="284" y="453" class="t-sub">toy world, hero starts naive</text>
+</a>
+<path d="M366,556 V586" class="ln" marker-end="url(#ah)"/>
+<path d="M196,512 L236,527" class="dash"/>
+<rect x="36" y="500" width="160" height="24" rx="6" class="tag"/>
+<text x="116" y="516" class="t-tag" text-anchor="middle">characters.md</text>
+<path d="M196,542 L236,527" class="dash"/>
+<rect x="36" y="530" width="160" height="24" rx="6" class="tag"/>
+<text x="116" y="546" class="t-tag" text-anchor="middle">googly-cast.html</text>
+<rect x="241" y="503" width="260" height="58" rx="12" class="shadow"/>
+<a href="#step-5" class="node" aria-label="Step 5: Cast">
+<rect x="236" y="498" width="260" height="58" rx="12" class="box"/>
+<circle cx="260" cy="527" r="13" class="numc"/>
+<text x="260" y="531.5" class="t-num" text-anchor="middle">5</text>
+<text x="284" y="523" class="t-title">Cast</text>
+<text x="284" y="541" class="t-sub">3 objects with googly eyes</text>
+</a>
+<path d="M366,644 V674" class="ln" marker-end="url(#ah)"/>
+<path d="M196,615 L236,615" class="dash"/>
+<rect x="36" y="603" width="160" height="24" rx="6" class="tag"/>
+<text x="116" y="619" class="t-tag" text-anchor="middle">style.md</text>
+<rect x="241" y="591" width="260" height="58" rx="12" class="shadow"/>
+<a href="#step-6" class="node" aria-label="Step 6: Camera">
+<rect x="236" y="586" width="260" height="58" rx="12" class="box"/>
+<circle cx="260" cy="615" r="13" class="numc"/>
+<text x="260" y="619.5" class="t-num" text-anchor="middle">6</text>
+<text x="284" y="611" class="t-title">Camera</text>
+<text x="284" y="629" class="t-sub">eased moves of 72–192 frames</text>
+</a>
+<path d="M366,732 V792" class="ln" marker-end="url(#ah)"/>
+<path d="M196,703 L236,703" class="dash"/>
+<rect x="36" y="691" width="160" height="24" rx="6" class="tag"/>
+<text x="116" y="707" class="t-tag" text-anchor="middle">audio-captions.md</text>
+<rect x="241" y="679" width="260" height="58" rx="12" class="shadow"/>
+<a href="#step-7" class="node" aria-label="Step 7: Captions and sound">
+<rect x="236" y="674" width="260" height="58" rx="12" class="box"/>
+<circle cx="260" cy="703" r="13" class="numc"/>
+<text x="260" y="707.5" class="t-num" text-anchor="middle">7</text>
+<text x="284" y="699" class="t-title">Captions and sound</text>
+<text x="284" y="717" class="t-sub">keyword captions, SFX, songs</text>
+</a>
+<path d="M366,850 V880" class="ln" marker-end="url(#ah)"/>
+<path d="M196,821 L236,821" class="dash"/>
+<rect x="36" y="809" width="160" height="24" rx="6" class="tag"/>
+<text x="116" y="825" class="t-tag" text-anchor="middle">style-guide.html</text>
+<rect x="241" y="797" width="260" height="58" rx="12" class="shadow"/>
+<a href="#step-8" class="node" aria-label="Step 8: Review stills">
+<rect x="236" y="792" width="260" height="58" rx="12" class="box"/>
+<circle cx="260" cy="821" r="13" class="numc"/>
+<text x="260" y="825.5" class="t-num" text-anchor="middle">8</text>
+<text x="284" y="817" class="t-title">Review stills</text>
+<text x="284" y="835" class="t-sub">stills vs. the quality gate</text>
+</a>
+<path d="M496,811 H590" class="ln-red" marker-end="url(#ah-red)"/>
+<text x="543" y="805" class="t-red" text-anchor="middle">fails gate</text>
+<path d="M590,832 H496" class="ln-muted" marker-end="url(#ah-muted)"/>
+<text x="543" y="847" class="t-muted" text-anchor="middle">recheck</text>
+<rect x="595" y="797" width="154" height="58" rx="12" class="shadow"/>
+<rect x="590" y="792" width="154" height="58" rx="12" class="box loopbox"/>
+<text x="667" y="817" class="t-loop" text-anchor="middle">Fix it in the</text>
+<text x="667" y="834" class="t-loop" text-anchor="middle">editable scene</text>
+<path d="M366,938 V998" class="ln" marker-end="url(#ah)"/>
+<path d="M196,894 L236,909" class="dash"/>
+<rect x="36" y="882" width="160" height="24" rx="6" class="tag"/>
+<text x="116" y="898" class="t-tag" text-anchor="middle">z-audit.js</text>
+<path d="M196,924 L236,909" class="dash"/>
+<rect x="36" y="912" width="160" height="24" rx="6" class="tag"/>
+<text x="116" y="928" class="t-tag" text-anchor="middle">characters.md</text>
+<rect x="241" y="885" width="260" height="58" rx="12" class="shadow"/>
+<a href="#step-9" class="node" aria-label="Step 9: Z-fighting pass">
+<rect x="236" y="880" width="260" height="58" rx="12" class="box"/>
+<circle cx="260" cy="909" r="13" class="numc"/>
+<text x="260" y="913.5" class="t-num" text-anchor="middle">9</text>
+<text x="284" y="905" class="t-title">Z-fighting pass</text>
+<text x="284" y="923" class="t-sub">audit, close-ups, slow move</text>
+</a>
+<path d="M496,899 H590" class="ln-red" marker-end="url(#ah-red)"/>
+<text x="543" y="893" class="t-red" text-anchor="middle">finds a fight</text>
+<path d="M590,920 H496" class="ln-muted" marker-end="url(#ah-muted)"/>
+<text x="543" y="935" class="t-muted" text-anchor="middle">re-audit</text>
+<rect x="595" y="885" width="154" height="58" rx="12" class="shadow"/>
+<rect x="590" y="880" width="154" height="58" rx="12" class="box loopbox"/>
+<text x="667" y="905" class="t-loop" text-anchor="middle">Remodel: sink,</text>
+<text x="667" y="922" class="t-loop" text-anchor="middle">lift or stand proud</text>
+<path d="M366,1056 V1086" class="ln" marker-end="url(#ah)"/>
+<path d="M196,1027 L236,1027" class="dash"/>
+<rect x="36" y="1015" width="160" height="24" rx="6" class="tag"/>
+<text x="116" y="1031" class="t-tag" text-anchor="middle">mac-render.md</text>
+<rect x="241" y="1003" width="260" height="58" rx="12" class="shadow"/>
+<a href="#step-10" class="node" aria-label="Step 10: Final render">
+<rect x="236" y="998" width="260" height="58" rx="12" class="box"/>
+<circle cx="260" cy="1027" r="13" class="numc"/>
+<text x="260" y="1031.5" class="t-num" text-anchor="middle">10</text>
+<text x="284" y="1023" class="t-title">Final render</text>
+<text x="284" y="1041" class="t-sub">whole film on your Mac</text>
+</a>
+<path d="M496,1017 H590" class="ln-red" marker-end="url(#ah-red)"/>
+<text x="543" y="1011" class="t-red" text-anchor="middle">Mac offline</text>
+<path d="M590,1038 H496" class="ln-muted" marker-end="url(#ah-muted)"/>
+<text x="543" y="1053" class="t-muted" text-anchor="middle">reconnect</text>
+<rect x="595" y="1003" width="154" height="58" rx="12" class="shadow"/>
+<rect x="590" y="998" width="154" height="58" rx="12" class="box loopbox"/>
+<text x="667" y="1023" class="t-loop" text-anchor="middle">Report and wait,</text>
+<text x="667" y="1040" class="t-loop" text-anchor="middle">no other machine</text>
+<rect x="241" y="1091" width="260" height="58" rx="12" class="shadow"/>
+<a href="#step-11" class="node" aria-label="Step 11: Verify and deliver">
+<rect x="236" y="1086" width="260" height="58" rx="12" class="box"/>
+<circle cx="260" cy="1115" r="13" class="numc"/>
+<text x="260" y="1119.5" class="t-num" text-anchor="middle">11</text>
+<text x="284" y="1111" class="t-title">Verify and deliver</text>
+<text x="284" y="1129" class="t-sub">ffprobe and decoded frames</text>
+</a>
+<path d="M366,1144 V1190" class="ln" marker-end="url(#ah)"/>
+<rect x="241" y="1195" width="260" height="50" rx="25" class="shadow"/>
+<rect x="236" y="1190" width="260" height="50" rx="25" class="box done"/>
+<text x="366" y="1211" class="t-title on-sig" text-anchor="middle">Finished Short</text>
+<text x="366" y="1229" class="t-sub on-sig" text-anchor="middle">1080×1920 · 24 fps · MP4</text>
+<path d="M496,1215 H590" class="ln" marker-end="url(#ah)"/>
+<text x="543" y="1208" class="t-muted" text-anchor="middle">once posted</text>
+<rect x="595" y="1195" width="154" height="50" rx="12" class="shadow"/>
+<rect x="590" y="1190" width="154" height="50" rx="12" class="box"/>
+<text x="667" y="1211" class="t-loop strong" text-anchor="middle">✅ on the tab</text>
+<text x="667" y="1228" class="t-note" text-anchor="middle">in the Google Doc</text>
+</svg>
+    </div></div>
+    <figcaption>
+      <p id="chart-cap">The script tab flows down through eleven steps to a finished Short. Dashed lines show which file each step reads, the blue line shows where the voice-over's word timings are used, and red arrows are the loops that send work back before the render. Select a step to jump to its details.</p>
+      <ul class="legend">
+        <li><span class="sw lime"></span>the step you're pointing at</li>
+        <li><span class="sw red"></span>a check failed, loop back</li>
+        <li><span class="sw mint"></span>done</li>
+        <li><span class="sw data"></span>VO word timings</li>
+        <li><span class="sw dash"></span>file read at that step</li>
+      </ul>
+    </figcaption>
+  </figure>
+
+  <section class="steps-sec" aria-labelledby="steps-h">
+    <h2 id="steps-h">What happens at each step</h2>
+<section class="phase" aria-labelledby="ph-PREP"><h3 id="ph-PREP"><span>Prep</span> <small>steps 1–3</small></h3><ol class="steps">
+<li class="step" id="step-1"><span class="badge" aria-hidden="true">1</span><div class="sbody"><h4>Lock the script</h4><p>Read the tab list in the <b>Scripts for Game Dev Puppet</b> Google Doc. A tab whose name starts with ✅ is already posted, so it's skipped. Take the first unticked tab unless you name another, and lock the script exactly as written: no fact-checking and no rewriting.</p><p class="fail"><span class="k">If it fails</span> A ✅ tab is skipped; move on to the next tab.</p></div></li>
+<li class="step" id="step-2"><span class="badge" aria-hidden="true">2</span><div class="sbody"><h4>Voice-over</h4><p>Generate the paid voice-over with the approved credentials. Its transcript and word timings decide when every beat lands and how long the film runs. Timings are never estimated from a duration.</p></div></li>
+<li class="step" id="step-3"><span class="badge" aria-hidden="true">3</span><div class="sbody"><h4>Beat map</h4><p>Tag every sentence with its rung on the problem ladder (naive version, problem, fix, mechanism, name, title answer, callback, congratulations, kicker). Then look up its picture, signal colour, camera move, caption span and cast reaction. Something new appears every 24–48 frames. This map stays internal: there's no storyboard review.</p><div class="meta"><span class="k">Reads</span><ul class="chips"><li><code>references/script-ladder.md</code></li><li><code>references/script-writing.md §4</code></li></ul></div></div></li>
+</ol></section>
+<section class="phase" aria-labelledby="ph-BUILD"><h3 id="ph-BUILD"><span>Build</span> <small>steps 4–7</small></h3><ol class="steps">
+<li class="step" id="step-4"><span class="badge" aria-hidden="true">4</span><div class="sbody"><h4>World and props</h4><p>Pick one world kit: the workshop desk for most game-dev topics, the field for outdoor and physical ones. The hero object starts at its naive version and gains one part per fix. Props are built from primitives; Poly Pizza models are allowed only once they're converted to the toon look.</p><div class="meta"><span class="k">Reads</span><ul class="chips"><li><code>references/style.md</code></li></ul></div></div></li>
+<li class="step" id="step-5"><span class="badge" aria-hidden="true">5</span><div class="sbody"><h4>Cast</h4><p>Cast three household objects from one room that suits the topic, with at most one accessory for the whole cast, and build them with the googly-eye rig. Their pupils point at whatever the beat is about: the lime part, the problem, or the camera.</p><div class="meta"><span class="k">Reads</span><ul class="chips"><li><code>references/characters.md</code></li><li><code>assets/googly-cast.html</code></li></ul></div></div></li>
+<li class="step" id="step-6"><span class="badge" aria-hidden="true">6</span><div class="sbody"><h4>Camera</h4><p>Long, overlapping, eased moves of 72–192 frames: orbits, push-ins through x-ray walls and pull-backs, cycling through wide, medium and close. The camera only stops on the deliberate freeze, and the film ends on its opening composition.</p><div class="meta"><span class="k">Reads</span><ul class="chips"><li><code>references/style.md</code></li></ul></div></div></li>
+<li class="step" id="step-7"><span class="badge" aria-hidden="true">7</span><div class="sbody"><h4>Captions and sound</h4><p>Keyword captions come straight from the VO word timings, automatically. Sound effects are real recordings placed on meaningful actions, with the VO on top. Songs and music beds are downloaded with yt-dlp, and only when they're free to use or licensed.</p><div class="meta"><span class="k">Reads</span><ul class="chips"><li><code>references/audio-captions.md</code></li></ul></div></div></li>
+</ol></section>
+<section class="phase" aria-labelledby="ph-CHECK"><h3 id="ph-CHECK"><span>Check</span> <small>steps 8–9</small></h3><ol class="steps">
+<li class="step" id="step-8"><span class="badge" aria-hidden="true">8</span><div class="sbody"><h4>Review the editable film</h4><p>Render stills at every beat start, every lime, red and mint moment, every camera landing and caption change, and the first and last frames. Check each against the quality gate in SKILL.md and fix what's wrong in the editable scene. Short motion clips are allowed for pupils, pops and dust; a full draft movie isn't.</p><div class="meta"><span class="k">Reads</span><ul class="chips"><li><code>assets/style-guide.html</code></li></ul></div><p class="fail"><span class="k">If it fails</span> Fix it in the editable scene, then render those stills again.</p></div></li>
+<li class="step" id="step-9"><span class="badge" aria-hidden="true">9</span><div class="sbody"><h4>Final pass: z-fighting</h4><p>The last check before the render, because remodelling can break a pose or a contact. Run z-audit.js at each beat start until it reports nothing. Then look at close, wide and grazing-angle stills for flicker, stripes, dotted outlines and flipped faces, and render one short clip of the slowest camera move.</p><div class="meta"><span class="k">Reads</span><ul class="chips"><li><code>assets/z-audit.js</code></li><li><code>references/characters.md</code></li></ul></div><p class="fail"><span class="k">If it fails</span> Remodel the geometry, then audit again: sink solid parts, lift decals with polygonOffset, and stand outlined parts proud.</p></div></li>
+</ol></section>
+<section class="phase" aria-labelledby="ph-SHIP"><h3 id="ph-SHIP"><span>Ship</span> <small>steps 10–11</small></h3><ol class="steps">
+<li class="step" id="step-10"><span class="badge" aria-hidden="true">10</span><div class="sbody"><h4>Final render on the Mac</h4><p>Copy a self-contained render package to your MacBook Air and render the whole film as a lossless 1080×1920, 24 fps image sequence. Then encode it there with ffmpeg (H.264).</p><div class="meta"><span class="k">Reads</span><ul class="chips"><li><code>references/mac-render.md</code></li></ul></div><p class="fail"><span class="k">If it fails</span> If the Mac is offline, report it and wait. The render never moves to another machine.</p></div></li>
+<li class="step" id="step-11"><span class="badge" aria-hidden="true">11</span><div class="sbody"><h4>Verify and deliver</h4><p>Check the size, 24 fps, frame count and audio length with ffprobe, and look at decoded frames from the opening, a lime beat, a red beat, the freeze and the ending. Then deliver the file. The ✅ goes on the script tab only once the Short is actually posted.</p></div></li>
+</ol></section>
+  </section>
+
+  <section class="files" aria-labelledby="files-h">
+    <h2 id="files-h">Files in the skill</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th scope="col">File</th><th scope="col">What's in it</th><th scope="col">Steps</th></tr></thead>
+        <tbody>
+<tr><td><code>SKILL.md</code></td><td>The 11 steps, the rules and the quality gate</td><td class="num">All</td></tr>
+<tr><td><code>references/script-ladder.md</code></td><td>Reading a script as a problem ladder, and the beat-to-picture table</td><td class="num">3</td></tr>
+<tr><td><code>references/script-writing.md</code></td><td>Your short-script rules, the channel findings, the idea bank and how to stage a “Say…” script</td><td class="num">3, and whenever you ask for a script</td></tr>
+<tr><td><code>references/style.md</code></td><td>The look: rendering, palette, world kits, props, signal devices, camera and timing</td><td class="num">4, 6</td></tr>
+<tr><td><code>references/characters.md</code></td><td>Casting and the Three.js rig: toon ramp, outlines, blue shadows, googly eyes, pupil physics, z-fighting rules</td><td class="num">5, 9</td></tr>
+<tr><td><code>references/audio-captions.md</code></td><td>Keyword captions, sound rules, yt-dlp songs and the mix</td><td class="num">7</td></tr>
+<tr><td><code>references/mac-render.md</code></td><td>The final render on your Mac</td><td class="num">10</td></tr>
+<tr><td><code>assets/googly-cast.html</code></td><td>A working build of six characters in the target look</td><td class="num">5</td></tr>
+<tr><td><code>assets/style-guide.html</code></td><td>The visual source of truth, with 41 reference frames</td><td class="num">8, and any look question</td></tr>
+<tr><td><code>assets/z-audit.js</code></td><td>The z-fighting audit</td><td class="num">9</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="rules" aria-labelledby="rules-h">
+    <h2 id="rules-h">Rules that hold at every step</h2>
+    <ul>
+<li><b>One Short at a time.</b> Reuse the current project and tools; no extra platforms or tooling.</li>
+<li><b>Exactly 24 fps.</b> Shots, captions, animation, render and ffmpeg all run on the integer frame number.</li>
+<li><b>No storyboard review.</b> The beat map and shot plan stay internal.</li>
+<li><b>Captions, always.</b> Automatic keyword captions, without asking.</li>
+<li><b>Real sounds only.</b> No generated or default SFX. Silence beats filler.</li>
+<li><b>Fix before the render.</b> Feedback is handled in the editable scene; the full render happens last, on your Mac.</li>
+<li><b>Signal colours are reserved.</b> Lime names a part, red is the problem, mint means solved.</li>
+<li><b>Real objects, googly eyes.</b> Built in code from primitives. The pupils do the acting.</li>
+<li><b>The camera never parks.</b> It only holds on the deliberate freeze, and the last frame matches the first.</li>
+    </ul>
+  </section>
+
+  <footer><p>Drawn from <code>content-short/SKILL.md</code> and its reference files as they stood on 24 November 2026.</p></footer>
+</div>
+
+</body></html>
