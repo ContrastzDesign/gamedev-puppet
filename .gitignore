@@ -20,6 +20,11 @@ research/shirusekaii/guide/
 skill/content-short/assets/guide/
 examples/*/audio/sfx/
 examples/*/audio/music/
+# Exception: getting-shot-short ships its cleared bed + SFX so the Mac final can render from a fresh clone
+!examples/getting-shot-short/audio/sfx/
+!examples/getting-shot-short/audio/sfx/**
+!examples/getting-shot-short/audio/music/
+!examples/getting-shot-short/audio/music/**
 
 # Raw ElevenLabs API responses (large caches; vo.mp3 and the word timings are committed)
 examples/*/audio/vo-take-*.json

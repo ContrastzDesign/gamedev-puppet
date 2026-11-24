@@ -1,0 +1,81 @@
+{
+ "file": "vo.mp3",
+ "duration": 52.767347,
+ "fps": 24,
+ "video_end": 1267,
+ "method": "faster-whisper medium.en words aligned to spoken.txt; frames f=round(t*fps)+1; video_end=ceil(duration*fps-0.05)",
+ "lines": [
+  {
+   "line": 1,
+   "start": 0.0,
+   "end": 3.08,
+   "f_start": 1,
+   "f_end": 75,
+   "text": "Why does getting shot in a game doesn't kill you in real life?"
+  },
+  {
+   "line": 2,
+   "start": 3.78,
+   "end": 6.08,
+   "f_start": 92,
+   "f_end": 147,
+   "text": "Think about the last time you got shot in Call of duty?"
+  },
+  {
+   "line": 3,
+   "start": 6.72,
+   "end": 8.74,
+   "f_start": 162,
+   "f_end": 211,
+   "text": "Why didn’t you feel the bullets go through your screen?"
+  },
+  {
+   "line": 4,
+   "start": 9.44,
+   "end": 12.38,
+   "f_start": 228,
+   "f_end": 298,
+   "text": "Games have a clever way of making it look like you got shot."
+  },
+  {
+   "line": 5,
+   "start": 13.0,
+   "end": 23.48,
+   "f_start": 313,
+   "f_end": 565,
+   "text": "First, the bullet isn't real. The game draws an invisible line from the gun, and if it touches the invisible box around your body, that counts as a hit. This is what you call a hit box."
+  },
+  {
+   "line": 6,
+   "start": 24.0,
+   "end": 35.66,
+   "f_start": 577,
+   "f_end": 857,
+   "text": "Then the game starts tricking your brain. It adds camera shakes. The edges of the screen turn red, and blood marks appear like on your screen. And to top it of a red arrow shows you where the shot came from."
+  },
+  {
+   "line": 7,
+   "start": 36.08,
+   "end": 45.82,
+   "f_start": 867,
+   "f_end": 1101,
+   "text": "And finally the sound. A sharp thud on every hit. Your character grunts and breathes hard. As your health drops, you hear a heartbeat and everything sounds muffled."
+  },
+  {
+   "line": 8,
+   "start": 46.32,
+   "end": 49.36,
+   "f_start": 1113,
+   "f_end": 1186,
+   "text": "All of these combined make your game feel like your shot."
+  },
+  {
+   "line": 9,
+   "start": 49.84,
+   "end": 52.5,
+   "f_start": 1197,
+   "f_end": 1261,
+   "text": "But In real life, there's no respawn button."
+  }
+ ]
+}

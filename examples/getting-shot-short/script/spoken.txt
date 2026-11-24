@@ -1,0 +1,9 @@
+Why does getting shot in a game doesn't kill you in real life?
+Think about the last time you got shot in Call of duty?
+Why didn’t you feel the bullets go through your screen?
+Games have a clever way of making it look like you got shot.
+First, the bullet isn't real. The game draws an invisible line from the gun, and if it touches the invisible box around your body, that counts as a hit. This is what you call a hit box.
+Then the game starts tricking your brain. It adds camera shakes. The edges of the screen turn red, and blood marks appear like on your screen. And to top it of a red arrow shows you where the shot came from.
+And finally the sound. A sharp thud on every hit. Your character grunts and breathes hard. As your health drops, you hear a heartbeat and everything sounds muffled.
+All of these combined make your game feel like your shot.
+But In real life, there's no respawn button.

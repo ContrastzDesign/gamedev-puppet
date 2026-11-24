@@ -1,0 +1,15 @@
+{
+  "id": "USUAN1100772",
+  "title": "Sneaky Snitch",
+  "uploader": "Kevin MacLeod",
+  "artist": "Kevin MacLeod",
+  "webpage_url": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100772",
+  "source_url": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Sneaky%20Snitch.mp3",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "license_name": "CC BY 4.0",
+  "duration": 136.620408,
+  "sha256_wav": "1d2d7c1eff17398217160ada6170896333bbd9e77d37fe80bffa299b7743294a",
+  "extractor": "yt-dlp+incompetech-direct",
+  "note": "Downloaded official incompetech.com MP3 via curl and via yt-dlp (YouTube blocked by bot check). Converted to WAV with ffmpeg. See also sneaky-snitch.ytdlp.info.json from yt-dlp --write-info-json.",
+  "ytdlp_info_json": "sneaky-snitch.ytdlp.info.json"
+}

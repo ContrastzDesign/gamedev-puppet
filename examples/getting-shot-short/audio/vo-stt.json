@@ -1,0 +1,1042 @@
+{
+ "words": [
+  {
+   "type": "word",
+   "text": "Why",
+   "start": 0.0,
+   "end": 0.28
+  },
+  {
+   "type": "word",
+   "text": "does",
+   "start": 0.28,
+   "end": 0.44
+  },
+  {
+   "type": "word",
+   "text": "getting",
+   "start": 0.44,
+   "end": 0.66
+  },
+  {
+   "type": "word",
+   "text": "shot",
+   "start": 0.66,
+   "end": 1.0
+  },
+  {
+   "type": "word",
+   "text": "in",
+   "start": 1.0,
+   "end": 1.18
+  },
+  {
+   "type": "word",
+   "text": "a",
+   "start": 1.18,
+   "end": 1.4
+  },
+  {
+   "type": "word",
+   "text": "game",
+   "start": 1.4,
+   "end": 1.64
+  },
+  {
+   "type": "word",
+   "text": "doesn't",
+   "start": 1.64,
+   "end": 2.0
+  },
+  {
+   "type": "word",
+   "text": "kill",
+   "start": 2.0,
+   "end": 2.26
+  },
+  {
+   "type": "word",
+   "text": "you",
+   "start": 2.26,
+   "end": 2.44
+  },
+  {
+   "type": "word",
+   "text": "in",
+   "start": 2.44,
+   "end": 2.56
+  },
+  {
+   "type": "word",
+   "text": "real",
+   "start": 2.56,
+   "end": 2.74
+  },
+  {
+   "type": "word",
+   "text": "life?",
+   "start": 2.74,
+   "end": 3.08
+  },
+  {
+   "type": "word",
+   "text": "Think",
+   "start": 3.78,
+   "end": 3.88
+  },
+  {
+   "type": "word",
+   "text": "about",
+   "start": 3.88,
+   "end": 4.08
+  },
+  {
+   "type": "word",
+   "text": "the",
+   "start": 4.08,
+   "end": 4.26
+  },
+  {
+   "type": "word",
+   "text": "last",
+   "start": 4.26,
+   "end": 4.5
+  },
+  {
+   "type": "word",
+   "text": "time",
+   "start": 4.5,
+   "end": 4.74
+  },
+  {
+   "type": "word",
+   "text": "you",
+   "start": 4.74,
+   "end": 4.84
+  },
+  {
+   "type": "word",
+   "text": "got",
+   "start": 4.84,
+   "end": 5.02
+  },
+  {
+   "type": "word",
+   "text": "shot",
+   "start": 5.02,
+   "end": 5.34
+  },
+  {
+   "type": "word",
+   "text": "in",
+   "start": 5.34,
+   "end": 5.52
+  },
+  {
+   "type": "word",
+   "text": "Call",
+   "start": 5.52,
+   "end": 5.68
+  },
+  {
+   "type": "word",
+   "text": "of",
+   "start": 5.68,
+   "end": 5.84
+  },
+  {
+   "type": "word",
+   "text": "duty?",
+   "start": 5.84,
+   "end": 6.08
+  },
+  {
+   "type": "word",
+   "text": "Why",
+   "start": 6.72,
+   "end": 6.84
+  },
+  {
+   "type": "word",
+   "text": "didn\u2019t",
+   "start": 6.84,
+   "end": 7.02
+  },
+  {
+   "type": "word",
+   "text": "you",
+   "start": 7.02,
+   "end": 7.18
+  },
+  {
+   "type": "word",
+   "text": "feel",
+   "start": 7.18,
+   "end": 7.36
+  },
+  {
+   "type": "word",
+   "text": "the",
+   "start": 7.36,
+   "end": 7.56
+  },
+  {
+   "type": "word",
+   "text": "bullets",
+   "start": 7.56,
+   "end": 7.82
+  },
+  {
+   "type": "word",
+   "text": "go",
+   "start": 7.82,
+   "end": 8.04
+  },
+  {
+   "type": "word",
+   "text": "through",
+   "start": 8.04,
+   "end": 8.2
+  },
+  {
+   "type": "word",
+   "text": "your",
+   "start": 8.2,
+   "end": 8.42
+  },
+  {
+   "type": "word",
+   "text": "screen?",
+   "start": 8.42,
+   "end": 8.74
+  },
+  {
+   "type": "word",
+   "text": "Games",
+   "start": 9.44,
+   "end": 9.68
+  },
+  {
+   "type": "word",
+   "text": "have",
+   "start": 9.68,
+   "end": 9.86
+  },
+  {
+   "type": "word",
+   "text": "a",
+   "start": 9.86,
+   "end": 10.16
+  },
+  {
+   "type": "word",
+   "text": "clever",
+   "start": 10.16,
+   "end": 10.36
+  },
+  {
+   "type": "word",
+   "text": "way",
+   "start": 10.36,
+   "end": 10.68
+  },
+  {
+   "type": "word",
+   "text": "of",
+   "start": 10.68,
+   "end": 10.86
+  },
+  {
+   "type": "word",
+   "text": "making",
+   "start": 10.86,
+   "end": 11.06
+  },
+  {
+   "type": "word",
+   "text": "it",
+   "start": 11.06,
+   "end": 11.3
+  },
+  {
+   "type": "word",
+   "text": "look",
+   "start": 11.3,
+   "end": 11.48
+  },
+  {
+   "type": "word",
+   "text": "like",
+   "start": 11.48,
+   "end": 11.72
+  },
+  {
+   "type": "word",
+   "text": "you",
+   "start": 11.72,
+   "end": 11.84
+  },
+  {
+   "type": "word",
+   "text": "got",
+   "start": 11.84,
+   "end": 12.02
+  },
+  {
+   "type": "word",
+   "text": "shot.",
+   "start": 12.02,
+   "end": 12.38
+  },
+  {
+   "type": "word",
+   "text": "First,",
+   "start": 13.0,
+   "end": 13.26
+  },
+  {
+   "type": "word",
+   "text": "the",
+   "start": 13.62,
+   "end": 13.76
+  },
+  {
+   "type": "word",
+   "text": "bullet",
+   "start": 13.76,
+   "end": 14.02
+  },
+  {
+   "type": "word",
+   "text": "isn't",
+   "start": 14.02,
+   "end": 14.34
+  },
+  {
+   "type": "word",
+   "text": "real.",
+   "start": 14.34,
+   "end": 14.68
+  },
+  {
+   "type": "word",
+   "text": "The",
+   "start": 15.16,
+   "end": 15.26
+  },
+  {
+   "type": "word",
+   "text": "game",
+   "start": 15.26,
+   "end": 15.48
+  },
+  {
+   "type": "word",
+   "text": "draws",
+   "start": 15.48,
+   "end": 15.82
+  },
+  {
+   "type": "word",
+   "text": "an",
+   "start": 15.82,
+   "end": 16.0
+  },
+  {
+   "type": "word",
+   "text": "invisible",
+   "start": 16.0,
+   "end": 16.4
+  },
+  {
+   "type": "word",
+   "text": "line",
+   "start": 16.4,
+   "end": 16.74
+  },
+  {
+   "type": "word",
+   "text": "from",
+   "start": 16.74,
+   "end": 16.94
+  },
+  {
+   "type": "word",
+   "text": "the",
+   "start": 16.94,
+   "end": 17.16
+  },
+  {
+   "type": "word",
+   "text": "gun,",
+   "start": 17.16,
+   "end": 17.44
+  },
+  {
+   "type": "word",
+   "text": "and",
+   "start": 17.66,
+   "end": 17.92
+  },
+  {
+   "type": "word",
+   "text": "if",
+   "start": 17.92,
+   "end": 18.04
+  },
+  {
+   "type": "word",
+   "text": "it",
+   "start": 18.04,
+   "end": 18.22
+  },
+  {
+   "type": "word",
+   "text": "touches",
+   "start": 18.22,
+   "end": 18.42
+  },
+  {
+   "type": "word",
+   "text": "the",
+   "start": 18.42,
+   "end": 18.66
+  },
+  {
+   "type": "word",
+   "text": "invisible",
+   "start": 18.66,
+   "end": 19.02
+  },
+  {
+   "type": "word",
+   "text": "box",
+   "start": 19.02,
+   "end": 19.36
+  },
+  {
+   "type": "word",
+   "text": "around",
+   "start": 19.36,
+   "end": 19.62
+  },
+  {
+   "type": "word",
+   "text": "your",
+   "start": 19.62,
+   "end": 19.86
+  },
+  {
+   "type": "word",
+   "text": "body,",
+   "start": 19.86,
+   "end": 20.14
+  },
+  {
+   "type": "word",
+   "text": "that",
+   "start": 20.44,
+   "end": 20.62
+  },
+  {
+   "type": "word",
+   "text": "counts",
+   "start": 20.62,
+   "end": 20.86
+  },
+  {
+   "type": "word",
+   "text": "as",
+   "start": 20.86,
+   "end": 21.04
+  },
+  {
+   "type": "word",
+   "text": "a",
+   "start": 21.04,
+   "end": 21.16
+  },
+  {
+   "type": "word",
+   "text": "hit.",
+   "start": 21.16,
+   "end": 21.3
+  },
+  {
+   "type": "word",
+   "text": "This",
+   "start": 21.74,
+   "end": 22.0
+  },
+  {
+   "type": "word",
+   "text": "is",
+   "start": 22.0,
+   "end": 22.14
+  },
+  {
+   "type": "word",
+   "text": "what",
+   "start": 22.14,
+   "end": 22.26
+  },
+  {
+   "type": "word",
+   "text": "you",
+   "start": 22.26,
+   "end": 22.38
+  },
+  {
+   "type": "word",
+   "text": "call",
+   "start": 22.38,
+   "end": 22.74
+  },
+  {
+   "type": "word",
+   "text": "a",
+   "start": 22.74,
+   "end": 22.98
+  },
+  {
+   "type": "word",
+   "text": "hit",
+   "start": 22.98,
+   "end": 23.18
+  },
+  {
+   "type": "word",
+   "text": "box.",
+   "start": 23.18,
+   "end": 23.48
+  },
+  {
+   "type": "word",
+   "text": "Then",
+   "start": 24.0,
+   "end": 24.4
+  },
+  {
+   "type": "word",
+   "text": "the",
+   "start": 24.4,
+   "end": 24.6
+  },
+  {
+   "type": "word",
+   "text": "game",
+   "start": 24.6,
+   "end": 24.82
+  },
+  {
+   "type": "word",
+   "text": "starts",
+   "start": 24.82,
+   "end": 25.12
+  },
+  {
+   "type": "word",
+   "text": "tricking",
+   "start": 25.12,
+   "end": 25.58
+  },
+  {
+   "type": "word",
+   "text": "your",
+   "start": 25.58,
+   "end": 25.72
+  },
+  {
+   "type": "word",
+   "text": "brain.",
+   "start": 25.72,
+   "end": 26.06
+  },
+  {
+   "type": "word",
+   "text": "It",
+   "start": 26.36,
+   "end": 26.64
+  },
+  {
+   "type": "word",
+   "text": "adds",
+   "start": 26.64,
+   "end": 26.84
+  },
+  {
+   "type": "word",
+   "text": "camera",
+   "start": 26.84,
+   "end": 27.22
+  },
+  {
+   "type": "word",
+   "text": "shakes.",
+   "start": 27.22,
+   "end": 27.62
+  },
+  {
+   "type": "word",
+   "text": "The",
+   "start": 28.0,
+   "end": 28.2
+  },
+  {
+   "type": "word",
+   "text": "edges",
+   "start": 28.2,
+   "end": 28.38
+  },
+  {
+   "type": "word",
+   "text": "of",
+   "start": 28.38,
+   "end": 28.56
+  },
+  {
+   "type": "word",
+   "text": "the",
+   "start": 28.56,
+   "end": 28.74
+  },
+  {
+   "type": "word",
+   "text": "screen",
+   "start": 28.74,
+   "end": 29.02
+  },
+  {
+   "type": "word",
+   "text": "turn",
+   "start": 29.02,
+   "end": 29.28
+  },
+  {
+   "type": "word",
+   "text": "red,",
+   "start": 29.28,
+   "end": 29.72
+  },
+  {
+   "type": "word",
+   "text": "and",
+   "start": 29.72,
+   "end": 30.0
+  },
+  {
+   "type": "word",
+   "text": "blood",
+   "start": 30.0,
+   "end": 30.28
+  },
+  {
+   "type": "word",
+   "text": "marks",
+   "start": 30.28,
+   "end": 30.54
+  },
+  {
+   "type": "word",
+   "text": "appear",
+   "start": 30.54,
+   "end": 30.86
+  },
+  {
+   "type": "word",
+   "text": "like",
+   "start": 30.86,
+   "end": 31.08
+  },
+  {
+   "type": "word",
+   "text": "on",
+   "start": 31.08,
+   "end": 31.24
+  },
+  {
+   "type": "word",
+   "text": "your",
+   "start": 31.24,
+   "end": 31.36
+  },
+  {
+   "type": "word",
+   "text": "screen.",
+   "start": 31.36,
+   "end": 31.76
+  },
+  {
+   "type": "word",
+   "text": "And",
+   "start": 32.22,
+   "end": 32.28
+  },
+  {
+   "type": "word",
+   "text": "to",
+   "start": 32.28,
+   "end": 32.42
+  },
+  {
+   "type": "word",
+   "text": "top",
+   "start": 32.42,
+   "end": 32.58
+  },
+  {
+   "type": "word",
+   "text": "it",
+   "start": 32.58,
+   "end": 32.72
+  },
+  {
+   "type": "word",
+   "text": "of",
+   "start": 32.72,
+   "end": 33.0
+  },
+  {
+   "type": "word",
+   "text": "a",
+   "start": 33.26,
+   "end": 33.36
+  },
+  {
+   "type": "word",
+   "text": "red",
+   "start": 33.36,
+   "end": 33.64
+  },
+  {
+   "type": "word",
+   "text": "arrow",
+   "start": 33.64,
+   "end": 33.98
+  },
+  {
+   "type": "word",
+   "text": "shows",
+   "start": 33.98,
+   "end": 34.36
+  },
+  {
+   "type": "word",
+   "text": "you",
+   "start": 34.36,
+   "end": 34.56
+  },
+  {
+   "type": "word",
+   "text": "where",
+   "start": 34.56,
+   "end": 34.7
+  },
+  {
+   "type": "word",
+   "text": "the",
+   "start": 34.7,
+   "end": 34.88
+  },
+  {
+   "type": "word",
+   "text": "shot",
+   "start": 34.88,
+   "end": 35.06
+  },
+  {
+   "type": "word",
+   "text": "came",
+   "start": 35.06,
+   "end": 35.32
+  },
+  {
+   "type": "word",
+   "text": "from.",
+   "start": 35.32,
+   "end": 35.66
+  },
+  {
+   "type": "word",
+   "text": "And",
+   "start": 36.08,
+   "end": 36.18
+  },
+  {
+   "type": "word",
+   "text": "finally",
+   "start": 36.18,
+   "end": 36.62
+  },
+  {
+   "type": "word",
+   "text": "the",
+   "start": 36.92,
+   "end": 37.02
+  },
+  {
+   "type": "word",
+   "text": "sound.",
+   "start": 37.02,
+   "end": 37.4
+  },
+  {
+   "type": "word",
+   "text": "A",
+   "start": 37.88,
+   "end": 37.98
+  },
+  {
+   "type": "word",
+   "text": "sharp",
+   "start": 37.98,
+   "end": 38.34
+  },
+  {
+   "type": "word",
+   "text": "thud",
+   "start": 38.34,
+   "end": 38.76
+  },
+  {
+   "type": "word",
+   "text": "on",
+   "start": 38.76,
+   "end": 38.94
+  },
+  {
+   "type": "word",
+   "text": "every",
+   "start": 38.94,
+   "end": 39.24
+  },
+  {
+   "type": "word",
+   "text": "hit.",
+   "start": 39.24,
+   "end": 39.5
+  },
+  {
+   "type": "word",
+   "text": "Your",
+   "start": 39.98,
+   "end": 40.12
+  },
+  {
+   "type": "word",
+   "text": "character",
+   "start": 40.12,
+   "end": 40.44
+  },
+  {
+   "type": "word",
+   "text": "grunts",
+   "start": 40.44,
+   "end": 40.94
+  },
+  {
+   "type": "word",
+   "text": "and",
+   "start": 40.94,
+   "end": 41.18
+  },
+  {
+   "type": "word",
+   "text": "breathes",
+   "start": 41.18,
+   "end": 41.56
+  },
+  {
+   "type": "word",
+   "text": "hard.",
+   "start": 41.56,
+   "end": 41.9
+  },
+  {
+   "type": "word",
+   "text": "As",
+   "start": 42.3,
+   "end": 42.42
+  },
+  {
+   "type": "word",
+   "text": "your",
+   "start": 42.42,
+   "end": 42.56
+  },
+  {
+   "type": "word",
+   "text": "health",
+   "start": 42.56,
+   "end": 42.78
+  },
+  {
+   "type": "word",
+   "text": "drops,",
+   "start": 42.78,
+   "end": 43.16
+  },
+  {
+   "type": "word",
+   "text": "you",
+   "start": 43.42,
+   "end": 43.52
+  },
+  {
+   "type": "word",
+   "text": "hear",
+   "start": 43.52,
+   "end": 43.66
+  },
+  {
+   "type": "word",
+   "text": "a",
+   "start": 43.66,
+   "end": 43.86
+  },
+  {
+   "type": "word",
+   "text": "heartbeat",
+   "start": 43.86,
+   "end": 44.2
+  },
+  {
+   "type": "word",
+   "text": "and",
+   "start": 44.2,
+   "end": 44.54
+  },
+  {
+   "type": "word",
+   "text": "everything",
+   "start": 44.54,
+   "end": 45.0
+  },
+  {
+   "type": "word",
+   "text": "sounds",
+   "start": 45.0,
+   "end": 45.34
+  },
+  {
+   "type": "word",
+   "text": "muffled.",
+   "start": 45.34,
+   "end": 45.82
+  },
+  {
+   "type": "word",
+   "text": "All",
+   "start": 46.32,
+   "end": 46.48
+  },
+  {
+   "type": "word",
+   "text": "of",
+   "start": 46.48,
+   "end": 46.62
+  },
+  {
+   "type": "word",
+   "text": "these",
+   "start": 46.62,
+   "end": 46.8
+  },
+  {
+   "type": "word",
+   "text": "combined",
+   "start": 46.8,
+   "end": 47.26
+  },
+  {
+   "type": "word",
+   "text": "make",
+   "start": 47.26,
+   "end": 47.64
+  },
+  {
+   "type": "word",
+   "text": "your",
+   "start": 47.64,
+   "end": 47.94
+  },
+  {
+   "type": "word",
+   "text": "game",
+   "start": 47.94,
+   "end": 48.26
+  },
+  {
+   "type": "word",
+   "text": "feel",
+   "start": 48.26,
+   "end": 48.62
+  },
+  {
+   "type": "word",
+   "text": "like",
+   "start": 48.62,
+   "end": 48.88
+  },
+  {
+   "type": "word",
+   "text": "your",
+   "start": 48.88,
+   "end": 49.02
+  },
+  {
+   "type": "word",
+   "text": "shot.",
+   "start": 49.02,
+   "end": 49.36
+  },
+  {
+   "type": "word",
+   "text": "But",
+   "start": 49.84,
+   "end": 50.08
+  },
+  {
+   "type": "word",
+   "text": "In",
+   "start": 50.08,
+   "end": 50.38
+  },
+  {
+   "type": "word",
+   "text": "real",
+   "start": 50.38,
+   "end": 50.58
+  },
+  {
+   "type": "word",
+   "text": "life,",
+   "start": 50.58,
+   "end": 50.88
+  },
+  {
+   "type": "word",
+   "text": "there's",
+   "start": 51.28,
+   "end": 51.5
+  },
+  {
+   "type": "word",
+   "text": "no",
+   "start": 51.5,
+   "end": 51.68
+  },
+  {
+   "type": "word",
+   "text": "respawn",
+   "start": 51.68,
+   "end": 52.14
+  },
+  {
+   "type": "word",
+   "text": "button.",
+   "start": 52.14,
+   "end": 52.5
+  }
+ ]
+}

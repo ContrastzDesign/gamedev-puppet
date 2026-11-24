@@ -780,9 +780,9 @@ const CAM = [
   [1113, [0.5, 5.4, 9.8], [0, 1.2, 0.4]],
   [1150, [-0.6, 4.0, 8.2], [-1.6, 1.6, -1.0]],
   [1186, [0.2, 4.6, 9.0], [0, 1.0, 0.8]],
-  // KICKER f1197: respawn button
-  [1197, [1.5, 2.6, 6.4], [0.15, 0.55, 3.45]],
-  [1237, [1.0, 2.1, 5.5], [0.1, 0.5, 3.5]],
+  // KICKER f1197: respawn button — medium three-quarter so plunger + RESPAWN placard fill the frame
+  [1197, [1.8, 2.4, 5.8], [0.1, 0.45, 3.55]],
+  [1237, [1.2, 2.0, 5.2], [0.1, 0.4, 3.55]],
   [1260, [0.5, 5.8, 10.5], [0, 1.2, 0.4]],
 ].map(([f, p, t]) => ({ s: sOf(f), p: V3(...p), t: V3(...t) }));
 
@@ -834,11 +834,17 @@ function poseWorld(f, s) {
   camera.lookAt(_camT);
 
   // set visibility by beat: hide desk room/cast during full-frame arena cuts;
-  // during the sound beat, park the cast so the toy devices read as the hero
+  // during the sound beat, park the cast so the toy devices read as the hero;
+  // during the kicker, slide the cast aside so the RESPAWN button is the hero
   const inArenaCut = arenaCut(f);
   const inSound = f >= 867 && f < 1113;
+  const inKicker = f >= 1190 && f < 1260;
   if (roomRoot) roomRoot.visible = !inArenaCut;
   for (const ch of cast) ch.root.visible = !inArenaCut && !inSound;
+  if (inKicker) {
+    // RESPAWN button is the hero — hide the cast for a clean plate
+    for (const ch of cast) ch.root.visible = false;
+  }
 
   soundSet.visible = (f >= 860 && f < 1115);
   if (soundSet.visible) {

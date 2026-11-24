@@ -1,0 +1,155 @@
+1
+00:00:00,000 --> 00:00:01,180
+Why does getting shot in
+
+2
+00:00:01,180 --> 00:00:02,440
+a game doesn't kill you
+
+3
+00:00:02,440 --> 00:00:03,080
+in real life
+
+4
+00:00:03,780 --> 00:00:04,740
+Think about the last time
+
+5
+00:00:04,740 --> 00:00:05,680
+you got shot in Call
+
+6
+00:00:05,680 --> 00:00:06,080
+of duty
+
+7
+00:00:06,720 --> 00:00:07,560
+Why didn’t you feel the
+
+8
+00:00:07,560 --> 00:00:08,740
+bullets go through your screen
+
+9
+00:00:09,440 --> 00:00:10,680
+Games have a clever way
+
+10
+00:00:10,680 --> 00:00:11,720
+of making it look like
+
+11
+00:00:11,720 --> 00:00:12,380
+you got shot
+
+12
+00:00:13,000 --> 00:00:14,680
+First, the bullet isn't real
+
+13
+00:00:15,160 --> 00:00:16,400
+The game draws an invisible
+
+14
+00:00:16,400 --> 00:00:17,920
+line from the gun, and
+
+15
+00:00:17,920 --> 00:00:19,020
+if it touches the invisible
+
+16
+00:00:19,020 --> 00:00:20,620
+box around your body, that
+
+17
+00:00:20,620 --> 00:00:22,000
+counts as a hit. This
+
+18
+00:00:22,000 --> 00:00:22,980
+is what you call a
+
+19
+00:00:22,980 --> 00:00:23,480
+hit box
+
+20
+00:00:24,000 --> 00:00:25,580
+Then the game starts tricking
+
+21
+00:00:25,580 --> 00:00:27,220
+your brain. It adds camera
+
+22
+00:00:27,220 --> 00:00:28,740
+shakes. The edges of the
+
+23
+00:00:28,740 --> 00:00:30,280
+screen turn red, and blood
+
+24
+00:00:30,280 --> 00:00:31,360
+marks appear like on your
+
+25
+00:00:31,360 --> 00:00:32,720
+screen. And to top it
+
+26
+00:00:32,720 --> 00:00:34,360
+of a red arrow shows
+
+27
+00:00:34,360 --> 00:00:35,320
+you where the shot came
+
+28
+00:00:35,320 --> 00:00:35,660
+from
+
+29
+00:00:36,080 --> 00:00:37,980
+And finally the sound. A
+
+30
+00:00:37,980 --> 00:00:39,500
+sharp thud on every hit
+
+31
+00:00:39,980 --> 00:00:41,560
+Your character grunts and breathes
+
+32
+00:00:41,560 --> 00:00:43,160
+hard. As your health drops
+
+33
+00:00:43,420 --> 00:00:44,540
+you hear a heartbeat and
+
+34
+00:00:44,540 --> 00:00:45,820
+everything sounds muffled
+
+35
+00:00:46,320 --> 00:00:47,640
+All of these combined make
+
+36
+00:00:47,640 --> 00:00:49,020
+your game feel like your
+
+37
+00:00:49,020 --> 00:00:49,360
+shot
+
+38
+00:00:49,840 --> 00:00:51,500
+But In real life, there's
+
+39
+00:00:51,500 --> 00:00:52,500
+no respawn button
