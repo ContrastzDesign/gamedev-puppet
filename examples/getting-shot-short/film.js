@@ -92,6 +92,8 @@ function spawn(kind, pos, vel, size, life) {
   let p = parts.find((q) => !q.alive && q.kind === kind);
   if (!p) {
     const m = new THREE.Mesh(puffGeo, puffMats[0]);
+    m.name = kind === 'dust' ? 'dust-puff' : `${kind}-puff`;
+    m.userData.particle = true;
     addOutline(m);
     p = { kind, mesh: m, vel: new THREE.Vector3() };
     scene.add(m); parts.push(p);
@@ -267,15 +269,20 @@ function updateChar(ch, dt) {
 }
 function hop(ch, v) { const s = ch.st; if (!s.air) { s.vy = v; s.air = true; } }
 
-// 1. Mug (coral) — front left
+// 1. Mug (plum — keep cast off signal red) — front left
 const mug = character({
-  key: 'mug', x: -1.35, z: 2.7, ry: 0.28, dy: 0.0005, w: 1.25, d: 0.84, h: 1.0, hopV: 3.6, seed: 101,
+  key: 'mug', x: -1.35, z: 2.7, ry: 0.28, dy: 0, w: 1.25, d: 0.84, h: 1.0, hopV: 3.6, seed: 101,
   build(ch) {
     const r = 0.42, Hm = 1.0, V2 = (x, y) => new THREE.Vector2(x, y);
-    const prof = [V2(0, 0), V2(r - 0.05, 0), V2(r, 0.05), V2(r, Hm - 0.012), V2(r - 0.014, Hm), V2(r - 0.05, Hm), V2(r - 0.064, Hm - 0.016), V2(r - 0.064, 0.1), V2(0, 0.1)];
-    add(ch, mesh(new THREE.LatheGeometry(prof, 48), toon(COL.coral, { side: THREE.DoubleSide }), { })).name = 'mug-body';
-    add(ch, mesh(new THREE.CircleGeometry(r - 0.064, 40), toon(0x5b3a29), { p: [0, Hm * 0.8, 0], r: [-Math.PI / 2, 0, 0], line: false, shadow: false })).name = 'mug-coffee';
-    add(ch, mesh(new THREE.TorusGeometry(0.25, 0.066, 12, 28, Math.PI), toon(COL.coral), { p: [r - 0.03, Hm * 0.5, 0], r: [0, 0, -Math.PI / 2] })).name = 'mug-handle';
+    const mugCol = COL.plum;
+    // open bottom (no buried disc) so the mat can't fight a coplanar underside
+    const prof = [V2(r - 0.05, 0), V2(r, 0.05), V2(r, Hm - 0.012), V2(r - 0.014, Hm), V2(r - 0.05, Hm), V2(r - 0.064, Hm - 0.016), V2(r - 0.064, 0.1), V2(0, 0.1)];
+    const body = mesh(new THREE.LatheGeometry(prof, 48), toon(mugCol, { side: THREE.DoubleSide }), { });
+    body.name = 'mug-body'; add(ch, body);
+    const coffee = mesh(new THREE.CircleGeometry(r - 0.064, 40), toon(0x5b3a29), { p: [0, Hm * 0.8, 0], r: [-Math.PI / 2, 0, 0], line: false, shadow: false });
+    coffee.name = 'mug-coffee'; add(ch, coffee);
+    const handle = mesh(new THREE.TorusGeometry(0.25, 0.066, 12, 28, Math.PI), toon(mugCol), { p: [r - 0.03, Hm * 0.5, 0], r: [0, 0, -Math.PI / 2] });
+    handle.name = 'mug-handle'; add(ch, handle);
     roundEyes(ch, 0.12, r, 0.7, 0.35);
     ch.update = (dt) => {
       if (ch.steamT <= 0) return;
@@ -293,7 +300,7 @@ const mug = character({
 
 // 2. Gamepad / controller (cream body, dark face) — front right
 const pad = character({
-  key: 'pad', x: 1.35, z: 2.65, ry: -0.32, dy: 0.002, w: 1.4, d: 0.95, h: 0.55, hopV: 3.8, seed: 202,
+  key: 'pad', x: 1.35, z: 2.65, ry: -0.32, dy: 0.0005, w: 1.4, d: 0.95, h: 0.55, hopV: 3.8, seed: 202,
   build(ch) {
     const bodyM = toon(COL.cream), faceM = toon(COL.dark), btnM = toon(COL.sky), stickM = toon(COL.steel);
     add(ch, mesh(new RoundedBoxGeometry(1.35, 0.32, 0.82, 4, 0.08), bodyM, { p: [0, 0.18, 0] })).name = 'pad-body';
@@ -303,34 +310,33 @@ const pad = character({
         p: [sx * 0.58, 0.12, -0.28], r: [0.35, 0, sx * -0.15],
       })).name = 'pad-grip';
     }
-    // dark face plate (sunk slightly)
-    add(ch, mesh(new RoundedBoxGeometry(1.05, 0.06, 0.55, 2, 0.03), faceM, { p: [0, 0.34 - 0.008, 0.06] })).name = 'pad-face';
-    // sticks
-    for (const [sx, sz] of [[-0.28, 0.02], [0.28, -0.12]]) {
-      add(ch, mesh(new THREE.CylinderGeometry(0.07, 0.08, 0.06, 16), stickM, { p: [sx, 0.38, sz] })).name = 'pad-stick-base';
-      add(ch, mesh(new THREE.SphereGeometry(0.09, 16, 12), stickM, { p: [sx, 0.44, sz] })).name = 'pad-stick';
+    // dark face plate (small bevel so the top stays a flat sink target)
+    add(ch, mesh(new RoundedBoxGeometry(1.05, 0.06, 0.55, 2, 0.01), faceM, { p: [0, 0.34 - 0.012, 0.06] })).name = 'pad-face';
+    // sticks — clear of dpad in xz; bases sink into face by >= LIFT
+    for (const [sx, sz] of [[-0.22, -0.06], [0.30, -0.14]]) {
+      add(ch, mesh(new THREE.CylinderGeometry(0.07, 0.08, 0.06, 16), stickM, { p: [sx, 0.380, sz] })).name = 'pad-stick-base';
+      add(ch, mesh(new THREE.SphereGeometry(0.09, 16, 12), stickM, { p: [sx, 0.440, sz] })).name = 'pad-stick';
     }
-    // d-pad
-    const dpad = new THREE.Group(); dpad.position.set(-0.42, 0.38, 0.14); dpad.name = 'pad-dpad';
-    dpad.add(mesh(new RoundedBoxGeometry(0.22, 0.05, 0.08, 1, 0.015), toon(COL.dark), { p: [0, 0, 0] }));
-    dpad.add(mesh(new RoundedBoxGeometry(0.08, 0.05, 0.22, 1, 0.015), toon(COL.dark), { p: [0, 0, 0] }));
+    // d-pad — short enough to sink into the face without reaching the body top (0.34)
+    const dpad = new THREE.Group(); dpad.position.set(-0.42, 0.366, 0.14); dpad.name = 'pad-dpad';
+    dpad.add(mesh(new THREE.BoxGeometry(0.22, 0.036, 0.08), toon(COL.dark), { p: [0, 0, 0] }));
+    dpad.add(mesh(new THREE.BoxGeometry(0.08, 0.036, 0.22), toon(COL.dark), { p: [0, LIFT, 0] }));
     ch.body.add(dpad);
-    // face buttons (diamond)
     const cols = [COL.sky, COL.saffron, COL.aqua, COL.peach];
     [[0.42, 0.22], [0.52, 0.12], [0.32, 0.12], [0.42, 0.02]].forEach(([x, z], i) => {
-      add(ch, mesh(new THREE.CylinderGeometry(0.055, 0.055, 0.04, 16), toon(cols[i]), { p: [x, 0.38, z] })).name = 'pad-btn';
+      add(ch, mesh(new THREE.CylinderGeometry(0.055, 0.055, 0.04, 16), toon(cols[i]), { p: [x, 0.368, z] })).name = 'pad-btn';
     });
-    // shoulder bumps
+    // shoulder bumps — further back/up so they don't share a plane with face buttons
     for (const sx of [-1, 1]) {
-      add(ch, mesh(new RoundedBoxGeometry(0.28, 0.08, 0.14, 2, 0.03), bodyM, { p: [sx * 0.42, 0.34, 0.38] })).name = 'pad-shoulder';
+      add(ch, mesh(new RoundedBoxGeometry(0.28, 0.08, 0.14, 2, 0.03), bodyM, { p: [sx * 0.42, 0.36, 0.44] })).name = 'pad-shoulder';
     }
     flatEyes(ch, 0.11, 0.28, 0.41, 0.34);
   },
 });
 
-// 3. Soda can (saffron + steel top) — back centre
+// 3. Soda can (saffron + steel top) — back centre (clear of arena apron)
 const can = character({
-  key: 'can', x: 0.05, z: 2.05, ry: 0.05, dy: 0.001, w: 0.7, d: 0.7, h: 1.15, hopV: 3.5, seed: 303,
+  key: 'can', x: 0.05, z: 2.35, ry: 0.05, dy: 0, w: 0.7, d: 0.7, h: 1.15, hopV: 3.5, seed: 303,
   build(ch) {
     const R = 0.32, Hh = 1.05;
     add(ch, mesh(new THREE.CylinderGeometry(R, R, Hh, 40), toon(COL.saffron), { p: [0, Hh / 2, 0] })).name = 'can-body';
@@ -339,8 +345,8 @@ const can = character({
     add(ch, mesh(new THREE.CylinderGeometry(R - 0.04, R - 0.04, 0.03, 32), toon(COL.steel), { p: [0, Hh - 0.035, 0] })).name = 'can-lid';
     // tab
     add(ch, mesh(new RoundedBoxGeometry(0.1, 0.02, 0.16, 1, 0.01), toon(COL.steel), { p: [0, Hh + 0.005, 0.04] })).name = 'can-tab';
-    // stripe band
-    add(ch, mesh(new THREE.CylinderGeometry(R + 0.004, R + 0.004, 0.18, 40, 1, true), toon(COL.cream), {
+    // stripe band — proud of body by > LIFT so it clears eps
+    add(ch, mesh(new THREE.CylinderGeometry(R + 0.008, R + 0.008, 0.18, 40, 1, true), toon(COL.cream), {
       p: [0, 0.55, 0], line: false, shadow: false,
     })).name = 'can-stripe';
     roundEyes(ch, 0.105, R, 0.72, 0.30);
@@ -352,52 +358,103 @@ const castBy = { mug, pad, can };
 const DROP = { mug: 3.6, pad: 4.15, can: 4.7 };
 
 // ---------- arena diorama (GAME layer + full-scene cuts); sits on the mat like gta6's bridge ----------
-const arena = new THREE.Group(); arena.name = 'arena'; arena.position.set(0, Y0, -0.2); scene.add(arena);
+// Sink whole arena into the mat by LIFT so plinth/apron bottoms aren't coplanar with the mat top.
+const arena = new THREE.Group(); arena.name = 'arena'; arena.position.set(0, Y0 - LIFT, -0.2); scene.add(arena);
 const arenaMats = [];
 function amat(c, o) { const m = toon(c, o); m.userData.base = m.color.clone(); arenaMats.push(m); return m; }
 const aadd = (m) => { arena.add(m); return m; };
 
 // base plinth + patterned floor
 aadd(mesh(new RoundedBoxGeometry(4.6, 0.28, 3.4, 3, 0.05), amat(COL.base), { p: [0, 0.14, 0] })).name = 'arena-plinth';
+// grass-green checker (NOT mint — mint is reserved for the solved tick)
 const floorTex = canvasTex(256, 256, (x, w, h) => {
-  x.fillStyle = '#7a8f6a'; x.fillRect(0, 0, w, h);
-  x.fillStyle = '#6a7f5a';
+  x.fillStyle = '#9ccd67'; x.fillRect(0, 0, w, h);
+  x.fillStyle = '#80a857';
   for (let i = 0; i < 8; i++) for (let j = 0; j < 8; j++) if ((i + j) % 2 === 0) x.fillRect(i * 32, j * 32, 32, 32);
-  x.strokeStyle = 'rgba(40,50,35,0.35)'; x.lineWidth = 2;
+  x.strokeStyle = 'rgba(40,50,35,0.28)'; x.lineWidth = 2;
   for (let i = 0; i <= 8; i++) { x.beginPath(); x.moveTo(i * 32, 0); x.lineTo(i * 32, h); x.stroke(); x.beginPath(); x.moveTo(0, i * 32); x.lineTo(w, i * 32); x.stroke(); }
 });
 floorTex.wrapS = floorTex.wrapT = THREE.RepeatWrapping; floorTex.repeat.set(3, 2.2);
 const floorM = amat(0xffffff, { map: floorTex });
 const FLOOR_Y = 0.28;
-aadd(mesh(new THREE.BoxGeometry(4.2, 0.08, 3.0), floorM, { p: [0, FLOOR_Y + 0.04, 0] })).name = 'arena-floor';
-aadd(catcher(4.1, 2.9, { p: [0, FLOOR_Y + 0.084, 0] })).name = 'arena-catcher';
+{
+  // inset from walls + sunk into plinth so side/bottom faces don't fight
+  const fl = mesh(new THREE.BoxGeometry(3.95, 0.08, 2.85), floorM, { p: [0, FLOOR_Y + 0.04 - LIFT, 0] });
+  fl.name = 'arena-floor'; aadd(fl);
+  const ac = catcher(3.85, 2.75, { p: [0, FLOOR_Y + 0.084 - LIFT, 0] });
+  ac.name = 'arena-catcher'; aadd(ac);
+}
 
 // warehouse walls with windows (open front for camera)
 const wallM = amat(0xc8b89a), trimM = amat(0x8a7a62), winM = amat(COL.window);
-aadd(mesh(new THREE.BoxGeometry(4.3, 2.2, 0.14), wallM, { p: [0, FLOOR_Y + 1.1, -1.45] })).name = 'arena-wall-back';
-aadd(mesh(new THREE.BoxGeometry(0.14, 2.2, 3.0), wallM, { p: [-2.1, FLOOR_Y + 1.1, 0] })).name = 'arena-wall-L';
-aadd(mesh(new THREE.BoxGeometry(0.14, 2.2, 3.0), wallM, { p: [2.1, FLOOR_Y + 1.1, 0] })).name = 'arena-wall-R';
+{
+  // walls sink 2×LIFT so bottoms aren't coplanar with the sunk floor slab
+  const wb = mesh(new THREE.BoxGeometry(4.3, 2.2, 0.14), wallM, { p: [0, FLOOR_Y + 1.1 - LIFT * 2, -1.45] }); wb.name = 'arena-wall-back'; aadd(wb);
+  const wl = mesh(new THREE.BoxGeometry(0.14, 2.2, 3.0), wallM, { p: [-2.1, FLOOR_Y + 1.1 - LIFT * 2, 0] }); wl.name = 'arena-wall-L'; aadd(wl);
+  const wr = mesh(new THREE.BoxGeometry(0.14, 2.2, 3.0), wallM, { p: [2.1, FLOOR_Y + 1.1 - LIFT * 2, 0] }); wr.name = 'arena-wall-R'; aadd(wr);
+  // ceiling slab so full-scene cuts never show a void
+  // ceiling sunk into wall tops (walls already lowered by 2×LIFT)
+  const ceil = mesh(new THREE.BoxGeometry(4.4, 0.12, 3.2), amat(0xd8cfc0), { p: [0, FLOOR_Y + 2.25 - LIFT * 2, 0], shadow: false });
+  ceil.name = 'arena-ceiling'; aadd(ceil);
+  // apron sunk deeper than plinth so their bottom faces aren't coplanar
+  const apron = mesh(new THREE.BoxGeometry(5.2, 0.06, 3.6), amat(0xb09878), { p: [0, 0.03 - LIFT, 0.05], line: false });
+  apron.name = 'arena-apron'; aadd(apron);
+}
 for (const x of [-1.1, 0, 1.1]) {
-  aadd(decal(new THREE.PlaneGeometry(0.7, 0.55), winM, { p: [x, FLOOR_Y + 1.35, -1.45 + LIFT] })).name = 'arena-window';
-  aadd(mesh(new THREE.BoxGeometry(0.78, 0.62, 0.05), trimM, { p: [x, FLOOR_Y + 1.35, -1.42] })).name = 'arena-window-frame';
+  const win = decal(new THREE.PlaneGeometry(0.7, 0.55), winM, { p: [x, FLOOR_Y + 1.35 - LIFT * 2, -1.45 + LIFT] });
+  win.name = 'arena-window'; aadd(win);
+  const frm = mesh(new THREE.BoxGeometry(0.78, 0.62, 0.05), trimM, { p: [x, FLOOR_Y + 1.35 - LIFT * 2, -1.42] });
+  frm.name = 'arena-window-frame'; aadd(frm);
 }
-// sky dome (GAME clear backdrop)
-aadd(mesh(new THREE.SphereGeometry(7, 20, 10, 0, Math.PI * 2, 0, Math.PI / 2),
-  new THREE.MeshBasicMaterial({ color: 0xa8c8e0, side: THREE.BackSide }),
-  { p: [0, FLOOR_Y, 0], line: false, shadow: false })).name = 'arena-sky';
+// sky / haze beyond the open front
+{
+  const sky = mesh(new THREE.SphereGeometry(9, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2),
+    new THREE.MeshBasicMaterial({ color: 0x76a2db, side: THREE.BackSide }),
+    { p: [0, FLOOR_Y - 0.2, 0], line: false, shadow: false });
+  sky.name = 'arena-sky'; aadd(sky);
+  // distant toon mountains
+  for (const [x, s] of [[-3.5, 1.4], [-1.2, 1.8], [1.5, 1.5], [3.8, 1.6]]) {
+    const mtn = mesh(new THREE.ConeGeometry(s * 0.9, s * 1.3, 5, 1, true), amat(0x7a8fa8), {
+      p: [x, FLOOR_Y + s * 0.55, -4.2], line: false, shadow: false,
+    });
+    mtn.name = 'arena-mountain'; aadd(mtn);
+  }
+}
 
-// crates + cover
+// crates + cover + barrels + lamp poles (detail the set)
+// Crates sink LIFT into floor; barriers sink 2×LIFT so bottoms aren't coplanar with crates.
 const crateCols = [0xb8895a, 0x9a7350, 0xc49a6c];
-[[-1.4, 0.28, -0.7, 0.55], [1.5, 0.22, -0.3, 0.45], [-1.1, 0.32, 0.85, 0.6],
-  [1.2, 0.25, 0.7, 0.5], [0.1, 0.2, -1.0, 0.4], [-1.7, 0.3, 0.15, 0.55]].forEach(([x, h, z, s], i) => {
-  aadd(mesh(new RoundedBoxGeometry(s, h * 2, s * 0.9, 2, 0.04), amat(crateCols[i % 3]), { p: [x, FLOOR_Y + 0.08 + h, z] })).name = 'arena-crate';
+[[-1.4, 0.28, -0.55, 0.55], [1.5, 0.22, -0.3, 0.45], [-1.1, 0.32, 0.85, 0.55],
+  [1.15, 0.25, 0.55, 0.48], [0.1, 0.2, -1.0, 0.4], [-1.7, 0.3, 0.15, 0.55],
+  [1.85, 0.18, 1.2, 0.4], [-0.55, 0.22, -1.15, 0.38]].forEach(([x, h, z, s], i) => {
+  const c = mesh(new RoundedBoxGeometry(s, h * 2, s * 0.9, 2, 0.04), amat(crateCols[i % 3]), {
+    p: [x, FLOOR_Y + 0.08 + h - LIFT * 2, z],
+  });
+  c.name = 'arena-crate'; aadd(c);
 });
-for (const [x, z, w] of [[-0.4, 0.35, 0.95], [0.85, -0.55, 0.85]]) {
-  aadd(mesh(new RoundedBoxGeometry(w, 0.38, 0.2, 2, 0.03), amat(COL.slate), { p: [x, FLOOR_Y + 0.08 + 0.19, z] })).name = 'arena-barrier';
+for (const [x, z, w] of [[-0.35, 0.4, 0.9], [0.9, -0.55, 0.8], [-1.65, -1.05, 0.65]]) {
+  const b = mesh(new RoundedBoxGeometry(w, 0.38, 0.2, 2, 0.03), amat(COL.slate), {
+    p: [x, FLOOR_Y + 0.08 + 0.19 - LIFT * 3, z],
+  });
+  b.name = 'arena-barrier'; aadd(b);
+}
+// barrels
+for (const [x, z] of [[-1.85, 1.05], [1.75, -0.95]]) {
+  const bar = mesh(new THREE.CylinderGeometry(0.18, 0.2, 0.42, 16), amat(COL.steel), {
+    p: [x, FLOOR_Y + 0.29 - LIFT * 2, z],
+  });
+  bar.name = 'arena-barrel'; aadd(bar);
+}
+// hanging lamp
+{
+  const pole = mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.7, 8), amat(COL.dark), { p: [0, FLOOR_Y + 1.9, 0.2], shadow: false });
+  pole.name = 'arena-lamp-pole'; aadd(pole);
+  const shade = mesh(new THREE.ConeGeometry(0.28, 0.22, 16, 1, true), amat(COL.saffron), { p: [0, FLOOR_Y + 1.55, 0.2], r: [Math.PI, 0, 0] });
+  shade.name = 'arena-lamp-shade'; aadd(shade);
 }
 
-// player mannequin (prop — no googly eyes)
-const player = new THREE.Group(); player.name = 'player-mannequin'; player.position.set(0.25, FLOOR_Y + 0.08, 0.15);
+// player mannequin (prop — no googly eyes) — feet sunk into floor
+const player = new THREE.Group(); player.name = 'player-mannequin'; player.position.set(0.25, FLOOR_Y + 0.08 - LIFT, 0.15);
 arena.add(player);
 const manM = amat(COL.cream), suitM = amat(COL.slate), bootM = amat(COL.dark);
 player.add(mesh(new THREE.CapsuleGeometry(0.16, 0.42, 6, 14), suitM, { p: [0, 0.55, 0] })).name = 'man-torso';
@@ -407,8 +464,8 @@ for (const sx of [-1, 1]) {
   player.add(mesh(new THREE.CapsuleGeometry(0.06, 0.26, 4, 10), bootM, { p: [sx * 0.08, 0.2, 0] })).name = 'man-leg';
 }
 
-// gun prop opposite the player
-const gunG = new THREE.Group(); gunG.name = 'gun'; gunG.position.set(-1.05, FLOOR_Y + 0.75, 0.95); gunG.rotation.y = 0.55;
+// gun prop — clear of crates so the grip doesn't sit coplanar on a crate top
+const gunG = new THREE.Group(); gunG.name = 'gun'; gunG.position.set(-0.35, FLOOR_Y + 0.7, 1.1); gunG.rotation.y = 0.35;
 arena.add(gunG);
 gunG.add(mesh(new RoundedBoxGeometry(0.12, 0.14, 0.36, 2, 0.025), amat(COL.dark), { p: [0, 0, 0] })).name = 'gun-body';
 gunG.add(mesh(new THREE.CylinderGeometry(0.028, 0.032, 0.32, 12).rotateX(Math.PI / 2), amat(COL.steel), { p: [0, 0.03, -0.3] })).name = 'gun-barrel';
@@ -449,12 +506,12 @@ const arrowG = new THREE.Group(); arrowG.name = 'shot-arrow'; arrowG.visible = f
   arrowG.userData.mat = am;
 }
 
-// x-ray translucent walls — FIX1
+// x-ray translucent walls — FIX1 (inset inside arena walls by > LIFT; sunk into floor)
 const xrayG = new THREE.Group(); xrayG.name = 'xray'; xrayG.visible = false; arena.add(xrayG);
 const xrayWallM = new THREE.MeshBasicMaterial({ color: 0xa8d4f0, transparent: true, opacity: 0.28, depthWrite: false, side: THREE.DoubleSide });
-for (const [x, z, w, d] of [[0, -1.42, 4.1, 0.06], [-2.05, 0, 0.06, 2.9], [2.05, 0, 0.06, 2.9]]) {
+for (const [x, z, w, d] of [[0, -1.34, 3.9, 0.06], [-1.98, 0, 0.06, 2.7], [1.98, 0, 0.06, 2.7]]) {
   const m = new THREE.Mesh(new THREE.BoxGeometry(w, 2.0, d), xrayWallM);
-  m.position.set(x, FLOOR_Y + 1.0, z); m.name = 'xray-wall'; m.castShadow = false; xrayG.add(m);
+  m.position.set(x, FLOOR_Y + 1.0 - LIFT * 2, z); m.name = 'xray-wall'; m.castShadow = false; xrayG.add(m);
 }
 
 // lime raycast line (rod + ball ends) from gun to player
@@ -477,7 +534,7 @@ function poseRay(from, to) {
 // hit box around player body
 const hitBoxG = new THREE.Group(); hitBoxG.name = 'hitbox'; hitBoxG.visible = false; hitBoxG.position.copy(player.position);
 arena.add(hitBoxG);
-const hitBoxGeo = new THREE.BoxGeometry(0.5, 1.1, 0.35).translate(0, 0.55, 0);
+const hitBoxGeo = new THREE.BoxGeometry(0.5, 1.1, 0.35).translate(0, 0.55 + LIFT, 0);
 const hitFillM = new THREE.MeshBasicMaterial({ color: 0xa8e0f8, transparent: true, opacity: 0.18, depthWrite: false });
 const hitFill = new THREE.Mesh(hitBoxGeo, hitFillM); hitFill.name = 'hitbox-fill'; hitFill.castShadow = false; hitBoxG.add(hitFill);
 const hitHull = new THREE.Mesh(hullGeometry(hitBoxGeo), new THREE.MeshBasicMaterial({ color: COL.lime, side: THREE.BackSide }));
@@ -491,27 +548,41 @@ hitBoxG.userData = { fill: hitFillM, hull: hitHull.material, wire: hitWire.mater
 
 inGame(arena);
 
-// ---------- sound set (FIX3) — side of desk ----------
-const soundSet = new THREE.Group(); soundSet.name = 'sound-set'; soundSet.position.set(3.2, Y0, 1.8); scene.add(soundSet);
+// ---------- sound set (FIX3) — left of desk, clear of arena apron ----------
+// clear of arena apron/plinth in xz so bottoms can sit ON_MAT without fighting them
+const soundSet = new THREE.Group(); soundSet.name = 'sound-set'; soundSet.position.set(-3.8, Y0, 2.5); scene.add(soundSet);
 function pmat(c, o) { const m = toon(c, o); m.userData.base = m.color.clone(); return m; }
 const labelMat = (tex) => {
   const m = new THREE.MeshBasicMaterial({ map: tex, transparent: true, toneMapped: false });
   m.polygonOffset = true; m.polygonOffsetFactor = -2; m.polygonOffsetUnits = -4; return m;
 };
 
-// small side platform
-soundSet.add(mesh(new RoundedBoxGeometry(2.4, 0.12, 1.6, 2, 0.04), pmat(COL.desk), { p: [0, 0.06, 0] })).name = 'sound-platform';
-soundSet.add(catcher(2.2, 1.4, { p: [0, 0.125, 0] }));
+// ON_MAT: sink LIFT into mat top (bottom at Y0-LIFT ≈ 0.015, clear of mat underside at 0.005)
+{
+  const plat = mesh(new RoundedBoxGeometry(2.0, 0.12, 1.4, 2, 0.04), pmat(COL.desk), { p: [0, 0.06 - LIFT, 0] });
+  plat.name = 'sound-platform'; soundSet.add(plat);
+  const sc = catcher(1.85, 1.25, { p: [0, 0.125 - LIFT, 0] });
+  sc.name = 'sound-catcher'; soundSet.add(sc);
+}
+const PLAT_TOP = 0.12 - LIFT;
 
-// speaker / amp
-const speaker = new THREE.Group(); speaker.name = 'speaker'; speaker.position.set(-0.7, 0.12, 0.1); soundSet.add(speaker);
-speaker.add(mesh(new RoundedBoxGeometry(0.7, 0.95, 0.55, 2, 0.05), pmat(COL.dark), { p: [0, 0.48, 0] })).name = 'speaker-cab';
-speaker.add(mesh(new THREE.CylinderGeometry(0.22, 0.22, 0.08, 24).rotateX(Math.PI / 2), pmat(COL.steel), { p: [0, 0.55, 0.28] })).name = 'speaker-cone';
-speaker.add(mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.06, 16).rotateX(Math.PI / 2), pmat(COL.cream), { p: [0, 0.55, 0.32] })).name = 'speaker-dustcap';
+// speaker / amp — cab sunk into platform by >= LIFT
+const speaker = new THREE.Group(); speaker.name = 'speaker'; speaker.position.set(-0.7, PLAT_TOP, 0.1); soundSet.add(speaker);
+{
+  const cab = mesh(new RoundedBoxGeometry(0.7, 0.95, 0.55, 2, 0.05), pmat(COL.dark), { p: [0, 0.475 - LIFT, 0] });
+  cab.name = 'speaker-cab'; speaker.add(cab);
+  const cone = mesh(new THREE.CylinderGeometry(0.22, 0.22, 0.08, 24).rotateX(Math.PI / 2), pmat(COL.steel), { p: [0, 0.55, 0.28] });
+  cone.name = 'speaker-cone'; speaker.add(cone);
+  const cap = mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.06, 16).rotateX(Math.PI / 2), pmat(COL.cream), { p: [0, 0.55, 0.32 + LIFT] });
+  cap.name = 'speaker-dustcap'; speaker.add(cap);
+}
 
 // waveform bars (data blue)
-const waveG = new THREE.Group(); waveG.name = 'waveform'; waveG.position.set(0.55, 0.14, -0.15); soundSet.add(waveG);
-waveG.add(mesh(new RoundedBoxGeometry(1.1, 0.5, 0.12, 2, 0.03), pmat(COL.white), { p: [0, 0.28, 0] })).name = 'wave-panel';
+const waveG = new THREE.Group(); waveG.name = 'waveform'; waveG.position.set(0.55, PLAT_TOP, -0.25); soundSet.add(waveG);
+{
+  const panel = mesh(new RoundedBoxGeometry(1.1, 0.5, 0.12, 2, 0.03), pmat(COL.white), { p: [0, 0.25 - LIFT, 0] });
+  panel.name = 'wave-panel'; waveG.add(panel);
+}
 const waveBars = [];
 const waveMat = pmat(COL.data);
 for (let i = 0; i < 8; i++) {
@@ -522,16 +593,19 @@ for (let i = 0; i < 8; i++) {
 }
 
 // health bar
-const healthG = new THREE.Group(); healthG.name = 'health-bar'; healthG.position.set(0.55, 0.14, 0.45); soundSet.add(healthG);
-healthG.add(mesh(new RoundedBoxGeometry(1.15, 0.28, 0.1, 2, 0.03), pmat(COL.dark), { p: [0, 0.18, 0] })).name = 'health-frame';
+const healthG = new THREE.Group(); healthG.name = 'health-bar'; healthG.position.set(0.55, PLAT_TOP, 0.5); soundSet.add(healthG);
+{
+  const hf = mesh(new RoundedBoxGeometry(1.15, 0.28, 0.1, 2, 0.03), pmat(COL.dark), { p: [0, 0.14 - LIFT, 0] });
+  hf.name = 'health-frame'; healthG.add(hf);
+}
 const healthFillM = pmat(COL.sky); healthFillM.userData.base = healthFillM.color.clone();
-const healthFill = mesh(new RoundedBoxGeometry(1.02, 0.16, 0.06, 1, 0.02), healthFillM, { p: [0, 0.18, 0.04] });
+const healthFill = mesh(new RoundedBoxGeometry(1.02, 0.16, 0.06, 1, 0.02), healthFillM, { p: [0, 0.14, 0.04] });
 healthFill.name = 'health-fill'; healthG.add(healthFill);
 const hpTex = canvasTex(256, 64, (x, w, h) => {
   x.fillStyle = hex(COL.ink); x.font = '800 36px Caption'; x.textAlign = 'left'; x.textBaseline = 'middle';
   x.fillText('HP', 12, h / 2 + 2);
 });
-healthG.add(decal(new THREE.PlaneGeometry(0.28, 0.14), labelMat(hpTex), { p: [-0.55, 0.42, 0.06] }));
+healthG.add(decal(new THREE.PlaneGeometry(0.28, 0.14), labelMat(hpTex), { p: [-0.55, 0.36, 0.06] }));
 
 // heartbeat circle
 const heartG = new THREE.Group(); heartG.name = 'heartbeat'; heartG.position.set(-0.55, 0.7, -0.35); soundSet.add(heartG);
@@ -541,11 +615,14 @@ heartRing.name = 'heart-ring'; heartG.add(heartRing);
 const heartCore = mesh(new THREE.SphereGeometry(0.12, 16, 12), pmat(COL.peach), { p: [0, 0, 0] });
 heartCore.name = 'heart-core'; heartG.add(heartCore);
 
-// thud impact plate
-const thudG = new THREE.Group(); thudG.name = 'thud'; thudG.position.set(0.1, 0.14, 0.0); soundSet.add(thudG);
-thudG.add(mesh(new THREE.CylinderGeometry(0.35, 0.38, 0.12, 28), pmat(COL.slate), { p: [0, 0.1, 0] })).name = 'thud-base';
+// thud impact plate — clear of waveform/health in z; plate sunk into base; base sunk extra vs health
+const thudG = new THREE.Group(); thudG.name = 'thud'; thudG.position.set(-0.05, PLAT_TOP, 0.15); soundSet.add(thudG);
+{
+  const base = mesh(new THREE.CylinderGeometry(0.35, 0.38, 0.12, 28), pmat(COL.slate), { p: [0, 0.06 - LIFT * 2, 0] });
+  base.name = 'thud-base'; thudG.add(base);
+}
 const thudPlateM = pmat(COL.cream); thudPlateM.userData.base = thudPlateM.color.clone();
-const thudPlate = mesh(new THREE.CylinderGeometry(0.28, 0.28, 0.08, 28), thudPlateM, { p: [0, 0.2, 0] });
+const thudPlate = mesh(new THREE.CylinderGeometry(0.28, 0.28, 0.08, 28), thudPlateM, { p: [0, 0.14 - LIFT * 3, 0] });
 thudPlate.name = 'thud-plate'; thudG.add(thudPlate);
 
 soundSet.visible = false;
@@ -650,61 +727,63 @@ const on = (f, fn) => { const k = Math.round(f); if (!EVENTS.has(k)) EVENTS.set(
 for (const [f, who, a] of ACTS) on(f, () => { for (const ch of cast) if (who === 'all' || who === ch.key) act(ch, a); });
 on(18, () => dustRing(V3(-1.35, Y0, 2.7), 8, 0.4, 0.3, 0.9, 0.07));
 on(22, () => dustRing(V3(1.35, Y0, 2.65), 8, 0.45, 0.3, 0.9, 0.07));
-on(26, () => dustRing(V3(0.05, Y0, 2.05), 7, 0.3, 0.25, 0.8, 0.06));
+on(26, () => dustRing(V3(0.05, Y0, 2.35), 7, 0.3, 0.25, 0.8, 0.06));
 on(875, () => dustRing(soundSet.position, 10, 0.6, 0.5, 1.0, 0.08));
 on(1200, () => dustRing(BTN, 10, 0.5, 0.5, 1.1, 0.09));
 
 // ---------- camera rail (scene-time keys) ----------
-// Hard cuts on beat starts; long eased orbits/push-ins 72–192 frames between.
+// Arena sits on the desk at (0, Y0, -0.2). Full-scene arena cuts hide the room and frame the diorama.
+// Target y ≈ FLOOR_Y+0.9 ≈ 1.2 in arena-local ≈ 1.22 world.
+const AY = Y0 + FLOOR_Y + 0.85; // ~1.15
 const CAM = [
-  // HOOK f1-75: desk wide → medium
-  [0, [0.6, 6.8, 11.2], [0, 1.0, 0.6]],
-  [40, [0.2, 4.6, 9.0], [-0.4, 1.4, -0.2]],
-  [75, [-0.8, 3.8, 8.2], [-2.0, 1.8, -1.6]],
-  // NAIVE f92: push into monitor gameplay
-  [92, [-2.6, 3.2, -0.4], [-3.2, 2.0, -2.4]],
-  [130, [-2.9, 2.9, -1.2], [-3.3, 2.05, -2.5]],
-  [147, [-3.0, 2.85, -1.5], [-3.35, 2.05, -2.55]],
-  // PROBLEM f162: red on screen / glass
-  [162, [-2.7, 3.0, -0.8], [-3.3, 2.05, -2.5]],
-  [190, [-2.5, 3.1, -0.5], [-3.2, 2.0, -2.45]],
-  [211, [-2.2, 3.4, 0.2], [-3.0, 2.0, -2.3]],
+  // HOOK f1-75: desk wide → medium (cast + monitor)
+  [0, [0.4, 5.8, 10.5], [0, 1.2, 0.4]],
+  [40, [-0.2, 4.2, 8.6], [-0.6, 1.6, -0.4]],
+  [75, [-1.2, 3.6, 7.4], [-2.4, 1.9, -1.8]],
+  // NAIVE f92: HARD CUT into the toon arena (full frame)
+  [92, [2.2, AY + 1.4, 3.6], [0.2, AY, 0.1]],
+  [120, [1.6, AY + 1.1, 3.0], [0.2, AY + 0.05, 0.15]],
+  [147, [0.9, AY + 0.9, 2.6], [0.25, AY, 0.15]],
+  // PROBLEM f162: closer on player + screen-surface red (overlay + glass)
+  [162, [0.4, AY + 0.75, 2.2], [0.25, AY + 0.05, 0.15]],
+  [190, [0.6, AY + 0.85, 2.4], [0.25, AY, 0.2]],
+  [211, [1.2, AY + 1.1, 2.8], [0.2, AY, 0.1]],
   // TURN f228: pull back to desk; cast lean
-  [228, [0.4, 5.2, 9.4], [0, 1.0, 1.2]],
-  [260, [0.8, 4.0, 8.6], [0.2, 0.8, 2.0]],
-  [298, [0.5, 3.6, 8.0], [0, 0.7, 2.2]],
-  // FIX1 f313: cut to x-ray arena (diorama on desk)
-  [313, [1.8, 2.6, 3.4], [0.15, 0.95, 0.0]],
-  [360, [1.4, 2.2, 2.8], [0.1, 1.0, 0.05]],
-  [385, [0.2, 1.7, 2.6], [-0.4, 0.85, 0.5]],
-  [430, [0.5, 1.75, 2.3], [0.0, 0.85, 0.3]],
-  [449, [1.1, 1.9, 2.4], [0.25, 0.8, 0.15]],
-  [500, [1.5, 2.3, 2.9], [0.25, 0.95, 0.05]],
-  [553, [0.9, 1.85, 2.3], [0.25, 0.85, 0.1]],
-  [565, [1.1, 2.0, 2.5], [0.25, 0.9, 0.08]],
+  [228, [0.5, 5.0, 9.2], [0, 1.1, 1.0]],
+  [260, [0.9, 3.8, 8.0], [0.3, 0.9, 2.0]],
+  [298, [0.4, 3.5, 7.6], [0, 0.8, 2.1]],
+  // FIX1 f313: x-ray arena
+  [313, [2.0, AY + 1.3, 3.5], [0.15, AY, 0.0]],
+  [360, [1.5, AY + 1.0, 2.9], [0.1, AY + 0.05, 0.05]],
+  [385, [0.3, AY + 0.6, 2.5], [-0.3, AY - 0.05, 0.45]],
+  [430, [0.6, AY + 0.65, 2.2], [0.05, AY - 0.05, 0.25]],
+  [449, [1.2, AY + 0.8, 2.4], [0.25, AY - 0.05, 0.15]],
+  [500, [1.6, AY + 1.1, 2.9], [0.25, AY, 0.05]],
+  [553, [1.0, AY + 0.75, 2.3], [0.25, AY - 0.05, 0.1]],
+  [565, [1.2, AY + 0.9, 2.5], [0.25, AY, 0.08]],
   // FIX2 f577: feedback — closer arena POV
-  [577, [0.15, 1.5, 2.0], [0.25, 0.95, 0.15]],
-  [645, [0.2, 1.45, 1.9], [0.25, 1.0, 0.15]],
-  [678, [0.05, 1.4, 1.85], [0.25, 0.95, 0.18]],
-  [721, [0.25, 1.5, 2.0], [0.2, 0.9, 0.2]],
-  [802, [1.3, 1.9, 2.4], [0.7, 1.15, 0.55]],
-  [857, [0.8, 1.7, 2.2], [0.5, 1.05, 0.4]],
-  // FIX3 f867: sound set
-  [867, [3.0, 3.2, 6.0], [3.2, 0.7, 1.8]],
-  [913, [3.4, 2.4, 4.2], [3.2, 0.5, 1.9]],
-  [972, [3.6, 2.6, 4.0], [3.3, 0.6, 1.7]],
-  [1022, [3.8, 2.2, 3.6], [3.6, 0.4, 2.2]],
-  [1054, [2.8, 2.5, 3.8], [2.7, 0.8, 1.5]],
-  [1089, [3.2, 2.8, 4.4], [3.2, 0.7, 1.8]],
-  [1101, [3.0, 3.0, 5.0], [3.2, 0.7, 1.8]],
+  [577, [0.2, AY + 0.45, 1.95], [0.25, AY + 0.05, 0.15]],
+  [645, [0.25, AY + 0.4, 1.85], [0.25, AY + 0.1, 0.15]],
+  [678, [0.1, AY + 0.35, 1.8], [0.25, AY + 0.05, 0.18]],
+  [721, [0.3, AY + 0.45, 1.95], [0.2, AY, 0.2]],
+  [802, [1.4, AY + 0.85, 2.4], [0.7, AY + 0.25, 0.55]],
+  [857, [0.9, AY + 0.65, 2.2], [0.5, AY + 0.15, 0.4]],
+  // FIX3 f867: sound set at (-3.8, Y0, 2.5) — medium → close on devices
+  [867, [-3.2, 2.8, 5.8], [-3.8, 0.65, 2.5]],
+  [913, [-3.0, 1.9, 4.6], [-3.8, 0.45, 2.5]],
+  [972, [-2.8, 2.0, 4.4], [-3.5, 0.55, 2.4]],
+  [1022, [-2.6, 1.7, 4.1], [-3.3, 0.4, 2.85]],
+  [1054, [-4.2, 2.0, 4.3], [-4.3, 0.85, 2.2]],
+  [1089, [-3.4, 2.4, 5.1], [-3.8, 0.65, 2.5]],
+  [1101, [-3.2, 2.7, 5.6], [-3.8, 0.7, 2.5]],
   // RECAP f1113: desk + arena combo
-  [1113, [0.5, 5.5, 10.0], [0, 1.2, 0.4]],
-  [1150, [-0.5, 4.2, 8.5], [-1.5, 1.6, -1.0]],
-  [1186, [0.2, 4.8, 9.2], [0, 1.0, 0.8]],
-  // KICKER f1197: respawn button (side/low so cast doesn't bury it)
-  [1197, [1.4, 2.4, 6.2], [0.15, 0.55, 3.45]],
-  [1237, [0.9, 2.0, 5.4], [0.1, 0.5, 3.5]],
-  [1260, [0.6, 6.5, 11.0], [0, 1.0, 0.6]],
+  [1113, [0.5, 5.4, 9.8], [0, 1.2, 0.4]],
+  [1150, [-0.6, 4.0, 8.2], [-1.6, 1.6, -1.0]],
+  [1186, [0.2, 4.6, 9.0], [0, 1.0, 0.8]],
+  // KICKER f1197: respawn button
+  [1197, [1.5, 2.6, 6.4], [0.15, 0.55, 3.45]],
+  [1237, [1.0, 2.1, 5.5], [0.1, 0.5, 3.5]],
+  [1260, [0.5, 5.8, 10.5], [0, 1.2, 0.4]],
 ].map(([f, p, t]) => ({ s: sOf(f), p: V3(...p), t: V3(...t) }));
 
 const _m0 = new THREE.Vector3(), _m1 = new THREE.Vector3();
@@ -727,6 +806,8 @@ function splineAt(keys, s, prop, out) {
 
 // hard-cut beat starts: jump rail segment without blending across the cut
 const HARD_CUTS = new Set([92, 162, 228, 313, 577, 867, 1113, 1197]);
+// full-frame arena: hide workshop room so the diorama fills the shot
+const arenaCut = (f) => (f >= 92 && f < 228) || (f >= 313 && f < 867);
 
 // gameplay camera orbit around arena diorama
 const GR = 3.4, GH = 2.0;
@@ -752,15 +833,21 @@ function poseWorld(f, s) {
   }
   camera.lookAt(_camT);
 
-  // set visibility by beat: hide desk room/cast during FIX1/FIX2 arena cuts
-  const inArenaCut = f >= 313 && f < 867;
+  // set visibility by beat: hide desk room/cast during full-frame arena cuts;
+  // during the sound beat, park the cast so the toy devices read as the hero
+  const inArenaCut = arenaCut(f);
   const inSound = f >= 867 && f < 1113;
   if (roomRoot) roomRoot.visible = !inArenaCut;
-  for (const ch of cast) ch.root.visible = !inArenaCut;
+  for (const ch of cast) ch.root.visible = !inArenaCut && !inSound;
 
   soundSet.visible = (f >= 860 && f < 1115);
-  const ss = inSound ? popInOut(f, 867, 1105) : (f >= 860 && f < 867 ? popScale(f - 860) : (f >= 1105 ? popOut(f - 1105) : 0));
-  if (soundSet.visible) soundSet.scale.setScalar(Math.max(ss, 1e-3));
+  if (soundSet.visible) {
+    let sc = 0;
+    if (f >= 860 && f < 867) sc = popScale(f - 860);
+    else if (f >= 867 && f < 1100) sc = 1;
+    else if (f >= 1100) sc = popOut(f - 1100);
+    soundSet.scale.setScalar(Math.max(sc, 1e-3));
+  }
 
   btnG.visible = f >= 1190;
   const bs = f < 1197 ? popScale(f - 1190) : popInOut(f, 1197, 1260);
@@ -780,10 +867,14 @@ function poseWorld(f, s) {
     }
   }
 
-  // monitor glass tint (PROBLEM)
-  const tintA = lin(162, 175, f) * (1 - lin(220, 235, f)) * 0.55;
+  // monitor glass tint (PROBLEM) — only when the desk room is visible
+  const tintA = (!inArenaCut ? lin(162, 175, f) * (1 - lin(220, 235, f)) * 0.55 : 0);
+  // during full-frame PROBLEM (arena cut), drive the same red via overlays damage
   glassTint.material.opacity = tintA;
   glassTint.visible = tintA > 0.01;
+  if (f >= 162 && f < 220 && inArenaCut) {
+    ovlDamage = Math.max(ovlDamage, sstep(162, 175, f) * (1 - lin(200, 220, f)) * 0.7);
+  }
 
   // x-ray mode
   const xrayOn = f >= 313 && f < 577;
@@ -867,7 +958,7 @@ function poseWorld(f, s) {
   gunG.scale.setScalar(1 + (shoot && ((f % 14) < 3) ? 0.08 : 0));
 
   // sound set anims
-  if (soundSet.visible) {
+  if (soundSet.visible && soundSet.scale.x > 0.2) {
     // waveform
     for (let i = 0; i < waveBars.length; i++) {
       const h = 0.15 + 0.55 * (0.5 + 0.5 * Math.sin(s * 0.35 + i * 0.9 + (f >= 913 ? f * 0.15 : 0)));
