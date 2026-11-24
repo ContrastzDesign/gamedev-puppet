@@ -1,0 +1,17 @@
+{
+  "name": "getting-shot-short",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Game Dev Puppet Short: Why does getting shot in a game doesn't kill you (1080x1920, 24 fps, 1267 frames)",
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "scripts": {
+    "stills": "GPU=0 node render.mjs --stills stills",
+    "render": "GPU=0 node render.mjs --seq frames",
+    "zaudit": "GPU=0 node tests/zaudit-film.mjs",
+    "mix": "python3 mix.py"
+  },
+  "dependencies": {
+    "puppeteer-core": "^23.11.1"
+  }
+}

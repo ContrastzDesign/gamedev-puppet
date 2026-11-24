@@ -1,0 +1,15 @@
+[
+  {
+    "filename": "sneaky-snitch.wav",
+    "title": "Sneaky Snitch",
+    "artist": "Kevin MacLeod",
+    "uploader": "Kevin MacLeod (incompetech.com)",
+    "url": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100772",
+    "download_url": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Sneaky%20Snitch.mp3",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "sha256": "1d2d7c1eff17398217160ada6170896333bbd9e77d37fe80bffa299b7743294a",
+    "duration_sec": 136.620408,
+    "notes": "Official incompetech.com MP3 converted to 44.1kHz 16-bit stereo WAV with ffmpeg. Quirky/playful sneaky bed (~2:17) usable under narration. yt-dlp YouTube fetch blocked by bot check; used official source instead. Attribution required: \"Sneaky Snitch\" Kevin MacLeod (incompetech.com) Licensed under Creative Commons: By Attribution 4.0."
+  }
+]
