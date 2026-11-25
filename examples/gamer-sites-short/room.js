@@ -246,10 +246,10 @@ function addBgBooth(parent, x, z, seed, label) {
   g.add(scr);
   addRgbKeyboard(g, 0.1, 1.0, 0.35);
   addRgbMouse(g, 0.55, 1.01, 0.4);
-  // chair
-  box(g, 0.55, 0.07, 0.55, '#3a4450', 0, 0.5, 1.0, 0, 0, 0, { round: 0.04 });
-  cyl(g, 0.06, 0.08, 0.48, '#2a3038', 0, 0.24, 1.0);
-  box(g, 0.5, 0.55, 0.07, '#3a4450', 0, 0.9, 1.25, 0, 0, 0, { round: 0.03 });
+  // chair tucked under desk (never in the aisle / camera sightline)
+  box(g, 0.5, 0.07, 0.5, '#3a4450', 0.55, 0.5, 0.35, 0, 0.4, 0, { round: 0.04 });
+  cyl(g, 0.06, 0.08, 0.48, '#2a3038', 0.55, 0.24, 0.35);
+  box(g, 0.45, 0.5, 0.07, '#3a4450', 0.55, 0.85, 0.55, 0, 0.4, 0, { round: 0.03 });
   // soft monitor glow
   const glow = new THREE.PointLight(['#6a8fbf', '#a87890', '#5a9a88', '#c4785a', '#7a6a94'][seed % 5], 0.7, 4, 2);
   glow.position.set(0.15, 1.7, 0.3);
@@ -267,10 +267,10 @@ function addBgBooth(parent, x, z, seed, label) {
 }
 
 function buildHeroBooth(g, b, textures) {
-  // desk — y slightly above floor props
-  box(g, 2.6, 0.12, 1.2, '#5c4332', 0, 0.95, 0.2, 0, 0, 0, { round: 0.04 });
-  box(g, 0.12, 0.95, 1.1, '#4a3628', -1.15, 0.47, 0.2);
-  box(g, 0.12, 0.95, 1.1, '#4a3628', 1.15, 0.47, 0.2);
+  // desk — shallower + pulled back so the top edge stays behind the aisle character
+  box(g, 2.6, 0.12, 0.95, '#5c4332', 0, 0.95, -0.05, 0, 0, 0, { round: 0.04 });
+  box(g, 0.12, 0.95, 0.85, '#4a3628', -1.15, 0.47, -0.05);
+  box(g, 0.12, 0.95, 0.85, '#4a3628', 1.15, 0.47, -0.05);
   // PC tower with RGB strip
   box(g, 0.32, 0.85, 0.5, '#1a1e24', -1.0, 1.4, -0.25);
   box(g, 0.02, 0.6, 0.02, '#60a0e0', -0.83, 1.4, -0.25, 0, 0, 0, {
@@ -283,50 +283,49 @@ function buildHeroBooth(g, b, textures) {
   const scr = makeScreen(b.screen);
   scr.position.set(0, 1.85, -0.2);
   g.add(scr);
-  // RGB keyboard + mouse on both sides + center pad (billboard-safe)
-  addRgbKeyboard(g, -0.85, 1.035, 0.52);
-  addRgbKeyboard(g, 0.55, 1.035, 0.52);
-  addRgbMouse(g, -0.25, 1.045, 0.62);
-  addRgbMouse(g, 1.05, 1.045, 0.58);
+  // RGB keyboard + mouse on desk (behind the aisle character)
+  addRgbKeyboard(g, -0.75, 1.035, 0.2);
+  addRgbKeyboard(g, 0.5, 1.035, 0.2);
+  addRgbMouse(g, -0.2, 1.045, 0.3);
+  addRgbMouse(g, 1.0, 1.045, 0.28);
   // headset hanging on side panel (always readable)
-  addHeadset(g, -1.25, 1.55, 0.55);
-  addHeadset(g, 1.25, 1.55, 0.55);
-  // drinks / snacks on both front corners
-  addDrinkCan(g, -1.1, 1.1, 0.55, '#c45848');
-  addDrinkCan(g, -1.0, 1.1, 0.7, '#4878a8');
-  addDrinkCan(g, 1.05, 1.1, 0.5, '#48a878');
-  addSnackBag(g, -1.15, 1.1, 0.35, '#d4a060');
-  addSnackBag(g, 1.1, 1.1, 0.7, '#6a8fbf');
+  addHeadset(g, -1.25, 1.55, 0.35);
+  addHeadset(g, 1.25, 1.55, 0.35);
+  // drinks / snacks on desk corners
+  addDrinkCan(g, -1.05, 1.1, 0.25, '#c45848');
+  addDrinkCan(g, -0.9, 1.1, 0.35, '#4878a8');
+  addDrinkCan(g, 1.0, 1.1, 0.22, '#48a878');
+  addSnackBag(g, -1.1, 1.1, 0.05, '#d4a060');
+  addSnackBag(g, 1.05, 1.1, 0.35, '#6a8fbf');
   // cables under desk only (kept clear of floor/desk faces — no z-fight)
-  addCable(g, -0.15, 0.78, 0.05, -0.85, 0.62, -0.2, '#3a3a40');
-  addCable(g, 0.25, 0.8, 0.1, 0.9, 0.58, -0.15, '#2a3a2e');
-  // coiled cable pile on floor (raised above boards)
-  cyl(g, 0.12, 0.12, 0.05, '#2e2e32', 0.55, 0.04, 1.35);
-  cyl(g, 0.09, 0.09, 0.04, '#3a4038', -0.65, 0.04, 1.4);
+  addCable(g, -0.15, 0.78, -0.1, -0.85, 0.62, -0.35, '#3a3a40');
+  addCable(g, 0.25, 0.8, -0.05, 0.9, 0.58, -0.3, '#2a3a2e');
+  // coiled cable pile under desk (not in aisle)
+  cyl(g, 0.12, 0.12, 0.05, '#2e2e32', 0.9, 0.04, 0.2);
+  cyl(g, 0.09, 0.09, 0.04, '#3a4038', -0.9, 0.04, 0.15);
   // power strip (offset from cable tray)
   box(g, 0.7, 0.04, 0.1, '#1e1e22', 0.15, 0.58, -0.25);
-  // chair
-  box(g, 0.7, 0.08, 0.7, '#3d4654', 0, 0.55, 1.15, 0, 0, 0, { round: 0.05 });
-  cyl(g, 0.08, 0.1, 0.55, '#2a3038', 0, 0.27, 1.15);
-  box(g, 0.65, 0.7, 0.08, '#3d4654', 0, 1.0, 1.45, 0, 0, 0, { round: 0.04 });
-  // armrests
-  box(g, 0.08, 0.08, 0.45, '#2a3038', -0.38, 0.72, 1.2);
-  box(g, 0.08, 0.08, 0.45, '#2a3038', 0.38, 0.72, 1.2);
+  // chair fully under the desk (negative-z), rotated — never between camera and character
+  box(g, 0.6, 0.08, 0.6, '#3d4654', 0.85, 0.55, -0.15, 0, 0.9, 0, { round: 0.05 });
+  cyl(g, 0.07, 0.09, 0.55, '#2a3038', 0.85, 0.27, -0.15);
+  box(g, 0.55, 0.55, 0.07, '#3d4654', 0.85, 0.9, 0.1, 0, 0.9, 0, { round: 0.04 });
+  box(g, 0.07, 0.07, 0.35, '#2a3038', 0.62, 0.7, -0.1, 0, 0.9, 0);
+  box(g, 0.07, 0.07, 0.35, '#2a3038', 1.08, 0.7, -0.2, 0, 0.9, 0);
   // booth sign
   const sign = makeSign(b.label);
   sign.position.set(0, 2.55, -0.35);
   g.add(sign);
   // neon under sign
   neonStrip(g, 1.5, b.neon || '#c4a35a', 0, 2.35, -0.32);
-  // side panels / booth frame
-  box(g, 0.1, 2.4, 1.6, '#6a5545', -1.4, 1.2, 0.1);
-  box(g, 0.1, 2.4, 1.6, '#6a5545', 1.4, 1.2, 0.1);
-  // LED edge on panels
-  box(g, 0.03, 2.2, 0.03, b.neon || '#c4a35a', -1.34, 1.2, 0.85, 0, 0, 0, {
+  // side panels / booth frame — shorter toward aisle so they don't slab the foreground
+  box(g, 0.1, 2.4, 1.2, '#6a5545', -1.4, 1.2, -0.15);
+  box(g, 0.1, 2.4, 1.2, '#6a5545', 1.4, 1.2, -0.15);
+  // LED edge on panels (back half only)
+  box(g, 0.03, 2.2, 0.03, b.neon || '#c4a35a', -1.34, 1.2, 0.35, 0, 0, 0, {
     mat: { emissive: b.neon || '#c4a35a', emissiveIntensity: 1.2 },
     noShadow: true,
   });
-  box(g, 0.03, 2.2, 0.03, b.neon || '#c4a35a', 1.34, 1.2, 0.85, 0, 0, 0, {
+  box(g, 0.03, 2.2, 0.03, b.neon || '#c4a35a', 1.34, 1.2, 0.35, 0, 0, 0, {
     mat: { emissive: b.neon || '#c4a35a', emissiveIntensity: 1.2 },
     noShadow: true,
   });
@@ -421,14 +420,12 @@ export function buildRoom(textures) {
     boothGroups[id] = g;
   }
 
-  // Neighbouring / background booths — side aisles + gaps between heroes (center aisle stays clear)
+  // Neighbouring booths — back wall + far sides only (nothing in the camera→character aisle)
   addBgBooth(root, -12.4, -5.0, 0, 'OPEN SEAT');
-  addBgBooth(root, -12.0, -2.6, 1, null);
-  addBgBooth(root, -12.6, 0.2, 4, null);
+  addBgBooth(root, -12.6, -2.8, 1, null);
   addBgBooth(root, 12.0, -5.0, 2, 'DUO BAY');
-  addBgBooth(root, 12.4, -2.4, 3, null);
-  addBgBooth(root, 12.2, 0.4, 5, null);
-  // Compact glowing stations tucked in the gaps BETWEEN hero booths (same back wall, not in aisle)
+  addBgBooth(root, 12.4, -2.8, 3, null);
+  // Compact glowing stations in the gaps BETWEEN hero booths (same back wall)
   addBgBooth(root, -6.35, -5.35, 6, null);
   addBgBooth(root, -1.95, -5.35, 0, null);
   addBgBooth(root, 2.45, -5.35, 1, null);

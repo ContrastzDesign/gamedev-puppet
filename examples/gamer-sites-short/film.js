@@ -43,7 +43,6 @@ sun.shadow.camera.top = 14;
 sun.shadow.camera.bottom = -14;
 scene.add(sun);
 scene.add(new THREE.AmbientLight('#f0e6d4', 0.85));
-// Fill from the window side so booths aren't muddy
 const fill = new THREE.DirectionalLight('#e8f4f8', 0.85);
 fill.position.set(-8, 6, 4);
 scene.add(fill);
@@ -59,17 +58,24 @@ const loadTex = (url) => new Promise((res, rej) => loader.load(url, (t) => {
 
 const CHAR_NAMES = ['quokka', 'redpanda', 'axolotl', 'pangolin', 'lemur'];
 const POSES = ['neutral', 'talk', 'point', 'wow'];
+const OCCLUSION_MAX = 0.15; // set geometry may cover at most 15% of the character plane
 
 let room, chars = {}, shadowCatch;
 let ready = false;
+const raycaster = new THREE.Raycaster();
+const _v = new THREE.Vector3();
+const _n = new THREE.Vector3();
 
 function makeBillboard(tex) {
   const g = new THREE.Group();
   const plane = new THREE.Mesh(
     new THREE.PlaneGeometry(1.35, 1.8),
-    new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false }),
+    // Billboard cards composite on top of the set (depthTest off) so chairs/desks never hide them.
+    // Geometric occlusion is still measured via raycast in assertCharacterVisible.
+    new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false, depthTest: false }),
   );
   plane.position.y = 0.9;
+  plane.name = 'characterPlane';
   g.add(plane);
   return { group: g, plane, mats: { [tex.image?.src || '']: plane.material } };
 }
@@ -86,7 +92,6 @@ function shotAt(f) {
 
 function poseFor(shot, f) {
   const local = f - shot.f0;
-  // Talk while VO for that line is active-ish; point/wow at punchy moments
   if (shot.id === 'hook') {
     if (local > 35) return 'point';
     if (local > 10) return 'talk';
@@ -107,71 +112,76 @@ function poseFor(shot, f) {
     if (local % 14 < 7) return 'talk';
     return 'neutral';
   }
-  // twitch
   if (local > 190) return 'wow';
   if (local > 140) return 'point';
   if (local % 16 < 8) return 'talk';
   return 'neutral';
 }
 
+/** Character stands well into the aisle in front of the desk (full body readable). */
+function charLocal(shot) {
+  // Slight side offset for variety, but never enough to hide behind a partition
+  const side = ({ hook: -0.15, steam: 0.2, poki: -0.2, roblox: 0.15, twitch: -0.1 })[shot.id] || 0;
+  // z ≥ 2.15 keeps the desk top behind the feet in projection (no neck-gap slab)
+  // Slightly smaller so feet sit above the lower-third caption band
+  return { side, z: 2.2, scale: shot.id === 'hook' ? 0.95 : 0.9 };
+}
+
 function cameraFor(shot, f) {
   const booth = room.boothMeta[shot.booth];
   const t = easeInOut(clamp((f - shot.f0) / Math.max(1, shot.f1 - shot.f0 - 1)));
-  const charX = booth.x;
-  const charZ = booth.z + 1.7;
-  // Varied framing: character always clear in aisle; neighbours/shelves/neon read in BG.
+  const cl = charLocal(shot);
+  const charX = booth.x + cl.side;
+  const charZ = booth.z + cl.z;
+  // Eye-level aisle cameras, pulled back so feet clear the lower-third caption band.
   if (shot.id === 'hook') {
-    // Wide establish — ceiling lamps, neighbour glow, WEB MAP
     return {
-      x: lin(-5.8, -7.2, t),
-      y: lin(2.55, 2.1, t),
-      z: lin(6.2, 4.6, t),
-      lx: -8.2,
-      ly: lin(1.55, 1.35, t),
-      lz: -3.5,
+      x: lin(charX + 0.5, charX + 0.2, t),
+      y: lin(1.55, 1.45, t),
+      z: lin(charZ + 5.0, charZ + 4.2, t),
+      lx: charX - 0.08,
+      ly: 0.85,
+      lz: charZ - 0.1,
     };
   }
   if (shot.id === 'steam') {
-    // Three-quarter from right — desk props + slot neighbour
     return {
-      x: lin(charX + 2.6, charX + 1.8, t),
-      y: lin(2.0, 1.85, t),
-      z: lin(charZ + 5.0, charZ + 3.9, t),
-      lx: charX - 0.1,
-      ly: 1.4,
-      lz: charZ - 0.5,
+      x: lin(charX + 0.85, charX + 0.5, t),
+      y: lin(1.5, 1.42, t),
+      z: lin(charZ + 4.8, charZ + 4.1, t),
+      lx: charX - 0.06,
+      ly: 0.85,
+      lz: charZ - 0.15,
     };
   }
   if (shot.id === 'poki') {
-    // High wide — ceiling + neon + BROWSER PLAY
     return {
-      x: lin(charX - 2.2, charX - 1.2, t),
-      y: lin(2.85, 2.4, t),
-      z: lin(charZ + 5.2, charZ + 4.0, t),
-      lx: charX + 0.15,
-      ly: 1.45,
-      lz: charZ - 0.45,
+      x: lin(charX - 0.8, charX - 0.4, t),
+      y: lin(1.55, 1.45, t),
+      z: lin(charZ + 4.9, charZ + 4.15, t),
+      lx: charX + 0.06,
+      ly: 0.88,
+      lz: charZ - 0.1,
     };
   }
   if (shot.id === 'roblox') {
-    // Side wide — BLOCK WORLD + right shelves / DUO BAY
     return {
-      x: lin(charX - 3.2, charX - 2.1, t),
-      y: lin(2.2, 1.95, t),
-      z: lin(charZ + 5.0, charZ + 3.9, t),
-      lx: charX + 0.4,
-      ly: 1.4,
-      lz: charZ - 0.35,
+      x: lin(charX - 0.9, charX - 0.45, t),
+      y: lin(1.5, 1.42, t),
+      z: lin(charZ + 4.85, charZ + 4.1, t),
+      lx: charX + 0.08,
+      ly: 0.85,
+      lz: charZ - 0.1,
     };
   }
-  // twitch: wide enough for LIVE WATCH + neighbour + ceiling cove
+  // twitch: straight-on — full body + floor under feet for captions
   return {
-    x: lin(charX + 2.6, charX + 1.6, t),
-    y: lin(2.35, 2.05, t),
-    z: lin(charZ + 5.3, charZ + 4.1, t),
-    lx: charX - 0.2,
-    ly: 1.4,
-    lz: charZ - 0.35,
+    x: lin(charX + 0.3, charX + 0.08, t),
+    y: lin(1.5, 1.42, t),
+    z: lin(charZ + 4.95, charZ + 4.15, t),
+    lx: charX - 0.03,
+    ly: 0.85,
+    lz: charZ - 0.08,
   };
 }
 
@@ -181,22 +191,103 @@ function placeCharacter(shot, f) {
   for (const n of CHAR_NAMES) chars[n].group.visible = false;
   const bill = chars[name];
   bill.group.visible = true;
-  const pose = poseFor(shot, f);
-  setPose(bill, chars[name].poses[pose]);
+  setPose(bill, chars[name].poses[poseFor(shot, f)]);
   const bob = Math.sin(f * 0.21) * 0.025;
   const lean = Math.sin(f * 0.09) * 0.03;
-  // Offset slightly so desk RGB / drinks / headset stay readable beside the character
-  const sideNudge = ({ hook: -0.35, steam: 0.4, poki: -0.45, roblox: 0.35, twitch: -0.4 })[shot.id] || 0;
-  const scale = shot.id === 'hook' ? 1.0 : 0.92;
-  bill.group.scale.set(scale, scale, scale);
-  bill.group.position.set(booth.x + lean + sideNudge, bob, booth.z + 1.55);
+  const cl = charLocal(shot);
+  bill.group.scale.set(cl.scale, cl.scale, cl.scale);
+  bill.group.position.set(booth.x + lean + cl.side, bob, booth.z + cl.z);
   bill.group.rotation.y = Math.atan2(
     camera.position.x - bill.group.position.x,
     camera.position.z - bill.group.position.z,
   );
   shadowCatch.position.set(bill.group.position.x, 0.035, bill.group.position.z);
-  shadowCatch.scale.setScalar(scale);
+  shadowCatch.scale.setScalar(cl.scale);
   shadowCatch.visible = true;
+}
+
+function isCharacterHit(obj) {
+  let o = obj;
+  while (o) {
+    if (o.name === 'characterPlane') return true;
+    o = o.parent;
+  }
+  return false;
+}
+
+function isIgnoredHit(obj) {
+  let o = obj;
+  while (o) {
+    if (o === shadowCatch) return true;
+    if (o.isLight) return true;
+    o = o.parent;
+  }
+  return false;
+}
+
+/**
+ * Sample the character plane with rays from the camera.
+ * Returns the fraction of samples whose nearest hit is set geometry (not the character).
+ */
+function measureCharacterOcclusion(bill) {
+  bill.plane.updateWorldMatrix(true, false);
+  const mw = 1.35 * bill.group.scale.x;
+  const mh = 1.8 * bill.group.scale.y;
+  // Sample a dense grid over the plane (skip extreme edges / transparent margins a bit)
+  const nu = 9, nv = 11;
+  let total = 0, occluded = 0;
+  const camPos = camera.position;
+  for (let iv = 1; iv < nv; iv++) {
+    for (let iu = 1; iu < nu; iu++) {
+      const u = (iu / nu) - 0.5;
+      const v = (iv / nv) - 0.5;
+      // local plane point (geometry is centered at plane.position.y = 0.9 within group)
+      _v.set(u * mw, 0.9 + v * mh, 0);
+      bill.group.localToWorld(_v);
+      _n.copy(_v).sub(camPos).normalize();
+      raycaster.set(camPos, _n);
+      raycaster.far = camPos.distanceTo(_v) + 0.35;
+      const hits = raycaster.intersectObjects(scene.children, true)
+        .filter((h) => !isIgnoredHit(h.object));
+      if (!hits.length) continue;
+      total++;
+      if (!isCharacterHit(hits[0].object)) occluded++;
+    }
+  }
+  return total ? occluded / total : 0;
+}
+
+export function assertCharacterVisible(frames) {
+  const results = [];
+  const fails = [];
+  for (const shot of SHOTS) {
+    const samples = [
+      shot.f0,
+      Math.floor((shot.f0 + shot.f1 - 1) / 2),
+      shot.f1 - 1,
+    ];
+    for (const f of samples) {
+      if (frames && !frames.includes(f) && frames !== 'all') continue;
+      const cam = cameraFor(shot, f);
+      camera.position.set(cam.x, cam.y, cam.z);
+      camera.lookAt(cam.lx, cam.ly, cam.lz);
+      placeCharacter(shot, f);
+      // Ensure matrices are current for raycasts
+      scene.updateMatrixWorld(true);
+      const bill = chars[shot.char];
+      const frac = measureCharacterOcclusion(bill);
+      const row = { shot: shot.id, f, occlusion: +frac.toFixed(3) };
+      results.push(row);
+      if (frac > OCCLUSION_MAX + 1e-6) fails.push(row);
+    }
+  }
+  if (fails.length) {
+    throw new Error(
+      `Character occlusion > ${(OCCLUSION_MAX * 100).toFixed(0)}%:\n`
+      + fails.map((r) => `  ${r.shot} f${r.f}: ${(r.occlusion * 100).toFixed(1)}%`).join('\n'),
+    );
+  }
+  return results;
 }
 
 function renderFrame(f) {
@@ -207,7 +298,6 @@ function renderFrame(f) {
   camera.lookAt(cam.lx, cam.ly, cam.lz);
   placeCharacter(shot, f);
 
-  // Subtle screen flicker on active booth monitor (already baked textures)
   renderer.render(scene, camera);
   ctx.drawImage(glCanvas, 0, 0, W, H);
   drawOverlays(ctx, f);
@@ -238,12 +328,14 @@ async function boot() {
   }
 
   await initOverlays();
+  const occl = assertCharacterVisible('all');
   window.captionInfo = captionInfo;
   window.assertCaptionSafeZone = assertCaptionSafeZone;
+  window.assertCharacterVisible = assertCharacterVisible;
+  window.occlusionInfo = occl;
   ready = true;
   window.filmReady = true;
   window.renderFrame = renderFrame;
-  // Preview loop when opened in a browser
   if (!window.__HEADLESS) {
     let f = 0;
     const tick = () => { renderFrame(f); f = (f + 1) % FRAMES; requestAnimationFrame(tick); };
@@ -253,4 +345,4 @@ async function boot() {
   }
 }
 
-boot().catch((e) => { console.error(e); window.filmReady = false; });
+boot().catch((e) => { console.error(e); window.filmReady = false; window.filmBootError = String(e && e.stack || e); });

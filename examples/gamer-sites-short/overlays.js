@@ -11,7 +11,10 @@ const MAX_TEXT_W = MAX_RENDER_W - STROKE_W; // 906
 const BASE_FONT_PX = 70;
 const MIN_FONT_PX = 42;
 const TRACK_RATIO = -0.01;
-const BAND_Y = { top: 280, low: 1380 };
+// top: above heads; low: lower third — kept below typical character feet so faces stay clear
+const BAND_Y = { top: 200, low: 1760 };
+const LOW_TOP_MIN = 1640;   // first line below character feet / lower body
+const BOTTOM_MARGIN = 50;   // keep clear of Shorts bottom UI
 const WRAP_DANGLE = new Set(['a', 'an', 'the', 'or', 'and', 'of', 'in', 'on', 'to', 'at', 'by', 'for', 'with', 'its', "it's", 'where', 'can']);
 const FILL = '#f5e6b8';
 const STROKE = '#1c1810';
@@ -88,7 +91,15 @@ function wrapWords(words, visW, maxW, maxLines = 5) {
 function layoutCaption(c, kit) {
   const words = c.text.split(/\s+/).filter(Boolean);
   const lines = wrapWords(words, kit.visW, MAX_TEXT_W, 5);
-  const cy = BAND_Y[c.band] ?? BAND_Y.top;
+  let cy = BAND_Y[c.band] ?? BAND_Y.top;
+  // Keep low-band blocks entirely in the lower third (below feet, above bottom margin)
+  if (c.band === 'low') {
+    const half = ((lines.length - 1) / 2) * kit.lineH;
+    const topY = cy - half - kit.lineH * 0.55;
+    if (topY < LOW_TOP_MIN) cy += (LOW_TOP_MIN - topY);
+    const botY = cy + half + kit.lineH * 0.55;
+    if (botY > H - BOTTOM_MARGIN) cy -= (botY - (H - BOTTOM_MARGIN));
+  }
   const lineInfo = lines.map(([a, b], li) => {
     const str = words.slice(a, b).join(' ');
     const lw = kit.visW(str);
@@ -97,7 +108,7 @@ function layoutCaption(c, kit) {
     return { text: str, width: lw, renderW, baseline };
   });
   const maxRender = lineInfo.length ? Math.max(...lineInfo.map((l) => l.renderW)) : 0;
-  return { ...c, fontPx: kit.fontPx, font: kit.font, track: kit.track, lineInfo, maxRender };
+  return { ...c, fontPx: kit.fontPx, font: kit.font, track: kit.track, lineInfo, maxRender, cy };
 }
 
 export async function initOverlays() {
