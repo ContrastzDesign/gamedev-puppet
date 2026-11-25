@@ -1,74 +1,166 @@
 // Word-exact caption overlays — warm cream/yellow with dark outline (V1).
+// Hard safe zone: 80 px side margins → max rendered line width 920 px (incl. stroke).
 import { W, H, clamp, smooth } from './core.js';
 import { CAPTIONS } from './beats.js';
 
-const FONT_PX = 70;
-const FONT = `800 ${FONT_PX}px Caption`;
-const TRACK = -0.01 * FONT_PX;
+const SIDE_MARGIN = 80;
+const MAX_RENDER_W = W - SIDE_MARGIN * 2; // 920
+const STROKE_W = 14;
+// Stroke is centered on the glyph path → half extends past each edge.
+const MAX_TEXT_W = MAX_RENDER_W - STROKE_W; // 906
+const BASE_FONT_PX = 70;
+const MIN_FONT_PX = 42;
+const TRACK_RATIO = -0.01;
 const BAND_Y = { top: 280, low: 1380 };
-const MAX_W = 920;
-const LINE_H = 82;
-const WRAP_DANGLE = new Set(['a', 'an', 'the', 'or', 'and', 'of', 'in', 'on', 'to', 'at', 'by', 'for', 'with', 'its', "it's"]);
+const WRAP_DANGLE = new Set(['a', 'an', 'the', 'or', 'and', 'of', 'in', 'on', 'to', 'at', 'by', 'for', 'with', 'its', "it's", 'where', 'can']);
 const FILL = '#f5e6b8';
 const STROKE = '#1c1810';
 
 let LAYOUTS = null;
 
-export async function initOverlays() {
-  await document.fonts.load(FONT);
-  if (!document.fonts.check(FONT)) throw new Error('Caption font missing');
-
+function measureKit(fontPx) {
+  const font = `800 ${fontPx}px Caption`;
+  const track = TRACK_RATIO * fontPx;
   const m = document.createElement('canvas').getContext('2d');
-  m.font = FONT;
-  m.letterSpacing = `${TRACK}px`;
+  m.font = font;
+  m.letterSpacing = `${track}px`;
   m.textBaseline = 'alphabetic';
   const mw = (s) => m.measureText(s).width;
   const m0 = document.createElement('canvas').getContext('2d');
-  m0.font = FONT;
+  m0.font = font;
   const trailing = mw('a') - m0.measureText('a').width;
-  const visW = (s) => mw(s) - trailing;
+  const visW = (s) => Math.max(0, mw(s) - trailing);
   const asc = m.measureText('H').actualBoundingBoxAscent;
   const desc = m.measureText('g').actualBoundingBoxDescent;
   const baseOff = (asc - desc) / 2;
+  const lineH = Math.round(fontPx * 1.17);
+  return { font, track, visW, baseOff, lineH, fontPx };
+}
+
+/** Balanced multi-line wrap: try 1..maxLines splits; pick the layout whose longest line is shortest. */
+function wrapWords(words, visW, maxW, maxLines = 5) {
+  const n = words.length;
+  if (n === 0) return [];
+  if (n === 1 || visW(words.join(' ')) <= maxW) return [[0, n]];
+
+  let best = null;
+  let bestScore = Infinity;
+  const maxL = Math.min(maxLines, n);
+
+  // Dynamic programming: best wrap into exactly L lines for prefix of words
+  // For small n (captions), brute-force partitions are fine.
+  function search(start, linesLeft, acc) {
+    if (linesLeft === 1) {
+      const last = [start, n];
+      const widths = [...acc, last].map(([a, b]) => visW(words.slice(a, b).join(' ')));
+      const longest = Math.max(...widths);
+      let score = longest;
+      // mild dangle penalty
+      for (const [a, b] of [...acc, last]) {
+        if (b - a >= 1 && WRAP_DANGLE.has(words[b - 1].toLowerCase().replace(/[^\w']/g, ''))) score += 40;
+      }
+      if (score < bestScore) {
+        bestScore = score;
+        best = [...acc, last];
+      }
+      return;
+    }
+    for (let end = start + 1; end <= n - (linesLeft - 1); end++) {
+      search(end, linesLeft - 1, [...acc, [start, end]]);
+    }
+  }
+
+  for (let L = 2; L <= maxL; L++) {
+    best = null;
+    bestScore = Infinity;
+    search(0, L, []);
+    if (best && Math.max(...best.map(([a, b]) => visW(words.slice(a, b).join(' ')))) <= maxW) {
+      return best;
+    }
+  }
+  // Even with max lines, return the best we found (caller may shrink font).
+  best = null;
+  bestScore = Infinity;
+  search(0, maxL, []);
+  return best || [[0, n]];
+}
+
+function layoutCaption(c, kit) {
+  const words = c.text.split(/\s+/).filter(Boolean);
+  const lines = wrapWords(words, kit.visW, MAX_TEXT_W, 5);
+  const cy = BAND_Y[c.band] ?? BAND_Y.top;
+  const lineInfo = lines.map(([a, b], li) => {
+    const str = words.slice(a, b).join(' ');
+    const lw = kit.visW(str);
+    const renderW = lw + STROKE_W;
+    const baseline = cy + kit.baseOff + (li - (lines.length - 1) / 2) * kit.lineH;
+    return { text: str, width: lw, renderW, baseline };
+  });
+  const maxRender = lineInfo.length ? Math.max(...lineInfo.map((l) => l.renderW)) : 0;
+  return { ...c, fontPx: kit.fontPx, font: kit.font, track: kit.track, lineInfo, maxRender };
+}
+
+export async function initOverlays() {
+  await document.fonts.load(`800 ${BASE_FONT_PX}px Caption`);
+  if (!document.fonts.check(`800 ${BASE_FONT_PX}px Caption`)) throw new Error('Caption font missing');
 
   LAYOUTS = CAPTIONS.map((c) => {
-    const words = c.text.split(/\s+/).filter(Boolean);
-    const one = words.join(' ');
-    let lines = [[0, words.length]];
-    if (visW(one) > MAX_W && words.length > 1) {
-      let best = 1, bestW = Infinity;
-      for (let k = 1; k < words.length; k++) {
-        const w = Math.max(visW(words.slice(0, k).join(' ')), visW(words.slice(k).join(' ')))
-          + (WRAP_DANGLE.has(words[k - 1].toLowerCase()) ? 100 : 0);
-        if (w < bestW) { bestW = w; best = k; }
-      }
-      // Prefer up to 3 lines for long captions
-      if (visW(words.slice(0, best).join(' ')) > MAX_W || visW(words.slice(best).join(' ')) > MAX_W) {
-        let b1 = 1, b2 = words.length - 1, score = Infinity;
-        for (let i = 1; i < words.length - 1; i++) {
-          for (let j = i + 1; j < words.length; j++) {
-            const ww = Math.max(
-              visW(words.slice(0, i).join(' ')),
-              visW(words.slice(i, j).join(' ')),
-              visW(words.slice(j).join(' ')),
-            );
-            if (ww < score) { score = ww; b1 = i; b2 = j; }
-          }
-        }
-        lines = [[0, b1], [b1, b2], [b2, words.length]];
-      } else {
-        lines = [[0, best], [best, words.length]];
+    let fontPx = BASE_FONT_PX;
+    let layout = layoutCaption(c, measureKit(fontPx));
+    while (layout.maxRender > MAX_RENDER_W + 0.5 && fontPx > MIN_FONT_PX) {
+      fontPx -= 2;
+      layout = layoutCaption(c, measureKit(fontPx));
+    }
+    return layout;
+  });
+
+  // Hard fail if any line still overflows the 80 px safe zone.
+  assertCaptionSafeZone();
+}
+
+/** Measure every caption line's rendered width; throw if any exceeds the safe zone. */
+export function assertCaptionSafeZone() {
+  if (!LAYOUTS) throw new Error('overlays: call initOverlays() first');
+  const overflows = [];
+  for (const c of LAYOUTS) {
+    for (const line of c.lineInfo) {
+      const left = W / 2 - line.renderW / 2;
+      const right = W / 2 + line.renderW / 2;
+      if (line.renderW > MAX_RENDER_W + 0.5 || left < SIDE_MARGIN - 0.5 || right > W - SIDE_MARGIN + 0.5) {
+        overflows.push({
+          text: c.text,
+          line: line.text,
+          renderW: +line.renderW.toFixed(1),
+          max: MAX_RENDER_W,
+          left: +left.toFixed(1),
+          right: +right.toFixed(1),
+          fontPx: c.fontPx,
+        });
       }
     }
-    const cy = BAND_Y[c.band] ?? BAND_Y.top;
-    const lineInfo = lines.map(([a, b], li) => {
-      const str = words.slice(a, b).join(' ');
-      const lw = visW(str);
-      const baseline = cy + baseOff + (li - (lines.length - 1) / 2) * LINE_H;
-      return { text: str, width: lw, baseline };
-    });
-    return { ...c, lineInfo };
-  });
+  }
+  if (overflows.length) {
+    throw new Error(`Caption overflow (safe zone ${SIDE_MARGIN}px / max ${MAX_RENDER_W}px):\n`
+      + overflows.map((o) => `  "${o.line}" renderW=${o.renderW} font=${o.fontPx} left=${o.left} right=${o.right}`).join('\n'));
+  }
+  return true;
+}
+
+export function captionInfo() {
+  if (!LAYOUTS) throw new Error('overlays: call initOverlays() first');
+  return LAYOUTS.map((L) => ({
+    f: L.f,
+    end: L.end,
+    text: L.text,
+    band: L.band,
+    fontPx: L.fontPx,
+    maxRender: +L.maxRender.toFixed(1),
+    lines: L.lineInfo.map((l) => ({
+      text: l.text,
+      width: +l.width.toFixed(1),
+      renderW: +l.renderW.toFixed(1),
+    })),
+  }));
 }
 
 export function drawOverlays(ctx, f) {
@@ -82,8 +174,8 @@ export function drawOverlays(ctx, f) {
     if (a <= 0.01) continue;
     ctx.save();
     ctx.globalAlpha = a;
-    ctx.font = FONT;
-    ctx.letterSpacing = `${TRACK}px`;
+    ctx.font = c.font;
+    ctx.letterSpacing = `${c.track}px`;
     ctx.textAlign = 'left';
     ctx.textBaseline = 'alphabetic';
     ctx.lineJoin = 'round';
@@ -91,7 +183,7 @@ export function drawOverlays(ctx, f) {
     for (const line of c.lineInfo) {
       const x = W / 2 - line.width / 2;
       ctx.strokeStyle = STROKE;
-      ctx.lineWidth = 14;
+      ctx.lineWidth = STROKE_W;
       ctx.strokeText(line.text, x, line.baseline);
       ctx.fillStyle = FILL;
       ctx.fillText(line.text, x, line.baseline);
