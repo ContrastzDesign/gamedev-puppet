@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { FPS, FRAMES, SHOTS } from './beats.js';
 import { W, H, clamp, easeInOut, lin } from './core.js';
 import { buildRoom } from './room.js';
-import { initOverlays, drawOverlays, captionInfo, assertCaptionSafeZone } from './overlays.js';
+import { initOverlays, drawOverlays, captionInfo, assertCaptionSafeZone, captionBoxes } from './overlays.js';
 
 const glCanvas = document.querySelector('#gl');
 const film = document.querySelector('#film');
@@ -64,6 +64,8 @@ let ready = false;
 const raycaster = new THREE.Raycaster();
 const _v = new THREE.Vector3();
 const _n = new THREE.Vector3();
+const _p = new THREE.Vector3();
+const _box = new THREE.Box3();
 
 function makeBillboard(tex) {
   const g = new THREE.Group();
@@ -125,10 +127,11 @@ function poseFor(shot, f) {
 /** Character stands well into the aisle in front of the desk (full body readable). */
 function charLocal(shot) {
   const side = ({
-    hook: 0, platform: 0.15, roblox: -0.15, godot: 0.2, nilo: -0.2, outro: 0.1,
+    hook: 0, platform: 0.1, roblox: -0.15, godot: 0.2, nilo: -0.2, outro: 0.1,
   })[shot.id] || 0;
-  const scale = shot.id === 'hook' || shot.id === 'platform' ? 0.95 : 0.9;
-  return { side, z: 2.2, scale };
+  // Hook/platform larger so medium framing reads ~40–50% frame height.
+  const scale = shot.id === 'hook' || shot.id === 'platform' ? 1.18 : 0.9;
+  return { side, z: 2.15, scale };
 }
 
 function cameraFor(shot, f) {
@@ -137,20 +140,22 @@ function cameraFor(shot, f) {
   const cl = charLocal(shot);
   const charX = booth.x + cl.side;
   const charZ = booth.z + cl.z;
-  const wantFov = shot.id === 'hook' ? 52 : shot.id === 'platform' ? 48 : 40;
+  // Hook/platform: medium shot (not a distant wide). Keep FOV near booth close-ups.
+  const wantFov = shot.id === 'hook' || shot.id === 'platform' ? 42 : 40;
   if (camera.fov !== wantFov) {
     camera.fov = wantFov;
     camera.updateProjectionMatrix();
   }
   if (shot.id === 'hook' || shot.id === 'platform') {
-    // Wide street establishing shot — all three stalls (Roblox / Godot / Nilo) readable
+    // Medium shot: character ~40–50% of frame height, Build Street booths behind.
+    // Keep look height on the torso so feet clear the caption band and the set fills the frame.
     return {
-      x: lin(0.2, 0.0, t),
-      y: lin(2.35, 2.0, t),
-      z: lin(charZ + 11.0, charZ + 8.5, t),
-      lx: 0.0,
-      ly: 1.35,
-      lz: booth.z - 0.3,
+      x: lin(charX + 0.28, charX + 0.08, t),
+      y: lin(1.52, 1.42, t),
+      z: lin(charZ + 4.55, charZ + 3.95, t),
+      lx: charX - 0.02,
+      ly: 1.05,
+      lz: charZ - 0.15,
     };
   }
   if (shot.id === 'roblox') {
@@ -292,6 +297,115 @@ export function assertCharacterVisible(frames) {
   return results;
 }
 
+function collectSignScreenMeshes() {
+  const out = [];
+  scene.traverse((obj) => {
+    if (obj.isMesh && obj.userData && obj.userData.isSignOrScreen) out.push(obj);
+  });
+  return out;
+}
+
+/** Project a sign/screen plane mesh to an axis-aligned pixel bbox (or null if off/behind). */
+function meshScreenBBox(mesh) {
+  mesh.updateWorldMatrix(true, false);
+  const geo = mesh.geometry;
+  if (!geo.boundingBox) geo.computeBoundingBox();
+  _box.copy(geo.boundingBox);
+  // Expand slightly so bezel-adjacent screens still count as readable targets.
+  _box.expandByScalar(0.02);
+  const corners = [
+    new THREE.Vector3(_box.min.x, _box.min.y, _box.min.z),
+    new THREE.Vector3(_box.min.x, _box.min.y, _box.max.z),
+    new THREE.Vector3(_box.min.x, _box.max.y, _box.min.z),
+    new THREE.Vector3(_box.min.x, _box.max.y, _box.max.z),
+    new THREE.Vector3(_box.max.x, _box.min.y, _box.min.z),
+    new THREE.Vector3(_box.max.x, _box.min.y, _box.max.z),
+    new THREE.Vector3(_box.max.x, _box.max.y, _box.min.z),
+    new THREE.Vector3(_box.max.x, _box.max.y, _box.max.z),
+  ];
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  let any = false;
+  for (const c of corners) {
+    c.applyMatrix4(mesh.matrixWorld);
+    _p.copy(c).project(camera);
+    if (_p.z < -1 || _p.z > 1) continue; // behind / clipped
+    // Require on-screen (allow slight margin)
+    if (_p.x < -1.15 || _p.x > 1.15 || _p.y < -1.15 || _p.y > 1.15) continue;
+    const sx = (_p.x * 0.5 + 0.5) * W;
+    const sy = (-_p.y * 0.5 + 0.5) * H;
+    minX = Math.min(minX, sx); maxX = Math.max(maxX, sx);
+    minY = Math.min(minY, sy); maxY = Math.max(maxY, sy);
+    any = true;
+  }
+  if (!any) return null;
+  // Ignore tiny projected scraps
+  if (maxX - minX < 8 || maxY - minY < 8) return null;
+  return { left: minX, right: maxX, top: minY, bottom: maxY };
+}
+
+function boxesOverlap(a, b) {
+  return a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
+}
+
+/**
+ * Fail if any caption box overlaps a sign/screen mesh's screen-space bbox
+ * on a sample frame inside that caption's on-screen window.
+ */
+export function assertCaptionClearOfSigns() {
+  const meshes = collectSignScreenMeshes();
+  if (!meshes.length) throw new Error('No sign/screen meshes tagged for caption overlap check');
+  const boxes = captionBoxes();
+  const fails = [];
+  for (const cap of boxes) {
+    const mid = Math.floor((cap.f + cap.end) / 2);
+    const samples = [cap.f + 4, mid, Math.max(cap.f + 4, cap.end - 4)];
+    for (const f of samples) {
+      if (f < cap.f || f > cap.end) continue;
+      const shot = shotAt(f);
+      const cam = cameraFor(shot, f);
+      camera.position.set(cam.x, cam.y, cam.z);
+      camera.lookAt(cam.lx, cam.ly, cam.lz);
+      placeCharacter(shot, f);
+      scene.updateMatrixWorld(true);
+      camera.updateMatrixWorld(true);
+      for (const mesh of meshes) {
+        const mb = meshScreenBBox(mesh);
+        if (!mb) continue;
+        if (boxesOverlap(cap, mb)) {
+          fails.push({
+            f,
+            text: cap.text,
+            sign: mesh.userData.signText || mesh.name,
+            cap: {
+              l: +cap.left.toFixed(1), r: +cap.right.toFixed(1),
+              t: +cap.top.toFixed(1), b: +cap.bottom.toFixed(1),
+            },
+            mesh: {
+              l: +mb.left.toFixed(1), r: +mb.right.toFixed(1),
+              t: +mb.top.toFixed(1), b: +mb.bottom.toFixed(1),
+            },
+          });
+        }
+      }
+    }
+  }
+  // Deduplicate by caption text + sign label
+  const seen = new Set();
+  const uniq = fails.filter((row) => {
+    const k = `${row.text}|${row.sign}|${row.f}`;
+    if (seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  });
+  if (uniq.length) {
+    throw new Error(
+      `Caption overlaps sign/screen mesh:\n`
+      + uniq.map((r) => `  f${r.f} "${r.text}" vs ${r.sign} cap=[${r.cap.l},${r.cap.t}-${r.cap.r},${r.cap.b}] mesh=[${r.mesh.l},${r.mesh.t}-${r.mesh.r},${r.mesh.b}]`).join('\n'),
+    );
+  }
+  return { checked: boxes.length, meshes: meshes.length, samples: boxes.length * 3 };
+}
+
 function renderFrame(f) {
   f = ((f % FRAMES) + FRAMES) % FRAMES | 0;
   const shot = shotAt(f);
@@ -330,11 +444,16 @@ async function boot() {
   }
 
   await initOverlays();
+  assertCaptionSafeZone();
   const occl = assertCharacterVisible('all');
+  const signClear = assertCaptionClearOfSigns();
   window.captionInfo = captionInfo;
+  window.captionBoxes = captionBoxes;
   window.assertCaptionSafeZone = assertCaptionSafeZone;
+  window.assertCaptionClearOfSigns = assertCaptionClearOfSigns;
   window.assertCharacterVisible = assertCharacterVisible;
   window.occlusionInfo = occl;
+  window.signClearInfo = signClear;
   ready = true;
   window.filmReady = true;
   window.renderFrame = renderFrame;

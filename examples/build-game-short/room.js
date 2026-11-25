@@ -47,10 +47,15 @@ function makeSign(text, w = 1.6, h = 0.45, bg = '#2a3228', fg = '#f0e6d0', borde
   ctx.fillText(text, 256, 68);
   const tex = new THREE.CanvasTexture(c);
   tex.colorSpace = THREE.SRGBColorSpace;
-  return new THREE.Mesh(
+  const mesh = new THREE.Mesh(
     new THREE.PlaneGeometry(w, h),
     new THREE.MeshBasicMaterial({ map: tex }),
   );
+  // Tagged for caption-vs-sign screen-space overlap checks.
+  mesh.name = 'signMesh';
+  mesh.userData.signText = text;
+  mesh.userData.isSignOrScreen = true;
+  return mesh;
 }
 
 /** Generic original poster art (shapes only — not real game covers). */
@@ -122,6 +127,8 @@ function makeScreenTex(seed) {
 function makeScreen(tex) {
   const geo = new THREE.PlaneGeometry(1.35, 0.85);
   const screen = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ map: tex }));
+  screen.name = 'screenMesh';
+  screen.userData.isSignOrScreen = true;
   const bezel = box(new THREE.Group(), 1.5, 1.0, 0.08, '#1c1c20', 0, 0, -0.05);
   const g = new THREE.Group();
   g.add(bezel);
@@ -567,8 +574,9 @@ export function buildRoom(textures) {
   addShelfUnit(root, -14.2, -1.5, Math.PI / 2);
   addShelfUnit(root, 14.2, 1.0, -Math.PI / 2);
 
-  // Center rug
-  box(root, 6, 0.018, 4, '#8a5a4a', 0, 0.022, 2.2);
+  // Small side rug only — keep the camera aisle clear of the old untextured
+  // reddish center slab that filled the bottom of wide hook frames.
+  box(root, 2.4, 0.018, 1.6, '#8a5a4a', -9.5, 0.022, 3.4);
 
   // Lounge sofa + coffee table — parked to the side so the street aisle stays clear
   box(root, 3.2, 0.45, 1.1, '#6a5548', -10.5, 0.35, 2.5, 0, 0.6, 0, { round: 0.08 });

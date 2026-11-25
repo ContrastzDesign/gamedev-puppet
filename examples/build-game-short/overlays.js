@@ -174,6 +174,28 @@ export function captionInfo() {
   }));
 }
 
+/** Screen-space axis-aligned boxes for every caption (incl. stroke padding). */
+export function captionBoxes() {
+  if (!LAYOUTS) throw new Error('overlays: call initOverlays() first');
+  const vPad = STROKE_W / 2 + 4;
+  return LAYOUTS.map((L) => {
+    const lineH = Math.round(L.fontPx * 1.17);
+    const tops = L.lineInfo.map((l) => l.baseline - lineH * 0.55 - vPad);
+    const bots = L.lineInfo.map((l) => l.baseline + lineH * 0.55 + vPad);
+    const maxW = L.lineInfo.length ? Math.max(...L.lineInfo.map((l) => l.renderW)) : 0;
+    return {
+      f: L.f,
+      end: L.end ?? L.f + 90,
+      text: L.text,
+      band: L.band,
+      left: W / 2 - maxW / 2,
+      right: W / 2 + maxW / 2,
+      top: Math.min(...tops),
+      bottom: Math.max(...bots),
+    };
+  });
+}
+
 export function drawOverlays(ctx, f) {
   if (!LAYOUTS) return;
   for (const c of LAYOUTS) {
