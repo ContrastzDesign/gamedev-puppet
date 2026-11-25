@@ -1,0 +1,57 @@
+{
+ "file": "vo.mp3",
+ "duration": 47.307755,
+ "fps": 24,
+ "video_end": 1136,
+ "method": "faster-whisper small.en words aligned to spoken.txt; frames f=round(t*fps)+1; video_end=ceil(duration*fps-0.05)",
+ "lines": [
+  {
+   "line": 1,
+   "start": 0.0,
+   "end": 1.46,
+   "f_start": 1,
+   "f_end": 36,
+   "text": "Where should you build your game?"
+  },
+  {
+   "line": 2,
+   "start": 2.12,
+   "end": 4.26,
+   "f_start": 52,
+   "f_end": 103,
+   "text": "What’s the best platform for making a game?"
+  },
+  {
+   "line": 3,
+   "start": 4.98,
+   "end": 16.6,
+   "f_start": 121,
+   "f_end": 399,
+   "text": "Number one, Roblox Studio by far the easiest platform to get started on. It completely free to start making games and publishing, But Roblox does take more than 70% of your future earnings"
+  },
+  {
+   "line": 4,
+   "start": 17.22,
+   "end": 32.72,
+   "f_start": 414,
+   "f_end": 786,
+   "text": "Number two, Godot it’s the complete opposite of roblox, you can basically  get everything for free but it isn’t as easy to publish your game. You still have to pay publishing fees on any platform you put your game on. And depending on how big your game gets it can get pretty expensive!"
+  },
+  {
+   "line": 5,
+   "start": 33.52,
+   "end": 41.42,
+   "f_start": 805,
+   "f_end": 995,
+   "text": "Number three, Nilo for a playable 3D world in a browser. Even non-developers can describe a game, edit it, and publish a link."
+  },
+  {
+   "line": 6,
+   "start": 41.78,
+   "end": 46.78,
+   "f_start": 1004,
+   "f_end": 1124,
+   "text": "That makes it a practical choice when the first release is a playtest people should be able to join immediately."
+  }
+ ]
+}

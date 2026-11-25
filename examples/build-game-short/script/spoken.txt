@@ -1,0 +1,6 @@
+Where should you build your game?
+What’s the best platform for making a game?
+Number one, Roblox Studio by far the easiest platform to get started on. It completely free to start making games and publishing, But Roblox does take more than 70% of your future earnings
+Number two, Godot it’s the complete opposite of roblox, you can basically  get everything for free but it isn’t as easy to publish your game. You still have to pay publishing fees on any platform you put your game on. And depending on how big your game gets it can get pretty expensive!
+Number three, Nilo for a playable 3D world in a browser. Even non-developers can describe a game, edit it, and publish a link.
+That makes it a practical choice when the first release is a playtest people should be able to join immediately.
