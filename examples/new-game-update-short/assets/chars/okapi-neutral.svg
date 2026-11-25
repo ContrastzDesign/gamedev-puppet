@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <ellipse cx="300" cy="560" rx="120" ry="132" fill="#6a5240"/>
+  <!-- zebra-stripe haunches hint -->
+  <path d="M360,520 Q400,560 380,640" fill="none" stroke="#ebe4dc" stroke-width="10"/>
+  <path d="M380,500 Q420,550 400,630" fill="none" stroke="#ebe4dc" stroke-width="8"/>
+  <path d="M220,520 Q180,560 200,640" fill="none" stroke="#ebe4dc" stroke-width="10"/>
+  <!-- safety vest -->
+  <path d="M210,455 Q300,425 390,455 L400,640 Q300,670 200,640 Z" fill="#c4a35a"/>
+  <path d="M235,480 Q300,450 365,480 L370,620 Q300,645 230,620 Z" fill="#2a3848"/>
+  <rect x="250" y="500" width="20" height="90" fill="#c4a35a"/>
+  <rect x="330" y="500" width="20" height="90" fill="#c4a35a"/>
+  <!-- head -->
+  <ellipse cx="300" cy="285" rx="130" ry="118" fill="#8a6a50"/>
+  <ellipse cx="300" cy="305" rx="100" ry="88" fill="#9a7a60"/>
+  <ellipse cx="300" cy="340" rx="42" ry="28" fill="#5a4030"/>
+  <ellipse cx="300" cy="330" rx="14" ry="10" fill="#2a2118"/>
+  <!-- okapi ears + forehead stripes -->
+  <ellipse cx="185" cy="195" rx="28" ry="40" fill="#7a5a40"/>
+  <ellipse cx="415" cy="195" rx="28" ry="40" fill="#7a5a40"/>
+  <ellipse cx="185" cy="200" rx="12" ry="20" fill="#e8b4a0"/>
+  <ellipse cx="415" cy="200" rx="12" ry="20" fill="#e8b4a0"/>
+  <path d="M250,210 Q270,240 255,270" fill="none" stroke="#ebe4dc" stroke-width="7"/>
+  <path d="M350,210 Q330,240 345,270" fill="none" stroke="#ebe4dc" stroke-width="7"/>
+  <path d="M280,200 Q300,230 280,265" fill="none" stroke="#ebe4dc" stroke-width="6"/>
+  <path d="M320,200 Q300,230 320,265" fill="none" stroke="#ebe4dc" stroke-width="6"/>
+  <!-- yellow hard hat (dome + brim) -->
+  <ellipse cx="300" cy="200" rx="145" ry="28" fill="#c4a35a"/>
+  <ellipse cx="300" cy="175" rx="115" ry="55" fill="#e0c070"/>
+  <ellipse cx="300" cy="155" rx="70" ry="22" fill="#d0b060"/>
+  <rect x="288" y="118" width="24" height="28" rx="4" fill="#8a7030"/>
+  <!-- safety shades -->
+  <rect x="230" y="260" width="55" height="40" rx="10" fill="#1a3038" opacity=".9"/>
+  <rect x="315" y="260" width="55" height="40" rx="10" fill="#1a3038" opacity=".9"/>
+  <path d="M285,280 H315" stroke="#c4a35a" stroke-width="5"/>
+  
+  <ellipse cx="260" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="340" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="260" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="340" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <path d="M282,385 Q300,401 318,385" fill="none" stroke="#3a2a24" stroke-width="5" stroke-linecap="round"/>
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#9a7a60"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#9a7a60"/>
+  
+  <ellipse cx="410" cy="515.0" rx="22" ry="55.0" fill="#9a7a60"/>
+  <ellipse cx="410" cy="550" rx="20" ry="16" fill="#9a7a60"/>
+  
+  <ellipse cx="230" cy="710" rx="28" ry="16" fill="#5a4030"/>
+  <ellipse cx="370" cy="710" rx="28" ry="16" fill="#5a4030"/>
+  <ellipse cx="230" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+  <ellipse cx="370" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+
+</svg>

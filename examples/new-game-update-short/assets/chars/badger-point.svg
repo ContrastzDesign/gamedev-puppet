@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <ellipse cx="300" cy="560" rx="118" ry="130" fill="#4a4850"/>
+  <!-- coder tee -->
+  <path d="M210,460 Q300,425 390,460 L400,640 Q300,670 200,640 Z" fill="#6b8f6a"/>
+  <path d="M235,485 Q300,455 365,485 L370,620 Q300,645 230,620 Z" fill="#7a9f7a"/>
+  <text x="255" y="545" font-family="sans-serif" font-size="22" font-weight="700" fill="#f0e6d0">FIX</text>
+  <!-- head with badger stripes -->
+  <ellipse cx="300" cy="290" rx="135" ry="120" fill="#ebe4dc"/>
+  <ellipse cx="300" cy="310" rx="105" ry="90" fill="#f4f0ea"/>
+  <path d="M220,220 Q260,300 240,360 Q210,300 220,220 Z" fill="#2a2828"/>
+  <path d="M380,220 Q340,300 360,360 Q390,300 380,220 Z" fill="#2a2828"/>
+  <ellipse cx="300" cy="345" rx="42" ry="28" fill="#d8d0c8"/>
+  <ellipse cx="300" cy="335" rx="14" ry="10" fill="#2a2118"/>
+  <!-- round ears -->
+  <ellipse cx="185" cy="200" rx="26" ry="32" fill="#4a4850"/>
+  <ellipse cx="415" cy="200" rx="26" ry="32" fill="#4a4850"/>
+  <ellipse cx="185" cy="205" rx="12" ry="16" fill="#e8b4a0"/>
+  <ellipse cx="415" cy="205" rx="12" ry="16" fill="#e8b4a0"/>
+  <!-- knit beanie -->
+  <ellipse cx="300" cy="195" rx="120" ry="30" fill="#c45848"/>
+  <path d="M190,200 Q300,120 410,200" fill="#d46858"/>
+  <circle cx="300" cy="125" r="16" fill="#ebe4dc"/>
+  <!-- round bug-hunter shades -->
+  <circle cx="255" cy="280" r="26" fill="#1a2428" opacity=".88"/>
+  <circle cx="345" cy="280" r="26" fill="#1a2428" opacity=".88"/>
+  <path d="M281,280 H319" stroke="#6b8f6a" stroke-width="4"/>
+  <!-- fly swatter (raised) -->
+  <rect x="430" y="220" width="10" height="160" rx="3" fill="#5a4030"/>
+  <rect x="405" y="175" width="60" height="55" rx="8" fill="#3a4858"/>
+  <path d="M415,185 H455 M415,200 H455 M415,215 H455 M420,180 V220 M435,180 V220 M450,180 V220" stroke="#8ab0c0" stroke-width="2"/>
+  
+  <ellipse cx="255" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="345" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="259" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="349" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="300" cy="390" rx="11" ry="13" fill="#3a2a24"/>
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#ebe4dc"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#ebe4dc"/>
+  
+  <ellipse cx="410" cy="410.0" rx="22" ry="70.0" fill="#ebe4dc"/>
+  <ellipse cx="428" cy="340" rx="20" ry="16" fill="#ebe4dc"/>
+  
+  <ellipse cx="230" cy="710" rx="28" ry="16" fill="#4a4850"/>
+  <ellipse cx="370" cy="710" rx="28" ry="16" fill="#4a4850"/>
+  <ellipse cx="230" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+  <ellipse cx="370" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+
+</svg>

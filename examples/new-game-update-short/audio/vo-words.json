@@ -1,0 +1,1099 @@
+{
+ "file": "vo.mp3",
+ "fps": 24,
+ "duration": 42.44898,
+ "model": "faster-whisper-small.en",
+ "note": "aligned to script/spoken.txt (frames f=round(t*fps)+1)",
+ "unaligned": [],
+ "heard_differently": [],
+ "words": [
+  {
+   "w": "Why",
+   "start": 0.0,
+   "end": 0.36,
+   "line": 1,
+   "f_start": 1,
+   "f_end": 10
+  },
+  {
+   "w": "Does",
+   "start": 0.36,
+   "end": 0.5,
+   "line": 1,
+   "f_start": 10,
+   "f_end": 13
+  },
+  {
+   "w": "a",
+   "start": 0.5,
+   "end": 0.7,
+   "line": 1,
+   "f_start": 13,
+   "f_end": 18
+  },
+  {
+   "w": "Brand",
+   "start": 0.7,
+   "end": 0.96,
+   "line": 1,
+   "f_start": 18,
+   "f_end": 24
+  },
+  {
+   "w": "New",
+   "start": 0.96,
+   "end": 1.22,
+   "line": 1,
+   "f_start": 24,
+   "f_end": 30
+  },
+  {
+   "w": "Game",
+   "start": 1.22,
+   "end": 1.5,
+   "line": 1,
+   "f_start": 30,
+   "f_end": 37
+  },
+  {
+   "w": "Need",
+   "start": 1.5,
+   "end": 1.74,
+   "line": 1,
+   "f_start": 37,
+   "f_end": 43
+  },
+  {
+   "w": "an",
+   "start": 1.74,
+   "end": 1.88,
+   "line": 1,
+   "f_start": 43,
+   "f_end": 46
+  },
+  {
+   "w": "Update?",
+   "start": 1.88,
+   "end": 2.24,
+   "line": 1,
+   "f_start": 46,
+   "f_end": 55
+  },
+  {
+   "w": "Lets",
+   "start": 2.76,
+   "end": 3.0,
+   "line": 2,
+   "f_start": 67,
+   "f_end": 73
+  },
+  {
+   "w": "Say",
+   "start": 3.0,
+   "end": 3.12,
+   "line": 2,
+   "f_start": 73,
+   "f_end": 76
+  },
+  {
+   "w": "you",
+   "start": 3.12,
+   "end": 3.28,
+   "line": 2,
+   "f_start": 76,
+   "f_end": 80
+  },
+  {
+   "w": "buy",
+   "start": 3.28,
+   "end": 3.42,
+   "line": 2,
+   "f_start": 80,
+   "f_end": 83
+  },
+  {
+   "w": "the",
+   "start": 3.42,
+   "end": 3.58,
+   "line": 2,
+   "f_start": 83,
+   "f_end": 87
+  },
+  {
+   "w": "new",
+   "start": 3.58,
+   "end": 3.76,
+   "line": 2,
+   "f_start": 87,
+   "f_end": 91
+  },
+  {
+   "w": "Call",
+   "start": 3.76,
+   "end": 3.98,
+   "line": 2,
+   "f_start": 91,
+   "f_end": 97
+  },
+  {
+   "w": "of",
+   "start": 3.98,
+   "end": 4.16,
+   "line": 2,
+   "f_start": 97,
+   "f_end": 101
+  },
+  {
+   "w": "Duty",
+   "start": 4.16,
+   "end": 4.38,
+   "line": 2,
+   "f_start": 101,
+   "f_end": 106
+  },
+  {
+   "w": "on",
+   "start": 4.38,
+   "end": 4.68,
+   "line": 2,
+   "f_start": 106,
+   "f_end": 113
+  },
+  {
+   "w": "disc!",
+   "start": 4.68,
+   "end": 4.94,
+   "line": 2,
+   "f_start": 113,
+   "f_end": 120
+  },
+  {
+   "w": "Before",
+   "start": 5.38,
+   "end": 5.62,
+   "line": 2,
+   "f_start": 130,
+   "f_end": 136
+  },
+  {
+   "w": "you",
+   "start": 5.62,
+   "end": 5.8,
+   "line": 2,
+   "f_start": 136,
+   "f_end": 140
+  },
+  {
+   "w": "can",
+   "start": 5.8,
+   "end": 5.96,
+   "line": 2,
+   "f_start": 140,
+   "f_end": 144
+  },
+  {
+   "w": "play,",
+   "start": 5.96,
+   "end": 6.26,
+   "line": 2,
+   "f_start": 144,
+   "f_end": 151
+  },
+  {
+   "w": "it",
+   "start": 6.52,
+   "end": 6.6,
+   "line": 2,
+   "f_start": 157,
+   "f_end": 159
+  },
+  {
+   "w": "makes",
+   "start": 6.6,
+   "end": 6.78,
+   "line": 2,
+   "f_start": 159,
+   "f_end": 164
+  },
+  {
+   "w": "you",
+   "start": 6.78,
+   "end": 6.98,
+   "line": 2,
+   "f_start": 164,
+   "f_end": 169
+  },
+  {
+   "w": "download",
+   "start": 6.98,
+   "end": 7.3,
+   "line": 2,
+   "f_start": 169,
+   "f_end": 176
+  },
+  {
+   "w": "a",
+   "start": 7.3,
+   "end": 7.5,
+   "line": 2,
+   "f_start": 176,
+   "f_end": 181
+  },
+  {
+   "w": "200",
+   "start": 7.5,
+   "end": 8.18,
+   "line": 2,
+   "f_start": 181,
+   "f_end": 197
+  },
+  {
+   "w": "Gigabyte",
+   "start": 8.18,
+   "end": 8.64,
+   "line": 2,
+   "f_start": 197,
+   "f_end": 208
+  },
+  {
+   "w": "patch.",
+   "start": 8.64,
+   "end": 9.06,
+   "line": 2,
+   "f_start": 208,
+   "f_end": 218
+  },
+  {
+   "w": "But",
+   "start": 9.5,
+   "end": 9.66,
+   "line": 2,
+   "f_start": 229,
+   "f_end": 233
+  },
+  {
+   "w": "why",
+   "start": 9.66,
+   "end": 10.04,
+   "line": 2,
+   "f_start": 233,
+   "f_end": 242
+  },
+  {
+   "w": "does",
+   "start": 10.04,
+   "end": 10.2,
+   "line": 2,
+   "f_start": 242,
+   "f_end": 246
+  },
+  {
+   "w": "a",
+   "start": 10.2,
+   "end": 10.34,
+   "line": 2,
+   "f_start": 246,
+   "f_end": 249
+  },
+  {
+   "w": "brand",
+   "start": 10.34,
+   "end": 10.6,
+   "line": 2,
+   "f_start": 249,
+   "f_end": 255
+  },
+  {
+   "w": "new",
+   "start": 10.6,
+   "end": 10.84,
+   "line": 2,
+   "f_start": 255,
+   "f_end": 261
+  },
+  {
+   "w": "game",
+   "start": 10.84,
+   "end": 11.12,
+   "line": 2,
+   "f_start": 261,
+   "f_end": 268
+  },
+  {
+   "w": "need",
+   "start": 11.12,
+   "end": 11.34,
+   "line": 2,
+   "f_start": 268,
+   "f_end": 273
+  },
+  {
+   "w": "fixing",
+   "start": 11.34,
+   "end": 11.72,
+   "line": 2,
+   "f_start": 273,
+   "f_end": 282
+  },
+  {
+   "w": "already?",
+   "start": 11.72,
+   "end": 12.1,
+   "line": 2,
+   "f_start": 282,
+   "f_end": 291
+  },
+  {
+   "w": "Why",
+   "start": 12.56,
+   "end": 12.8,
+   "line": 3,
+   "f_start": 302,
+   "f_end": 308
+  },
+  {
+   "w": "not",
+   "start": 12.8,
+   "end": 12.96,
+   "line": 3,
+   "f_start": 308,
+   "f_end": 312
+  },
+  {
+   "w": "just",
+   "start": 12.96,
+   "end": 13.12,
+   "line": 3,
+   "f_start": 312,
+   "f_end": 316
+  },
+  {
+   "w": "put",
+   "start": 13.12,
+   "end": 13.32,
+   "line": 3,
+   "f_start": 316,
+   "f_end": 321
+  },
+  {
+   "w": "the",
+   "start": 13.32,
+   "end": 13.52,
+   "line": 3,
+   "f_start": 321,
+   "f_end": 325
+  },
+  {
+   "w": "finished",
+   "start": 13.52,
+   "end": 13.78,
+   "line": 3,
+   "f_start": 325,
+   "f_end": 332
+  },
+  {
+   "w": "game",
+   "start": 13.78,
+   "end": 14.06,
+   "line": 3,
+   "f_start": 332,
+   "f_end": 338
+  },
+  {
+   "w": "on",
+   "start": 14.06,
+   "end": 14.22,
+   "line": 3,
+   "f_start": 338,
+   "f_end": 342
+  },
+  {
+   "w": "the",
+   "start": 14.22,
+   "end": 14.34,
+   "line": 3,
+   "f_start": 342,
+   "f_end": 345
+  },
+  {
+   "w": "disc?",
+   "start": 14.34,
+   "end": 14.64,
+   "line": 3,
+   "f_start": 345,
+   "f_end": 352
+  },
+  {
+   "w": "Millions",
+   "start": 15.24,
+   "end": 15.4,
+   "line": 4,
+   "f_start": 367,
+   "f_end": 371
+  },
+  {
+   "w": "of",
+   "start": 15.4,
+   "end": 15.72,
+   "line": 4,
+   "f_start": 371,
+   "f_end": 378
+  },
+  {
+   "w": "discs",
+   "start": 15.72,
+   "end": 15.96,
+   "line": 4,
+   "f_start": 378,
+   "f_end": 384
+  },
+  {
+   "w": "take",
+   "start": 15.96,
+   "end": 16.3,
+   "line": 4,
+   "f_start": 384,
+   "f_end": 392
+  },
+  {
+   "w": "weeks",
+   "start": 16.3,
+   "end": 16.68,
+   "line": 4,
+   "f_start": 392,
+   "f_end": 401
+  },
+  {
+   "w": "to",
+   "start": 16.68,
+   "end": 16.96,
+   "line": 4,
+   "f_start": 401,
+   "f_end": 408
+  },
+  {
+   "w": "print",
+   "start": 16.96,
+   "end": 17.16,
+   "line": 4,
+   "f_start": 408,
+   "f_end": 413
+  },
+  {
+   "w": "and",
+   "start": 17.16,
+   "end": 17.36,
+   "line": 4,
+   "f_start": 413,
+   "f_end": 418
+  },
+  {
+   "w": "ship.",
+   "start": 17.36,
+   "end": 17.6,
+   "line": 4,
+   "f_start": 418,
+   "f_end": 423
+  },
+  {
+   "w": "So",
+   "start": 17.84,
+   "end": 18.04,
+   "line": 4,
+   "f_start": 429,
+   "f_end": 434
+  },
+  {
+   "w": "the",
+   "start": 18.04,
+   "end": 18.18,
+   "line": 4,
+   "f_start": 434,
+   "f_end": 437
+  },
+  {
+   "w": "game",
+   "start": 18.18,
+   "end": 18.34,
+   "line": 4,
+   "f_start": 437,
+   "f_end": 441
+  },
+  {
+   "w": "has",
+   "start": 18.34,
+   "end": 18.54,
+   "line": 4,
+   "f_start": 441,
+   "f_end": 446
+  },
+  {
+   "w": "to",
+   "start": 18.54,
+   "end": 18.68,
+   "line": 4,
+   "f_start": 446,
+   "f_end": 449
+  },
+  {
+   "w": "be",
+   "start": 18.68,
+   "end": 18.78,
+   "line": 4,
+   "f_start": 449,
+   "f_end": 452
+  },
+  {
+   "w": "done",
+   "start": 18.78,
+   "end": 18.98,
+   "line": 4,
+   "f_start": 452,
+   "f_end": 457
+  },
+  {
+   "w": "weeks",
+   "start": 18.98,
+   "end": 19.32,
+   "line": 4,
+   "f_start": 457,
+   "f_end": 465
+  },
+  {
+   "w": "early.",
+   "start": 19.32,
+   "end": 19.76,
+   "line": 4,
+   "f_start": 465,
+   "f_end": 475
+  },
+  {
+   "w": "This",
+   "start": 20.18,
+   "end": 20.36,
+   "line": 4,
+   "f_start": 485,
+   "f_end": 490
+  },
+  {
+   "w": "is",
+   "start": 20.36,
+   "end": 20.48,
+   "line": 4,
+   "f_start": 490,
+   "f_end": 493
+  },
+  {
+   "w": "what",
+   "start": 20.48,
+   "end": 20.62,
+   "line": 4,
+   "f_start": 493,
+   "f_end": 496
+  },
+  {
+   "w": "you",
+   "start": 20.62,
+   "end": 20.76,
+   "line": 4,
+   "f_start": 496,
+   "f_end": 499
+  },
+  {
+   "w": "call",
+   "start": 20.76,
+   "end": 21.04,
+   "line": 4,
+   "f_start": 499,
+   "f_end": 506
+  },
+  {
+   "w": "going",
+   "start": 21.04,
+   "end": 21.44,
+   "line": 4,
+   "f_start": 506,
+   "f_end": 516
+  },
+  {
+   "w": "gold.",
+   "start": 21.44,
+   "end": 21.84,
+   "line": 4,
+   "f_start": 516,
+   "f_end": 525
+  },
+  {
+   "w": "So",
+   "start": 22.22,
+   "end": 22.38,
+   "line": 4,
+   "f_start": 534,
+   "f_end": 538
+  },
+  {
+   "w": "your",
+   "start": 22.38,
+   "end": 22.54,
+   "line": 4,
+   "f_start": 538,
+   "f_end": 542
+  },
+  {
+   "w": "disc",
+   "start": 22.54,
+   "end": 22.9,
+   "line": 4,
+   "f_start": 542,
+   "f_end": 551
+  },
+  {
+   "w": "is",
+   "start": 22.9,
+   "end": 23.1,
+   "line": 4,
+   "f_start": 551,
+   "f_end": 555
+  },
+  {
+   "w": "the",
+   "start": 23.1,
+   "end": 23.26,
+   "line": 4,
+   "f_start": 555,
+   "f_end": 559
+  },
+  {
+   "w": "game",
+   "start": 23.26,
+   "end": 23.46,
+   "line": 4,
+   "f_start": 559,
+   "f_end": 564
+  },
+  {
+   "w": "from",
+   "start": 23.46,
+   "end": 23.66,
+   "line": 4,
+   "f_start": 564,
+   "f_end": 569
+  },
+  {
+   "w": "weeks",
+   "start": 23.66,
+   "end": 23.96,
+   "line": 4,
+   "f_start": 569,
+   "f_end": 576
+  },
+  {
+   "w": "ago.",
+   "start": 23.96,
+   "end": 24.3,
+   "line": 4,
+   "f_start": 576,
+   "f_end": 584
+  },
+  {
+   "w": "But",
+   "start": 24.64,
+   "end": 24.8,
+   "line": 5,
+   "f_start": 592,
+   "f_end": 596
+  },
+  {
+   "w": "the",
+   "start": 24.8,
+   "end": 24.96,
+   "line": 5,
+   "f_start": 596,
+   "f_end": 600
+  },
+  {
+   "w": "team",
+   "start": 24.96,
+   "end": 25.2,
+   "line": 5,
+   "f_start": 600,
+   "f_end": 606
+  },
+  {
+   "w": "keeps",
+   "start": 25.2,
+   "end": 25.46,
+   "line": 5,
+   "f_start": 606,
+   "f_end": 612
+  },
+  {
+   "w": "fixing",
+   "start": 25.46,
+   "end": 25.88,
+   "line": 5,
+   "f_start": 612,
+   "f_end": 622
+  },
+  {
+   "w": "bugs",
+   "start": 25.88,
+   "end": 26.2,
+   "line": 5,
+   "f_start": 622,
+   "f_end": 630
+  },
+  {
+   "w": "until",
+   "start": 26.2,
+   "end": 26.54,
+   "line": 5,
+   "f_start": 630,
+   "f_end": 638
+  },
+  {
+   "w": "launch.",
+   "start": 26.54,
+   "end": 26.94,
+   "line": 5,
+   "f_start": 638,
+   "f_end": 648
+  },
+  {
+   "w": "Those",
+   "start": 26.94,
+   "end": 27.54,
+   "line": 5,
+   "f_start": 648,
+   "f_end": 662
+  },
+  {
+   "w": "fixes",
+   "start": 27.54,
+   "end": 27.94,
+   "line": 5,
+   "f_start": 662,
+   "f_end": 672
+  },
+  {
+   "w": "become",
+   "start": 27.94,
+   "end": 28.32,
+   "line": 5,
+   "f_start": 672,
+   "f_end": 681
+  },
+  {
+   "w": "a",
+   "start": 28.32,
+   "end": 28.48,
+   "line": 5,
+   "f_start": 681,
+   "f_end": 685
+  },
+  {
+   "w": "patch,",
+   "start": 28.48,
+   "end": 28.78,
+   "line": 5,
+   "f_start": 685,
+   "f_end": 692
+  },
+  {
+   "w": "and",
+   "start": 29.14,
+   "end": 29.22,
+   "line": 5,
+   "f_start": 700,
+   "f_end": 702
+  },
+  {
+   "w": "Sony",
+   "start": 29.22,
+   "end": 29.42,
+   "line": 5,
+   "f_start": 702,
+   "f_end": 707
+  },
+  {
+   "w": "checks",
+   "start": 29.42,
+   "end": 29.7,
+   "line": 5,
+   "f_start": 707,
+   "f_end": 714
+  },
+  {
+   "w": "that",
+   "start": 29.7,
+   "end": 29.98,
+   "line": 5,
+   "f_start": 714,
+   "f_end": 721
+  },
+  {
+   "w": "too.",
+   "start": 29.98,
+   "end": 30.26,
+   "line": 5,
+   "f_start": 721,
+   "f_end": 727
+  },
+  {
+   "w": "Fail",
+   "start": 30.68,
+   "end": 30.86,
+   "line": 5,
+   "f_start": 737,
+   "f_end": 742
+  },
+  {
+   "w": "one",
+   "start": 30.86,
+   "end": 31.18,
+   "line": 5,
+   "f_start": 742,
+   "f_end": 749
+  },
+  {
+   "w": "rule,",
+   "start": 31.18,
+   "end": 31.5,
+   "line": 5,
+   "f_start": 749,
+   "f_end": 757
+  },
+  {
+   "w": "and",
+   "start": 31.76,
+   "end": 31.8,
+   "line": 5,
+   "f_start": 763,
+   "f_end": 764
+  },
+  {
+   "w": "you",
+   "start": 31.8,
+   "end": 31.92,
+   "line": 5,
+   "f_start": 764,
+   "f_end": 767
+  },
+  {
+   "w": "start",
+   "start": 31.92,
+   "end": 32.18,
+   "line": 5,
+   "f_start": 767,
+   "f_end": 773
+  },
+  {
+   "w": "all",
+   "start": 32.18,
+   "end": 32.54,
+   "line": 5,
+   "f_start": 773,
+   "f_end": 782
+  },
+  {
+   "w": "over",
+   "start": 32.54,
+   "end": 32.8,
+   "line": 5,
+   "f_start": 782,
+   "f_end": 788
+  },
+  {
+   "w": "again.",
+   "start": 32.8,
+   "end": 33.14,
+   "line": 5,
+   "f_start": 788,
+   "f_end": 796
+  },
+  {
+   "w": "This",
+   "start": 33.56,
+   "end": 33.8,
+   "line": 6,
+   "f_start": 806,
+   "f_end": 812
+  },
+  {
+   "w": "is",
+   "start": 33.8,
+   "end": 33.94,
+   "line": 6,
+   "f_start": 812,
+   "f_end": 816
+  },
+  {
+   "w": "why",
+   "start": 33.94,
+   "end": 34.14,
+   "line": 6,
+   "f_start": 816,
+   "f_end": 820
+  },
+  {
+   "w": "your",
+   "start": 34.14,
+   "end": 34.32,
+   "line": 6,
+   "f_start": 820,
+   "f_end": 825
+  },
+  {
+   "w": "disc",
+   "start": 34.32,
+   "end": 34.6,
+   "line": 6,
+   "f_start": 825,
+   "f_end": 831
+  },
+  {
+   "w": "is",
+   "start": 34.6,
+   "end": 34.8,
+   "line": 6,
+   "f_start": 831,
+   "f_end": 836
+  },
+  {
+   "w": "basically",
+   "start": 34.8,
+   "end": 35.28,
+   "line": 6,
+   "f_start": 836,
+   "f_end": 848
+  },
+  {
+   "w": "a",
+   "start": 35.28,
+   "end": 35.52,
+   "line": 6,
+   "f_start": 848,
+   "f_end": 853
+  },
+  {
+   "w": "coaster.",
+   "start": 35.52,
+   "end": 35.9,
+   "line": 6,
+   "f_start": 853,
+   "f_end": 863
+  },
+  {
+   "w": "The",
+   "start": 36.5,
+   "end": 37.06,
+   "line": 7,
+   "f_start": 877,
+   "f_end": 890
+  },
+  {
+   "w": "disc",
+   "start": 37.06,
+   "end": 37.4,
+   "line": 7,
+   "f_start": 890,
+   "f_end": 899
+  },
+  {
+   "w": "was",
+   "start": 37.4,
+   "end": 37.6,
+   "line": 7,
+   "f_start": 899,
+   "f_end": 903
+  },
+  {
+   "w": "finished.",
+   "start": 37.6,
+   "end": 37.94,
+   "line": 7,
+   "f_start": 903,
+   "f_end": 912
+  },
+  {
+   "w": "The",
+   "start": 38.38,
+   "end": 38.46,
+   "line": 7,
+   "f_start": 922,
+   "f_end": 924
+  },
+  {
+   "w": "game",
+   "start": 38.46,
+   "end": 38.74,
+   "line": 7,
+   "f_start": 924,
+   "f_end": 931
+  },
+  {
+   "w": "wasn't.",
+   "start": 38.74,
+   "end": 39.34,
+   "line": 7,
+   "f_start": 931,
+   "f_end": 945
+  },
+  {
+   "w": "Congratulations,",
+   "start": 39.58,
+   "end": 39.94,
+   "line": 7,
+   "f_start": 951,
+   "f_end": 960
+  },
+  {
+   "w": "you're",
+   "start": 40.56,
+   "end": 40.8,
+   "line": 7,
+   "f_start": 974,
+   "f_end": 980
+  },
+  {
+   "w": "now",
+   "start": 40.8,
+   "end": 40.96,
+   "line": 7,
+   "f_start": 980,
+   "f_end": 984
+  },
+  {
+   "w": "a",
+   "start": 40.96,
+   "end": 41.2,
+   "line": 7,
+   "f_start": 984,
+   "f_end": 990
+  },
+  {
+   "w": "true",
+   "start": 41.2,
+   "end": 41.44,
+   "line": 7,
+   "f_start": 990,
+   "f_end": 996
+  },
+  {
+   "w": "game",
+   "start": 41.44,
+   "end": 41.72,
+   "line": 7,
+   "f_start": 996,
+   "f_end": 1002
+  },
+  {
+   "w": "developer!",
+   "start": 41.72,
+   "end": 42.08,
+   "line": 7,
+   "f_start": 1002,
+   "f_end": 1011
+  }
+ ]
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <ellipse cx="300" cy="560" rx="120" ry="132" fill="#6a5a48"/>
+  <!-- inspector coat -->
+  <path d="M205,455 Q300,420 395,455 L405,645 Q300,675 195,645 Z" fill="#ebe4dc"/>
+  <path d="M230,480 Q300,445 370,480 L375,625 Q300,650 225,625 Z" fill="#f4f0ea"/>
+  <rect x="290" y="500" width="20" height="110" fill="#c45848"/>
+  <!-- clipboard -->
+  <rect x="115" y="490" width="80" height="105" rx="6" fill="#d8c8a0"/>
+  <rect x="125" y="505" width="60" height="8" rx="2" fill="#2a2118"/>
+  <rect x="125" y="522" width="50" height="6" rx="2" fill="#6b8f6a"/>
+  <rect x="125" y="536" width="55" height="6" rx="2" fill="#c45848"/>
+  <rect x="125" y="550" width="40" height="6" rx="2" fill="#4a8a98"/>
+  <!-- red stamp -->
+  <rect x="420" y="500" width="55" height="70" rx="6" fill="#c45848"/>
+  <rect x="428" y="510" width="40" height="12" rx="2" fill="#f4f0ea"/>
+  <text x="430" y="555" font-family="sans-serif" font-size="11" font-weight="700" fill="#f4f0ea">FAIL</text>
+  <!-- head with colorful mandrill face -->
+  <ellipse cx="300" cy="290" rx="135" ry="120" fill="#8a7a68"/>
+  <ellipse cx="300" cy="310" rx="105" ry="90" fill="#9a8a78"/>
+  <!-- mandrill snout: red nose + short blue side ridges (not tear streaks) -->
+  <ellipse cx="300" cy="345" rx="55" ry="48" fill="#c45848"/>
+  <ellipse cx="255" cy="330" rx="28" ry="22" fill="#4a8a98"/>
+  <ellipse cx="345" cy="330" rx="28" ry="22" fill="#4a8a98"/>
+  <ellipse cx="245" cy="345" rx="18" ry="14" fill="#3a7a88"/>
+  <ellipse cx="355" cy="345" rx="18" ry="14" fill="#3a7a88"/>
+  <ellipse cx="300" cy="365" rx="22" ry="14" fill="#2a2118"/>
+  <!-- ears -->
+  <ellipse cx="175" cy="230" rx="28" ry="34" fill="#7a6a58"/>
+  <ellipse cx="425" cy="230" rx="28" ry="34" fill="#7a6a58"/>
+  <ellipse cx="175" cy="235" rx="12" ry="16" fill="#e8b4a0"/>
+  <ellipse cx="425" cy="235" rx="12" ry="16" fill="#e8b4a0"/>
+  <!-- inspector visor hat -->
+  <ellipse cx="300" cy="185" rx="130" ry="28" fill="#2a3848"/>
+  <path d="M180,195 Q300,125 420,195" fill="#3a4858"/>
+  <rect x="175" y="200" width="250" height="22" rx="4" fill="#1a2838"/>
+  <rect x="190" y="204" width="220" height="14" rx="3" fill="#4a8a98" opacity=".55"/>
+  <!-- rectangular inspector shades -->
+  <rect x="228" y="262" width="58" height="36" rx="6" fill="#1a2428" opacity=".92"/>
+  <rect x="314" y="262" width="58" height="36" rx="6" fill="#1a2428" opacity=".92"/>
+  <path d="M286,280 H314" stroke="#c45848" stroke-width="4"/>
+  
+  <ellipse cx="258" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="342" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="258" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="342" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <path d="M282,400 Q300,416 318,400" fill="none" stroke="#3a2a24" stroke-width="5" stroke-linecap="round"/>
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#9a8a78"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#9a8a78"/>
+  
+  <ellipse cx="410" cy="515.0" rx="22" ry="55.0" fill="#9a8a78"/>
+  <ellipse cx="410" cy="550" rx="20" ry="16" fill="#9a8a78"/>
+  
+  <ellipse cx="230" cy="710" rx="28" ry="16" fill="#6a5a48"/>
+  <ellipse cx="370" cy="710" rx="28" ry="16" fill="#6a5a48"/>
+  <ellipse cx="230" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+  <ellipse cx="370" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+
+</svg>

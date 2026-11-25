@@ -1,0 +1,99 @@
+{
+  "title": "Why Does a Brand New Game Need an Update?",
+  "project": "examples/new-game-update-short",
+  "style": "content-short VERSION 1 (drawn SVG animals in detailed 3D worlds)",
+  "video": {
+    "file": "new-game-update-short.mp4",
+    "width": 1080,
+    "height": 1920,
+    "fps": 24,
+    "frames": 1019,
+    "duration_s": 42.458333,
+    "video_codec": "libx264 CRF 18 yuv420p",
+    "audio_codec": "AAC 192k",
+    "loudness_lufs": -14.1,
+    "true_peak_dbtp": -1.5,
+    "renderer": "ANGLE SwiftShader GPU=0",
+    "sha256": "2523b7e7fbc2c50449f8119df89a40bb755861a140a7388dd33855d5fcf40c49",
+    "bytes": 8723003
+  },
+  "voiceover": {
+    "file": "audio/vo.mp3",
+    "sha256": "e7913f4b0b980061d305f318d256f8848e14415d88d6bc18894ea960509b5fd4",
+    "bytes": 679644,
+    "duration_s": 42.44898,
+    "engine": "ElevenLabs eleven_v4 (pre-supplied; not regenerated)",
+    "note": "Use supplied seed VO unchanged; captions spell disc (not disk), Call of Duty, 200 Gigabyte, going gold, Sony"
+  },
+  "music": {
+    "title": "Hidden Agenda",
+    "artist": "Kevin MacLeod",
+    "url": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100863",
+    "download": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Hidden%20Agenda.mp3",
+    "license": "CC BY 4.0",
+    "license_url": "http://creativecommons.org/licenses/by/4.0/",
+    "file": "hidden-agenda.wav",
+    "sha256": "1e724841d4211c24b208ab33c08ec4f034726b30d89a7034b7b21d0326d44a30",
+    "source_mp3_sha256": "d9ed18f6c79c2bdc2d3c0bbd264dbae40ef435f9f69b4e0e9bb8de7e0a2d7a32",
+    "note": "Trimmed for mix; not Carefree / Sneaky Snitch / Wallpaper / Local Forecast / Lobby Time / Investigations"
+  },
+  "sfx": "see audio/sfx/SOURCES.json",
+  "characters": [
+    {
+      "beat": "hook / buy / why",
+      "species": "shiba",
+      "outfit": "gaming headset, round shades, hoodie vest, sealed game case"
+    },
+    {
+      "beat": "factory / print & ship",
+      "species": "okapi",
+      "outfit": "yellow hard hat, safety shades, high-vis vest"
+    },
+    {
+      "beat": "going gold",
+      "species": "narwhal",
+      "outfit": "tiny gold crown, gold-rim shades, GOLD MASTER sash + medal"
+    },
+    {
+      "beat": "bug fix",
+      "species": "badger",
+      "outfit": "knit beanie, bug-hunter shades, FIX tee, fly swatter"
+    },
+    {
+      "beat": "cert / Sony check",
+      "species": "mandrill",
+      "outfit": "inspector visor, red-frame shades, clipboard + FAIL stamp"
+    },
+    {
+      "beat": "coaster gag",
+      "species": "shiba (coast outfit)",
+      "outfit": "backwards cap, purple tee, disc under soda"
+    },
+    {
+      "beat": "finale / true game developer",
+      "species": "shiba (grad outfit)",
+      "outfit": "mortarboard, gown, gold sash, diploma"
+    }
+  ],
+  "set": "Gamer bedroom, disc-press factory, game studio, certification office, bedroom coaster gag. Original screen UIs; generic plain lettering only. No Activision/Sony footage or logos.",
+  "3d_assets": "Procedural Three.js geometry (original). Screen textures hand-authored. No Poly Haven downloads required for this build.",
+  "caption_font": {
+    "file": "assets/caption.woff2",
+    "family": "Montserrat ExtraBold",
+    "license": "OFL"
+  },
+  "notes": "Final render online GPU=0 overrides mac-render.md. Music is Hidden Agenda (new vs prior Carefree/Sneaky Snitch/Wallpaper/Local Forecast/Lobby Time/Investigations).",
+  "qa": {
+    "version": "v1",
+    "fixes": [
+      "cleared cert aisle chairs that occluded character >15%",
+      "densified factory press/crates/spindles in camera view",
+      "strengthened okapi hard-hat dome; mandrill snout ridges (not tear streaks); narwhal sash/medal",
+      "oversized disc+soda coaster prop for punchline beat",
+      "all captions in lower band with 80px side safe zone",
+      "assertCaptionClearOfSigns + assertCharacterVisible boot checks",
+      "original download/title/factory/bugs/cert/gold screens only"
+    ],
+    "artifacts": "/opt/cursor/artifacts/new-game-update-final/"
+  }
+}

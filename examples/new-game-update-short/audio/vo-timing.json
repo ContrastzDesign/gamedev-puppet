@@ -1,0 +1,65 @@
+{
+ "file": "vo.mp3",
+ "duration": 42.44898,
+ "fps": 24,
+ "video_end": 1019,
+ "method": "faster-whisper small.en words aligned to spoken.txt; frames f=round(t*fps)+1; video_end=ceil(duration*fps-0.05)",
+ "lines": [
+  {
+   "line": 1,
+   "start": 0.0,
+   "end": 2.24,
+   "f_start": 1,
+   "f_end": 55,
+   "text": "Why Does a Brand New Game Need an Update?"
+  },
+  {
+   "line": 2,
+   "start": 2.76,
+   "end": 12.1,
+   "f_start": 67,
+   "f_end": 291,
+   "text": "Lets Say you buy the new Call of Duty on disc! Before you can play, it makes you download a 200 Gigabyte patch. But why does a brand new game need fixing already?"
+  },
+  {
+   "line": 3,
+   "start": 12.56,
+   "end": 14.64,
+   "f_start": 302,
+   "f_end": 352,
+   "text": "Why not just put the finished game on the disc?"
+  },
+  {
+   "line": 4,
+   "start": 15.24,
+   "end": 24.3,
+   "f_start": 367,
+   "f_end": 584,
+   "text": "Millions of discs take weeks to print and ship. So the game has to be done weeks early. This is what you call going gold. So your disc is the game from weeks ago."
+  },
+  {
+   "line": 5,
+   "start": 24.64,
+   "end": 33.14,
+   "f_start": 592,
+   "f_end": 796,
+   "text": "But the team keeps fixing bugs until launch. Those fixes become a patch, and Sony checks that too. Fail one rule, and you start all over again."
+  },
+  {
+   "line": 6,
+   "start": 33.56,
+   "end": 35.9,
+   "f_start": 806,
+   "f_end": 863,
+   "text": "This is why your disc is basically a coaster."
+  },
+  {
+   "line": 7,
+   "start": 36.5,
+   "end": 42.08,
+   "f_start": 877,
+   "f_end": 1011,
+   "text": "The disc was finished. The game wasn't. Congratulations, you're now a true game developer!"
+  }
+ ]
+}
