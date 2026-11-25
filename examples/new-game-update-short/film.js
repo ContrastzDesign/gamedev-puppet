@@ -23,8 +23,8 @@ window.glInfo = (() => {
 })();
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color('#3a3840');
-scene.fog = new THREE.Fog('#3a3840', 28, 52);
+scene.background = new THREE.Color('#5a5a60');
+scene.fog = new THREE.Fog('#5a5a60', 30, 55);
 
 const camera = new THREE.PerspectiveCamera(40, W / H, 0.1, 60);
 
@@ -156,41 +156,41 @@ function cameraFor(shot, f) {
   if (shot.id === 'hook' || shot.id === 'buy' || shot.id === 'why' || shot.id === 'coaster' || shot.id === 'grad') {
     return {
       x: lin(charX + 0.28, charX + 0.08, t),
-      y: lin(1.52, 1.42, t),
-      z: lin(charZ + 4.55, charZ + 3.95, t),
+      y: lin(1.7, 1.55, t),
+      z: lin(charZ + 4.7, charZ + 4.1, t),
       lx: charX - 0.02,
-      ly: 1.05,
-      lz: charZ - 0.15,
+      ly: 1.35,
+      lz: charZ - 0.25,
     };
   }
   if (shot.id === 'factory') {
     return {
-      x: lin(charX + 1.15, charX + 0.55, t),
-      y: lin(1.7, 1.55, t),
-      z: lin(charZ + 5.6, charZ + 4.7, t),
-      lx: charX - 0.1,
-      ly: 0.95,
-      lz: charZ - 0.35,
+      x: lin(charX + 0.95, charX + 0.4, t),
+      y: lin(1.85, 1.68, t),
+      z: lin(charZ + 6.1, charZ + 5.15, t),
+      lx: charX - 0.05,
+      ly: 1.2,
+      lz: charZ - 0.55,
     };
   }
   if (shot.id === 'gold' || shot.id === 'bugs') {
     return {
-      x: lin(charX - 0.75, charX - 0.35, t),
-      y: lin(1.52, 1.42, t),
-      z: lin(charZ + 4.9, charZ + 4.15, t),
+      x: lin(charX - 0.65, charX - 0.28, t),
+      y: lin(1.78, 1.62, t),
+      z: lin(charZ + 5.15, charZ + 4.35, t),
       lx: charX + 0.05,
-      ly: 0.88,
-      lz: charZ - 0.1,
+      ly: 1.32,
+      lz: charZ - 0.3,
     };
   }
   // cert
   return {
-    x: lin(charX + 0.7, charX + 0.3, t),
-    y: lin(1.55, 1.45, t),
-    z: lin(charZ + 4.9, charZ + 4.15, t),
-    lx: charX - 0.04,
-    ly: 0.88,
-    lz: charZ - 0.1,
+    x: lin(charX + 0.55, charX + 0.2, t),
+    y: lin(1.78, 1.62, t),
+    z: lin(charZ + 5.25, charZ + 4.4, t),
+    lx: charX - 0.02,
+    ly: 1.28,
+    lz: charZ - 0.3,
   };
 }
 
