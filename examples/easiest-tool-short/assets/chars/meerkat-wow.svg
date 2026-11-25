@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <ellipse cx="300" cy="555" rx="100" ry="135" fill="#c49a6a"/>
+  <!-- tall tinkerer torso / vest -->
+  <path d="M220,455 Q300,420 380,455 L390,640 Q300,670 210,640 Z" fill="#4a6a78"/>
+  <path d="M240,475 Q300,450 360,475 L365,625 Q300,645 235,625 Z" fill="#5a7a88"/>
+  <rect x="245" y="510" width="40" height="36" rx="4" fill="#c4a35a"/>
+  <rect x="315" y="510" width="40" height="36" rx="4" fill="#c4785a"/>
+  <!-- key badge -->
+  <circle cx="300" cy="560" r="18" fill="#e0c070"/>
+  <rect x="312" y="555" width="28" height="8" rx="2" fill="#e0c070"/>
+  <!-- head -->
+  <ellipse cx="300" cy="280" rx="130" ry="125" fill="#d8b080"/>
+  <ellipse cx="300" cy="300" rx="100" ry="95" fill="#e8c898"/>
+  <!-- dark eye patches (meerkat) -->
+  <ellipse cx="255" cy="275" rx="32" ry="28" fill="#6a5040" opacity=".55"/>
+  <ellipse cx="345" cy="275" rx="32" ry="28" fill="#6a5040" opacity=".55"/>
+  <!-- ears -->
+  <ellipse cx="195" cy="185" rx="24" ry="30" fill="#c49a6a"/>
+  <ellipse cx="405" cy="185" rx="24" ry="30" fill="#c49a6a"/>
+  <ellipse cx="195" cy="188" rx="10" ry="14" fill="#e8b4a0"/>
+  <ellipse cx="405" cy="188" rx="10" ry="14" fill="#e8b4a0"/>
+  <!-- goggles on forehead / worn -->
+  <ellipse cx="255" cy="230" rx="34" ry="22" fill="#2a4048"/>
+  <ellipse cx="345" cy="230" rx="34" ry="22" fill="#2a4048"/>
+  <path d="M289,230 H311" stroke="#3a5058" stroke-width="6"/>
+  <ellipse cx="255" cy="230" rx="22" ry="14" fill="#7ec8d0" opacity=".45"/>
+  <ellipse cx="345" cy="230" rx="22" ry="14" fill="#7ec8d0" opacity=".45"/>
+  <ellipse cx="300" cy="335" rx="42" ry="30" fill="#f0dcc0"/>
+  <ellipse cx="300" cy="325" rx="10" ry="8" fill="#2a2118"/>
+  
+  <ellipse cx="260" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="340" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="260" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="340" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="300" cy="355" rx="16" ry="14" fill="#3a2a24"/><ellipse cx="300" cy="359" rx="10" ry="6" fill="#c47a7a"/>
+  <!-- small door prop hint in raised hand when pointing -->
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#d8b080"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#d8b080"/>
+  
+  <ellipse cx="410" cy="410.0" rx="22" ry="70.0" fill="#d8b080"/>
+  <ellipse cx="428" cy="340" rx="20" ry="16" fill="#d8b080"/>
+  
+  <ellipse cx="230" cy="710" rx="28" ry="16" fill="#c49a6a"/>
+  <ellipse cx="370" cy="710" rx="28" ry="16" fill="#c49a6a"/>
+  <ellipse cx="230" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+  <ellipse cx="370" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+
+</svg>
