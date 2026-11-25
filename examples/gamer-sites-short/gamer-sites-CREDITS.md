@@ -8,10 +8,10 @@
 - Number two / Twitch: ring-tailed lemur — streamer hoodie, cat-ear headset, sunglasses
 
 ## Set
-Warm wooden cyber-cafe with booths labeled WEB MAP, PC LIBRARY, BROWSER PLAY, BLOCK WORLD, LIVE WATCH. Original screen UIs; generic plain lettering only.
+Warm wooden cyber-cafe with booths labeled WEB MAP, PC LIBRARY, BROWSER PLAY, BLOCK WORLD, LIVE WATCH. Neighbouring glowing PC bays, neon/LED strips, posters with original abstract art, shelves of game boxes, RGB desks, snacks/drinks, cables, headsets, ceiling lamps, and window glow. Original screen UIs; generic plain lettering only.
 
 ## Technical
-1080×1920, 24 fps, 731 frames, H.264 CRF 18 yuv420p + AAC. Integrated loudness −14.0 LUFS, true peak −2.5 dBTP. Rendered online with GPU=0 (SwiftShader).
+1080×1920, 24 fps, 731 frames, H.264 CRF 18 yuv420p + AAC. Integrated loudness −14.0 LUFS, true peak −2.5 dBTP. Rendered online with GPU=0 (SwiftShader). Captions hard-clamped to an 80 px side safe zone (max line render width 920 px).
 
 ## Paste-ready YouTube description
 

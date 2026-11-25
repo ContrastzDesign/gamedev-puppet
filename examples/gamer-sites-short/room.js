@@ -283,26 +283,28 @@ function buildHeroBooth(g, b, textures) {
   const scr = makeScreen(b.screen);
   scr.position.set(0, 1.85, -0.2);
   g.add(scr);
-  // RGB keyboard + mouse pushed to desk sides so billboards don't hide them
-  addRgbKeyboard(g, -0.75, 1.03, 0.5);
-  addRgbMouse(g, 0.85, 1.04, 0.55);
-  // second mini keypad / mousepad clutter
-  box(g, 0.35, 0.03, 0.25, '#2a3038', 0.15, 1.02, 0.5, 0, 0, 0, { round: 0.02 });
-  // headset on desk
-  addHeadset(g, 1.05, 1.12, 0.35);
+  // RGB keyboard + mouse on both sides + center pad (billboard-safe)
+  addRgbKeyboard(g, -0.85, 1.035, 0.52);
+  addRgbKeyboard(g, 0.55, 1.035, 0.52);
+  addRgbMouse(g, -0.25, 1.045, 0.62);
+  addRgbMouse(g, 1.05, 1.045, 0.58);
+  // headset hanging on side panel (always readable)
+  addHeadset(g, -1.25, 1.55, 0.55);
+  addHeadset(g, 1.25, 1.55, 0.55);
   // drinks / snacks on both front corners
   addDrinkCan(g, -1.1, 1.1, 0.55, '#c45848');
   addDrinkCan(g, -1.0, 1.1, 0.7, '#4878a8');
   addDrinkCan(g, 1.05, 1.1, 0.5, '#48a878');
   addSnackBag(g, -1.15, 1.1, 0.35, '#d4a060');
   addSnackBag(g, 1.1, 1.1, 0.7, '#6a8fbf');
-  // cables under desk + trailing onto floor (visible set dressing)
-  addCable(g, -0.2, 0.7, 0.1, -0.9, 0.55, -0.15, '#3a3a40');
-  addCable(g, 0.3, 0.75, 0.15, 0.95, 0.5, -0.1, '#2a3a2e');
-  addCable(g, 0.1, 0.4, 0.7, 0.6, 0.04, 1.3, '#2e2e32');
-  addCable(g, -0.4, 0.35, 0.65, -0.8, 0.04, 1.4, '#3a4038');
-  // power strip
-  box(g, 0.7, 0.04, 0.1, '#1e1e22', 0, 0.52, -0.3);
+  // cables under desk only (kept clear of floor/desk faces — no z-fight)
+  addCable(g, -0.15, 0.78, 0.05, -0.85, 0.62, -0.2, '#3a3a40');
+  addCable(g, 0.25, 0.8, 0.1, 0.9, 0.58, -0.15, '#2a3a2e');
+  // coiled cable pile on floor (raised above boards)
+  cyl(g, 0.12, 0.12, 0.05, '#2e2e32', 0.55, 0.04, 1.35);
+  cyl(g, 0.09, 0.09, 0.04, '#3a4038', -0.65, 0.04, 1.4);
+  // power strip (offset from cable tray)
+  box(g, 0.7, 0.04, 0.1, '#1e1e22', 0.15, 0.58, -0.25);
   // chair
   box(g, 0.7, 0.08, 0.7, '#3d4654', 0, 0.55, 1.15, 0, 0, 0, { round: 0.05 });
   cyl(g, 0.08, 0.1, 0.55, '#2a3038', 0, 0.27, 1.15);

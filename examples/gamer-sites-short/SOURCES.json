@@ -4,7 +4,7 @@
   "style": "content-short VERSION 1 (drawn SVG animals in detailed 3D worlds)",
   "video": {
     "file": "gamer-sites-short.mp4",
-    "sha256": "e296cd4377791de9e4d4a68e88f4dd8829870b329b0cf2e4bb33b9fa0cf56666",
+    "sha256": "e656cd431bc445d062656303679c81878935daf8bd3f15b019985402ec7a3506",
     "width": 1080,
     "height": 1920,
     "fps": 24,
@@ -164,7 +164,7 @@
       "outfit": "muted grape streamer hoodie, cat-ear headset, sunglasses"
     }
   ],
-  "set": "Warm wooden cyber-cafe / internet street with five booths (WEB MAP, PC LIBRARY, BROWSER PLAY, BLOCK WORLD, LIVE WATCH), brick wall, ceiling lamps, lounge sofa, generic plain-lettering signs, original screen UIs (no real platform logos or Roblox media)",
+  "set": "Warm wooden cyber-cafe with five hero booths (WEB MAP, PC LIBRARY, BROWSER PLAY, BLOCK WORLD, LIVE WATCH), neighbouring glowing PC bays, neon/LED strips, posters with original abstract art, shelves of game boxes, RGB desks, snacks/drinks, cables, headsets, ceiling lamps, and window glow. Original screen UIs; generic plain lettering only.",
   "3d_assets": "Procedural Three.js geometry (original). Screen textures hand-authored. No Poly Haven downloads required for this build.",
   "caption_font": {
     "file": "assets/caption.woff2",
