@@ -1,0 +1,659 @@
+{
+ "file": "vo.mp3",
+ "fps": 24,
+ "duration": 30.432653,
+ "model": "faster-whisper-small.en",
+ "note": "aligned to script/spoken.txt (frames f=round(t*fps)+1)",
+ "unaligned": [],
+ "heard_differently": [],
+ "words": [
+  {
+   "w": "What",
+   "start": 0.0,
+   "end": 0.32,
+   "line": 1,
+   "f_start": 1,
+   "f_end": 9
+  },
+  {
+   "w": "websites",
+   "start": 0.32,
+   "end": 0.78,
+   "line": 1,
+   "f_start": 9,
+   "f_end": 20
+  },
+  {
+   "w": "do",
+   "start": 0.78,
+   "end": 1.12,
+   "line": 1,
+   "f_start": 20,
+   "f_end": 28
+  },
+  {
+   "w": "gamers",
+   "start": 1.12,
+   "end": 1.48,
+   "line": 1,
+   "f_start": 28,
+   "f_end": 37
+  },
+  {
+   "w": "visit",
+   "start": 1.48,
+   "end": 1.84,
+   "line": 1,
+   "f_start": 37,
+   "f_end": 45
+  },
+  {
+   "w": "the",
+   "start": 1.84,
+   "end": 2.04,
+   "line": 1,
+   "f_start": 45,
+   "f_end": 50
+  },
+  {
+   "w": "most?",
+   "start": 2.04,
+   "end": 2.44,
+   "line": 1,
+   "f_start": 50,
+   "f_end": 60
+  },
+  {
+   "w": "Number",
+   "start": 3.14,
+   "end": 3.14,
+   "line": 2,
+   "f_start": 76,
+   "f_end": 76
+  },
+  {
+   "w": "five,",
+   "start": 3.14,
+   "end": 3.58,
+   "line": 2,
+   "f_start": 76,
+   "f_end": 87
+  },
+  {
+   "w": "Steam.",
+   "start": 4.06,
+   "end": 4.42,
+   "line": 2,
+   "f_start": 98,
+   "f_end": 107
+  },
+  {
+   "w": "By",
+   "start": 4.88,
+   "end": 5.14,
+   "line": 2,
+   "f_start": 118,
+   "f_end": 124
+  },
+  {
+   "w": "far",
+   "start": 5.14,
+   "end": 5.6,
+   "line": 2,
+   "f_start": 124,
+   "f_end": 135
+  },
+  {
+   "w": "where",
+   "start": 5.66,
+   "end": 5.86,
+   "line": 2,
+   "f_start": 137,
+   "f_end": 142
+  },
+  {
+   "w": "all",
+   "start": 5.86,
+   "end": 6.24,
+   "line": 2,
+   "f_start": 142,
+   "f_end": 151
+  },
+  {
+   "w": "most",
+   "start": 6.24,
+   "end": 6.48,
+   "line": 2,
+   "f_start": 151,
+   "f_end": 157
+  },
+  {
+   "w": "of",
+   "start": 6.48,
+   "end": 6.62,
+   "line": 2,
+   "f_start": 157,
+   "f_end": 160
+  },
+  {
+   "w": "the",
+   "start": 6.62,
+   "end": 6.72,
+   "line": 2,
+   "f_start": 160,
+   "f_end": 162
+  },
+  {
+   "w": "best",
+   "start": 6.72,
+   "end": 6.88,
+   "line": 2,
+   "f_start": 162,
+   "f_end": 166
+  },
+  {
+   "w": "games",
+   "start": 6.88,
+   "end": 7.18,
+   "line": 2,
+   "f_start": 166,
+   "f_end": 173
+  },
+  {
+   "w": "are",
+   "start": 7.18,
+   "end": 7.4,
+   "line": 2,
+   "f_start": 173,
+   "f_end": 179
+  },
+  {
+   "w": "in!",
+   "start": 7.4,
+   "end": 7.66,
+   "line": 2,
+   "f_start": 179,
+   "f_end": 185
+  },
+  {
+   "w": "Number",
+   "start": 8.16,
+   "end": 8.28,
+   "line": 3,
+   "f_start": 197,
+   "f_end": 200
+  },
+  {
+   "w": "four,",
+   "start": 8.28,
+   "end": 8.72,
+   "line": 3,
+   "f_start": 200,
+   "f_end": 210
+  },
+  {
+   "w": "Poki.",
+   "start": 9.14,
+   "end": 9.58,
+   "line": 3,
+   "f_start": 220,
+   "f_end": 231
+  },
+  {
+   "w": "Its",
+   "start": 9.74,
+   "end": 9.9,
+   "line": 3,
+   "f_start": 235,
+   "f_end": 239
+  },
+  {
+   "w": "a",
+   "start": 9.9,
+   "end": 10.0,
+   "line": 3,
+   "f_start": 239,
+   "f_end": 241
+  },
+  {
+   "w": "games",
+   "start": 10.0,
+   "end": 10.22,
+   "line": 3,
+   "f_start": 241,
+   "f_end": 246
+  },
+  {
+   "w": "platform",
+   "start": 10.22,
+   "end": 10.74,
+   "line": 3,
+   "f_start": 246,
+   "f_end": 259
+  },
+  {
+   "w": "run",
+   "start": 10.74,
+   "end": 10.98,
+   "line": 3,
+   "f_start": 259,
+   "f_end": 265
+  },
+  {
+   "w": "in",
+   "start": 10.98,
+   "end": 11.1,
+   "line": 3,
+   "f_start": 265,
+   "f_end": 267
+  },
+  {
+   "w": "the",
+   "start": 11.1,
+   "end": 11.2,
+   "line": 3,
+   "f_start": 267,
+   "f_end": 270
+  },
+  {
+   "w": "browser.",
+   "start": 11.2,
+   "end": 11.46,
+   "line": 3,
+   "f_start": 270,
+   "f_end": 276
+  },
+  {
+   "w": "It’s",
+   "start": 11.92,
+   "end": 12.06,
+   "line": 3,
+   "f_start": 287,
+   "f_end": 290
+  },
+  {
+   "w": "the",
+   "start": 12.06,
+   "end": 12.18,
+   "line": 3,
+   "f_start": 290,
+   "f_end": 293
+  },
+  {
+   "w": "place",
+   "start": 12.18,
+   "end": 12.38,
+   "line": 3,
+   "f_start": 293,
+   "f_end": 298
+  },
+  {
+   "w": "where",
+   "start": 12.38,
+   "end": 12.6,
+   "line": 3,
+   "f_start": 298,
+   "f_end": 303
+  },
+  {
+   "w": "people",
+   "start": 12.6,
+   "end": 12.78,
+   "line": 3,
+   "f_start": 303,
+   "f_end": 308
+  },
+  {
+   "w": "can",
+   "start": 12.78,
+   "end": 12.98,
+   "line": 3,
+   "f_start": 308,
+   "f_end": 313
+  },
+  {
+   "w": "play",
+   "start": 12.98,
+   "end": 13.18,
+   "line": 3,
+   "f_start": 313,
+   "f_end": 317
+  },
+  {
+   "w": "Mobile",
+   "start": 13.18,
+   "end": 13.52,
+   "line": 3,
+   "f_start": 317,
+   "f_end": 325
+  },
+  {
+   "w": "games",
+   "start": 13.52,
+   "end": 13.82,
+   "line": 3,
+   "f_start": 325,
+   "f_end": 333
+  },
+  {
+   "w": "on",
+   "start": 13.82,
+   "end": 14.0,
+   "line": 3,
+   "f_start": 333,
+   "f_end": 337
+  },
+  {
+   "w": "their",
+   "start": 14.0,
+   "end": 14.12,
+   "line": 3,
+   "f_start": 337,
+   "f_end": 340
+  },
+  {
+   "w": "browser!",
+   "start": 14.12,
+   "end": 14.5,
+   "line": 3,
+   "f_start": 340,
+   "f_end": 349
+  },
+  {
+   "w": "Number",
+   "start": 15.14,
+   "end": 15.3,
+   "line": 4,
+   "f_start": 364,
+   "f_end": 368
+  },
+  {
+   "w": "three,",
+   "start": 15.3,
+   "end": 15.8,
+   "line": 4,
+   "f_start": 368,
+   "f_end": 380
+  },
+  {
+   "w": "roblox.com.",
+   "start": 16.3,
+   "end": 17.34,
+   "line": 4,
+   "f_start": 392,
+   "f_end": 417
+  },
+  {
+   "w": "Probably",
+   "start": 17.7,
+   "end": 17.92,
+   "line": 4,
+   "f_start": 426,
+   "f_end": 431
+  },
+  {
+   "w": "the",
+   "start": 17.92,
+   "end": 18.18,
+   "line": 4,
+   "f_start": 431,
+   "f_end": 437
+  },
+  {
+   "w": "most",
+   "start": 18.18,
+   "end": 18.52,
+   "line": 4,
+   "f_start": 437,
+   "f_end": 445
+  },
+  {
+   "w": "played",
+   "start": 18.52,
+   "end": 18.84,
+   "line": 4,
+   "f_start": 445,
+   "f_end": 453
+  },
+  {
+   "w": "game",
+   "start": 18.84,
+   "end": 19.12,
+   "line": 4,
+   "f_start": 453,
+   "f_end": 460
+  },
+  {
+   "w": "platform",
+   "start": 19.12,
+   "end": 19.56,
+   "line": 4,
+   "f_start": 460,
+   "f_end": 470
+  },
+  {
+   "w": "of",
+   "start": 19.56,
+   "end": 19.78,
+   "line": 4,
+   "f_start": 470,
+   "f_end": 476
+  },
+  {
+   "w": "all",
+   "start": 19.78,
+   "end": 20.12,
+   "line": 4,
+   "f_start": 476,
+   "f_end": 484
+  },
+  {
+   "w": "time!",
+   "start": 20.12,
+   "end": 20.54,
+   "line": 4,
+   "f_start": 484,
+   "f_end": 494
+  },
+  {
+   "w": "And",
+   "start": 21.12,
+   "end": 21.24,
+   "line": 5,
+   "f_start": 508,
+   "f_end": 511
+  },
+  {
+   "w": "finally",
+   "start": 21.24,
+   "end": 21.78,
+   "line": 5,
+   "f_start": 511,
+   "f_end": 524
+  },
+  {
+   "w": "Number",
+   "start": 22.2,
+   "end": 22.4,
+   "line": 5,
+   "f_start": 534,
+   "f_end": 539
+  },
+  {
+   "w": "two,",
+   "start": 22.4,
+   "end": 22.88,
+   "line": 5,
+   "f_start": 539,
+   "f_end": 550
+  },
+  {
+   "w": "It’s",
+   "start": 23.18,
+   "end": 23.4,
+   "line": 5,
+   "f_start": 557,
+   "f_end": 563
+  },
+  {
+   "w": "not",
+   "start": 23.4,
+   "end": 23.58,
+   "line": 5,
+   "f_start": 563,
+   "f_end": 567
+  },
+  {
+   "w": "even",
+   "start": 23.58,
+   "end": 23.74,
+   "line": 5,
+   "f_start": 567,
+   "f_end": 571
+  },
+  {
+   "w": "a",
+   "start": 23.74,
+   "end": 23.9,
+   "line": 5,
+   "f_start": 571,
+   "f_end": 575
+  },
+  {
+   "w": "gaming",
+   "start": 23.9,
+   "end": 24.14,
+   "line": 5,
+   "f_start": 575,
+   "f_end": 580
+  },
+  {
+   "w": "platform.",
+   "start": 24.14,
+   "end": 24.7,
+   "line": 5,
+   "f_start": 580,
+   "f_end": 594
+  },
+  {
+   "w": "It’s",
+   "start": 25.0,
+   "end": 25.18,
+   "line": 5,
+   "f_start": 601,
+   "f_end": 605
+  },
+  {
+   "w": "the",
+   "start": 25.18,
+   "end": 25.32,
+   "line": 5,
+   "f_start": 605,
+   "f_end": 609
+  },
+  {
+   "w": "only",
+   "start": 25.32,
+   "end": 25.64,
+   "line": 5,
+   "f_start": 609,
+   "f_end": 616
+  },
+  {
+   "w": "place",
+   "start": 25.64,
+   "end": 26.02,
+   "line": 5,
+   "f_start": 616,
+   "f_end": 625
+  },
+  {
+   "w": "where",
+   "start": 26.02,
+   "end": 26.28,
+   "line": 5,
+   "f_start": 625,
+   "f_end": 632
+  },
+  {
+   "w": "gamers",
+   "start": 26.28,
+   "end": 26.56,
+   "line": 5,
+   "f_start": 632,
+   "f_end": 638
+  },
+  {
+   "w": "can",
+   "start": 26.56,
+   "end": 26.78,
+   "line": 5,
+   "f_start": 638,
+   "f_end": 644
+  },
+  {
+   "w": "watch",
+   "start": 26.78,
+   "end": 27.02,
+   "line": 5,
+   "f_start": 644,
+   "f_end": 649
+  },
+  {
+   "w": "livestreams",
+   "start": 27.02,
+   "end": 27.62,
+   "line": 5,
+   "f_start": 649,
+   "f_end": 664
+  },
+  {
+   "w": "of",
+   "start": 27.62,
+   "end": 27.86,
+   "line": 5,
+   "f_start": 664,
+   "f_end": 670
+  },
+  {
+   "w": "every",
+   "start": 27.86,
+   "end": 28.32,
+   "line": 5,
+   "f_start": 670,
+   "f_end": 681
+  },
+  {
+   "w": "game",
+   "start": 28.32,
+   "end": 28.58,
+   "line": 5,
+   "f_start": 681,
+   "f_end": 687
+  },
+  {
+   "w": "being",
+   "start": 28.58,
+   "end": 28.78,
+   "line": 5,
+   "f_start": 687,
+   "f_end": 692
+  },
+  {
+   "w": "played!",
+   "start": 28.78,
+   "end": 29.22,
+   "line": 5,
+   "f_start": 692,
+   "f_end": 702
+  },
+  {
+   "w": "Twitch",
+   "start": 29.22,
+   "end": 29.92,
+   "line": 5,
+   "f_start": 702,
+   "f_end": 719
+  }
+ ]
+}

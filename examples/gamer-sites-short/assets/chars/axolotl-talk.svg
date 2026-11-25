@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <ellipse cx="300" cy="560" rx="115" ry="132" fill="#e8b0b8"/>
+  <!-- candy hoodie -->
+  <path d="M200,460 Q300,420 400,460 L410,650 Q300,690 190,650 Z" fill="#6a8fbf"/>
+  <path d="M220,475 Q300,445 380,475 L385,630 Q300,655 215,630 Z" fill="#7ea3d4"/>
+  <path d="M240,500 Q300,520 360,500" fill="none" stroke="#f2c96a" stroke-width="10"/>
+  <path d="M245,540 Q300,560 355,540" fill="none" stroke="#e8899a" stroke-width="8"/>
+  <!-- external gill stalks (distinctive axolotl) -->
+  <path d="M155,210 C110,160 95,230 130,250 C95,255 115,310 160,295" fill="#e8899a"/>
+  <path d="M150,250 C90,245 100,300 155,310" fill="#d9788a"/>
+  <path d="M165,195 C145,140 100,175 140,220" fill="#f0a0ac"/>
+  <path d="M445,210 C490,160 505,230 470,250 C505,255 485,310 440,295" fill="#e8899a"/>
+  <path d="M450,250 C510,245 500,300 445,310" fill="#d9788a"/>
+  <path d="M435,195 C455,140 500,175 460,220" fill="#f0a0ac"/>
+  <!-- head -->
+  <ellipse cx="300" cy="295" rx="138" ry="125" fill="#f0c2c8"/>
+  <ellipse cx="300" cy="315" rx="108" ry="90" fill="#f7d4d8"/>
+  <ellipse cx="300" cy="345" rx="52" ry="36" fill="#fce8e6"/>
+  <ellipse cx="288" cy="332" rx="6" ry="5" fill="#2a2118"/>
+  <ellipse cx="312" cy="332" rx="6" ry="5" fill="#2a2118"/>
+  
+  <ellipse cx="266" cy="280" rx="8" ry="9" fill="#2a2118"/>
+  <ellipse cx="334" cy="280" rx="8" ry="9" fill="#2a2118"/>
+  <ellipse cx="266" cy="278" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="334" cy="278" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <!-- arcade visor -->
+  <rect x="210" y="240" width="180" height="48" rx="14" fill="#2c3548"/>
+  <rect x="218" y="248" width="164" height="32" rx="10" fill="#7ec8c0"/>
+  <rect x="230" y="256" width="40" height="16" rx="4" fill="#f2e6a0" opacity=".7"/>
+  <rect x="280" y="256" width="28" height="16" rx="4" fill="#f2e6a0" opacity=".45"/>
+  <path d="M210,260 Q170,250 165,280" fill="none" stroke="#2c3548" stroke-width="10"/>
+  <path d="M390,260 Q430,250 435,280" fill="none" stroke="#2c3548" stroke-width="10"/>
+  <ellipse cx="300" cy="370" rx="16" ry="14" fill="#3a2a24"/><ellipse cx="300" cy="374" rx="10" ry="6" fill="#c47a7a"/>
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#f0c2c8"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#f0c2c8"/>
+  
+  <ellipse cx="410" cy="515.0" rx="22" ry="55.0" fill="#f0c2c8"/>
+  <ellipse cx="410" cy="550" rx="20" ry="16" fill="#f0c2c8"/>
+  
+  <ellipse cx="230" cy="710" rx="28" ry="16" fill="#e8b0b8"/>
+  <ellipse cx="370" cy="710" rx="28" ry="16" fill="#e8b0b8"/>
+  <ellipse cx="230" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+  <ellipse cx="370" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+
+</svg>

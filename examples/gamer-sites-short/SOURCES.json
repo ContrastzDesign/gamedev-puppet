@@ -1,0 +1,174 @@
+{
+  "title": "What websites do gamers visit the most?",
+  "project": "examples/gamer-sites-short",
+  "style": "content-short VERSION 1 (drawn SVG animals in detailed 3D worlds)",
+  "video": {
+    "file": "gamer-sites-short.mp4",
+    "sha256": "e296cd4377791de9e4d4a68e88f4dd8829870b329b0cf2e4bb33b9fa0cf56666",
+    "width": 1080,
+    "height": 1920,
+    "fps": 24,
+    "frames": 731,
+    "duration_s": 30.458333,
+    "video_codec": "libx264 CRF 18 yuv420p",
+    "audio_codec": "AAC 192k",
+    "loudness_lufs": -14.0,
+    "true_peak_dbtp": -2.5,
+    "renderer": "ANGLE SwiftShader GPU=0"
+  },
+  "voiceover": {
+    "file": "audio/vo.mp3",
+    "sha256": "002a5dc4e2b7209ec0e8bbc19abfd41997ae63d1d165c158e5907c4e7c716997",
+    "bytes": 487383,
+    "duration_s": 30.432653,
+    "engine": "ElevenLabs (pre-supplied; not regenerated)",
+    "note": "Use supplied seed VO unchanged"
+  },
+  "music": {
+    "title": "Carefree",
+    "artist": "Kevin MacLeod",
+    "url": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1400005",
+    "download": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Carefree.mp3",
+    "license": "CC BY 4.0",
+    "license_url": "http://creativecommons.org/licenses/by/4.0/",
+    "file": "carefree.wav",
+    "sha256": "59d9d83c9588a71241c7e16f86c161daa19272dcc73048eecced74ea3451ce94",
+    "bytes": 39387024,
+    "source_mp3_sha256": "8433b770a630d9b1594fd484442c677907ece899a4d149954cd2e74fd733e311"
+  },
+  "sfx": [
+    {
+      "file": "cheer-short.wav",
+      "sha256": "e565de87cbb408187768c0b086082b61c478f54f7d6e7791b4faaa5ca72cf4e1",
+      "bytes": 172878,
+      "freesound_id": 511788,
+      "user": "Kinoton",
+      "license": "CC0",
+      "url": "https://freesound.org/s/511788/",
+      "note": "trimmed preview"
+    },
+    {
+      "file": "kenney-click.wav",
+      "sha256": "022301cad8d747d34ff74b373a66d20c96a0c1104a9cbde6d3d44bac0c26b2c6",
+      "bytes": 9086,
+      "source": "Kenney UI Audio",
+      "license": "CC0",
+      "url": "https://kenney.nl/assets/ui-audio"
+    },
+    {
+      "file": "kenney-switch.wav",
+      "sha256": "73faee4d27c201ab012dee68c5b7ef09a2d1c925e15ce002f464fbd2b697f2f3",
+      "bytes": 30290,
+      "source": "Kenney UI Audio",
+      "license": "CC0",
+      "url": "https://kenney.nl/assets/ui-audio"
+    },
+    {
+      "file": "keyboard-short.wav",
+      "sha256": "6468683c998719fff3630e0070ab6a85a6225fdd33863358c8a7e8cda795c1e6",
+      "bytes": 115278,
+      "freesound_id": 450282,
+      "user": "stu556",
+      "license": "CC0",
+      "url": "https://freesound.org/s/450282/",
+      "note": "trimmed preview"
+    },
+    {
+      "file": "mouse-click.wav",
+      "sha256": "5d1cf5704e48250d829483d0b7300341bad512b00d45640d2059521752051899",
+      "bytes": 45226,
+      "freesound_id": 534104,
+      "user": "pbimal",
+      "license": "CC0",
+      "url": "https://freesound.org/s/534104/"
+    },
+    {
+      "file": "mouse-click2.wav",
+      "sha256": "1b2e7e9d290c4a48f0711c5aa834771c1765e6055ad22c9e15b58409716f5c09",
+      "bytes": 126860,
+      "freesound_id": 687108,
+      "user": "aphom000",
+      "license": "CC0",
+      "url": "https://freesound.org/s/687108/"
+    },
+    {
+      "file": "soft-pop.wav",
+      "sha256": "e628c6ea0d2c9a4448c534da48b65af568eb627703778c653a32e104372f95a2",
+      "bytes": 101726,
+      "freesound_id": 541993,
+      "user": "Rob_Marion",
+      "license": "CC0",
+      "url": "https://freesound.org/s/541993/"
+    },
+    {
+      "file": "swish-short.wav",
+      "sha256": "f968c44ed2971d7590f8a42e970bba95a2d209d9329f45208e5c1e1ca56c5bad",
+      "bytes": 57678,
+      "freesound_id": 154648,
+      "license": "CC0",
+      "url": "https://freesound.org/s/154648/",
+      "note": "trimmed"
+    },
+    {
+      "file": "ui-pop.wav",
+      "sha256": "45758a8589d07737745f24dadaf0ad822b88417ede5c8e5f559a441ce3d7a422",
+      "bytes": 46122,
+      "freesound_id": 878253,
+      "user": "Qvantor",
+      "license": "CC0",
+      "url": "https://freesound.org/s/878253/"
+    },
+    {
+      "file": "whoosh-long.wav",
+      "sha256": "a7d595557390e211dfe42b48ba13b6aee311b4d0d492a0de0c0624f264303328",
+      "bytes": 81678,
+      "freesound_id": 416054,
+      "license": "CC0",
+      "url": "https://freesound.org/s/416054/",
+      "note": "trimmed"
+    },
+    {
+      "file": "whoosh-short.wav",
+      "sha256": "12be3bcd8a4426ce69dd0d4c1d7de848468d2556f1dbca17842a029fa41d7ee1",
+      "bytes": 67278,
+      "freesound_id": 372519,
+      "license": "CC0",
+      "url": "https://freesound.org/s/372519/",
+      "note": "trimmed"
+    }
+  ],
+  "characters": [
+    {
+      "beat": "hook",
+      "species": "quokka",
+      "outfit": "mustard beanie, round glasses, sage hoodie"
+    },
+    {
+      "beat": "Steam (#5)",
+      "species": "red panda",
+      "outfit": "gaming headset with boom mic, olive flannel over hoodie"
+    },
+    {
+      "beat": "Poki (#4)",
+      "species": "axolotl",
+      "outfit": "candy-stripe hoodie, teal arcade visor"
+    },
+    {
+      "beat": "roblox.com (#3)",
+      "species": "pangolin",
+      "outfit": "builder vest, yellow hard hat"
+    },
+    {
+      "beat": "Twitch (#2)",
+      "species": "ring-tailed lemur",
+      "outfit": "muted grape streamer hoodie, cat-ear headset, sunglasses"
+    }
+  ],
+  "set": "Warm wooden cyber-cafe / internet street with five booths (WEB MAP, PC LIBRARY, BROWSER PLAY, BLOCK WORLD, LIVE WATCH), brick wall, ceiling lamps, lounge sofa, generic plain-lettering signs, original screen UIs (no real platform logos or Roblox media)",
+  "3d_assets": "Procedural Three.js geometry (original). Screen textures hand-authored. No Poly Haven downloads required for this build.",
+  "caption_font": {
+    "file": "assets/caption.woff2",
+    "family": "Montserrat ExtraBold",
+    "license": "OFL"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "recovered_from_history": false,
+  "new_paid_generations": 1,
+  "settings": "same fields as prior poker body; stored voice defaults; no overrides",
+  "model": "eleven_v4",
+  "authorization": "Ricardo delegated task (Tab 42 seed)",
+  "request_id": "zKfOZp0HuDsqWzfJOlEM",
+  "history_item_id": "p7flXzlmy6fQSr8UBOpv",
+  "sha256": "002a5dc4e2b7209ec0e8bbc19abfd41997ae63d1d165c158e5907c4e7c716997",
+  "bytes": 487383
+}
