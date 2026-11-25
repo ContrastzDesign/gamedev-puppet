@@ -10,10 +10,10 @@
 - Finale: grad (shiba) — mortarboard, gown, gold sash, diploma
 
 ## Set
-Gamer bedroom (GAMER DEN) with TV showing a 200 GB day-one download; disc-press factory with conveyor, press, spindles, crates and calendar; game studio with bug tickets and LAUNCH IN 4 DAYS board; certification office with RULE CHECK / REJECTED screens; bedroom COASTER MODE gag with disc under a soda. Original screen UIs; generic plain lettering only. No Activision / Call of Duty / Sony footage or logos.
+Gamer bedroom (GAMER DEN) with TV showing a 200 GB day-one download, high shelves, posters and string lights; busy disc-press factory with presses, dual conveyors, shrink-wrap, disc/case stacks, pallets, shipping crates, forklift/pallet jack, hazard stripes, pipes/vents and warning signs; game studio with bug tickets, sticky wall and LAUNCH IN 4 DAYS board under packed shelves; certification lab with test consoles/monitors, filing cabinets, clipboards, stamp desk, PASS/FAIL bins, dev-kit shelves and checklist wall; bedroom COASTER MODE gag with disc under a soda. Original screen UIs; generic plain lettering only. No Activision / Call of Duty / Sony footage or logos.
 
 ## Technical
-1080×1920, 24 fps, 1019 frames, H.264 CRF 18 yuv420p + AAC. Integrated loudness −14.1 LUFS, true peak ≤ −1 dBTP. Rendered online with GPU=0 (SwiftShader). Captions sit in one lower band below the character’s feet, hard-clamped to an 80 px side safe zone (max line render width 920 px), and fail boot if any caption box overlaps a sign/screen mesh. Captions spell **disc**, **Call of Duty**, **200 Gigabyte**, **going gold**, **Sony**.
+1080×1920, 24 fps, 1019 frames, H.264 CRF 18 yuv420p + AAC. Integrated loudness −14.1 LUFS, true peak ≤ −1.5 dBTP. Rendered online with GPU=0 (SwiftShader). Captions sit in one lower band below the character’s feet, hard-clamped to an 80 px side safe zone (max line render width 920 px), and fail boot if any caption box overlaps a sign/screen mesh. Captions spell **disc**, **Call of Duty**, **200 Gigabyte**, **going gold**, **Sony**. Final v2 artifacts: `/opt/cursor/artifacts/new-game-update-final-v2/`.
 
 ## Paste-ready YouTube description
 
