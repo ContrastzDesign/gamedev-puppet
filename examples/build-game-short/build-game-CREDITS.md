@@ -11,7 +11,7 @@
 Game-maker's street with booths labeled ROBLOX STUDIO, GODOT, NILO. Blocky build studio with a 70% earnings jar, free open workshop with publishing-fee receipts and a toll gate, glowing browser-portal stall with a joinable link. Neighbouring work benches, neon/LED strips, posters, shelves, lamps, snacks. Original screen UIs; generic plain lettering only.
 
 ## Technical
-1080×1920, 24 fps, 1136 frames, H.264 CRF 18 yuv420p + AAC. Integrated loudness −14.0 LUFS, true peak −1.5 dBTP. Rendered online with GPU=0 (SwiftShader). Captions hard-clamped to an 80 px side safe zone (max line render width 920 px). Captions spell **Nilo**.
+1080×1920, 24 fps, 1136 frames, H.264 CRF 18 yuv420p + AAC. Integrated loudness −14.1 LUFS, true peak −1.7 dBTP. Rendered online with GPU=0 (SwiftShader). Captions hard-clamped to an 80 px side safe zone (max line render width 920 px). Captions spell **Nilo**.
 
 ## Paste-ready YouTube description
 
