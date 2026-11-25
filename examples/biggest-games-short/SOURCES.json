@@ -1,0 +1,81 @@
+{
+  "title": "The biggest games, 2000s to 2011",
+  "project": "examples/biggest-games-short",
+  "style": "content-short VERSION 1 (drawn SVG animals in detailed 3D worlds)",
+  "video": {
+    "file": "biggest-games-short.mp4",
+    "width": 1080,
+    "height": 1920,
+    "fps": 24,
+    "frames": 1247,
+    "duration_s": 51.958333333333336,
+    "video_codec": "libx264 CRF 18 yuv420p",
+    "audio_codec": "AAC 192k",
+    "loudness_lufs": -14.0,
+    "true_peak_dbtp": -1.2,
+    "renderer": "ANGLE SwiftShader GPU=0",
+    "sha256": "7dc62ebbe8e81989bb350dc18fae87a4e6b3f30cd1bbfe40e866549aa0998347",
+    "bytes": 12770051
+  },
+  "voiceover": {
+    "file": "audio/vo.mp3",
+    "sha256": "cce3bdd7d6c4032206dd793a2c2b2ab30c0436e56fcb53bc22a7354afc386d1d",
+    "bytes": 831781,
+    "duration_s": 51.957551,
+    "engine": "ElevenLabs eleven_v4 (pre-supplied; not regenerated)",
+    "note": "Use supplied seed VO unchanged; captions spell Grand Theft Auto: Vice City, Madden NFL 2003, Guitar Hero III: Legends of Rock, Madden NFL 08, Call of Duty: Modern Warfare 3, The Elder Scrolls V: Skyrim, 2002, 2007, 2011"
+  },
+  "music": {
+    "title": "Investigations",
+    "artist": "Kevin MacLeod",
+    "url": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100646",
+    "download": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Investigations.mp3",
+    "license": "CC BY 4.0",
+    "license_url": "http://creativecommons.org/licenses/by/4.0/",
+    "file": "investigations.wav",
+    "sha256": "efa90d73bdf0ffbcda216fcecb67b2c55415ba3634ada7ba9a33b893689bd056",
+    "source_mp3_sha256": "699f7a3cd227dfe5c1e88099b45af57202bfe9d56f86b8b43e4252b65dd96768"
+  },
+  "sfx": "see audio/sfx/SOURCES.json",
+  "characters": [
+    {
+      "beat": "hook / question",
+      "species": "tapir",
+      "outfit": "time-travel visor hat, round analyst shades, clipboard chart, museum blazer"
+    },
+    {
+      "beat": "2002 / Grand Theft Auto: Vice City",
+      "species": "flamingo",
+      "outfit": "white fedora, neon round sunglasses, pastel Miami suit"
+    },
+    {
+      "beat": "2007 / Guitar Hero III: Legends of Rock",
+      "species": "armadillo",
+      "outfit": "spiky bandana, star shades, rock tee, wristbands, plastic guitar controller"
+    },
+    {
+      "beat": "2011 / Modern Warfare 3 vs Skyrim",
+      "species": "platypus",
+      "outfit": "split soldier/fantasy dual helmet with horns, tactical shades, split military/robe outfit"
+    }
+  ],
+  "set": "Sales-chart museum with 2002 shop, 2007 living room, and 2011 midnight-launch stations. Original screen UIs; generic plain lettering only. No publisher footage/logos/box art.",
+  "3d_assets": "Procedural Three.js geometry (original). Screen textures hand-authored. No Poly Haven downloads required for this build.",
+  "caption_font": {
+    "file": "assets/caption.woff2",
+    "family": "Montserrat ExtraBold",
+    "license": "OFL"
+  },
+  "notes": "Final render online GPU=0 overrides mac-render.md. Music is Investigations (not Carefree / Sneaky Snitch / Wallpaper / Local Forecast / Lobby Time).",
+  "qa": {
+    "version": "v1",
+    "fixes": [
+      "strengthened tapir trunk, armadillo shell bands + guitar silhouette, platypus duckbill + dual helmet",
+      "museum/living share center booth with visibility toggle",
+      "all captions in lower band with 80px side safe zone",
+      "assertCaptionClearOfSigns + assertCharacterVisible boot checks",
+      "original genre-evoking screens only (no cleared publisher footage)"
+    ],
+    "artifacts": "/opt/cursor/artifacts/biggest-games-final/"
+  }
+}

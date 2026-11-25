@@ -1,0 +1,1003 @@
+{
+ "file": "vo.mp3",
+ "fps": 24,
+ "duration": 51.957551,
+ "model": "faster-whisper-small.en",
+ "note": "aligned to script/spoken.txt (frames f=round(t*fps)+1)",
+ "unaligned": [],
+ "heard_differently": [],
+ "words": [
+  {
+   "w": "The",
+   "start": 0.0,
+   "end": 0.18,
+   "line": 1,
+   "f_start": 1,
+   "f_end": 5
+  },
+  {
+   "w": "biggest",
+   "start": 0.18,
+   "end": 0.6,
+   "line": 1,
+   "f_start": 5,
+   "f_end": 15
+  },
+  {
+   "w": "games,",
+   "start": 0.6,
+   "end": 1.04,
+   "line": 1,
+   "f_start": 15,
+   "f_end": 26
+  },
+  {
+   "w": "2000s",
+   "start": 1.46,
+   "end": 2.18,
+   "line": 1,
+   "f_start": 36,
+   "f_end": 53
+  },
+  {
+   "w": "to",
+   "start": 2.18,
+   "end": 2.32,
+   "line": 1,
+   "f_start": 53,
+   "f_end": 57
+  },
+  {
+   "w": "2011",
+   "start": 2.32,
+   "end": 2.96,
+   "line": 1,
+   "f_start": 57,
+   "f_end": 72
+  },
+  {
+   "w": "Which",
+   "start": 3.82,
+   "end": 3.9,
+   "line": 2,
+   "f_start": 93,
+   "f_end": 95
+  },
+  {
+   "w": "games",
+   "start": 3.9,
+   "end": 4.16,
+   "line": 2,
+   "f_start": 95,
+   "f_end": 101
+  },
+  {
+   "w": "earned",
+   "start": 4.16,
+   "end": 4.46,
+   "line": 2,
+   "f_start": 101,
+   "f_end": 108
+  },
+  {
+   "w": "the",
+   "start": 4.46,
+   "end": 4.62,
+   "line": 2,
+   "f_start": 108,
+   "f_end": 112
+  },
+  {
+   "w": "most",
+   "start": 4.62,
+   "end": 4.92,
+   "line": 2,
+   "f_start": 112,
+   "f_end": 119
+  },
+  {
+   "w": "in",
+   "start": 4.92,
+   "end": 5.18,
+   "line": 2,
+   "f_start": 119,
+   "f_end": 125
+  },
+  {
+   "w": "the",
+   "start": 5.18,
+   "end": 5.26,
+   "line": 2,
+   "f_start": 125,
+   "f_end": 127
+  },
+  {
+   "w": "United",
+   "start": 5.26,
+   "end": 5.52,
+   "line": 2,
+   "f_start": 127,
+   "f_end": 133
+  },
+  {
+   "w": "States",
+   "start": 5.52,
+   "end": 5.92,
+   "line": 2,
+   "f_start": 133,
+   "f_end": 143
+  },
+  {
+   "w": "in",
+   "start": 5.92,
+   "end": 6.2,
+   "line": 2,
+   "f_start": 143,
+   "f_end": 150
+  },
+  {
+   "w": "the",
+   "start": 6.2,
+   "end": 6.34,
+   "line": 2,
+   "f_start": 150,
+   "f_end": 153
+  },
+  {
+   "w": "early",
+   "start": 6.34,
+   "end": 6.6,
+   "line": 2,
+   "f_start": 153,
+   "f_end": 159
+  },
+  {
+   "w": "2000s,",
+   "start": 6.6,
+   "end": 7.52,
+   "line": 2,
+   "f_start": 159,
+   "f_end": 181
+  },
+  {
+   "w": "late",
+   "start": 7.6,
+   "end": 7.78,
+   "line": 2,
+   "f_start": 183,
+   "f_end": 188
+  },
+  {
+   "w": "2000s,",
+   "start": 7.78,
+   "end": 8.7,
+   "line": 2,
+   "f_start": 188,
+   "f_end": 210
+  },
+  {
+   "w": "and",
+   "start": 8.84,
+   "end": 8.96,
+   "line": 2,
+   "f_start": 213,
+   "f_end": 216
+  },
+  {
+   "w": "early",
+   "start": 8.96,
+   "end": 9.26,
+   "line": 2,
+   "f_start": 216,
+   "f_end": 223
+  },
+  {
+   "w": "2010s?",
+   "start": 9.26,
+   "end": 10.12,
+   "line": 2,
+   "f_start": 223,
+   "f_end": 244
+  },
+  {
+   "w": "Here’s",
+   "start": 10.6,
+   "end": 10.88,
+   "line": 2,
+   "f_start": 255,
+   "f_end": 262
+  },
+  {
+   "w": "one",
+   "start": 10.88,
+   "end": 11.16,
+   "line": 2,
+   "f_start": 262,
+   "f_end": 269
+  },
+  {
+   "w": "annual",
+   "start": 11.16,
+   "end": 11.52,
+   "line": 2,
+   "f_start": 269,
+   "f_end": 277
+  },
+  {
+   "w": "sales",
+   "start": 11.52,
+   "end": 11.84,
+   "line": 2,
+   "f_start": 277,
+   "f_end": 285
+  },
+  {
+   "w": "leader",
+   "start": 11.84,
+   "end": 12.14,
+   "line": 2,
+   "f_start": 285,
+   "f_end": 292
+  },
+  {
+   "w": "from",
+   "start": 12.14,
+   "end": 12.4,
+   "line": 2,
+   "f_start": 292,
+   "f_end": 299
+  },
+  {
+   "w": "each",
+   "start": 12.4,
+   "end": 12.66,
+   "line": 2,
+   "f_start": 299,
+   "f_end": 305
+  },
+  {
+   "w": "period,",
+   "start": 12.66,
+   "end": 13.16,
+   "line": 2,
+   "f_start": 305,
+   "f_end": 317
+  },
+  {
+   "w": "ranked",
+   "start": 13.42,
+   "end": 13.62,
+   "line": 2,
+   "f_start": 323,
+   "f_end": 328
+  },
+  {
+   "w": "by",
+   "start": 13.62,
+   "end": 13.88,
+   "line": 2,
+   "f_start": 328,
+   "f_end": 334
+  },
+  {
+   "w": "tracked",
+   "start": 13.88,
+   "end": 14.26,
+   "line": 2,
+   "f_start": 334,
+   "f_end": 343
+  },
+  {
+   "w": "full-game",
+   "start": 14.26,
+   "end": 14.82,
+   "line": 2,
+   "f_start": 343,
+   "f_end": 357
+  },
+  {
+   "w": "dollars.",
+   "start": 14.82,
+   "end": 15.32,
+   "line": 2,
+   "f_start": 357,
+   "f_end": 369
+  },
+  {
+   "w": "Number",
+   "start": 15.98,
+   "end": 16.04,
+   "line": 3,
+   "f_start": 385,
+   "f_end": 386
+  },
+  {
+   "w": "one,",
+   "start": 16.04,
+   "end": 16.7,
+   "line": 3,
+   "f_start": 386,
+   "f_end": 402
+  },
+  {
+   "w": "2002.",
+   "start": 16.7,
+   "end": 17.52,
+   "line": 3,
+   "f_start": 402,
+   "f_end": 421
+  },
+  {
+   "w": "Grand",
+   "start": 17.52,
+   "end": 18.32,
+   "line": 3,
+   "f_start": 421,
+   "f_end": 441
+  },
+  {
+   "w": "Theft",
+   "start": 18.32,
+   "end": 18.56,
+   "line": 3,
+   "f_start": 441,
+   "f_end": 446
+  },
+  {
+   "w": "Auto:",
+   "start": 18.56,
+   "end": 18.9,
+   "line": 3,
+   "f_start": 446,
+   "f_end": 455
+  },
+  {
+   "w": "Vice",
+   "start": 18.9,
+   "end": 19.18,
+   "line": 3,
+   "f_start": 455,
+   "f_end": 461
+  },
+  {
+   "w": "City",
+   "start": 19.18,
+   "end": 19.56,
+   "line": 3,
+   "f_start": 461,
+   "f_end": 470
+  },
+  {
+   "w": "led",
+   "start": 19.56,
+   "end": 19.9,
+   "line": 3,
+   "f_start": 470,
+   "f_end": 479
+  },
+  {
+   "w": "the",
+   "start": 19.9,
+   "end": 20.08,
+   "line": 3,
+   "f_start": 479,
+   "f_end": 483
+  },
+  {
+   "w": "annual",
+   "start": 20.08,
+   "end": 20.4,
+   "line": 3,
+   "f_start": 483,
+   "f_end": 491
+  },
+  {
+   "w": "chart,",
+   "start": 20.4,
+   "end": 20.78,
+   "line": 3,
+   "f_start": 491,
+   "f_end": 500
+  },
+  {
+   "w": "ahead",
+   "start": 20.78,
+   "end": 21.24,
+   "line": 3,
+   "f_start": 500,
+   "f_end": 511
+  },
+  {
+   "w": "of",
+   "start": 21.24,
+   "end": 21.7,
+   "line": 3,
+   "f_start": 511,
+   "f_end": 522
+  },
+  {
+   "w": "Madden",
+   "start": 21.7,
+   "end": 21.7,
+   "line": 3,
+   "f_start": 522,
+   "f_end": 522
+  },
+  {
+   "w": "NFL",
+   "start": 21.7,
+   "end": 22.06,
+   "line": 3,
+   "f_start": 522,
+   "f_end": 530
+  },
+  {
+   "w": "2003.",
+   "start": 22.06,
+   "end": 22.9,
+   "line": 3,
+   "f_start": 530,
+   "f_end": 551
+  },
+  {
+   "w": "An",
+   "start": 23.34,
+   "end": 23.52,
+   "line": 3,
+   "f_start": 561,
+   "f_end": 565
+  },
+  {
+   "w": "open-world",
+   "start": 23.52,
+   "end": 24.08,
+   "line": 3,
+   "f_start": 565,
+   "f_end": 579
+  },
+  {
+   "w": "action",
+   "start": 24.08,
+   "end": 24.46,
+   "line": 3,
+   "f_start": 579,
+   "f_end": 588
+  },
+  {
+   "w": "game",
+   "start": 24.46,
+   "end": 24.78,
+   "line": 3,
+   "f_start": 588,
+   "f_end": 596
+  },
+  {
+   "w": "took",
+   "start": 24.78,
+   "end": 25.02,
+   "line": 3,
+   "f_start": 596,
+   "f_end": 601
+  },
+  {
+   "w": "the",
+   "start": 25.02,
+   "end": 25.24,
+   "line": 3,
+   "f_start": 601,
+   "f_end": 607
+  },
+  {
+   "w": "top",
+   "start": 25.24,
+   "end": 25.46,
+   "line": 3,
+   "f_start": 607,
+   "f_end": 612
+  },
+  {
+   "w": "spot.",
+   "start": 25.46,
+   "end": 25.84,
+   "line": 3,
+   "f_start": 612,
+   "f_end": 621
+  },
+  {
+   "w": "Number",
+   "start": 25.84,
+   "end": 26.52,
+   "line": 4,
+   "f_start": 621,
+   "f_end": 637
+  },
+  {
+   "w": "two,",
+   "start": 26.52,
+   "end": 27.26,
+   "line": 4,
+   "f_start": 637,
+   "f_end": 655
+  },
+  {
+   "w": "2007.",
+   "start": 27.26,
+   "end": 28.14,
+   "line": 4,
+   "f_start": 655,
+   "f_end": 676
+  },
+  {
+   "w": "Guitar",
+   "start": 28.14,
+   "end": 28.94,
+   "line": 4,
+   "f_start": 676,
+   "f_end": 696
+  },
+  {
+   "w": "Hero",
+   "start": 28.94,
+   "end": 29.2,
+   "line": 4,
+   "f_start": 696,
+   "f_end": 702
+  },
+  {
+   "w": "III:",
+   "start": 29.2,
+   "end": 29.7,
+   "line": 4,
+   "f_start": 702,
+   "f_end": 714
+  },
+  {
+   "w": "Legends",
+   "start": 29.7,
+   "end": 30.12,
+   "line": 4,
+   "f_start": 714,
+   "f_end": 724
+  },
+  {
+   "w": "of",
+   "start": 30.12,
+   "end": 30.34,
+   "line": 4,
+   "f_start": 724,
+   "f_end": 729
+  },
+  {
+   "w": "Rock",
+   "start": 30.34,
+   "end": 30.64,
+   "line": 4,
+   "f_start": 729,
+   "f_end": 736
+  },
+  {
+   "w": "ranked",
+   "start": 30.64,
+   "end": 30.94,
+   "line": 4,
+   "f_start": 736,
+   "f_end": 744
+  },
+  {
+   "w": "first,",
+   "start": 30.94,
+   "end": 31.4,
+   "line": 4,
+   "f_start": 744,
+   "f_end": 755
+  },
+  {
+   "w": "ahead",
+   "start": 31.4,
+   "end": 31.96,
+   "line": 4,
+   "f_start": 755,
+   "f_end": 768
+  },
+  {
+   "w": "of",
+   "start": 31.96,
+   "end": 32.14,
+   "line": 4,
+   "f_start": 768,
+   "f_end": 772
+  },
+  {
+   "w": "Madden",
+   "start": 32.14,
+   "end": 32.36,
+   "line": 4,
+   "f_start": 772,
+   "f_end": 778
+  },
+  {
+   "w": "NFL",
+   "start": 32.36,
+   "end": 32.78,
+   "line": 4,
+   "f_start": 778,
+   "f_end": 788
+  },
+  {
+   "w": "08.",
+   "start": 32.78,
+   "end": 33.24,
+   "line": 4,
+   "f_start": 788,
+   "f_end": 799
+  },
+  {
+   "w": "Its",
+   "start": 33.74,
+   "end": 33.82,
+   "line": 4,
+   "f_start": 811,
+   "f_end": 813
+  },
+  {
+   "w": "guitar-controller",
+   "start": 33.82,
+   "end": 34.56,
+   "line": 4,
+   "f_start": 813,
+   "f_end": 830
+  },
+  {
+   "w": "bundle",
+   "start": 34.56,
+   "end": 34.88,
+   "line": 4,
+   "f_start": 830,
+   "f_end": 838
+  },
+  {
+   "w": "matters",
+   "start": 34.88,
+   "end": 35.32,
+   "line": 4,
+   "f_start": 838,
+   "f_end": 849
+  },
+  {
+   "w": "here",
+   "start": 35.32,
+   "end": 35.66,
+   "line": 4,
+   "f_start": 849,
+   "f_end": 857
+  },
+  {
+   "w": "because",
+   "start": 35.66,
+   "end": 35.96,
+   "line": 4,
+   "f_start": 857,
+   "f_end": 864
+  },
+  {
+   "w": "a",
+   "start": 35.96,
+   "end": 36.12,
+   "line": 4,
+   "f_start": 864,
+   "f_end": 868
+  },
+  {
+   "w": "higher-priced",
+   "start": 36.12,
+   "end": 36.68,
+   "line": 4,
+   "f_start": 868,
+   "f_end": 881
+  },
+  {
+   "w": "bundle",
+   "start": 36.68,
+   "end": 37.06,
+   "line": 4,
+   "f_start": 881,
+   "f_end": 890
+  },
+  {
+   "w": "can",
+   "start": 37.06,
+   "end": 37.32,
+   "line": 4,
+   "f_start": 890,
+   "f_end": 897
+  },
+  {
+   "w": "generate",
+   "start": 37.32,
+   "end": 37.68,
+   "line": 4,
+   "f_start": 897,
+   "f_end": 905
+  },
+  {
+   "w": "more",
+   "start": 37.68,
+   "end": 38.04,
+   "line": 4,
+   "f_start": 905,
+   "f_end": 914
+  },
+  {
+   "w": "dollars",
+   "start": 38.04,
+   "end": 38.4,
+   "line": 4,
+   "f_start": 914,
+   "f_end": 923
+  },
+  {
+   "w": "per",
+   "start": 38.4,
+   "end": 38.68,
+   "line": 4,
+   "f_start": 923,
+   "f_end": 929
+  },
+  {
+   "w": "sale.",
+   "start": 38.68,
+   "end": 39.0,
+   "line": 4,
+   "f_start": 929,
+   "f_end": 937
+  },
+  {
+   "w": "Number",
+   "start": 39.6,
+   "end": 39.7,
+   "line": 5,
+   "f_start": 951,
+   "f_end": 954
+  },
+  {
+   "w": "three,",
+   "start": 39.7,
+   "end": 40.36,
+   "line": 5,
+   "f_start": 954,
+   "f_end": 970
+  },
+  {
+   "w": "2011.",
+   "start": 40.36,
+   "end": 40.96,
+   "line": 5,
+   "f_start": 970,
+   "f_end": 984
+  },
+  {
+   "w": "Call",
+   "start": 40.96,
+   "end": 41.7,
+   "line": 5,
+   "f_start": 984,
+   "f_end": 1002
+  },
+  {
+   "w": "of",
+   "start": 41.7,
+   "end": 41.86,
+   "line": 5,
+   "f_start": 1002,
+   "f_end": 1006
+  },
+  {
+   "w": "Duty:",
+   "start": 41.86,
+   "end": 42.14,
+   "line": 5,
+   "f_start": 1006,
+   "f_end": 1012
+  },
+  {
+   "w": "Modern",
+   "start": 42.14,
+   "end": 42.46,
+   "line": 5,
+   "f_start": 1012,
+   "f_end": 1020
+  },
+  {
+   "w": "Warfare",
+   "start": 42.46,
+   "end": 42.88,
+   "line": 5,
+   "f_start": 1020,
+   "f_end": 1030
+  },
+  {
+   "w": "3",
+   "start": 42.88,
+   "end": 43.36,
+   "line": 5,
+   "f_start": 1030,
+   "f_end": 1042
+  },
+  {
+   "w": "finished",
+   "start": 43.36,
+   "end": 43.7,
+   "line": 5,
+   "f_start": 1042,
+   "f_end": 1050
+  },
+  {
+   "w": "first.",
+   "start": 43.7,
+   "end": 44.18,
+   "line": 5,
+   "f_start": 1050,
+   "f_end": 1061
+  },
+  {
+   "w": "The",
+   "start": 44.74,
+   "end": 44.76,
+   "line": 5,
+   "f_start": 1075,
+   "f_end": 1075
+  },
+  {
+   "w": "Elder",
+   "start": 44.76,
+   "end": 45.02,
+   "line": 5,
+   "f_start": 1075,
+   "f_end": 1081
+  },
+  {
+   "w": "Scrolls",
+   "start": 45.02,
+   "end": 45.28,
+   "line": 5,
+   "f_start": 1081,
+   "f_end": 1088
+  },
+  {
+   "w": "V:",
+   "start": 45.28,
+   "end": 45.74,
+   "line": 5,
+   "f_start": 1088,
+   "f_end": 1099
+  },
+  {
+   "w": "Skyrim",
+   "start": 45.74,
+   "end": 46.16,
+   "line": 5,
+   "f_start": 1099,
+   "f_end": 1109
+  },
+  {
+   "w": "was",
+   "start": 46.16,
+   "end": 46.54,
+   "line": 5,
+   "f_start": 1109,
+   "f_end": 1118
+  },
+  {
+   "w": "second.",
+   "start": 46.54,
+   "end": 46.9,
+   "line": 5,
+   "f_start": 1118,
+   "f_end": 1127
+  },
+  {
+   "w": "Across",
+   "start": 47.4,
+   "end": 47.68,
+   "line": 5,
+   "f_start": 1139,
+   "f_end": 1145
+  },
+  {
+   "w": "these",
+   "start": 47.68,
+   "end": 47.96,
+   "line": 5,
+   "f_start": 1145,
+   "f_end": 1152
+  },
+  {
+   "w": "three",
+   "start": 47.96,
+   "end": 48.24,
+   "line": 5,
+   "f_start": 1152,
+   "f_end": 1159
+  },
+  {
+   "w": "years,",
+   "start": 48.24,
+   "end": 48.6,
+   "line": 5,
+   "f_start": 1159,
+   "f_end": 1167
+  },
+  {
+   "w": "three",
+   "start": 48.94,
+   "end": 49.12,
+   "line": 5,
+   "f_start": 1176,
+   "f_end": 1180
+  },
+  {
+   "w": "different",
+   "start": 49.12,
+   "end": 49.52,
+   "line": 5,
+   "f_start": 1180,
+   "f_end": 1189
+  },
+  {
+   "w": "genres",
+   "start": 49.52,
+   "end": 49.94,
+   "line": 5,
+   "f_start": 1189,
+   "f_end": 1200
+  },
+  {
+   "w": "led",
+   "start": 49.94,
+   "end": 50.2,
+   "line": 5,
+   "f_start": 1200,
+   "f_end": 1206
+  },
+  {
+   "w": "the",
+   "start": 50.2,
+   "end": 50.38,
+   "line": 5,
+   "f_start": 1206,
+   "f_end": 1210
+  },
+  {
+   "w": "same",
+   "start": 50.38,
+   "end": 50.72,
+   "line": 5,
+   "f_start": 1210,
+   "f_end": 1218
+  },
+  {
+   "w": "US",
+   "start": 50.72,
+   "end": 51.06,
+   "line": 5,
+   "f_start": 1218,
+   "f_end": 1226
+  },
+  {
+   "w": "sales",
+   "start": 51.06,
+   "end": 51.36,
+   "line": 5,
+   "f_start": 1226,
+   "f_end": 1234
+  },
+  {
+   "w": "chart.",
+   "start": 51.36,
+   "end": 51.68,
+   "line": 5,
+   "f_start": 1234,
+   "f_end": 1241
+  }
+ ]
+}

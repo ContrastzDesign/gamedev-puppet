@@ -1,0 +1,49 @@
+{
+ "file": "vo.mp3",
+ "duration": 51.957551,
+ "fps": 24,
+ "video_end": 1247,
+ "method": "faster-whisper small.en words aligned to spoken.txt; frames f=round(t*fps)+1; video_end=ceil(duration*fps-0.05)",
+ "lines": [
+  {
+   "line": 1,
+   "start": 0.0,
+   "end": 2.96,
+   "f_start": 1,
+   "f_end": 72,
+   "text": "The biggest games, 2000s to 2011"
+  },
+  {
+   "line": 2,
+   "start": 3.82,
+   "end": 15.32,
+   "f_start": 93,
+   "f_end": 369,
+   "text": "Which games earned the most in the United States in the early 2000s, late 2000s, and early 2010s? Here’s one annual sales leader from each period, ranked by tracked full-game dollars."
+  },
+  {
+   "line": 3,
+   "start": 15.98,
+   "end": 25.84,
+   "f_start": 385,
+   "f_end": 621,
+   "text": "Number one, 2002. Grand Theft Auto: Vice City led the annual chart, ahead of Madden NFL 2003. An open-world action game took the top spot."
+  },
+  {
+   "line": 4,
+   "start": 25.84,
+   "end": 39.0,
+   "f_start": 621,
+   "f_end": 937,
+   "text": "Number two, 2007. Guitar Hero III: Legends of Rock ranked first, ahead of Madden NFL 08. Its guitar-controller bundle matters here because a higher-priced bundle can generate more dollars per sale."
+  },
+  {
+   "line": 5,
+   "start": 39.6,
+   "end": 51.68,
+   "f_start": 951,
+   "f_end": 1241,
+   "text": "Number three, 2011. Call of Duty: Modern Warfare 3 finished first. The Elder Scrolls V: Skyrim was second. Across these three years, three different genres led the same US sales chart."
+  }
+ ]
+}
