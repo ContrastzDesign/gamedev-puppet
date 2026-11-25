@@ -1,0 +1,49 @@
+{
+ "file": "vo.mp3",
+ "duration": 52.192653,
+ "fps": 24,
+ "video_end": 1253,
+ "method": "faster-whisper small.en words aligned to spoken.txt; frames f=round(t*fps)+1; video_end=ceil(duration*fps-0.05)",
+ "lines": [
+  {
+   "line": 1,
+   "start": 0.0,
+   "end": 1.7,
+   "f_start": 1,
+   "f_end": 42,
+   "text": "Which engine looks the most real?"
+  },
+  {
+   "line": 2,
+   "start": 2.34,
+   "end": 11.06,
+   "f_start": 57,
+   "f_end": 266,
+   "text": "Which game engine comes closest to real-world footage? Two real-time demos show what developers can achieve, and one production constraint explains the difference."
+  },
+  {
+   "line": 3,
+   "start": 11.84,
+   "end": 24.3,
+   "f_start": 285,
+   "f_end": 584,
+   "text": "Number one, Unreal Engine 5 for a city at street level. In The Matrix Awakens, Nanite handled highly detailed geometry and Lumen calculated lighting. The player could move through the city while the engine rendered it."
+  },
+  {
+   "line": 4,
+   "start": 24.68,
+   "end": 36.88,
+   "f_start": 593,
+   "f_end": 886,
+   "text": "Number two, Unity for a close-up face. Its Enemies demo used the High Definition Render Pipeline, detailed eye and skin shaders, and simulated hair. Those details matter because the face fills the frame."
+  },
+  {
+   "line": 5,
+   "start": 37.54,
+   "end": 51.84,
+   "f_start": 902,
+   "f_end": 1245,
+   "text": "Number three, the frame budget. At sixty frames per second, an engine has about 16.7 milliseconds to draw each frame. A realistic city and a realistic face spend that budget on different work. Both engines can produce photorealistic shots."
+  }
+ ]
+}

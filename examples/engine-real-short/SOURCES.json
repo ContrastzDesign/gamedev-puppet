@@ -1,0 +1,65 @@
+{
+  "title": "Which engine looks the most real?",
+  "project": "examples/engine-real-short",
+  "style": "content-short VERSION 1 (drawn SVG animals in detailed 3D worlds)",
+  "video": {
+    "file": "engine-real-short.mp4",
+    "width": 1080,
+    "height": 1920,
+    "fps": 24,
+    "frames": 1253,
+    "duration_s": 52.208333333333336,
+    "video_codec": "libx264 CRF 18 yuv420p",
+    "audio_codec": "AAC 192k",
+    "loudness_lufs": -14.0,
+    "true_peak_dbtp": -1.5,
+    "renderer": "ANGLE SwiftShader GPU=0",
+    "sha256": "PENDING_AFTER_ENCODE",
+    "bytes": 0
+  },
+  "voiceover": {
+    "file": "audio/vo.mp3",
+    "sha256": "cbfddaca56c7cee6824692e63e9d4f2b5fd85411a5edbfef698d9254a9d5a0f1",
+    "bytes": 835543,
+    "duration_s": 52.192653,
+    "engine": "ElevenLabs eleven_v4 (pre-supplied; not regenerated)",
+    "note": "Use supplied seed VO unchanged; captions spell Unreal Engine 5, The Matrix Awakens, Nanite, Lumen, Enemies, High Definition Render Pipeline, sixty, 16.7"
+  },
+  "music": {
+    "title": "Lobby Time",
+    "artist": "Kevin MacLeod",
+    "url": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100345",
+    "download": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Lobby%20Time.mp3",
+    "license": "CC BY 4.0",
+    "license_url": "http://creativecommons.org/licenses/by/4.0/",
+    "file": "lobby-time.wav",
+    "sha256": "91d69f52cd10ed1bea77215e6a4cff75d8d1ac8cdf795a56c7f75542a4535200",
+    "source_mp3_sha256": "bc47dc1f1a0b1fe4ff631cee89ca3987b8f7b52f533d06233665d51300331beb"
+  },
+  "sfx": "see audio/sfx/SOURCES.json",
+  "characters": [
+    {"beat": "hook / question", "species": "raccoon", "outfit": "film-critic beret, dark round sunglasses, cream scarf, dark jacket"},
+    {"beat": "Unreal Engine 5 / city", "species": "wallaby", "outfit": "city cap, thin explorer shades, urban jacket, neck camera"},
+    {"beat": "Unity / face", "species": "puffin", "outfit": "photographer beret, gold round glasses, makeup apron, close-up lens"},
+    {"beat": "frame budget", "species": "tortoise", "outfit": "referee cap, sport sunglasses, striped shirt, shell plates, stopwatch"}
+  ],
+  "set": "Realism-test screening lab with CITY, FACE and BUDGET stations. Original screen UIs; generic plain lettering only. No Epic/Unity demo footage.",
+  "3d_assets": "Procedural Three.js geometry (original). Screen textures hand-authored. No Poly Haven downloads required for this build.",
+  "caption_font": {
+    "file": "assets/caption.woff2",
+    "family": "Montserrat ExtraBold",
+    "license": "OFL"
+  },
+  "notes": "Final render online GPU=0 overrides mac-render.md. Music is Lobby Time (not Carefree / Sneaky Snitch / Wallpaper / Local Forecast).",
+  "qa": {
+    "version": "v1",
+    "fixes": [
+      "hook/question use REALISM LAB center desk (not premature FACE)",
+      "deterministic set (no Math.random)",
+      "all captions in lower band with 80px side safe zone",
+      "assertCaptionClearOfSigns + assertCharacterVisible boot checks",
+      "puffin/tortoise species signals strengthened (beak/shell)"
+    ],
+    "artifacts": "/opt/cursor/artifacts/engine-real-final/"
+  }
+}
