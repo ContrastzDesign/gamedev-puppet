@@ -14,8 +14,8 @@
     "loudness_lufs": -14.1,
     "true_peak_dbtp": -1.7,
     "renderer": "ANGLE SwiftShader GPU=0",
-    "sha256": "4261660ff92ae48a641b2b83e7c2d44ec6958eb5274aa2267c3cc2b7ac9e4f4d",
-    "bytes": 13871092
+    "sha256": "29aabb6ad964673e5c635870230c88f86f05c1f1f45fb6a32ca6713b48bf12f0",
+    "bytes": 13260980
   },
   "voiceover": {
     "file": "audio/vo.mp3",
@@ -200,5 +200,16 @@
     "file": "assets/caption.woff2",
     "family": "Montserrat ExtraBold",
     "license": "OFL"
+  },
+  "notes": "",
+  "qa": {
+    "version": "v2",
+    "fixes": [
+      "hook/platform medium framing (~40-50% character height)",
+      "removed aisle reddish rug slab",
+      "all captions in lower band",
+      "assertCaptionClearOfSigns boot check"
+    ],
+    "artifacts": "/opt/cursor/artifacts/build-game-final-v2/"
   }
 }
