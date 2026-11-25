@@ -1,0 +1,12 @@
+{
+  "title": "Hidden Agenda",
+  "artist": "Kevin MacLeod",
+  "url": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100863",
+  "download": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Hidden%20Agenda.mp3",
+  "license": "CC BY 4.0",
+  "license_url": "http://creativecommons.org/licenses/by/4.0/",
+  "file": "hidden-agenda.wav",
+  "sha256": "d7fb1108f05d4f23d0d0445524f81dc691044dab1636bad297bfccd513fd91a3",
+  "source_mp3_sha256": "d9ed18f6c79c2bdc2d3c0bbd264dbae40ef435f9f69b4e0e9bb8de7e0a2d7a32",
+  "note": "Trimmed to ~50s for mix; not Carefree/Sneaky Snitch/Wallpaper/Local Forecast/Lobby Time/Investigations"
+}
