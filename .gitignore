@@ -18,12 +18,6 @@ research/references/
 research/shirusekaii/frames/
 research/shirusekaii/guide/
 skill/content-short/assets/guide/
-examples/*/audio/sfx/
-examples/*/audio/music/
-!examples/*/audio/sfx/SOURCES.json
-!examples/*/audio/music/SOURCES.json
-!examples/*/audio/sfx/.gitkeep
-!examples/*/audio/music/.gitkeep
 
 
 # Raw ElevenLabs API responses (large caches; vo.mp3 and the word timings are committed)
@@ -34,3 +28,11 @@ archive/water-short/assets/eleven-*.json
 *API Key*.txt
 .env
 .env.*
+
+# Third-party media kept local; provenance JSON is tracked
+examples/*/audio/sfx/**
+examples/*/audio/music/**
+!examples/*/audio/sfx/SOURCES.json
+!examples/*/audio/music/SOURCES.json
+!examples/*/audio/sfx/.gitkeep
+!examples/*/audio/music/.gitkeep
