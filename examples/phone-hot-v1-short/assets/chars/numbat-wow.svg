@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <!-- bushy STRIPED tail (numbat hallmark) -->
+  <ellipse cx="460" cy="540" rx="58" ry="100" fill="#c48848"/>
+  <path d="M430,480 Q460,470 490,480" fill="none" stroke="#3a2818" stroke-width="12"/>
+  <path d="M425,520 Q460,510 495,520" fill="none" stroke="#3a2818" stroke-width="12"/>
+  <path d="M428,560 Q460,550 492,560" fill="none" stroke="#3a2818" stroke-width="12"/>
+  <path d="M435,600 Q460,590 485,600" fill="none" stroke="#3a2818" stroke-width="12"/>
+  <ellipse cx="300" cy="560" rx="118" ry="112" fill="#c48848"/>
+  <path d="M190,480 Q300,472 410,480" fill="none" stroke="#3a2818" stroke-width="10" stroke-linecap="round" opacity=".85"/><path d="M190,498 Q300,490 410,498" fill="none" stroke="#3a2818" stroke-width="10" stroke-linecap="round" opacity=".85"/><path d="M190,516 Q300,508 410,516" fill="none" stroke="#3a2818" stroke-width="10" stroke-linecap="round" opacity=".85"/><path d="M190,534 Q300,526 410,534" fill="none" stroke="#3a2818" stroke-width="10" stroke-linecap="round" opacity=".85"/><path d="M190,552 Q300,544 410,552" fill="none" stroke="#3a2818" stroke-width="10" stroke-linecap="round" opacity=".85"/><path d="M190,570 Q300,562 410,570" fill="none" stroke="#3a2818" stroke-width="10" stroke-linecap="round" opacity=".85"/><path d="M190,588 Q300,580 410,588" fill="none" stroke="#3a2818" stroke-width="10" stroke-linecap="round" opacity=".85"/><path d="M190,606 Q300,598 410,606" fill="none" stroke="#3a2818" stroke-width="10" stroke-linecap="round" opacity=".85"/>
+  <!-- white lab coat (open so side stripes show) -->
+  <path d="M230,460 Q300,425 370,460 L385,650 Q300,675 215,650 Z" fill="#ebe4dc"/>
+  <path d="M250,485 Q300,458 350,485 L358,625 Q300,648 242,625 Z" fill="#f8f4ee"/>
+  <path d="M300,460 L300,640" stroke="#d0c8c0" stroke-width="4"/>
+  <ellipse cx="270" cy="520" rx="10" ry="10" fill="#c45848"/>
+  <ellipse cx="330" cy="540" rx="10" ry="10" fill="#4a8a98"/>
+  <!-- head with face stripes -->
+  <ellipse cx="300" cy="285" rx="125" ry="110" fill="#c48848"/>
+  <ellipse cx="300" cy="305" rx="100" ry="88" fill="#d49858"/>
+  <path d="M220,250 Q260,240 280,280" fill="none" stroke="#3a2818" stroke-width="8"/>
+  <path d="M380,250 Q340,240 320,280" fill="none" stroke="#3a2818" stroke-width="8"/>
+  <path d="M230,300 Q265,295 285,330" fill="none" stroke="#3a2818" stroke-width="7"/>
+  <path d="M370,300 Q335,295 315,330" fill="none" stroke="#3a2818" stroke-width="7"/>
+  <!-- pointed snout -->
+  <ellipse cx="300" cy="370" rx="40" ry="48" fill="#f0d8b0"/>
+  <ellipse cx="300" cy="410" rx="22" ry="20" fill="#e8d0b0"/>
+  <ellipse cx="300" cy="425" rx="12" ry="9" fill="#2a2118"/>
+  <!-- upright pointed ears -->
+  <ellipse cx="200" cy="175" rx="24" ry="52" fill="#c48848"/>
+  <ellipse cx="400" cy="175" rx="24" ry="52" fill="#c48848"/>
+  <ellipse cx="200" cy="170" rx="10" ry="28" fill="#e8b4a0"/>
+  <ellipse cx="400" cy="170" rx="10" ry="28" fill="#e8b4a0"/>
+  <!-- inventor goggles on forehead -->
+  <ellipse cx="255" cy="210" rx="38" ry="28" fill="none" stroke="#4a5058" stroke-width="10"/>
+  <ellipse cx="345" cy="210" rx="38" ry="28" fill="none" stroke="#4a5058" stroke-width="10"/>
+  <path d="M293,210 H307" stroke="#4a5058" stroke-width="8"/>
+  <ellipse cx="255" cy="210" rx="22" ry="16" fill="#8ab8c8" opacity=".45"/>
+  <ellipse cx="345" cy="210" rx="22" ry="16" fill="#8ab8c8" opacity=".45"/>
+  <!-- strap -->
+  <path d="M175,220 Q300,250 425,220" fill="none" stroke="#3a4048" stroke-width="8"/>
+  
+  <ellipse cx="262" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="338" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="262" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="338" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="300" cy="390" rx="16" ry="14" fill="#3a2a24"/><ellipse cx="300" cy="394" rx="10" ry="6" fill="#c47a7a"/>
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#c48848"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#c48848"/>
+  
+  <ellipse cx="410" cy="410.0" rx="22" ry="70.0" fill="#c48848"/>
+  <ellipse cx="428" cy="340" rx="20" ry="16" fill="#c48848"/>
+  
+  <ellipse cx="230" cy="710" rx="28" ry="16" fill="#a07040"/>
+  <ellipse cx="370" cy="710" rx="28" ry="16" fill="#a07040"/>
+  <!-- tiny desk fan when pointing -->
+  <ellipse cx='445' cy='350' rx='36' ry='36' fill='#6a7a88'/><ellipse cx='445' cy='350' rx='28' ry='28' fill='#c8d4d8'/><rect x='438' y='386' width='14' height='40' fill='#5a6a78'/><rect x='420' y='420' width='50' height='12' rx='3' fill='#4a5a68'/>
+
+</svg>

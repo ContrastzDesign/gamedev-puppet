@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <!-- bulky shaggy body -->
+  <ellipse cx="300" cy="560" rx="145" ry="125" fill="#5a4838"/>
+  <ellipse cx="300" cy="545" rx="120" ry="100" fill="#6a5848"/>
+  <!-- shaggy fringe tufts -->
+  <ellipse cx="220" cy="500" rx="40" ry="70" fill="#3a3028" opacity=".5"/>
+  <ellipse cx="380" cy="500" rx="40" ry="70" fill="#3a3028" opacity=".5"/>
+  <ellipse cx="300" cy="620" rx="100" ry="40" fill="#3a3028" opacity=".4"/>
+  <!-- orange hi-vis / work vest -->
+  <path d="M210,455 Q300,420 390,455 L402,640 Q300,670 198,640 Z" fill="#c47838"/>
+  <path d="M235,480 Q300,450 365,480 L370,620 Q300,645 230,620 Z" fill="#2a3848"/>
+  <rect x="248" y="500" width="22" height="95" fill="#e0c070"/>
+  <rect x="330" y="500" width="22" height="95" fill="#e0c070"/>
+  <!-- massive head -->
+  <ellipse cx="300" cy="280" rx="140" ry="120" fill="#5a4838"/>
+  <ellipse cx="300" cy="300" rx="115" ry="95" fill="#6a5848"/>
+  <!-- shaggy bangs -->
+  <path d="M180,240 Q220,160 260,230 Q300,150 340,230 Q380,160 420,240" fill="#3a3028"/>
+  <!-- hard hat first -->
+  <ellipse cx="300" cy="175" rx="140" ry="26" fill="#c4a35a"/>
+  <ellipse cx="300" cy="148" rx="115" ry="45" fill="#e0c070"/>
+  <ellipse cx="300" cy="128" rx="65" ry="16" fill="#d0b060"/>
+  <rect x="288" y="100" width="24" height="24" rx="4" fill="#8a7030"/>
+  <!-- HUGE thick curved horns OUTSIDE hat (yak hallmark) -->
+  <path d="M170,185 Q100,60 40,130 Q30,180 55,200 Q90,220 165,200 Z" fill="#e8d4a0" stroke="#8a7030" stroke-width="6"/>
+  <path d="M430,185 Q500,60 560,130 Q570,180 545,200 Q510,220 435,200 Z" fill="#e8d4a0" stroke="#8a7030" stroke-width="6"/>
+  <ellipse cx="55" cy="155" rx="28" ry="32" fill="#d8c098"/>
+  <ellipse cx="545" cy="155" rx="28" ry="32" fill="#d8c098"/>
+  <ellipse cx="48" cy="145" rx="10" ry="12" fill="#8a7030"/>
+  <ellipse cx="552" cy="145" rx="10" ry="12" fill="#8a7030"/>
+  <!-- broad muzzle -->
+  <ellipse cx="300" cy="360" rx="55" ry="40" fill="#c8b090"/>
+  <ellipse cx="300" cy="350" rx="14" ry="10" fill="#2a2118"/>
+  <!-- safety shades -->
+  <rect x="230" y="265" width="55" height="34" rx="8" fill="#1a3028" opacity=".9"/>
+  <rect x="315" y="265" width="55" height="34" rx="8" fill="#1a3028" opacity=".9"/>
+  <path d="M285,282 H315" stroke="#c4a35a" stroke-width="5"/>
+  
+  <ellipse cx="258" cy="260" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="342" cy="260" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="260" cy="258" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="344" cy="258" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="300" cy="395" rx="11" ry="13" fill="#3a2a24"/>
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#6a5848"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#6a5848"/>
+  
+  <ellipse cx="410" cy="410.0" rx="22" ry="70.0" fill="#6a5848"/>
+  <ellipse cx="428" cy="340" rx="20" ry="16" fill="#6a5848"/>
+  
+  <ellipse cx="215" cy="710" rx="28" ry="16" fill="#5a4838"/>
+  <ellipse cx="385" cy="710" rx="28" ry="16" fill="#5a4838"/>
+  <!-- gasket / seal tool -->
+  <rect x='415' y='340' width='70' height='28' rx='6' fill='#4a8a98'/><text x='450' y='360' text-anchor='middle' font-size='12' fill='#f0e6d0' font-family='sans-serif'>SEAL</text>
+
+</svg>

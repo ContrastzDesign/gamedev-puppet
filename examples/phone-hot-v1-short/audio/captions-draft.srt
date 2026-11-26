@@ -1,0 +1,111 @@
+1
+00:00:00,000 --> 00:00:01,140
+Why Does Your Phone Get
+
+2
+00:00:01,140 --> 00:00:02,340
+Hot Playing Games
+
+3
+00:00:02,860 --> 00:00:03,920
+Say your phone game runs
+
+4
+00:00:03,920 --> 00:00:05,720
+great, then slows to a
+
+5
+00:00:05,720 --> 00:00:07,560
+crawl. To fix this, you
+
+6
+00:00:07,560 --> 00:00:08,560
+only need to cool the
+
+7
+00:00:08,560 --> 00:00:10,220
+phone down. But why does
+
+8
+00:00:10,220 --> 00:00:10,980
+it get so hot
+
+9
+00:00:11,460 --> 00:00:12,500
+Why not just add a
+
+10
+00:00:12,500 --> 00:00:12,760
+fan
+
+11
+00:00:13,280 --> 00:00:14,580
+A fan needs air holes
+
+12
+00:00:15,180 --> 00:00:16,320
+Holes let in water and
+
+13
+00:00:16,320 --> 00:00:18,000
+dust. So phones are sealed
+
+14
+00:00:18,000 --> 00:00:19,320
+so it waterproof, and the
+
+15
+00:00:19,320 --> 00:00:20,460
+heat has nowhere to go
+
+16
+00:00:20,880 --> 00:00:22,160
+Then the chip slows itself
+
+17
+00:00:22,160 --> 00:00:23,860
+down to stay safe. This
+
+18
+00:00:23,860 --> 00:00:24,960
+is what you call thermal
+
+19
+00:00:24,960 --> 00:00:25,520
+throttling
+
+20
+00:00:25,960 --> 00:00:27,500
+Now developers can't lower the
+
+21
+00:00:27,500 --> 00:00:29,320
+heat, only the game. They
+
+22
+00:00:29,320 --> 00:00:30,760
+cut graphics and frame rate
+
+23
+00:00:30,920 --> 00:00:31,860
+and your game looks worse
+
+24
+00:00:32,500 --> 00:00:33,380
+This is why your phone
+
+25
+00:00:33,380 --> 00:00:34,440
+is a hand warmer with
+
+26
+00:00:34,440 --> 00:00:35,040
+an app store
+
+27
+00:00:36,020 --> 00:00:37,180
+The game didn't get harder
+
+28
+00:00:37,560 --> 00:00:38,760
+Your phone got hotter

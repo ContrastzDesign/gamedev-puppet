@@ -1,0 +1,7 @@
+Why Does Your Phone Get Hot Playing Games?
+Say your phone game runs great, then slows to a crawl. To fix this, you only need to cool the phone down. But why does it get so hot?
+Why not just add a fan?
+A fan needs air holes. Holes let in water and dust. So phones are sealed so it waterproof, and the heat has nowhere to go. Then the chip slows itself down to stay safe. This is what you call thermal throttling.
+Now developers can't lower the heat, only the game. They cut graphics and frame rate, and your game looks worse.
+This is why your phone is a hand warmer with an app store.
+The game didn't get harder. Your phone got hotter.

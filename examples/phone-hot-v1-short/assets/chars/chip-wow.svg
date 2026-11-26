@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <!-- racing suit body -->
+  <ellipse cx="300" cy="560" rx="110" ry="105" fill="#c45848"/>
+  <ellipse cx="300" cy="540" rx="90" ry="80" fill="#d46858"/>
+  <path d="M240,480 L300,560 L360,480" fill="#ebe4dc"/>
+  <rect x="270" y="500" width="60" height="18" rx="4" fill="#2a3038"/>
+  <text x="300" y="514" text-anchor="middle" font-size="11" fill="#e0c070" font-family="sans-serif">CPU</text>
+  <!-- head -->
+  <ellipse cx="300" cy="295" rx="120" ry="110" fill="#6a9848"/>
+  <ellipse cx="300" cy="315" rx="95" ry="88" fill="#7aa858"/>
+  <ellipse cx="300" cy="370" rx="34" ry="26" fill="#c8d898"/>
+  <ellipse cx="300" cy="362" rx="9" ry="7" fill="#2a2118"/>
+  <ellipse cx="190" cy="235" rx="14" ry="18" fill="#6a9848"/>
+  <ellipse cx="410" cy="235" rx="14" ry="18" fill="#6a9848"/>
+  <!-- racing helmet -->
+  <ellipse cx="300" cy="220" rx="125" ry="70" fill="#2a3848"/>
+  <ellipse cx="300" cy="200" rx="100" ry="45" fill="#3a4858"/>
+  <path d="M200,230 Q300,280 400,230" fill="#1a2428" opacity=".5"/>
+  <rect x="270" y="175" width="60" height="14" rx="3" fill="#c45848"/>
+  <!-- goggles -->
+  <ellipse cx="255" cy="270" rx="32" ry="22" fill="#8ab8c8" opacity=".7"/>
+  <ellipse cx="345" cy="270" rx="32" ry="22" fill="#8ab8c8" opacity=".7"/>
+  <path d="M287,270 H313" stroke="#2a3848" stroke-width="6"/>
+  
+  <ellipse cx="260" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="340" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="260" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="340" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <path d="M284,403 Q300,391 316,403" fill="none" stroke="#3a2a24" stroke-width="5" stroke-linecap="round"/>
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#6a9848"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#6a9848"/>
+  
+  <ellipse cx="410" cy="410.0" rx="22" ry="70.0" fill="#6a9848"/>
+  <ellipse cx="428" cy="340" rx="20" ry="16" fill="#6a9848"/>
+  <ellipse cx="230" cy="710" rx="28" ry="14" fill="#6a9848"/>
+  <ellipse cx="370" cy="710" rx="28" ry="14" fill="#6a9848"/>
+  <!-- SAFE MODE placard when pointing -->
+  <rect x='400' y='320' width='110' height='40' rx='6' fill='#2a3228'/><rect x='404' y='324' width='102' height='32' rx='4' fill='#c45848'/><text x='450' y='346' text-anchor='middle' font-size='12' fill='#f0e6d0' font-family='sans-serif' font-weight='bold'>SAFE MODE</text>
+
+</svg>

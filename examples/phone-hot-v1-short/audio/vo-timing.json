@@ -1,0 +1,65 @@
+{
+ "file": "vo.mp3",
+ "duration": 39.157551,
+ "fps": 24,
+ "video_end": 940,
+ "method": "faster-whisper small.en words aligned to spoken.txt; frames f=round(t*fps)+1; video_end=ceil(duration*fps-0.05)",
+ "lines": [
+  {
+   "line": 1,
+   "start": 0.0,
+   "end": 2.34,
+   "f_start": 1,
+   "f_end": 57,
+   "text": "Why Does Your Phone Get Hot Playing Games?"
+  },
+  {
+   "line": 2,
+   "start": 2.86,
+   "end": 10.98,
+   "f_start": 70,
+   "f_end": 265,
+   "text": "Say your phone game runs great, then slows to a crawl. To fix this, you only need to cool the phone down. But why does it get so hot?"
+  },
+  {
+   "line": 3,
+   "start": 11.46,
+   "end": 12.76,
+   "f_start": 276,
+   "f_end": 307,
+   "text": "Why not just add a fan?"
+  },
+  {
+   "line": 4,
+   "start": 13.28,
+   "end": 25.52,
+   "f_start": 320,
+   "f_end": 613,
+   "text": "A fan needs air holes. Holes let in water and dust. So phones are sealed so it waterproof, and the heat has nowhere to go. Then the chip slows itself down to stay safe. This is what you call thermal throttling."
+  },
+  {
+   "line": 5,
+   "start": 25.96,
+   "end": 31.86,
+   "f_start": 624,
+   "f_end": 766,
+   "text": "Now developers can't lower the heat, only the game. They cut graphics and frame rate, and your game looks worse."
+  },
+  {
+   "line": 6,
+   "start": 32.5,
+   "end": 35.04,
+   "f_start": 781,
+   "f_end": 842,
+   "text": "This is why your phone is a hand warmer with an app store."
+  },
+  {
+   "line": 7,
+   "start": 36.02,
+   "end": 38.76,
+   "f_start": 865,
+   "f_end": 931,
+   "text": "The game didn't get harder. Your phone got hotter."
+  }
+ ]
+}

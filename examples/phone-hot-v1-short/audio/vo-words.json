@@ -1,0 +1,1019 @@
+{
+ "file": "vo.mp3",
+ "fps": 24,
+ "duration": 39.157551,
+ "model": "faster-whisper-small.en",
+ "note": "aligned to script/spoken.txt (frames f=round(t*fps)+1)",
+ "unaligned": [],
+ "heard_differently": [],
+ "words": [
+  {
+   "w": "Why",
+   "start": 0.0,
+   "end": 0.32,
+   "line": 1,
+   "f_start": 1,
+   "f_end": 9
+  },
+  {
+   "w": "Does",
+   "start": 0.32,
+   "end": 0.46,
+   "line": 1,
+   "f_start": 9,
+   "f_end": 12
+  },
+  {
+   "w": "Your",
+   "start": 0.46,
+   "end": 0.62,
+   "line": 1,
+   "f_start": 12,
+   "f_end": 16
+  },
+  {
+   "w": "Phone",
+   "start": 0.62,
+   "end": 0.94,
+   "line": 1,
+   "f_start": 16,
+   "f_end": 24
+  },
+  {
+   "w": "Get",
+   "start": 0.94,
+   "end": 1.14,
+   "line": 1,
+   "f_start": 24,
+   "f_end": 28
+  },
+  {
+   "w": "Hot",
+   "start": 1.14,
+   "end": 1.48,
+   "line": 1,
+   "f_start": 28,
+   "f_end": 37
+  },
+  {
+   "w": "Playing",
+   "start": 1.48,
+   "end": 1.82,
+   "line": 1,
+   "f_start": 37,
+   "f_end": 45
+  },
+  {
+   "w": "Games?",
+   "start": 1.82,
+   "end": 2.34,
+   "line": 1,
+   "f_start": 45,
+   "f_end": 57
+  },
+  {
+   "w": "Say",
+   "start": 2.86,
+   "end": 2.94,
+   "line": 2,
+   "f_start": 70,
+   "f_end": 72
+  },
+  {
+   "w": "your",
+   "start": 2.94,
+   "end": 3.12,
+   "line": 2,
+   "f_start": 72,
+   "f_end": 76
+  },
+  {
+   "w": "phone",
+   "start": 3.12,
+   "end": 3.38,
+   "line": 2,
+   "f_start": 76,
+   "f_end": 82
+  },
+  {
+   "w": "game",
+   "start": 3.38,
+   "end": 3.62,
+   "line": 2,
+   "f_start": 82,
+   "f_end": 88
+  },
+  {
+   "w": "runs",
+   "start": 3.62,
+   "end": 3.92,
+   "line": 2,
+   "f_start": 88,
+   "f_end": 95
+  },
+  {
+   "w": "great,",
+   "start": 3.92,
+   "end": 4.32,
+   "line": 2,
+   "f_start": 95,
+   "f_end": 105
+  },
+  {
+   "w": "then",
+   "start": 4.66,
+   "end": 4.9,
+   "line": 2,
+   "f_start": 113,
+   "f_end": 119
+  },
+  {
+   "w": "slows",
+   "start": 4.9,
+   "end": 5.32,
+   "line": 2,
+   "f_start": 119,
+   "f_end": 129
+  },
+  {
+   "w": "to",
+   "start": 5.32,
+   "end": 5.58,
+   "line": 2,
+   "f_start": 129,
+   "f_end": 135
+  },
+  {
+   "w": "a",
+   "start": 5.58,
+   "end": 5.72,
+   "line": 2,
+   "f_start": 135,
+   "f_end": 138
+  },
+  {
+   "w": "crawl.",
+   "start": 5.72,
+   "end": 6.12,
+   "line": 2,
+   "f_start": 138,
+   "f_end": 148
+  },
+  {
+   "w": "To",
+   "start": 6.6,
+   "end": 6.72,
+   "line": 2,
+   "f_start": 159,
+   "f_end": 162
+  },
+  {
+   "w": "fix",
+   "start": 6.72,
+   "end": 6.92,
+   "line": 2,
+   "f_start": 162,
+   "f_end": 167
+  },
+  {
+   "w": "this,",
+   "start": 6.92,
+   "end": 7.22,
+   "line": 2,
+   "f_start": 167,
+   "f_end": 174
+  },
+  {
+   "w": "you",
+   "start": 7.46,
+   "end": 7.56,
+   "line": 2,
+   "f_start": 180,
+   "f_end": 182
+  },
+  {
+   "w": "only",
+   "start": 7.56,
+   "end": 7.8,
+   "line": 2,
+   "f_start": 182,
+   "f_end": 188
+  },
+  {
+   "w": "need",
+   "start": 7.8,
+   "end": 8.06,
+   "line": 2,
+   "f_start": 188,
+   "f_end": 194
+  },
+  {
+   "w": "to",
+   "start": 8.06,
+   "end": 8.2,
+   "line": 2,
+   "f_start": 194,
+   "f_end": 198
+  },
+  {
+   "w": "cool",
+   "start": 8.2,
+   "end": 8.38,
+   "line": 2,
+   "f_start": 198,
+   "f_end": 202
+  },
+  {
+   "w": "the",
+   "start": 8.38,
+   "end": 8.56,
+   "line": 2,
+   "f_start": 202,
+   "f_end": 206
+  },
+  {
+   "w": "phone",
+   "start": 8.56,
+   "end": 8.76,
+   "line": 2,
+   "f_start": 206,
+   "f_end": 211
+  },
+  {
+   "w": "down.",
+   "start": 8.76,
+   "end": 9.1,
+   "line": 2,
+   "f_start": 211,
+   "f_end": 219
+  },
+  {
+   "w": "But",
+   "start": 9.56,
+   "end": 9.68,
+   "line": 2,
+   "f_start": 230,
+   "f_end": 233
+  },
+  {
+   "w": "why",
+   "start": 9.68,
+   "end": 10.06,
+   "line": 2,
+   "f_start": 233,
+   "f_end": 242
+  },
+  {
+   "w": "does",
+   "start": 10.06,
+   "end": 10.22,
+   "line": 2,
+   "f_start": 242,
+   "f_end": 246
+  },
+  {
+   "w": "it",
+   "start": 10.22,
+   "end": 10.34,
+   "line": 2,
+   "f_start": 246,
+   "f_end": 249
+  },
+  {
+   "w": "get",
+   "start": 10.34,
+   "end": 10.44,
+   "line": 2,
+   "f_start": 249,
+   "f_end": 252
+  },
+  {
+   "w": "so",
+   "start": 10.44,
+   "end": 10.68,
+   "line": 2,
+   "f_start": 252,
+   "f_end": 257
+  },
+  {
+   "w": "hot?",
+   "start": 10.68,
+   "end": 10.98,
+   "line": 2,
+   "f_start": 257,
+   "f_end": 265
+  },
+  {
+   "w": "Why",
+   "start": 11.46,
+   "end": 11.7,
+   "line": 3,
+   "f_start": 276,
+   "f_end": 282
+  },
+  {
+   "w": "not",
+   "start": 11.7,
+   "end": 11.88,
+   "line": 3,
+   "f_start": 282,
+   "f_end": 286
+  },
+  {
+   "w": "just",
+   "start": 11.88,
+   "end": 12.1,
+   "line": 3,
+   "f_start": 286,
+   "f_end": 291
+  },
+  {
+   "w": "add",
+   "start": 12.1,
+   "end": 12.38,
+   "line": 3,
+   "f_start": 291,
+   "f_end": 298
+  },
+  {
+   "w": "a",
+   "start": 12.38,
+   "end": 12.5,
+   "line": 3,
+   "f_start": 298,
+   "f_end": 301
+  },
+  {
+   "w": "fan?",
+   "start": 12.5,
+   "end": 12.76,
+   "line": 3,
+   "f_start": 301,
+   "f_end": 307
+  },
+  {
+   "w": "A",
+   "start": 13.28,
+   "end": 13.36,
+   "line": 4,
+   "f_start": 320,
+   "f_end": 322
+  },
+  {
+   "w": "fan",
+   "start": 13.36,
+   "end": 13.7,
+   "line": 4,
+   "f_start": 322,
+   "f_end": 330
+  },
+  {
+   "w": "needs",
+   "start": 13.7,
+   "end": 13.96,
+   "line": 4,
+   "f_start": 330,
+   "f_end": 336
+  },
+  {
+   "w": "air",
+   "start": 13.96,
+   "end": 14.26,
+   "line": 4,
+   "f_start": 336,
+   "f_end": 343
+  },
+  {
+   "w": "holes.",
+   "start": 14.26,
+   "end": 14.58,
+   "line": 4,
+   "f_start": 343,
+   "f_end": 351
+  },
+  {
+   "w": "Holes",
+   "start": 15.18,
+   "end": 15.28,
+   "line": 4,
+   "f_start": 365,
+   "f_end": 368
+  },
+  {
+   "w": "let",
+   "start": 15.28,
+   "end": 15.56,
+   "line": 4,
+   "f_start": 368,
+   "f_end": 374
+  },
+  {
+   "w": "in",
+   "start": 15.56,
+   "end": 15.72,
+   "line": 4,
+   "f_start": 374,
+   "f_end": 378
+  },
+  {
+   "w": "water",
+   "start": 15.72,
+   "end": 16.0,
+   "line": 4,
+   "f_start": 378,
+   "f_end": 385
+  },
+  {
+   "w": "and",
+   "start": 16.0,
+   "end": 16.32,
+   "line": 4,
+   "f_start": 385,
+   "f_end": 393
+  },
+  {
+   "w": "dust.",
+   "start": 16.32,
+   "end": 16.6,
+   "line": 4,
+   "f_start": 393,
+   "f_end": 399
+  },
+  {
+   "w": "So",
+   "start": 17.04,
+   "end": 17.2,
+   "line": 4,
+   "f_start": 410,
+   "f_end": 414
+  },
+  {
+   "w": "phones",
+   "start": 17.2,
+   "end": 17.48,
+   "line": 4,
+   "f_start": 414,
+   "f_end": 421
+  },
+  {
+   "w": "are",
+   "start": 17.48,
+   "end": 17.64,
+   "line": 4,
+   "f_start": 421,
+   "f_end": 424
+  },
+  {
+   "w": "sealed",
+   "start": 17.64,
+   "end": 18.0,
+   "line": 4,
+   "f_start": 424,
+   "f_end": 433
+  },
+  {
+   "w": "so",
+   "start": 18.0,
+   "end": 18.26,
+   "line": 4,
+   "f_start": 433,
+   "f_end": 439
+  },
+  {
+   "w": "it",
+   "start": 18.26,
+   "end": 18.36,
+   "line": 4,
+   "f_start": 439,
+   "f_end": 442
+  },
+  {
+   "w": "waterproof,",
+   "start": 18.36,
+   "end": 18.72,
+   "line": 4,
+   "f_start": 442,
+   "f_end": 450
+  },
+  {
+   "w": "and",
+   "start": 19.1,
+   "end": 19.2,
+   "line": 4,
+   "f_start": 459,
+   "f_end": 462
+  },
+  {
+   "w": "the",
+   "start": 19.2,
+   "end": 19.32,
+   "line": 4,
+   "f_start": 462,
+   "f_end": 465
+  },
+  {
+   "w": "heat",
+   "start": 19.32,
+   "end": 19.54,
+   "line": 4,
+   "f_start": 465,
+   "f_end": 470
+  },
+  {
+   "w": "has",
+   "start": 19.54,
+   "end": 19.76,
+   "line": 4,
+   "f_start": 470,
+   "f_end": 475
+  },
+  {
+   "w": "nowhere",
+   "start": 19.76,
+   "end": 20.0,
+   "line": 4,
+   "f_start": 475,
+   "f_end": 481
+  },
+  {
+   "w": "to",
+   "start": 20.0,
+   "end": 20.22,
+   "line": 4,
+   "f_start": 481,
+   "f_end": 486
+  },
+  {
+   "w": "go.",
+   "start": 20.22,
+   "end": 20.46,
+   "line": 4,
+   "f_start": 486,
+   "f_end": 492
+  },
+  {
+   "w": "Then",
+   "start": 20.88,
+   "end": 21.12,
+   "line": 4,
+   "f_start": 502,
+   "f_end": 508
+  },
+  {
+   "w": "the",
+   "start": 21.12,
+   "end": 21.32,
+   "line": 4,
+   "f_start": 508,
+   "f_end": 513
+  },
+  {
+   "w": "chip",
+   "start": 21.32,
+   "end": 21.48,
+   "line": 4,
+   "f_start": 513,
+   "f_end": 517
+  },
+  {
+   "w": "slows",
+   "start": 21.48,
+   "end": 21.84,
+   "line": 4,
+   "f_start": 517,
+   "f_end": 525
+  },
+  {
+   "w": "itself",
+   "start": 21.84,
+   "end": 22.16,
+   "line": 4,
+   "f_start": 525,
+   "f_end": 533
+  },
+  {
+   "w": "down",
+   "start": 22.16,
+   "end": 22.5,
+   "line": 4,
+   "f_start": 533,
+   "f_end": 541
+  },
+  {
+   "w": "to",
+   "start": 22.5,
+   "end": 22.7,
+   "line": 4,
+   "f_start": 541,
+   "f_end": 546
+  },
+  {
+   "w": "stay",
+   "start": 22.7,
+   "end": 22.92,
+   "line": 4,
+   "f_start": 546,
+   "f_end": 551
+  },
+  {
+   "w": "safe.",
+   "start": 22.92,
+   "end": 23.32,
+   "line": 4,
+   "f_start": 551,
+   "f_end": 561
+  },
+  {
+   "w": "This",
+   "start": 23.72,
+   "end": 23.86,
+   "line": 4,
+   "f_start": 570,
+   "f_end": 574
+  },
+  {
+   "w": "is",
+   "start": 23.86,
+   "end": 23.98,
+   "line": 4,
+   "f_start": 574,
+   "f_end": 577
+  },
+  {
+   "w": "what",
+   "start": 23.98,
+   "end": 24.12,
+   "line": 4,
+   "f_start": 577,
+   "f_end": 580
+  },
+  {
+   "w": "you",
+   "start": 24.12,
+   "end": 24.26,
+   "line": 4,
+   "f_start": 580,
+   "f_end": 583
+  },
+  {
+   "w": "call",
+   "start": 24.26,
+   "end": 24.52,
+   "line": 4,
+   "f_start": 583,
+   "f_end": 589
+  },
+  {
+   "w": "thermal",
+   "start": 24.52,
+   "end": 24.96,
+   "line": 4,
+   "f_start": 589,
+   "f_end": 600
+  },
+  {
+   "w": "throttling.",
+   "start": 24.96,
+   "end": 25.52,
+   "line": 4,
+   "f_start": 600,
+   "f_end": 613
+  },
+  {
+   "w": "Now",
+   "start": 25.96,
+   "end": 26.18,
+   "line": 5,
+   "f_start": 624,
+   "f_end": 629
+  },
+  {
+   "w": "developers",
+   "start": 26.18,
+   "end": 26.62,
+   "line": 5,
+   "f_start": 629,
+   "f_end": 640
+  },
+  {
+   "w": "can't",
+   "start": 26.62,
+   "end": 27.16,
+   "line": 5,
+   "f_start": 640,
+   "f_end": 653
+  },
+  {
+   "w": "lower",
+   "start": 27.16,
+   "end": 27.3,
+   "line": 5,
+   "f_start": 653,
+   "f_end": 656
+  },
+  {
+   "w": "the",
+   "start": 27.3,
+   "end": 27.5,
+   "line": 5,
+   "f_start": 656,
+   "f_end": 661
+  },
+  {
+   "w": "heat,",
+   "start": 27.5,
+   "end": 27.76,
+   "line": 5,
+   "f_start": 661,
+   "f_end": 667
+  },
+  {
+   "w": "only",
+   "start": 28.1,
+   "end": 28.26,
+   "line": 5,
+   "f_start": 675,
+   "f_end": 679
+  },
+  {
+   "w": "the",
+   "start": 28.26,
+   "end": 28.48,
+   "line": 5,
+   "f_start": 679,
+   "f_end": 685
+  },
+  {
+   "w": "game.",
+   "start": 28.48,
+   "end": 28.74,
+   "line": 5,
+   "f_start": 685,
+   "f_end": 691
+  },
+  {
+   "w": "They",
+   "start": 28.74,
+   "end": 29.32,
+   "line": 5,
+   "f_start": 691,
+   "f_end": 705
+  },
+  {
+   "w": "cut",
+   "start": 29.32,
+   "end": 29.54,
+   "line": 5,
+   "f_start": 705,
+   "f_end": 710
+  },
+  {
+   "w": "graphics",
+   "start": 29.54,
+   "end": 29.98,
+   "line": 5,
+   "f_start": 710,
+   "f_end": 721
+  },
+  {
+   "w": "and",
+   "start": 29.98,
+   "end": 30.26,
+   "line": 5,
+   "f_start": 721,
+   "f_end": 727
+  },
+  {
+   "w": "frame",
+   "start": 30.26,
+   "end": 30.52,
+   "line": 5,
+   "f_start": 727,
+   "f_end": 733
+  },
+  {
+   "w": "rate,",
+   "start": 30.52,
+   "end": 30.76,
+   "line": 5,
+   "f_start": 733,
+   "f_end": 739
+  },
+  {
+   "w": "and",
+   "start": 30.92,
+   "end": 30.96,
+   "line": 5,
+   "f_start": 743,
+   "f_end": 744
+  },
+  {
+   "w": "your",
+   "start": 30.96,
+   "end": 31.08,
+   "line": 5,
+   "f_start": 744,
+   "f_end": 747
+  },
+  {
+   "w": "game",
+   "start": 31.08,
+   "end": 31.3,
+   "line": 5,
+   "f_start": 747,
+   "f_end": 752
+  },
+  {
+   "w": "looks",
+   "start": 31.3,
+   "end": 31.54,
+   "line": 5,
+   "f_start": 752,
+   "f_end": 758
+  },
+  {
+   "w": "worse.",
+   "start": 31.54,
+   "end": 31.86,
+   "line": 5,
+   "f_start": 758,
+   "f_end": 766
+  },
+  {
+   "w": "This",
+   "start": 32.5,
+   "end": 32.68,
+   "line": 6,
+   "f_start": 781,
+   "f_end": 785
+  },
+  {
+   "w": "is",
+   "start": 32.68,
+   "end": 32.82,
+   "line": 6,
+   "f_start": 785,
+   "f_end": 789
+  },
+  {
+   "w": "why",
+   "start": 32.82,
+   "end": 33.0,
+   "line": 6,
+   "f_start": 789,
+   "f_end": 793
+  },
+  {
+   "w": "your",
+   "start": 33.0,
+   "end": 33.16,
+   "line": 6,
+   "f_start": 793,
+   "f_end": 797
+  },
+  {
+   "w": "phone",
+   "start": 33.16,
+   "end": 33.38,
+   "line": 6,
+   "f_start": 797,
+   "f_end": 802
+  },
+  {
+   "w": "is",
+   "start": 33.38,
+   "end": 33.54,
+   "line": 6,
+   "f_start": 802,
+   "f_end": 806
+  },
+  {
+   "w": "a",
+   "start": 33.54,
+   "end": 33.66,
+   "line": 6,
+   "f_start": 806,
+   "f_end": 809
+  },
+  {
+   "w": "hand",
+   "start": 33.66,
+   "end": 33.97,
+   "line": 6,
+   "f_start": 809,
+   "f_end": 816
+  },
+  {
+   "w": "warmer",
+   "start": 33.97,
+   "end": 34.28,
+   "line": 6,
+   "f_start": 816,
+   "f_end": 824
+  },
+  {
+   "w": "with",
+   "start": 34.28,
+   "end": 34.44,
+   "line": 6,
+   "f_start": 824,
+   "f_end": 828
+  },
+  {
+   "w": "an",
+   "start": 34.44,
+   "end": 34.58,
+   "line": 6,
+   "f_start": 828,
+   "f_end": 831
+  },
+  {
+   "w": "app",
+   "start": 34.58,
+   "end": 34.76,
+   "line": 6,
+   "f_start": 831,
+   "f_end": 835
+  },
+  {
+   "w": "store.",
+   "start": 34.76,
+   "end": 35.04,
+   "line": 6,
+   "f_start": 835,
+   "f_end": 842
+  },
+  {
+   "w": "The",
+   "start": 36.02,
+   "end": 36.14,
+   "line": 7,
+   "f_start": 865,
+   "f_end": 868
+  },
+  {
+   "w": "game",
+   "start": 36.14,
+   "end": 36.38,
+   "line": 7,
+   "f_start": 868,
+   "f_end": 874
+  },
+  {
+   "w": "didn't",
+   "start": 36.38,
+   "end": 36.66,
+   "line": 7,
+   "f_start": 874,
+   "f_end": 881
+  },
+  {
+   "w": "get",
+   "start": 36.66,
+   "end": 36.8,
+   "line": 7,
+   "f_start": 881,
+   "f_end": 884
+  },
+  {
+   "w": "harder.",
+   "start": 36.8,
+   "end": 37.18,
+   "line": 7,
+   "f_start": 884,
+   "f_end": 893
+  },
+  {
+   "w": "Your",
+   "start": 37.56,
+   "end": 37.66,
+   "line": 7,
+   "f_start": 902,
+   "f_end": 905
+  },
+  {
+   "w": "phone",
+   "start": 37.66,
+   "end": 38.06,
+   "line": 7,
+   "f_start": 905,
+   "f_end": 914
+  },
+  {
+   "w": "got",
+   "start": 38.06,
+   "end": 38.4,
+   "line": 7,
+   "f_start": 914,
+   "f_end": 923
+  },
+  {
+   "w": "hotter.",
+   "start": 38.4,
+   "end": 38.76,
+   "line": 7,
+   "f_start": 923,
+   "f_end": 931
+  }
+ ]
+}
