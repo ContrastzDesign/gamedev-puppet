@@ -14,8 +14,8 @@
     "loudness_lufs": -14.0,
     "true_peak_dbtp": -1.5,
     "renderer": "ANGLE SwiftShader GPU=0",
-    "sha256": "bfeac7372e04dd404198b5b60113773b9aca7b2d725423959ccc6bcaf06ae475",
-    "bytes": 11127714
+    "sha256": "c541a2cfa4aef9dc16ce017bb569f4809dafe87083bc0f36cb6402af0534927a",
+    "bytes": 14973673
   },
   "voiceover": {
     "file": "audio/vo.mp3",
@@ -74,7 +74,7 @@
     "family": "Montserrat ExtraBold",
     "license": "OFL"
   },
-  "notes": "Final render online GPU=0 overrides mac-render.md. Music is Pixel Peeker Polka - faster (cleared; not on banned bed list). No V2 look.",
+  "notes": "Final render online GPU=0. VO-timed camera landings (Ricardo V1 camera rules): alternating move kinds, 12\u201330f eased moves, drift between landings, hold \u226412f. Music Pixel Peeker Polka - faster. No V2 look.",
   "qa": {
     "version": "v1",
     "fixes": [
@@ -83,7 +83,8 @@
       "motherboard-city racetrack with grandstands/lights; medium gecko",
       "densified gecko studio (desks, racks, sticky notes, whiteboard, floor props)",
       "captions fully opaque for whole on-screen window; finale caption holds to f939",
-      "STILL HOT / cool-shot framing kept inside portrait edges"
+      "STILL HOT / cool-shot framing kept inside portrait edges",
+      "VO-timed camera landings with alternating kinds (push/pull/drop/crane/orbit/follow/low/whip/cut); drift between; dressed sets for crane/drop"
     ],
     "artifacts": "/opt/cursor/artifacts/phone-hot-v1-final/"
   }

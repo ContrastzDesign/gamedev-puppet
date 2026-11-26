@@ -733,7 +733,7 @@ function buildRacetrack(screens) {
   for (let i = 0; i < 24; i++) {
     const x = -2.4 + (i % 8) * 0.7;
     const z = -2.5 + Math.floor(i / 8) * 0.85;
-    if (Math.abs(x) < 0.85 && z < -1.6) continue; // sightline to SAFE MODE / THERMAL THROTTLING
+    if (Math.abs(x) < 1.15 && z < -1.2) continue; // sightline to SAFE MODE / THERMAL THROTTLING
     const h = 0.7 + (i % 5) * 0.4;
     box(g, 0.45, h, 0.4, '#3a4850', x, h / 2, z, 0, 0, 0, { round: 0.02 });
     for (let p = 0; p < 3; p++) {
@@ -776,12 +776,12 @@ function buildRacetrack(screens) {
       });
     }
   }
-  // SAFE MODE + THERMAL THROTTLING — proud of towers, centered for portrait landings
-  const safe = makeSign('SAFE MODE', 1.05, 0.3, '#c45848', '#f0e6d0', '#e0c070');
-  safe.position.set(0, 2.15, -2.35);
+  // SAFE MODE + THERMAL THROTTLING — forward of tower field so lettering stays fully clear
+  const safe = makeSign('SAFE MODE', 1.1, 0.32, '#c45848', '#f0e6d0', '#e0c070');
+  safe.position.set(0, 2.05, -2.05);
   g.add(safe);
-  const thr = makeSign('THERMAL THROTTLING', 1.2, 0.26, '#2a3228', '#e0c070', '#c4a35a');
-  thr.position.set(0, 2.6, -2.35);
+  const thr = makeSign('THERMAL THROTTLING', 1.25, 0.28, '#2a3228', '#e0c070', '#c4a35a');
+  thr.position.set(0, 2.5, -2.05);
   g.add(thr);
   addTv(g, screens.racetrack, 0, 3.25, -3.0, 0.55);
   // wall signage + lights
@@ -802,11 +802,14 @@ function buildRacetrack(screens) {
     box(g, 0.38, h, 0.32, '#3a4850', x, h / 2, z, 0, 0, 0, { round: 0.02 });
   }
   // finish flags — behind character plane
-  box(g, 0.08, 0.7, 0.08, '#ebe4dc', -1.5, 0.4, 0.55);
-  box(g, 0.08, 0.7, 0.08, '#ebe4dc', 1.5, 0.4, 0.55);
-  box(g, 3.0, 0.18, 0.05, '#2a3038', 0, 0.8, 0.55);
-  for (let i = 0; i < 8; i++) {
-    box(g, 0.32, 0.16, 0.04, i % 2 ? '#f0e6d0' : '#1a1a1a', -1.2 + i * 0.35, 0.8, 0.57);
+  // Finish flags kept low/side so they never paint across the depth-test-off character billboard
+  box(g, 0.08, 0.55, 0.08, '#ebe4dc', -1.7, 0.3, 0.2);
+  box(g, 0.08, 0.55, 0.08, '#ebe4dc', 1.7, 0.3, 0.2);
+  box(g, 1.1, 0.14, 0.05, '#2a3038', -1.7, 0.6, 0.2);
+  box(g, 1.1, 0.14, 0.05, '#2a3038', 1.7, 0.6, 0.2);
+  for (let i = 0; i < 4; i++) {
+    box(g, 0.22, 0.12, 0.04, i % 2 ? '#f0e6d0' : '#1a1a1a', -2.1 + i * 0.25, 0.6, 0.22);
+    box(g, 0.22, 0.12, 0.04, i % 2 ? '#1a1a1a' : '#f0e6d0', 1.3 + i * 0.25, 0.6, 0.22);
   }
   // side banners
   const banL = makeSign('LAP 1', 0.7, 0.22, '#1a3040', '#8ab0c8', '#4a8a98');
