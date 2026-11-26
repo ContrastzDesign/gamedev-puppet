@@ -3,7 +3,7 @@
   "project": "examples/biggest-games-short",
   "style": "content-short VERSION 1 (drawn SVG animals in detailed 3D worlds)",
   "video": {
-    "file": "biggest-games-short.mp4",
+    "file": "biggest-games-final.mp4",
     "width": 1080,
     "height": 1920,
     "fps": 24,
@@ -11,11 +11,12 @@
     "duration_s": 51.958333333333336,
     "video_codec": "libx264 CRF 18 yuv420p",
     "audio_codec": "AAC 192k",
-    "loudness_lufs": -14.0,
-    "true_peak_dbtp": -1.2,
+    "loudness_lufs": -14.1,
+    "true_peak_dbtp": -1.5,
     "renderer": "ANGLE SwiftShader GPU=0",
-    "sha256": "7dc62ebbe8e81989bb350dc18fae87a4e6b3f30cd1bbfe40e866549aa0998347",
-    "bytes": 12770051
+    "sha256": "46c66c8ac975e0c9d3b0fc8e435f9407433a733f0345424900dba425e4bd79da",
+    "bytes": 17440498,
+    "static_check_max_still_run": 1
   },
   "voiceover": {
     "file": "audio/vo.mp3",
@@ -70,12 +71,143 @@
   "qa": {
     "version": "v1",
     "fixes": [
-      "strengthened tapir trunk, armadillo shell bands + guitar silhouette, platypus duckbill + dual helmet",
-      "museum/living share center booth with visibility toggle",
-      "all captions in lower band with 80px side safe zone",
-      "assertCaptionClearOfSigns + assertCharacterVisible boot checks",
-      "original genre-evoking screens only (no cleared publisher footage)"
+      "rebuilt free-moving camera with varied landings (camera.md)",
+      "assertMaxHold + assertCameraPathClear boot checks",
+      "fully opaque captions, max 2 lines, bbox bottom \u22641840",
+      "denser aisle dressing, content windows, raised tip signs",
+      "static check max still run = 1 (YAVG<0.15)"
     ],
     "artifacts": "/opt/cursor/artifacts/biggest-games-final/"
+  },
+  "camera": {
+    "landings": [
+      {
+        "f": 0,
+        "kind": "push-in",
+        "label": "hook"
+      },
+      {
+        "f": 32,
+        "kind": "orbit",
+        "label": "2000s"
+      },
+      {
+        "f": 54,
+        "kind": "crane",
+        "label": "2011-title"
+      },
+      {
+        "f": 90,
+        "kind": "cut",
+        "label": "which"
+      },
+      {
+        "f": 109,
+        "kind": "pull-out",
+        "label": "most"
+      },
+      {
+        "f": 130,
+        "kind": "fly-through",
+        "label": "states"
+      },
+      {
+        "f": 150,
+        "kind": "top-down",
+        "label": "early-2000s"
+      },
+      {
+        "f": 180,
+        "kind": "whip",
+        "label": "late-2000s"
+      },
+      {
+        "f": 213,
+        "kind": "low-hero",
+        "label": "early-2010s"
+      },
+      {
+        "f": 282,
+        "kind": "push-in",
+        "label": "leader"
+      },
+      {
+        "f": 354,
+        "kind": "orbit",
+        "label": "dollars"
+      },
+      {
+        "f": 382,
+        "kind": "cut",
+        "label": "num1"
+      },
+      {
+        "f": 418,
+        "kind": "low-hero",
+        "label": "vice"
+      },
+      {
+        "f": 519,
+        "kind": "crane",
+        "label": "madden03"
+      },
+      {
+        "f": 562,
+        "kind": "push-in",
+        "label": "openworld"
+      },
+      {
+        "f": 618,
+        "kind": "cut",
+        "label": "num2"
+      },
+      {
+        "f": 673,
+        "kind": "whip",
+        "label": "guitar"
+      },
+      {
+        "f": 769,
+        "kind": "orbit",
+        "label": "madden08"
+      },
+      {
+        "f": 810,
+        "kind": "top-down",
+        "label": "bundle"
+      },
+      {
+        "f": 926,
+        "kind": "pull-out",
+        "label": "sale"
+      },
+      {
+        "f": 948,
+        "kind": "cut",
+        "label": "num3"
+      },
+      {
+        "f": 981,
+        "kind": "fly-through",
+        "label": "mw3"
+      },
+      {
+        "f": 1096,
+        "kind": "orbit",
+        "label": "skyrim"
+      },
+      {
+        "f": 1186,
+        "kind": "crane",
+        "label": "genres"
+      }
+    ],
+    "assertions": [
+      "assertMaxHold<=12",
+      "assertCameraPathClear near=0.35",
+      "assertCaptionSafeZone bbox.bottom<=1840",
+      "assertCaptionClearOfSigns",
+      "assertCharacterVisible"
+    ]
   }
 }
