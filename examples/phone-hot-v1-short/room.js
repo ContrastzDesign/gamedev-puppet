@@ -378,34 +378,106 @@ function buildPatio(screens) {
   });
   box(g, 1.4, 0.7, 0.5, '#ebe4dc', 0, 2.8, -2.85, 0, 0, 0, { round: 0.04 });
   box(g, 1.2, 0.15, 0.35, '#4a8a98', 0, 2.8, -2.6);
-  // louvers
   for (let i = 0; i < 5; i++) {
     box(g, 1.15, 0.04, 0.3, '#6a9ab0', 0, 2.65 + i * 0.08, -2.55);
   }
+  // wall vents + ducting
+  for (const x of [-2.6, 2.6]) {
+    box(g, 0.9, 0.55, 0.12, '#9aa8b0', x, 2.0, -3.08);
+    for (let i = 0; i < 4; i++) box(g, 0.75, 0.04, 0.06, '#6a7a88', x, 1.85 + i * 0.1, -3.0);
+  }
+  box(g, 5.5, 0.18, 0.18, '#7a8890', 0, 3.55, -2.95);
+  box(g, 0.18, 0.5, 0.18, '#7a8890', -2.4, 3.25, -2.95);
+  box(g, 0.18, 0.5, 0.18, '#7a8890', 2.4, 3.25, -2.95);
   const ac = makeSign('COOL AIR', 1.0, 0.26, '#1a3040', '#8ab0c8', '#4a8a98');
   ac.position.set(0, 3.25, -2.7);
   g.add(ac);
-  addPhoneProp(g, screens.slow, 1.1, 1.0, 0.4, 0.95, true);
-  // outdoor furniture
-  box(g, 1.6, 0.4, 0.7, '#6a8f6a', -1.5, 0.35, 0.8, 0, 0, 0, { round: 0.05 });
-  box(g, 0.6, 0.55, 0.6, '#5a7f5a', 1.5, 0.4, 0.5, 0, 0, 0, { round: 0.05 });
+  addPhoneProp(g, screens.slow, 0.95, 1.15, -0.15, 0.85, true);
+  // lounge furniture cluster — kept inside portrait frustum (|x|≲2)
+  box(g, 1.7, 0.42, 0.8, '#6a8f6a', -1.2, 0.35, 0.55, 0, 0, 0, { round: 0.05 });
+  box(g, 0.65, 0.55, 0.6, '#5a7f5a', 1.25, 0.4, 0.4, 0, 0, 0, { round: 0.05 });
+  box(g, 0.65, 0.55, 0.6, '#4a6f6a', 1.25, 0.4, 1.15, 0, 0.2, 0, { round: 0.05 });
+  box(g, 1.0, 0.08, 0.65, '#8a6a40', 0.05, 0.42, 1.0);
+  box(g, 0.08, 0.4, 0.08, '#6a5030', -0.35, 0.2, 0.8);
+  box(g, 0.08, 0.4, 0.08, '#6a5030', 0.45, 0.2, 1.2);
+  cyl(g, 0.07, 0.05, 0.18, '#ebe4dc', -0.15, 0.55, 0.95);
+  cyl(g, 0.07, 0.05, 0.18, '#c45848', 0.3, 0.55, 1.05);
+  // floor fans + pedestal fans (visible midground)
+  for (const [x, z] of [[-1.55, 0.05], [1.55, 0.0], [-0.95, 1.55], [0.9, 1.6]]) {
+    cyl(g, 0.16, 0.2, 0.06, '#4a5560', x, 0.05, z);
+    cyl(g, 0.04, 0.04, 0.75, '#6a7a88', x, 0.45, z);
+    cyl(g, 0.24, 0.24, 0.07, '#8aa0b0', x, 0.9, z, Math.PI / 2);
+    box(g, 0.05, 0.3, 0.04, '#3a4850', x, 0.9, z + 0.05);
+  }
+  // storage crates / gadgets on floor near character path
+  for (let i = 0; i < 5; i++) {
+    box(g, 0.35, 0.28, 0.3, ['#8a6a40', '#4a8a98', '#c45848', '#6b8f6a', '#c4a35a'][i],
+      -1.6 + i * 0.75, 0.16, 1.85, 0, 0.08, 0, { round: 0.02 });
+  }
+  // side console tables with remotes / books
+  box(g, 0.7, 0.55, 0.4, '#5a4030', -1.7, 0.3, -1.5);
+  box(g, 0.7, 0.55, 0.4, '#5a4030', 1.7, 0.3, -1.5);
+  for (let i = 0; i < 3; i++) {
+    box(g, 0.12, 0.22, 0.1, ['#4a8a98', '#c45848', '#c4a35a'][i], -1.9 + i * 0.2, 0.7, -1.45);
+    box(g, 0.12, 0.22, 0.1, ['#6b8f6a', '#a87890', '#3a4858'][i], 1.5 + i * 0.2, 0.7, -1.45);
+  }
+  // standing AC / cooler boxes (kept inside frustum)
+  box(g, 0.5, 1.15, 0.4, '#d0d8e0', -1.85, 0.6, -1.3, 0, 0, 0, { round: 0.03 });
+  box(g, 0.35, 0.18, 0.08, '#4a8a98', -1.85, 0.95, -1.08);
+  box(g, 0.5, 1.0, 0.4, '#c8d0d8', 1.85, 0.55, -1.3, 0, 0, 0, { round: 0.03 });
+  // shelves + gadgets
+  addShelf(g, -3.25, 0, 1.4);
+  addWallShelf(g, -2.0, 2.55, -3.1, 1.6);
+  addWallShelf(g, 2.0, 2.55, -3.1, 1.6);
+  for (let i = 0; i < 6; i++) {
+    box(g, 0.14, 0.22, 0.12, ['#4a8a98', '#c45848', '#6b8f6a', '#c4a35a'][i % 4],
+      -2.5 + i * 0.28, 2.72, -3.0, 0, 0.1, 0, { round: 0.01 });
+  }
+  // cable clutter + wall clutter
+  for (let i = 0; i < 8; i++) {
+    cyl(g, 0.015, 0.015, 0.7 + (i % 3) * 0.15, '#2a3038',
+      -1.8 + i * 0.45, 0.08, 0.3 + (i % 2) * 0.4, 0, 0, Math.PI / 2 + i * 0.1);
+  }
+  // side posters inset so they don't crop at portrait edges
+  const p1 = makePosterArt(2, 0.55, 0.8);
+  p1.position.set(-2.2, 2.15, -3.05);
+  g.add(p1);
+  const p2 = makePosterArt(3, 0.55, 0.8);
+  p2.position.set(2.2, 2.15, -3.05);
+  g.add(p2);
   addPlant(g, -3.0, 0, -2.0);
   addPlant(g, 3.0, 0, -2.0);
   addPlant(g, -2.5, 0, 2.0);
   addPlant(g, 2.5, 0, 2.0);
-  // sun umbrella
-  cyl(g, 0.04, 0.04, 2.2, '#c4a35a', 2.0, 1.1, -1.0);
-  cyl(g, 0.9, 0.05, 0.08, '#c45848', 2.0, 2.2, -1.0);
-  const hot = makeSign('STILL HOT', 1.05, 0.28, '#3a2020', '#e08040', '#c45848');
-  hot.position.set(-1.2, 2.55, -3.05);
+  addPlant(g, -1.2, 0, -2.4);
+  addPlant(g, 1.2, 0, -2.4);
+  cyl(g, 0.04, 0.04, 2.2, '#c4a35a', 2.2, 1.1, -1.2);
+  cyl(g, 0.95, 0.05, 0.08, '#c45848', 2.2, 2.2, -1.2);
+  // STILL HOT fully inside frame — centered under left shelf, clear of both edges
+  const hot = makeSign('STILL HOT', 0.85, 0.24, '#3a2020', '#e08040', '#c45848');
+  hot.position.set(-0.55, 2.3, -2.95);
   g.add(hot);
-  // side planters + drink table so edges aren't bare
+  // mid-wall clutter: vents + cables kept inside ±1.2
+  box(g, 0.65, 0.4, 0.1, '#9aa8b0', -1.2, 1.8, -3.05);
+  for (let i = 0; i < 3; i++) box(g, 0.5, 0.04, 0.05, '#6a7a88', -1.2, 1.65 + i * 0.1, -2.98);
+  box(g, 0.65, 0.4, 0.1, '#9aa8b0', 1.2, 1.8, -3.05);
+  for (let i = 0; i < 3; i++) box(g, 0.5, 0.04, 0.05, '#6a7a88', 1.2, 1.65 + i * 0.1, -2.98);
+  for (let i = 0; i < 6; i++) {
+    cyl(g, 0.012, 0.012, 0.9, '#2a3038', -1.0 + i * 0.4, 1.2, -2.95, 0.4, 0, 0);
+  }
+  // rug + more plants in frustum
+  addRug(g, 0, 0, 0.7, 2.6, 1.8);
+  addPlant(g, -1.35, 0, -0.9);
+  addPlant(g, 1.35, 0, -0.9);
   box(g, 0.7, 0.08, 0.7, '#8a6a40', -2.4, 0.45, -0.5);
   cyl(g, 0.08, 0.06, 0.2, '#ebe4dc', -2.4, 0.6, -0.5);
   box(g, 0.7, 0.08, 0.7, '#8a6a40', 2.4, 0.45, -0.5);
-  addWallShelf(g, 0, 3.5, -3.1, 4);
+  addLamp(g, -3.0, 0, 0.3);
+  addLamp(g, 3.0, 0, 0.8);
+  addWallShelf(g, 0, 3.55, -3.1, 5.2);
   addCeilingBeam(g, 0, 3.95, -1, 7);
-  // sky light feel
+  addCeilingBeam(g, 0, 3.95, 0.8, 7);
+  addUpperWallDressing(g, -3.1, -3.4, 3.4, 3.05);
   const sun = new THREE.PointLight('#fff0d0', 1.1, 12, 2);
   sun.position.set(0, 3.5, 1);
   g.add(sun);
@@ -463,9 +535,14 @@ function buildWorkshop(screens) {
 
 function buildSeal(screens) {
   const g = boothShell('#5a5a60', '#8a9098');
-  // factory floor stripes
-  box(g, 7.5, 0.05, 0.4, '#c4a35a', 0, 0.05, 0);
-  box(g, 7.5, 0.05, 0.4, '#c4a35a', 0, 0.05, 1.5);
+  // factory floor tiles + stripes
+  for (let i = -3; i <= 3; i++) {
+    for (let j = -2; j <= 2; j++) {
+      box(g, 0.95, 0.03, 0.95, (i + j) % 2 ? '#555860' : '#4a4e58', i * 1.0, 0.03, j * 1.0);
+    }
+  }
+  box(g, 7.5, 0.05, 0.4, '#c4a35a', 0, 0.06, 0);
+  box(g, 7.5, 0.05, 0.4, '#c4a35a', 0, 0.06, 1.5);
   // sealing press
   box(g, 1.6, 1.8, 1.0, '#4a5058', 0, 0.9, -1.8, 0, 0, 0, { round: 0.04 });
   box(g, 1.2, 0.3, 0.8, '#3a4048', 0, 1.8, -1.8);
@@ -473,7 +550,6 @@ function buildSeal(screens) {
     mat: { emissive: '#c45848', emissiveIntensity: 0.25 },
   });
   addPhoneProp(g, screens.circuit, 0, 1.15, -1.3, 1.0, true);
-  // big WATERPROOF gasket ring
   const gasket = new THREE.Mesh(
     new THREE.TorusGeometry(0.55, 0.08, 12, 32),
     mat('#4a8a98', { metalness: 0.3, roughness: 0.4 }),
@@ -481,38 +557,90 @@ function buildSeal(screens) {
   gasket.position.set(0, 1.2, -1.0);
   gasket.rotation.x = Math.PI / 2;
   g.add(gasket);
-  const wp = makeSign('WATERPROOF', 1.35, 0.32, '#1a3040', '#8ab0c8', '#4a8a98');
-  wp.position.set(0, 2.55, -3.05);
+  const wp = makeSign('WATERPROOF', 1.25, 0.3, '#1a3040', '#8ab0c8', '#4a8a98');
+  wp.position.set(0, 2.5, -3.0);
   g.add(wp);
+  // work benches flanking press (inside portrait frustum)
+  addDesk(g, -1.7, 0, -1.55, 1.5);
+  addDesk(g, 1.7, 0, -1.55, 1.5);
+  addMonitor(g, screens.blueprint, -1.7, 0.72, -1.6);
+  addMonitor(g, screens.temp, 1.7, 0.72, -1.6, -0.1);
+  // tool clutter on benches
+  for (let i = 0; i < 4; i++) {
+    box(g, 0.08, 0.28, 0.08, '#3a4048', -2.1 + i * 0.22, 0.9, -1.4);
+    box(g, 0.08, 0.28, 0.08, '#c45848', 1.3 + i * 0.22, 0.9, -1.4);
+  }
+  // water-test tanks — midground, camera-visible
+  for (const x of [-1.15, 1.15]) {
+    box(g, 0.85, 0.65, 0.65, '#3a5058', x, 0.38, 1.35, 0, 0, 0, { round: 0.03 });
+    box(g, 0.7, 0.42, 0.5, '#4a8a98', x, 0.52, 1.35, 0, 0, 0, {
+      mat: { transparent: true, opacity: 0.55, emissive: '#4a8a98', emissiveIntensity: 0.2 },
+    });
+    box(g, 0.22, 0.35, 0.06, '#2a3038', x, 0.8, 1.35, 0, 0, 0, { round: 0.02 });
+  }
+  // parts bins stacked near tanks
+  for (let i = 0; i < 8; i++) {
+    box(g, 0.32, 0.26, 0.3, ['#c45848', '#4a8a98', '#c4a35a', '#6b8f6a', '#a87890', '#3a4858', '#8a6a40', '#ebe4dc'][i],
+      -1.7 + (i % 4) * 0.38, 0.16 + Math.floor(i / 4) * 0.3, 1.85, 0, 0.05, 0, { round: 0.02 });
+  }
+  // pipe / hose runs on back wall
+  for (let i = 0; i < 5; i++) {
+    cyl(g, 0.05, 0.05, 1.4, '#6a7a88', -1.6 + i * 0.8, 3.1, -3.0, 0, 0, Math.PI / 2);
+  }
+  // instrument carts midground
+  box(g, 0.7, 0.95, 0.5, '#5a6068', -1.9, 0.5, 0.2, 0, 0, 0, { round: 0.03 });
+  box(g, 0.7, 0.95, 0.5, '#5a6068', 1.9, 0.5, 0.2, 0, 0, 0, { round: 0.03 });
+  for (let i = 0; i < 3; i++) {
+    cyl(g, 0.06, 0.06, 0.08, i % 2 ? '#6b8f6a' : '#c45848', -1.9, 1.1 + i * 0.12, 0.4);
+    cyl(g, 0.06, 0.06, 0.08, i % 2 ? '#4a8a98' : '#c4a35a', 1.9, 1.1 + i * 0.12, 0.4);
+  }
+  addPegboard(g, -2.2, 2.5, -3.1, 1.8, 1.2);
+  addPegboard(g, 2.2, 2.5, -3.1, 1.8, 1.2);
   // conveyor of sealed phones
   for (let i = 0; i < 5; i++) {
-    box(g, 0.35, 0.55, 0.08, '#2a3038', -2.5 + i * 0.7, 0.7, 0.8, 0, 0.1, 0, { round: 0.02 });
+    box(g, 0.35, 0.55, 0.08, '#2a3038', -2.5 + i * 0.7, 0.7, 0.85, 0, 0.1, 0, { round: 0.02 });
   }
-  box(g, 4.0, 0.12, 0.6, '#3a3a40', -0.5, 0.4, 0.8);
+  box(g, 4.0, 0.12, 0.6, '#3a3a40', -0.5, 0.4, 0.85);
   addShelf(g, -3.3, 0, -2.0);
   addShelf(g, 3.3, 0, -2.0);
-  // side tooling carts so midground isn't empty grey
-  box(g, 0.9, 1.1, 0.55, '#5a6068', -2.8, 0.55, -0.6, 0, 0, 0, { round: 0.03 });
-  box(g, 0.9, 1.1, 0.55, '#5a6068', 2.8, 0.55, -0.6, 0, 0, 0, { round: 0.03 });
-  for (let i = 0; i < 3; i++) {
-    cyl(g, 0.08, 0.08, 0.25, '#c4a35a', -2.8, 1.2 + i * 0.15, -0.4);
-    cyl(g, 0.08, 0.08, 0.25, '#4a8a98', 2.8, 1.2 + i * 0.15, -0.4);
-  }
-  // caution cones
-  for (const x of [-2.2, 2.2]) {
-    cyl(g, 0.02, 0.18, 0.45, '#c47838', x, 0.25, 1.6);
-  }
-  const sealed = makeSign('SEALED SHUT', 1.15, 0.28, '#2a3228', '#f0e6d0', '#c4a35a');
-  sealed.position.set(-1.2, 2.95, -3.05);
-  g.add(sealed);
-  // wall posters / gauges
-  box(g, 0.7, 0.7, 0.04, '#2a3038', 1.4, 2.3, -3.1);
+  box(g, 0.9, 1.1, 0.55, '#5a6068', -2.8, 0.55, -0.5, 0, 0, 0, { round: 0.03 });
+  box(g, 0.9, 1.1, 0.55, '#5a6068', 2.8, 0.55, -0.5, 0, 0, 0, { round: 0.03 });
   for (let i = 0; i < 4; i++) {
-    cyl(g, 0.06, 0.06, 0.02, i % 2 ? '#6b8f6a' : '#c45848', 1.2 + (i % 2) * 0.35, 2.15 + Math.floor(i / 2) * 0.3, -3.05);
+    cyl(g, 0.07, 0.07, 0.22, '#c4a35a', -2.9 + (i % 2) * 0.2, 1.2 + Math.floor(i / 2) * 0.18, -0.35);
+    cyl(g, 0.07, 0.07, 0.22, '#4a8a98', 2.7 + (i % 2) * 0.2, 1.2 + Math.floor(i / 2) * 0.18, -0.35);
   }
+  for (const x of [-2.2, 2.2, -1.0, 1.0]) {
+    cyl(g, 0.02, 0.18, 0.45, '#c47838', x, 0.25, 2.1);
+  }
+  const sealed = makeSign('SEALED SHUT', 0.9, 0.22, '#2a3228', '#f0e6d0', '#c4a35a');
+  sealed.position.set(-1.05, 2.35, -2.95);
+  g.add(sealed);
+  // wall posters / gauges inside frustum
+  for (let i = 0; i < 4; i++) {
+    const poster = makePosterArt(i, 0.5, 0.7);
+    poster.position.set(-1.6 + i * 1.05, 1.55, -3.08);
+    g.add(poster);
+  }
+  // hanging tool rail + clamps across mid wall (below top crop)
+  box(g, 3.2, 0.08, 0.08, '#3a4048', 0, 2.85, -3.0);
+  for (let i = 0; i < 8; i++) {
+    box(g, 0.06, 0.3, 0.06, ['#c45848', '#4a8a98', '#c4a35a', '#6b8f6a'][i % 4], -1.4 + i * 0.4, 2.65, -2.95);
+  }
+  box(g, 0.7, 0.7, 0.04, '#2a3038', 1.5, 3.15, -3.08);
+  for (let i = 0; i < 4; i++) {
+    cyl(g, 0.06, 0.06, 0.02, i % 2 ? '#6b8f6a' : '#c45848',
+      1.3 + (i % 2) * 0.35, 3.0 + Math.floor(i / 2) * 0.3, -3.04);
+  }
+  addChair(g, -2.2, 0, -0.7);
+  addChair(g, 2.2, 0, -0.7);
+  addLamp(g, -3.2, 0, 1.2);
+  addLamp(g, 3.2, 0, 1.2);
+  addPlant(g, -3.3, 0, 2.2);
+  addPlant(g, 3.3, 0, 2.2);
+  addWallShelf(g, 0, 3.55, -3.1, 5.5);
   addCeilingBeam(g, 0, 3.95, -1, 7.5);
   addCeilingBeam(g, 0, 3.95, 1, 7.5);
-  addUpperWallDressing(g, -3.1, -3.5, 3.5, 2.95);
+  addUpperWallDressing(g, -3.1, -3.5, 3.5, 3.0);
   const fl = new THREE.PointLight('#e8e8f0', 0.85, 10, 2);
   fl.position.set(0, 3.2, 0);
   g.add(fl);
@@ -571,93 +699,209 @@ function buildRacetrack(screens) {
   box(g, 8, 4.2, 0.15, '#1a2820', 0, 2.1, -3.2);
   box(g, 0.15, 4.2, 7, '#1a2820', -4, 2.1, 0);
   box(g, 0.15, 4.2, 7, '#1a2820', 4, 2.1, 0);
-  // oval track
+  box(g, 8, 0.15, 7, '#121c18', 0, 4.15, 0);
+  // PCB trace grid (circuit-trace roads under/around track)
+  for (let i = -3; i <= 3; i++) {
+    box(g, 0.14, 0.05, 6.5, '#2a5840', i * 1.05, 0.05, 0);
+    box(g, 6.5, 0.05, 0.14, '#2a5840', 0, 0.05, i * 0.85);
+  }
+  // oval track — kept behind character (char z≈2.45); near rim stays < 2.1
   const track = new THREE.Mesh(
-    new THREE.TorusGeometry(2.2, 0.35, 12, 48),
+    new THREE.TorusGeometry(1.85, 0.32, 12, 48),
     mat('#2a5840'),
   );
   track.rotation.x = Math.PI / 2;
-  track.position.set(0, 0.08, -0.3);
+  track.position.set(0, 0.1, -0.35);
   track.receiveShadow = true;
   g.add(track);
-  // lane lines
   const lane = new THREE.Mesh(
-    new THREE.TorusGeometry(2.2, 0.04, 8, 48),
+    new THREE.TorusGeometry(1.85, 0.04, 8, 48),
     mat('#e0c070'),
   );
   lane.rotation.x = Math.PI / 2;
-  lane.position.set(0, 0.12, -0.3);
+  lane.position.set(0, 0.15, -0.35);
   g.add(lane);
+  // capacitor / chip towers — dense motherboard city in camera frustum
+  for (let i = 0; i < 24; i++) {
+    const x = -2.4 + (i % 8) * 0.7;
+    const z = -2.5 + Math.floor(i / 8) * 0.85;
+    const h = 0.7 + (i % 5) * 0.4;
+    box(g, 0.45, h, 0.4, '#3a4850', x, h / 2, z, 0, 0, 0, { round: 0.02 });
+    for (let p = 0; p < 3; p++) {
+      cyl(g, 0.05, 0.05, 0.22 + (p % 2) * 0.12, '#c4a35a', x - 0.12 + p * 0.12, h + 0.14, z + 0.08);
+    }
+  }
+  // mid towers flanking the track (fill void behind character)
+  for (let i = 0; i < 10; i++) {
+    const side = i < 5 ? -1 : 1;
+    const idx = i % 5;
+    const h = 1.1 + idx * 0.35;
+    box(g, 0.5, h, 0.45, '#455560', side * (1.5 + idx * 0.15), h / 2, -1.2 + idx * 0.35, 0, 0, 0, { round: 0.02 });
+    cyl(g, 0.08, 0.08, 0.35, '#e0c070', side * (1.5 + idx * 0.15), h + 0.2, -1.2 + idx * 0.35);
+  }
+  // low chip blocks flanking (not in front of character torso)
+  for (let i = 0; i < 4; i++) {
+    box(g, 0.35, 0.22 + (i % 2) * 0.1, 0.28, '#3a4850', -2.0 + i * 0.35, 0.18, 1.5, 0, 0, 0, { round: 0.02 });
+    box(g, 0.35, 0.22 + (i % 2) * 0.1, 0.28, '#3a4850', 0.95 + i * 0.35, 0.18, 1.5, 0, 0, 0, { round: 0.02 });
+  }
+  // grandstands closer in (portrait-visible)
+  for (let side of [-1, 1]) {
+    for (let row = 0; row < 5; row++) {
+      box(g, 1.1, 0.18, 0.4, '#4a5860', side * 2.15, 0.25 + row * 0.28, -0.5 + row * 0.12, 0, 0, 0, { round: 0.01 });
+      for (let s = 0; s < 3; s++) {
+        box(g, 0.16, 0.2, 0.1, ['#c45848', '#4a8a98', '#c4a35a'][s],
+          side * 2.15 - 0.3 + s * 0.28, 0.4 + row * 0.28, -0.4 + row * 0.12);
+      }
+    }
+    cyl(g, 0.05, 0.05, 2.4, '#ebe4dc', side * 2.35, 1.3, 1.15);
+    box(g, 0.5, 0.12, 0.22, '#f5e6c8', side * 2.35, 2.55, 1.15, 0, 0, 0, {
+      mat: { emissive: '#f5e6c8', emissiveIntensity: 0.7 },
+    });
+  }
+  // billboard towers / LED walls behind track
+  for (const x of [-1.8, 1.8]) {
+    box(g, 0.9, 1.4, 0.12, '#2a3038', x, 2.0, -2.85);
+    for (let r = 0; r < 5; r++) {
+      box(g, 0.7, 0.12, 0.04, r % 2 ? '#c45848' : '#4a8a98', x, 1.5 + r * 0.22, -2.78, 0, 0, 0, {
+        mat: { emissive: r % 2 ? '#c45848' : '#4a8a98', emissiveIntensity: 0.45 },
+      });
+    }
+  }
   // SAFE MODE billboard — fully in frame
-  const safe = makeSign('SAFE MODE', 1.25, 0.36, '#c45848', '#f0e6d0', '#e0c070');
-  safe.position.set(0, 1.75, -2.8);
+  const safe = makeSign('SAFE MODE', 1.15, 0.32, '#c45848', '#f0e6d0', '#e0c070');
+  safe.position.set(0, 1.7, -2.7);
   g.add(safe);
-  const thr = makeSign('THERMAL THROTTLING', 1.45, 0.3, '#2a3228', '#e0c070', '#c4a35a');
-  thr.position.set(0, 2.3, -2.8);
+  const thr = makeSign('THERMAL THROTTLING', 1.35, 0.28, '#2a3228', '#e0c070', '#c4a35a');
+  thr.position.set(0, 2.2, -2.7);
   g.add(thr);
-  addTv(g, screens.racetrack, 0, 2.95, -3.05, 0.65);
-  // fill upper band with PCB shelves
-  addWallShelf(g, 0, 3.55, -3.1, 5.5);
-  for (let i = 0; i < 8; i++) {
-    box(g, 0.35, 0.2, 0.25, '#3a4850', -3.2 + i * 0.9, 3.75, -2.9, 0, 0, 0, { round: 0.01 });
-  }
-  // bleachers / chip stands
+  addTv(g, screens.racetrack, 0, 2.9, -3.0, 0.6);
+  // wall signage + lights
   for (let i = 0; i < 6; i++) {
-    box(g, 0.5, 0.3 + i * 0.08, 0.4, '#3a4850', -3.2, 0.2 + i * 0.05, -1.5 + i * 0.4, 0, 0, 0, { round: 0.02 });
-    box(g, 0.5, 0.3 + i * 0.08, 0.4, '#3a4850', 3.2, 0.2 + i * 0.05, -1.5 + i * 0.4, 0, 0, 0, { round: 0.02 });
+    box(g, 0.55, 0.22, 0.04, i % 2 ? '#c45848' : '#4a8a98', -2.8 + i * 1.1, 3.35, -3.08);
   }
-  // finish flags
-  box(g, 0.08, 1.2, 0.08, '#ebe4dc', -1.5, 0.7, 1.5);
-  box(g, 0.08, 1.2, 0.08, '#ebe4dc', 1.5, 0.7, 1.5);
-  box(g, 3.2, 0.25, 0.05, '#2a3038', 0, 1.3, 1.5);
+  addWallShelf(g, 0, 3.65, -3.1, 5.8);
+  for (let i = 0; i < 10; i++) {
+    box(g, 0.3, 0.18, 0.22, '#3a4850', -3.4 + i * 0.75, 3.85, -2.9, 0, 0, 0, { round: 0.01 });
+  }
+  addStringLights(g, 3.5, -2.9, -3.2, 3.2, 14);
+  // finish flags — behind character plane
+  box(g, 0.08, 1.0, 0.08, '#ebe4dc', -1.5, 0.6, 0.9);
+  box(g, 0.08, 1.0, 0.08, '#ebe4dc', 1.5, 0.6, 0.9);
+  box(g, 3.0, 0.22, 0.05, '#2a3038', 0, 1.15, 0.9);
   for (let i = 0; i < 8; i++) {
-    box(g, 0.35, 0.22, 0.04, i % 2 ? '#f0e6d0' : '#1a1a1a', -1.3 + i * 0.38, 1.3, 1.52);
+    box(g, 0.32, 0.2, 0.04, i % 2 ? '#f0e6d0' : '#1a1a1a', -1.2 + i * 0.35, 1.15, 0.92);
   }
-  const glow = new THREE.PointLight('#6b8f6a', 0.9, 10, 2);
-  glow.position.set(0, 2.5, 0);
+  // side banners
+  const banL = makeSign('LAP 1', 0.7, 0.22, '#1a3040', '#8ab0c8', '#4a8a98');
+  banL.position.set(-2.4, 1.6, -1.8);
+  g.add(banL);
+  const banR = makeSign('SLOW', 0.7, 0.22, '#3a2020', '#e08040', '#c45848');
+  banR.position.set(2.4, 1.6, -1.8);
+  g.add(banR);
+  const glow = new THREE.PointLight('#6b8f6a', 1.0, 11, 2);
+  glow.position.set(0, 2.4, 0.2);
   g.add(glow);
-  addCeilingBeam(g, 0, 3.95, -1, 7);
+  const rim = new THREE.PointLight('#e0c070', 0.55, 8, 2);
+  rim.position.set(0, 2.0, 2.0);
+  g.add(rim);
+  addCeilingBeam(g, 0, 3.95, -1.2, 7);
+  addCeilingBeam(g, 0, 3.95, 0.8, 7);
   return g;
 }
 
 function buildStudio(screens) {
   const g = boothShell('#5a5048', '#c0b0a0');
-  addDesk(g, 0, 0, -1.6, 2.4);
-  addMonitor(g, screens.sliders, -0.55, 0.72, -1.65);
-  addMonitor(g, screens.worse, 0.65, 0.72, -1.65, -0.15);
-  addPhoneProp(g, screens.worse, 1.3, 1.1, -1.3, 0.85, true);
-  addChair(g, 0, 0, -0.7);
-  // second desk
-  addDesk(g, -2.5, 0, -0.5, 1.4);
-  addMonitor(g, screens.smooth, -2.5, 0.72, -0.55);
-  addChair(g, -2.5, 0, 0.3);
-  addDesk(g, 2.5, 0, -0.5, 1.4);
-  addMonitor(g, screens.temp, 2.5, 0.72, -0.55);
-  addChair(g, 2.5, 0, 0.3);
-  // sticky notes wall
-  const cols = ['#e0c070', '#c45848', '#6b8f6a', '#4a8a98', '#a87890'];
-  for (let i = 0; i < 15; i++) {
-    box(g, 0.22, 0.22, 0.02, cols[i % cols.length], -2.5 + (i % 5) * 0.35, 2.2 + Math.floor(i / 5) * 0.3, -3.1);
+  // floor rug + cable trays
+  addRug(g, 0, 0, 0.4, 3.4, 2.4);
+  for (let i = 0; i < 6; i++) {
+    box(g, 0.55, 0.04, 0.18, '#3a3a40', -2.5 + i * 0.9, 0.04, 1.6);
   }
-  const cut = makeSign('CUT GRAPHICS', 1.2, 0.28, '#3a2020', '#f0e6d0', '#c45848');
-  cut.position.set(1.15, 2.55, -3.05);
+  // main dual-monitor desk
+  addDesk(g, 0, 0, -1.55, 2.5);
+  addMonitor(g, screens.sliders, -0.55, 0.72, -1.6);
+  addMonitor(g, screens.worse, 0.65, 0.72, -1.6, -0.15);
+  addPhoneProp(g, screens.worse, 1.35, 1.1, -1.25, 0.85, true);
+  addChair(g, 0.05, 0, -0.65);
+  // side desks + chairs (inside portrait frustum)
+  addDesk(g, -1.7, 0, -0.35, 1.35);
+  addMonitor(g, screens.smooth, -1.7, 0.72, -0.4);
+  addChair(g, -1.7, 0, 0.45);
+  addDesk(g, 1.7, 0, -0.35, 1.35);
+  addMonitor(g, screens.temp, 1.7, 0.72, -0.4);
+  addChair(g, 1.7, 0, 0.45);
+  // back-row desks under whiteboard
+  addDesk(g, -1.55, 0, -2.35, 1.2);
+  addMonitor(g, screens.blueprint, -1.55, 0.72, -2.4);
+  addChair(g, -1.55, 0, -1.65);
+  addDesk(g, 1.55, 0, -2.35, 1.2);
+  addMonitor(g, screens.circuit, 1.55, 0.72, -2.4);
+  addChair(g, 1.55, 0, -1.65);
+  // server racks flanking whiteboard (inside ±2 frustum at back wall)
+  for (const x of [-1.85, 1.85]) {
+    box(g, 0.55, 1.9, 0.45, '#2a3038', x, 0.95, -2.7, 0, 0, 0, { round: 0.02 });
+    for (let r = 0; r < 7; r++) {
+      box(g, 0.42, 0.11, 0.07, r % 2 ? '#4a8a98' : '#c45848', x, 0.35 + r * 0.24, -2.45, 0, 0, 0, {
+        mat: { emissive: r % 2 ? '#4a8a98' : '#c45848', emissiveIntensity: 0.35 },
+      });
+    }
+  }
+  // floor clutter flanking (not in character silhouette)
+  for (let i = 0; i < 3; i++) {
+    box(g, 0.32, 0.22 + (i % 2) * 0.08, 0.28, ['#8a6a40', '#4a6a78', '#c45848'][i],
+      -1.7 + i * 0.35, 0.14, 1.45, 0, 0.1, 0, { round: 0.02 });
+    box(g, 0.32, 0.22 + (i % 2) * 0.08, 0.28, ['#6b8f6a', '#5a4030', '#3a4858'][i],
+      1.05 + i * 0.35, 0.14, 1.45, 0, -0.1, 0, { round: 0.02 });
+  }
+  addPlant(g, -1.25, 0, 0.85);
+  addPlant(g, 1.25, 0, 0.85);
+  // whiteboard
+  box(g, 2.2, 1.3, 0.06, '#ebe4dc', 0, 2.35, -3.08);
+  box(g, 2.25, 1.35, 0.04, '#5a4030', 0, 2.35, -3.1);
+  for (let i = 0; i < 4; i++) {
+    box(g, 0.35 + i * 0.1, 0.03, 0.02, '#3a4858', -0.7 + i * 0.4, 2.55 - i * 0.15, -3.04);
+  }
+  // sticky notes — kept inside ~±2 portrait band at the back wall
+  const cols = ['#e0c070', '#c45848', '#6b8f6a', '#4a8a98', '#a87890', '#ebe4dc'];
+  for (let i = 0; i < 24; i++) {
+    box(g, 0.18, 0.18, 0.02, cols[i % cols.length],
+      -1.7 + (i % 6) * 0.28, 1.55 + Math.floor(i / 6) * 0.26, -3.08);
+  }
+  const cut = makeSign('CUT GRAPHICS', 1.0, 0.24, '#3a2020', '#f0e6d0', '#c45848');
+  cut.position.set(1.0, 3.2, -3.0);
   g.add(cut);
-  const fps = makeSign('LOWER FPS', 1.1, 0.28, '#2a3228', '#e0c070', '#c4a35a');
-  fps.position.set(-1.15, 2.55, -3.05);
+  const fps = makeSign('LOWER FPS', 0.95, 0.24, '#2a3228', '#e0c070', '#c4a35a');
+  fps.position.set(-1.0, 3.2, -3.0);
   g.add(fps);
-  addShelf(g, -3.3, 0, -2.2);
-  addPlant(g, 3.2, 0, 1.8);
-  addPlant(g, -3.2, 0, 1.8);
-  addLamp(g, 3.0, 0, -1.5);
-  addLamp(g, -3.0, 0, 1.0);
-  // pizza / energy drinks
-  box(g, 0.5, 0.05, 0.5, '#ebe4dc', 1.0, 0.78, -1.4);
-  cyl(g, 0.05, 0.05, 0.18, '#4a8a98', -1.0, 0.85, -1.35);
-  addWallShelf(g, 0, 3.35, -3.1, 5.5);
+  addShelf(g, -3.3, 0, 0.6);
+  addShelf(g, 3.3, 0, 0.6);
+  addPlant(g, 3.2, 0, 1.9);
+  addPlant(g, -3.2, 0, 1.9);
+  addPlant(g, 1.8, 0, 1.8);
+  addPlant(g, -1.8, 0, 1.8);
+  addLamp(g, 3.0, 0, -1.4);
+  addLamp(g, -3.0, 0, 1.1);
+  addLamp(g, 0, 0, 1.9);
+  // floor props: pizza, cans, bags, crates
+  box(g, 0.5, 0.05, 0.5, '#ebe4dc', 1.0, 0.78, -1.35);
+  cyl(g, 0.05, 0.05, 0.18, '#4a8a98', -1.0, 0.85, -1.3);
+  cyl(g, 0.05, 0.05, 0.18, '#c45848', -0.85, 0.85, -1.4);
+  box(g, 0.45, 0.35, 0.35, '#8a6a40', -1.5, 0.2, 1.5, 0, 0.2, 0, { round: 0.02 });
+  box(g, 0.4, 0.3, 0.3, '#6a5848', 1.6, 0.18, 1.55, 0, -0.15, 0, { round: 0.02 });
+  box(g, 0.55, 0.12, 0.4, '#3a4858', 0.2, 0.08, 1.7, 0, 0.3, 0, { round: 0.02 });
+  // side wall posters
+  const sp1 = makePosterArt(0, 0.65, 0.9);
+  sp1.position.set(-3.85, 2.5, -0.5);
+  sp1.rotation.y = Math.PI / 2;
+  g.add(sp1);
+  const sp2 = makePosterArt(1, 0.65, 0.9);
+  sp2.position.set(3.85, 2.5, -0.5);
+  sp2.rotation.y = -Math.PI / 2;
+  g.add(sp2);
+  addWallShelf(g, 0, 3.55, -3.1, 5.5);
   addCeilingBeam(g, 0, 3.95, -1.2, 7.5);
   addCeilingBeam(g, 0, 3.95, 0.6, 7.5);
-  addUpperWallDressing(g, -3.1, -3.5, 3.5, 2.9);
-  const fl = new THREE.PointLight('#f0e8d8', 0.8, 10, 2);
+  addUpperWallDressing(g, -3.1, -3.5, 3.5, 2.95);
+  const fl = new THREE.PointLight('#f0e8d8', 0.85, 10, 2);
   fl.position.set(0, 3.1, 0);
   g.add(fl);
   return g;

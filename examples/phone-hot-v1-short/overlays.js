@@ -1,6 +1,6 @@
 // Word-exact caption overlays — warm cream/yellow with dark outline (V1).
 // Hard safe zone: 80 px side margins → max rendered line width 920 px (incl. stroke).
-import { W, H, clamp, smooth } from './core.js';
+import { W, H } from './core.js';
 import { CAPTIONS } from './beats.js';
 
 const SIDE_MARGIN = 80;
@@ -12,9 +12,9 @@ const BASE_FONT_PX = 70;
 const MIN_FONT_PX = 42;
 const TRACK_RATIO = -0.01;
 // top: above heads; low: lower third — kept below typical character feet so faces stay clear
-const BAND_Y = { top: 200, low: 1760 };
-const LOW_TOP_MIN = 1640;   // first line below character feet / lower body
-const BOTTOM_MARGIN = 50;   // keep clear of Shorts bottom UI
+const BAND_Y = { top: 200, low: 1785 };
+const LOW_TOP_MIN = 1680;   // first line below character feet / lower body
+const BOTTOM_MARGIN = 40;   // keep clear of Shorts bottom UI
 const WRAP_DANGLE = new Set(['a', 'an', 'the', 'or', 'and', 'of', 'in', 'on', 'to', 'at', 'by', 'for', 'with', 'its', "it's", 'where', 'can']);
 const FILL = '#f5e6b8';
 const STROKE = '#1c1810';
@@ -199,14 +199,10 @@ export function captionBoxes() {
 export function drawOverlays(ctx, f) {
   if (!LAYOUTS) return;
   for (const c of LAYOUTS) {
+    // Inclusive [f, end]: fully opaque for the whole on-screen window (no mid-line fade).
     if (f < c.f || f > (c.end ?? c.f + 90)) continue;
-    const life = f - c.f;
-    const fadeIn = smooth(clamp(life / 4));
-    const fadeOut = c.end != null ? smooth(clamp(((c.end) - f) / 4)) : 1;
-    const a = fadeIn * fadeOut;
-    if (a <= 0.01) continue;
     ctx.save();
-    ctx.globalAlpha = a;
+    ctx.globalAlpha = 1;
     ctx.font = c.font;
     ctx.letterSpacing = `${c.track}px`;
     ctx.textAlign = 'left';

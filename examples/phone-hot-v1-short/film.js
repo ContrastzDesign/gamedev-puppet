@@ -102,7 +102,7 @@ function poseFor(shot, f) {
     return 'neutral';
   }
   if (shot.id === 'cool') {
-    if (local > 40) return 'point';
+    // Avoid point pose — the drawn phone/arm extends past the portrait edge.
     if (local % 12 < 6) return 'talk';
     return 'wow';
   }
@@ -148,15 +148,15 @@ function poseFor(shot, f) {
 /** Character stands readable mid-frame (~40-50% height on hook). */
 function charLocal(shot) {
   const side = ({
-    hook: 0.05, great: 0.1, cool: -0.05, fan: 0.1,
+    hook: 0.05, great: 0.1, cool: -0.22, fan: 0.1,
     holes: -0.08, seal: 0.05, heat: 0.0, throttle: 0.0,
     dev: -0.1, warmer: 0.08, finale: 0.0,
   })[shot.id] || 0;
   const scale = (shot.id === 'hook' || shot.id === 'great' || shot.id === 'finale' || shot.id === 'warmer')
-    ? 1.18 : (shot.id === 'throttle' ? 0.92 : 0.98);
+    ? 1.18 : (shot.id === 'throttle' ? 1.1 : (shot.id === 'cool' ? 0.92 : 0.98));
   const z = ({
-    living: 2.15, patio: 2.2, workshop: 2.25, seal: 2.3,
-    interior: 2.2, racetrack: 2.35, studio: 2.25, cabin: 2.2,
+    living: 2.15, patio: 2.45, workshop: 2.25, seal: 2.35,
+    interior: 2.2, racetrack: 2.45, studio: 2.3, cabin: 2.2,
   })[shot.booth] || 2.15;
   return { side, z, scale };
 }
@@ -185,23 +185,24 @@ function cameraFor(shot, f) {
     };
   }
   if (shot.id === 'cool') {
+    // Wide, centered pull-back so wall signs stay fully inside the portrait frame.
     return {
-      x: lin(charX - 0.2, charX, t),
-      y: lin(1.85, 1.7, t),
-      z: lin(charZ + 5.2, charZ + 4.5, t),
+      x: lin(charX, charX, t),
+      y: lin(1.68, 1.55, t),
+      z: lin(charZ + 6.6, charZ + 5.9, t),
       lx: charX,
-      ly: 1.5,
-      lz: charZ - 0.8,
+      ly: 1.35,
+      lz: charZ - 0.35,
     };
   }
   if (shot.id === 'heat' || shot.id === 'throttle') {
     return {
-      x: lin(charX + 0.2, charX, t),
-      y: lin(2.1, 1.9, t),
-      z: lin(charZ + 5.8, charZ + 5.0, t),
+      x: lin(charX + 0.15, charX, t),
+      y: lin(1.95, 1.75, t),
+      z: lin(charZ + 5.4, charZ + 4.7, t),
       lx: charX,
-      ly: 1.5,
-      lz: charZ - 0.8,
+      ly: 1.4,
+      lz: charZ - 0.6,
     };
   }
   if (shot.id === 'fan' || shot.id === 'holes') {

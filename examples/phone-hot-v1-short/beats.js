@@ -40,5 +40,5 @@ export const CAPTIONS = [
   { f: 690, end: 765, text: 'They cut graphics and frame rate, and your game looks worse.', band: 'low' },
   { f: 780, end: 841, text: 'This is why your phone is a hand warmer with an app store.', band: 'low' },
   { f: 864, end: 892, text: "The game didn't get harder.", band: 'low' },
-  { f: 901, end: 930, text: 'Your phone got hotter.', band: 'low' },
+  { f: 901, end: 939, text: 'Your phone got hotter.', band: 'low' },
 ];
