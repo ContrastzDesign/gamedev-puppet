@@ -42,13 +42,23 @@ function makeSign(text, w = 1.6, h = 0.45, bg = '#2a3228', fg = '#f0e6d0', borde
   ctx.fillStyle = fg;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  let px = 48;
+  // Prefer a clean two-line layout when a space is present and the line is long.
+  const parts = text.includes(' ') && text.length > 10 ? text.split(/\s+/) : [text];
+  let px = parts.length > 1 ? 42 : 48;
   ctx.font = `bold ${px}px sans-serif`;
-  while (px > 28 && ctx.measureText(text).width > 460) {
+  const maxW = 460;
+  const widest = () => Math.max(...parts.map((p) => ctx.measureText(p).width));
+  while (px > 26 && widest() > maxW) {
     px -= 2;
     ctx.font = `bold ${px}px sans-serif`;
   }
-  ctx.fillText(text, 256, 68);
+  if (parts.length === 1) {
+    ctx.fillText(parts[0], 256, 68);
+  } else {
+    const gap = px * 1.05;
+    const y0 = 68 - (parts.length - 1) * gap * 0.5;
+    parts.forEach((p, i) => ctx.fillText(p, 256, y0 + i * gap));
+  }
   const tex = new THREE.CanvasTexture(c);
   tex.colorSpace = THREE.SRGBColorSpace;
   const mesh = new THREE.Mesh(
@@ -806,9 +816,22 @@ function buildHarbour(screens) {
     box(g, 0.7, 1.0 + (i % 3) * 0.5, 0.55, i % 2 ? '#3a4858' : '#2a3848',
       -3.5 + i * 1.0, 0.7 + (i % 3) * 0.25, -3.6);
   }
-  const wallSign = makeSign('INVISIBLE WALL', 1.7, 0.3, '#1a3038', '#c8e8f0', '#4a8a98');
-  wallSign.position.set(1.35, 2.15, 0.7);
+  const wallSign = makeSign('INVISIBLE WALL', 1.25, 0.55, '#1a3038', '#c8e8f0', '#4a8a98');
+  // Centered above the shimmer so 9:16 pulls/cranes keep the whole two-line sign inside frame.
+  wallSign.position.set(0.0, 2.65, 0.95);
   g.add(wallSign);
+  // Extra harbour dressing so crane/orbit/pull angles never read as empty water.
+  for (const [x, z] of [[-2.2, -0.8], [2.3, -0.9], [-1.0, -2.2], [1.1, -2.3], [-3.2, -1.5], [3.2, -1.4]]) {
+    cyl(g, 0.16, 0.16, 0.45, '#c45848', x, 0.35, z);
+    cyl(g, 0.12, 0.12, 0.14, '#ebe4dc', x, 0.6, z);
+  }
+  for (let i = 0; i < 5; i++) {
+    box(g, 0.55, 0.8 + (i % 3) * 0.35, 0.45, i % 2 ? '#2a3848' : '#3a4858',
+      -2.5 + i * 1.2, 0.55 + (i % 3) * 0.15, -4.2);
+  }
+  addBoat(g, -3.2, 0.28, -0.6, '#6b8f6a', -0.4, 1.15);
+  addBoat(g, 3.3, 0.28, -0.5, '#a87890', 0.45, 1.1);
+  box(g, 2.4, 0.18, 1.2, '#5a3a20', 0, 0.12, 2.6); // front pier plank for feet contact read
   // soft sky discs (not hanging fixtures)
   for (const lx of [-2.5, 2.5]) {
     cyl(g, 0.9, 0.9, 0.15, '#d8e8f0', lx, 4.2, -3.2, 0, 0, 0, {

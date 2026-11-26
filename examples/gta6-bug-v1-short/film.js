@@ -5,6 +5,131 @@ import { W, H, clamp, easeInOut, lin } from './core.js';
 import { buildRoom } from './room.js';
 import { initOverlays, drawOverlays, captionInfo, assertCaptionSafeZone, captionBoxes } from './overlays.js';
 
+// --- Ricardo camera rules (content-short): VO-synced landings -----------------
+// Fly to whatever the VO names; land 0–4 frames before the word. Moves are
+// 12–30 frames, eased. Vary kind each landing (never same kind twice in a
+// row). Whips = EASE → ARC → land. Between landings: drift (slow push / rise /
+// small turn). No hold > 12 frames. Characters chest-up or full figure.
+const HOLD_MAX = 12;
+
+function lerpCam(a, b, t) {
+  return {
+    x: lin(a.x, b.x, t), y: lin(a.y, b.y, t), z: lin(a.z, b.z, t),
+    lx: lin(a.lx, b.lx, t), ly: lin(a.ly, b.ly, t), lz: lin(a.lz, b.lz, t),
+  };
+}
+
+function copyCam(c) {
+  return { x: c.x, y: c.y, z: c.z, lx: c.lx, ly: c.ly, lz: c.lz };
+}
+
+/** Whip: ease out of A, arc through a perpendicular mid, ease into B. */
+function whipInterp(a, b, u) {
+  const mid = {
+    x: (a.x + b.x) * 0.5 + (b.z - a.z) * 0.22,
+    y: (a.y + b.y) * 0.5 + 0.28,
+    z: (a.z + b.z) * 0.5 - (b.x - a.x) * 0.22,
+    lx: (a.lx + b.lx) * 0.5,
+    ly: (a.ly + b.ly) * 0.5 + 0.06,
+    lz: (a.lz + b.lz) * 0.5,
+  };
+  if (u < 0.32) {
+    return lerpCam(a, mid, easeInOut(u / 0.32) * 0.5);
+  }
+  if (u < 0.68) {
+    const t = easeInOut((u - 0.32) / 0.36);
+    return lerpCam(lerpCam(a, mid, 0.5), lerpCam(mid, b, 0.5), t);
+  }
+  return lerpCam(mid, b, 0.5 + easeInOut((u - 0.68) / 0.32) * 0.5);
+}
+
+/** Drop (top-down → hero): rise above the aisle, then ease into hero framing. */
+function dropInterp(a, b, u) {
+  const high = {
+    x: lin(a.x, b.x, 0.4),
+    y: Math.max(a.y, b.y) + 1.8,
+    z: Math.max(a.z, b.z) + 0.15, // stay audience-side
+    lx: b.lx, ly: b.ly - 0.1, lz: b.lz,
+  };
+  if (u < 0.45) return lerpCam(a, high, easeInOut(u / 0.45));
+  return lerpCam(high, b, easeInOut((u - 0.45) / 0.55));
+}
+
+function moveInterp(kind, a, b, u) {
+  if (kind === 'whip') return whipInterp(a, b, u);
+  if (kind === 'drop') return dropInterp(a, b, u);
+  return lerpCam(a, b, easeInOut(u));
+}
+
+/** Slow continuous drift so the camera never parks (hold ≤12f then drift). */
+function driftCam(pose, f, seed) {
+  const t = f * 0.017 + seed * 1.7;
+  return {
+    x: pose.x + Math.sin(t) * 0.055,
+    y: pose.y + Math.sin(t * 0.7 + 1.1) * 0.035,
+    z: pose.z + Math.cos(t * 0.55) * 0.07,
+    lx: pose.lx + Math.sin(t * 0.4) * 0.03,
+    ly: pose.ly + Math.cos(t * 0.5) * 0.02,
+    lz: pose.lz + Math.sin(t * 0.35 + 0.5) * 0.04,
+  };
+}
+
+/**
+ * Build a landed camera pose aimed at a world look-target.
+ * framing: 'full' | 'chest'
+ * kind biases the approach angle (orbit side, crane height, low angle, etc).
+ * Camera always stays on the audience side of `hero` (never behind the cast).
+ */
+function poseAt(look, kind, framing, side = 1, hero = null) {
+  const chest = framing === 'chest';
+  // Harbour needs extra distance so wide signs (INVISIBLE WALL) stay inside 9:16.
+  const harbour = look && look._harbour;
+  const dist = chest ? 3.55 : (harbour ? 5.6 : 4.55);
+  const anchor = hero || look;
+  // Bias look only gently toward the VO prop — cast must stay chest-up / full-figure.
+  const lx = lin(anchor.x, look.x, hero ? 0.22 : 1);
+  const ly0 = lin(anchor.y + (chest ? 0.3 : 0.05), look.y, hero ? 0.2 : 1);
+  const lz = lin(anchor.z, look.z, hero ? 0.18 : 1);
+  let x = anchor.x + side * 0.15;
+  let y = chest ? anchor.y + 0.2 : anchor.y + 0.4;
+  let z = anchor.z + dist;
+  if (kind === 'orbit') {
+    x = anchor.x + side * 1.05;
+    z = anchor.z + dist * 0.9;
+    y = anchor.y + 0.45;
+  } else if (kind === 'crane') {
+    y = anchor.y + 1.35;
+    z = anchor.z + dist * 1.05;
+    x = anchor.x + side * 0.4;
+  } else if (kind === 'low') {
+    y = 0.9;
+    z = anchor.z + dist * 0.95;
+    x = anchor.x + side * 0.3;
+  } else if (kind === 'pull') {
+    z = anchor.z + dist * 1.3;
+    y = anchor.y + 0.75;
+    x = anchor.x + side * 0.55;
+  } else if (kind === 'push') {
+    z = anchor.z + (chest ? 3.35 : 4.15);
+    x = anchor.x + side * 0.2;
+    y = chest ? anchor.y + 0.15 : anchor.y + 0.35;
+  } else if (kind === 'fly' || kind === 'follow') {
+    x = anchor.x + side * 0.9;
+    z = anchor.z + dist * 0.95;
+    y = anchor.y + 0.5;
+  } else if (kind === 'drop') {
+    // Landed after the aerial drop — still audience-side, slightly high.
+    z = anchor.z + dist * 0.98;
+    y = anchor.y + 0.85;
+    x = anchor.x + side * 0.35;
+  } else if (kind === 'whip') {
+    x = anchor.x + side * 0.75;
+    z = anchor.z + dist * 0.92;
+    y = anchor.y + 0.4;
+  }
+  return { x, y, z, lx, ly: ly0, lz };
+}
+
 const glCanvas = document.querySelector('#gl');
 const film = document.querySelector('#film');
 const ctx = film.getContext('2d', { alpha: false });
@@ -26,7 +151,7 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color('#5a5a60');
 scene.fog = new THREE.Fog('#5a5a60', 30, 55);
 
-const camera = new THREE.PerspectiveCamera(40, W / H, 0.1, 60);
+const camera = new THREE.PerspectiveCamera(40, W / H, 0.3, 60);
 
 const hemi = new THREE.HemisphereLight('#fff8f0', '#6a5a4c', 1.55);
 scene.add(hemi);
@@ -139,7 +264,7 @@ function poseFor(shot, f) {
   return 'wow';
 }
 
-/** Character stands readable mid-frame (~40-50% height on hook). */
+/** Character stands readable mid-frame (chest-up or full figure). */
 function charLocal(shot) {
   const side = ({
     hook: 0.05, cars: 0.1, code: -0.05, upload: 0.15,
@@ -152,59 +277,218 @@ function charLocal(shot) {
   return { side, z, scale };
 }
 
-function cameraFor(shot, f) {
+/** World-space look targets named by the VO (per booth origin). */
+function lookTargets(shot) {
   const booth = room.boothMeta[shot.booth];
-  const t = easeInOut(clamp((f - shot.f0) / Math.max(1, shot.f1 - shot.f0 - 1)));
+  const bx = booth.x;
+  const bz = booth.z;
   const cl = charLocal(shot);
-  const charX = booth.x + cl.side;
-  const charZ = booth.z + cl.z;
-  const wantFov = (shot.id === 'hook' || shot.id === 'cars') ? 42
-    : (shot.id === 'bridge' || shot.id === 'boats') ? 46
-    : 40;
+  const hero = { x: bx + cl.side, y: 1.25, z: bz + cl.z };
+  const chest = { x: hero.x, y: 1.55, z: hero.z };
+  if (shot.booth === 'bedroom') {
+    return {
+      hero, chest,
+      tv: { x: bx + 0.3, y: 1.85, z: bz - 2.7 },
+      bridgeTv: { x: bx + 0.3, y: 1.9, z: bz - 2.7 },
+      sign: { x: bx + 0.3, y: 2.35, z: bz - 2.7 },
+    };
+  }
+  if (shot.booth === 'studio') {
+    return {
+      hero, chest,
+      code: { x: bx + 0.0, y: 1.25, z: bz - 1.95 },
+      calendar: { x: bx + 0.0, y: 2.15, z: bz - 2.9 },
+      upload: { x: bx + 2.35, y: 1.2, z: bz - 0.25 },
+    };
+  }
+  if (shot.booth === 'harbour') {
+    const mark = (o) => Object.assign(o, { _harbour: true });
+    return {
+      hero: mark({ ...hero }),
+      chest: mark({ ...chest }),
+      bridge: mark({ x: bx + 0.0, y: 2.45, z: bz - 1.55 }),
+      boats: mark({ x: bx + 0.85, y: 0.85, z: bz + 1.0 }),
+      wall: mark({ x: bx + 0.0, y: 2.4, z: bz + 0.9 }),
+      wide: mark({ x: bx + 0.0, y: 1.6, z: bz + 0.2 }),
+    };
+  }
+  if (shot.booth === 'qa') {
+    return {
+      hero, chest,
+      testers: { x: bx + 0.0, y: 1.35, z: bz + 1.6 },
+      map: { x: bx + 0.0, y: 2.15, z: bz - 3.0 },
+      bridgePin: { x: bx + 0.2, y: 2.0, z: bz - 3.0 },
+    };
+  }
+  if (shot.booth === 'cert') {
+    return {
+      hero, chest,
+      rulebooks: { x: bx - 1.5, y: 1.6, z: bz - 2.75 },
+      fail: { x: bx + 1.2, y: 2.55, z: bz - 2.85 },
+      stamp: { x: bx + 1.75, y: 1.5, z: bz + 0.15 },
+    };
+  }
+  // years booth (years / finale / grad)
+  return {
+    hero, chest,
+    year10: { x: bx - 1.75, y: 2.35, z: bz - 2.85 },
+    timer: { x: bx - 1.0, y: 1.25, z: bz - 1.45 },
+    reports: { x: bx + 1.7, y: 1.05, z: bz + 0.95 },
+  };
+}
+
+/**
+ * VO landings (0-based render frames). Each lands 0–4 frames before the named
+ * word (vo-words f_start is 1-based → render = f_start-1). Kinds never repeat
+ * back-to-back (cuts between shots count). dur = move length 12–30.
+ *
+ * word → land (approx): GTA~18→16, Bug~55→52, car~113→110, bridge~159→156,
+ * one~209→206, two weeks~270→268, months~302→300, upload~357→354,
+ * bridge~391→388, boats~411→409, wall~438→435, broke~492→490,
+ * regression~541→538, testers~568→566, replay~576→586 (map), bridge~620→617,
+ * Sony~643→641, rulebooks~677→674, Fail~691→700 (stamp beat), start~730→732,
+ * 10 years~791→789, ten minutes~861→859, two weeks~925→923,
+ * Congratulations cut@958, true~992→990.
+ */
+function buildLandings() {
+  // [landF, shotId, kind, targetKey, framing, side, dur]
+  const rows = [
+    [16,  'hook',   'push',   'chest',     'chest',  1, 18],
+    [52,  'hook',   'orbit',  'hero',      'full',  -1, 24],
+    [80,  'hook',   'pull',   'tv',        'full',   1, 20],
+    // cut @84
+    [110, 'cars',   'fly',    'tv',        'full',  -1, 22],
+    [156, 'cars',   'crane',  'bridgeTv',  'full',   1, 26],
+    // cut @177
+    [206, 'code',   'push',   'code',      'chest',  1, 24],
+    [268, 'code',   'drop',   'calendar',  'full',  -1, 28],
+    [300, 'code',   'low',    'hero',      'full',   1, 22],
+    // cut @324 — whip lands chest-up on aardvark with UPLOAD readable over-shoulder
+    [354, 'upload', 'whip',   'upload',    'chest',  1, 26],
+    // cut @377
+    [388, 'bridge', 'crane',  'bridge',    'full',   1, 24],
+    [409, 'bridge', 'follow', 'boats',     'full',  -1, 20],
+    [435, 'bridge', 'pull',   'wall',      'full',   0, 22],
+    // cut @472
+    [490, 'boats',  'push',   'chest',     'chest',  1, 18],
+    [538, 'boats',  'pull',   'wide',      'full',  -1, 26],
+    // cut @564 — short fly onto testers, then map / bridge-pin
+    [568, 'qa',     'fly',    'testers',   'full',   1, 12],
+    [588, 'qa',     'orbit',  'map',       'full',  -1, 18],
+    [617, 'qa',     'push',   'bridgePin', 'full',   1, 22],
+    // cut @636
+    [643, 'cert',   'whip',   'chest',     'chest', -1, 16],
+    [674, 'cert',   'pull',   'rulebooks', 'full',   1, 26],
+    [700, 'cert',   'drop',   'fail',      'full',  -1, 24],
+    [732, 'cert',   'crane',  'stamp',     'full',   1, 26],
+    // cut @769
+    [789, 'years',  'push',   'year10',    'full',  -1, 20],
+    // cut @841
+    [859, 'finale', 'low',    'timer',     'full',   1, 18],
+    [923, 'finale', 'follow', 'reports',   'full',  -1, 28],
+    // cut @958 (= Congratulations) — orbit into "you're now", push on "true"
+    [974, 'grad',   'orbit',  'chest',     'chest',  1, 16],
+    [990, 'grad',   'push',   'hero',      'full',  -1, 14],
+  ];
+
+  // Validate no consecutive kinds (cuts implied between different shotIds).
+  let prevKind = null;
+  let prevShot = null;
+  for (const r of rows) {
+    if (prevShot && r[1] !== prevShot) {
+      if (prevKind === 'cut') throw new Error('double cut');
+      prevKind = 'cut';
+    }
+    if (r[2] === prevKind) throw new Error(`repeat kind ${r[2]} at f${r[0]}`);
+    prevKind = r[2];
+    prevShot = r[1];
+  }
+  // follow → pull is fine; pull after orbit was changed from orbit→orbit risk across boats.
+
+  return rows.map(([land, shotId, kind, target, framing, side, dur]) => {
+    const shot = SHOTS.find((s) => s.id === shotId);
+    const start = Math.max(shot.f0, land - dur);
+    return {
+      land, shotId, kind, target, framing, side,
+      start,
+      dur: Math.max(1, land - start),
+    };
+  });
+}
+
+let LANDINGS = null;
+let landingPoses = null; // parallel poses once room exists
+
+function ensureLandings() {
+  if (LANDINGS) return;
+  LANDINGS = buildLandings();
+  landingPoses = LANDINGS.map((L) => {
+    const shot = SHOTS.find((s) => s.id === L.shotId);
+    const looks = lookTargets(shot);
+    const look = looks[L.target] || looks.hero;
+    const hero = looks.hero;
+    return poseAt(look, L.kind, L.framing, L.side, hero);
+  });
+}
+
+function shotFov(shot) {
+  if (shot.id === 'hook' || shot.id === 'cars') return 42;
+  if (shot.id === 'bridge' || shot.id === 'boats') return 46;
+  return 40;
+}
+
+/** Cut-in / pre-move pose for a shot (hard cut lands here, then drifts). */
+function cutInPose(shot) {
+  const looks = lookTargets(shot);
+  const hero = looks.hero;
+  if (shot.booth === 'bedroom') return poseAt(looks.tv || hero, 'pull', 'full', 1, hero);
+  if (shot.booth === 'harbour') return poseAt(looks.wide || hero, 'pull', 'full', -1, hero);
+  return poseAt(hero, 'pull', 'full', 1, hero);
+}
+
+function cameraFor(shot, f) {
+  ensureLandings();
+  const wantFov = shotFov(shot);
   if (camera.fov !== wantFov) {
     camera.fov = wantFov;
     camera.updateProjectionMatrix();
   }
-  if (shot.id === 'hook' || shot.id === 'cars' || shot.id === 'grad' || shot.id === 'finale' || shot.id === 'years') {
-    return {
-      x: lin(charX + 0.28, charX + 0.08, t),
-      y: lin(1.7, 1.55, t),
-      z: lin(charZ + 4.7, charZ + 4.1, t),
-      lx: charX - 0.02,
-      ly: 1.35,
-      lz: charZ - 0.25,
-    };
+
+  // Only landings that belong to this shot (cuts reset the camera).
+  const idx = [];
+  for (let i = 0; i < LANDINGS.length; i++) {
+    if (LANDINGS[i].shotId === shot.id) idx.push(i);
   }
-  if (shot.id === 'bridge' || shot.id === 'boats') {
-    // Wide harbour view: bridge overhead, boats midground, water floor
-    return {
-      x: lin(charX + 0.15, charX, t),
-      y: lin(2.35, 2.15, t),
-      z: lin(charZ + 6.8, charZ + 5.9, t),
-      lx: charX,
-      ly: 1.75,
-      lz: charZ - 1.6,
-    };
+  const cutPose = cutInPose(shot);
+
+  if (!idx.length) return driftCam(cutPose, f, shot.f0);
+
+  const first = LANDINGS[idx[0]];
+  if (f < first.start) {
+    return driftCam(cutPose, f, shot.f0);
   }
-  if (shot.id === 'code' || shot.id === 'upload') {
-    return {
-      x: lin(charX - 0.35, charX - 0.1, t),
-      y: lin(1.85, 1.7, t),
-      z: lin(charZ + 5.4, charZ + 4.6, t),
-      lx: charX + 0.02,
-      ly: 1.45,
-      lz: charZ - 0.6,
-    };
+
+  // Active landing within this shot = last whose move has started.
+  let k = 0;
+  while (k < idx.length - 1 && LANDINGS[idx[k + 1]].start <= f) k++;
+  const gi = idx[k];
+  const L = LANDINGS[gi];
+  const pose = landingPoses[gi];
+
+  if (f < L.land) {
+    const u = clamp((f - L.start) / Math.max(1, L.dur));
+    let from;
+    if (k === 0) {
+      from = cutPose;
+    } else {
+      const prevGi = idx[k - 1];
+      from = driftCam(landingPoses[prevGi], L.start, prevGi);
+    }
+    return moveInterp(L.kind, from, pose, u);
   }
-  // qa / cert — wider so side stations / shelves stay in frame
-  return {
-    x: lin(charX + 0.35, charX + 0.12, t),
-    y: lin(1.9, 1.72, t),
-    z: lin(charZ + 5.6, charZ + 4.7, t),
-    lx: charX,
-    ly: 1.4,
-    lz: charZ - 0.55,
-  };
+
+  const seed = f <= L.land + HOLD_MAX ? gi + 10 : gi + 30;
+  return driftCam(pose, f, seed);
 }
 
 function syncBoothVisibility(shot) {
