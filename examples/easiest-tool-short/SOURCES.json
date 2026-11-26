@@ -3,7 +3,7 @@
   "project": "examples/easiest-tool-short",
   "style": "content-short VERSION 1 (drawn SVG animals in detailed 3D worlds)",
   "video": {
-    "file": "easiest-tool-short.mp4",
+    "file": "easiest-tool-final.mp4",
     "width": 1080,
     "height": 1920,
     "fps": 24,
@@ -14,8 +14,9 @@
     "loudness_lufs": -14.0,
     "true_peak_dbtp": -1.5,
     "renderer": "ANGLE SwiftShader GPU=0",
-    "sha256": "49cbd0e800091a8267c9477d597db51869e9cdbd5cb693eb037c0a2265f63fd2",
-    "bytes": 11686513
+    "sha256": "9c119aa1372d23e83e4b2de76393781d432b61c9351af8c3a5079923cbacb7bf",
+    "bytes": 16478372,
+    "duration": 24
   },
   "voiceover": {
     "file": "audio/vo.mp3",
@@ -39,7 +40,7 @@
   "sfx": [
     {
       "file": "cheer-short.wav",
-      "sha256": "fa9b4a07a1a3afe367f169b3c52b84cd337029594524b8c1f111295226b3831d",
+      "sha256": "1bc811b29e15824a23860f4d675c45ff244e7d31189db76deaaa5ad5672d54fa",
       "bytes": 67278,
       "license": "CC0",
       "url": "https://freesound.org/s/511788/",
@@ -49,7 +50,7 @@
     },
     {
       "file": "chime-short.wav",
-      "sha256": "76a63d3090e7e2ef95c664ad05fa098444080a6f4daa46e2289c0fbe8f804369",
+      "sha256": "f26aecefcbb58383afb24d23b7c2afa8fc54db4ffa27fc6ddf4f506b33b39425",
       "bytes": 67278,
       "license": "CC0",
       "url": "https://freesound.org/s/390863/",
@@ -76,7 +77,7 @@
     },
     {
       "file": "keyboard-short.wav",
-      "sha256": "dda7f7da7d3789a0f577d71efb90c55b38a90bb08c7c1ac2d70786ba7821d305",
+      "sha256": "99ec3be7a2a3de98783eac0e796e75b2d72feb0fd5ddde384e1f8801eac1c794",
       "bytes": 52878,
       "license": "CC0",
       "url": "https://freesound.org/s/450282/",
@@ -86,7 +87,7 @@
     },
     {
       "file": "mouse-click.wav",
-      "sha256": "6b8091602ef5dc4400bd7c58c758b3cf79717c79411e7ac207f48d8e05fcf03e",
+      "sha256": "2643d1ab92874af5f22656f23e1283f558de06eb188b63e8794d59d918dabefa",
       "bytes": 24078,
       "license": "CC0",
       "url": "https://freesound.org/s/534104/",
@@ -95,7 +96,7 @@
     },
     {
       "file": "paper-rustle.wav",
-      "sha256": "5cb9f09c723429882165c4bd093dde95e8dce6a8c16d32acf9706cbd144b95d7",
+      "sha256": "cb5653d176f10c1574d59c88adc200dd4ee5ce5315123241815c5ae9518ebec0",
       "bytes": 48078,
       "license": "CC0",
       "url": "https://freesound.org/s/181774/",
@@ -104,7 +105,7 @@
     },
     {
       "file": "soft-pop.wav",
-      "sha256": "d79447b8a04f865884b4fb534ca2d1fd7094d4d963a6d5a103b345cea44dfc3d",
+      "sha256": "86cd4b6e675cc58ca3bb804541f09c14ad1a4d67a996d2f6fde0e765d63e3f2b",
       "bytes": 43278,
       "license": "CC0",
       "url": "https://freesound.org/s/541993/",
@@ -113,7 +114,7 @@
     },
     {
       "file": "swish-short.wav",
-      "sha256": "a47bc21e13bc1984a7568320414a4237d927b98b8d2722671b9539507c24ec43",
+      "sha256": "ec3ad9326f98543199cbbb9e99f34a94e151afaedb27b62732766514bad33994",
       "bytes": 38478,
       "license": "CC0",
       "url": "https://freesound.org/s/154648/",
@@ -122,7 +123,7 @@
     },
     {
       "file": "ui-pop.wav",
-      "sha256": "918a95e253364849dfcb3eb7f1d7ecacd5bb4c4a68486e1b0f0c64dcf2780104",
+      "sha256": "41e513160291528357e618136c6734b25c11b8a09374d478b3526c43861596e9",
       "bytes": 28878,
       "license": "CC0",
       "url": "https://freesound.org/s/878253/",
@@ -131,7 +132,7 @@
     },
     {
       "file": "whoosh-long.wav",
-      "sha256": "3ef86c3210cd2f2f214c4e8b549a2a864fd4d31d1a7d5892881ee349e1569d16",
+      "sha256": "7d1c3d7761191ae56577e6b012516eb0d58c67cc130ad1a63fae4353489346df",
       "bytes": 52878,
       "license": "CC0",
       "url": "https://freesound.org/s/416054/",
@@ -140,7 +141,7 @@
     },
     {
       "file": "whoosh-short.wav",
-      "sha256": "eb5c4969a43080b309427b5d570401fd894005e40823c68c8d342883877a0be1",
+      "sha256": "0289d2daef798c375174918737b15006d32aa468510f9949e0f365b966861b9c",
       "bytes": 38478,
       "license": "CC0",
       "url": "https://freesound.org/s/372519/",
@@ -179,12 +180,17 @@
   },
   "notes": "Final render online GPU=0 overrides mac-render.md. Music is Local Forecast (not Carefree / Sneaky Snitch / Wallpaper).",
   "qa": {
-    "version": "v1",
+    "version": "v2-camera-rerender",
+    "static_yavg_thresh": 0.15,
+    "static_max_run": 0,
+    "static_pass": true,
+    "camera_static_hold_max": 7,
     "fixes": [
-      "hook/question use FIRST GAME LAB center desk (not premature GDevelop)",
-      "deterministic shelf book yaw (no Math.random)",
-      "all captions in lower band with 80px side safe zone",
-      "assertCaptionClearOfSigns + assertCharacterVisible boot checks"
+      "motivated free camera (camera.js) with varied landings per VO beat",
+      "no back-to-back repeated move kinds",
+      "captions pinned to bottom band below feet",
+      "upper-wall dressing for crane/pull-out frames",
+      "assertMoveVariety + maxStaticRun boot checks"
     ],
     "artifacts": "/opt/cursor/artifacts/easiest-tool-final/"
   }

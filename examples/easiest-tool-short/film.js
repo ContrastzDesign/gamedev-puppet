@@ -1,9 +1,12 @@
 // Easiest-tool Short — content-short VERSION 1 (drawn SVG animals in a detailed 3D workshop).
 import * as THREE from 'three';
 import { FPS, FRAMES, SHOTS } from './beats.js';
-import { W, H, clamp, easeInOut, lin } from './core.js';
+import { W, H, clamp } from './core.js';
 import { buildRoom } from './room.js';
 import { initOverlays, drawOverlays, captionInfo, assertCaptionSafeZone, captionBoxes } from './overlays.js';
+import {
+  cameraFor as camPose, charLocal, assertMoveVariety, cameraMovesSummary, maxStaticRun,
+} from './camera.js';
 
 const glCanvas = document.querySelector('#gl');
 const film = document.querySelector('#film');
@@ -118,65 +121,14 @@ function poseFor(shot, f) {
   return 'wow';
 }
 
-/** Character stands in the aisle in front of the station (full body readable). */
-function charLocal(shot) {
-  const side = ({
-    hook: 0, question: 0.1, twine: -0.15, gdevelop: 0.2, nilo: -0.2,
-  })[shot.id] || 0;
-  const scale = shot.id === 'hook' || shot.id === 'question' ? 1.18 : 0.9;
-  return { side, z: 2.15, scale };
-}
-
 function cameraFor(shot, f) {
-  const booth = room.boothMeta[shot.booth];
-  const t = easeInOut(clamp((f - shot.f0) / Math.max(1, shot.f1 - shot.f0 - 1)));
-  const cl = charLocal(shot);
-  const charX = booth.x + cl.side;
-  const charZ = booth.z + cl.z;
-  const wantFov = shot.id === 'hook' || shot.id === 'question' ? 42 : 40;
-  if (camera.fov !== wantFov) {
+  const pose = camPose(room.boothMeta, f);
+  const wantFov = pose.fov || 40;
+  if (Math.abs(camera.fov - wantFov) > 0.01) {
     camera.fov = wantFov;
     camera.updateProjectionMatrix();
   }
-  if (shot.id === 'hook' || shot.id === 'question') {
-    return {
-      x: lin(charX + 0.28, charX + 0.08, t),
-      y: lin(1.52, 1.42, t),
-      z: lin(charZ + 4.55, charZ + 3.95, t),
-      lx: charX - 0.02,
-      ly: 1.05,
-      lz: charZ - 0.15,
-    };
-  }
-  if (shot.id === 'twine') {
-    return {
-      x: lin(charX + 0.85, charX + 0.45, t),
-      y: lin(1.5, 1.42, t),
-      z: lin(charZ + 4.85, charZ + 4.1, t),
-      lx: charX - 0.06,
-      ly: 0.85,
-      lz: charZ - 0.15,
-    };
-  }
-  if (shot.id === 'gdevelop') {
-    return {
-      x: lin(charX - 0.85, charX - 0.4, t),
-      y: lin(1.52, 1.42, t),
-      z: lin(charZ + 4.9, charZ + 4.15, t),
-      lx: charX + 0.06,
-      ly: 0.85,
-      lz: charZ - 0.1,
-    };
-  }
-  // nilo
-  return {
-    x: lin(charX - 0.7, charX - 0.3, t),
-    y: lin(1.55, 1.45, t),
-    z: lin(charZ + 4.9, charZ + 4.15, t),
-    lx: charX + 0.05,
-    ly: 0.88,
-    lz: charZ - 0.1,
-  };
+  return pose;
 }
 
 function syncBoothVisibility(shot) {
@@ -200,7 +152,7 @@ function placeCharacter(shot, f) {
   setPose(bill, chars[name].poses[poseFor(shot, f)]);
   const bob = Math.sin(f * 0.21) * 0.025;
   const lean = Math.sin(f * 0.09) * 0.03;
-  const cl = charLocal(shot);
+  const cl = charLocal(shot.id);
   bill.group.scale.set(cl.scale, cl.scale, cl.scale);
   bill.group.position.set(booth.x + lean + cl.side, bob, booth.z + cl.z);
   bill.group.rotation.y = Math.atan2(
@@ -428,6 +380,11 @@ async function boot() {
 
   await initOverlays();
   assertCaptionSafeZone();
+  const moves = assertMoveVariety();
+  const staticRun = maxStaticRun(room.boothMeta);
+  if (staticRun.maxRun > 12) {
+    throw new Error(`Camera static hold ${staticRun.maxRun} frames at f${staticRun.maxAt} (max 12)`);
+  }
   const occl = assertCharacterVisible('all');
   const signClear = assertCaptionClearOfSigns();
   window.captionInfo = captionInfo;
@@ -435,8 +392,12 @@ async function boot() {
   window.assertCaptionSafeZone = assertCaptionSafeZone;
   window.assertCaptionClearOfSigns = assertCaptionClearOfSigns;
   window.assertCharacterVisible = assertCharacterVisible;
+  window.cameraMovesSummary = cameraMovesSummary;
+  window.maxStaticRun = () => maxStaticRun(room.boothMeta);
   window.occlusionInfo = occl;
   window.signClearInfo = signClear;
+  window.cameraMoves = moves;
+  window.staticRunInfo = staticRun;
   ready = true;
   window.filmReady = true;
   window.renderFrame = renderFrame;

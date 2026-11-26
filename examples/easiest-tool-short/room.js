@@ -313,11 +313,16 @@ function buildHeroStation(g, b) {
   const monLight = new THREE.PointLight('#b8d4e8', 0.85, 5, 2);
   monLight.position.set(0, 1.85, 0.4);
   g.add(monLight);
-  // plant
+  // plant (flattened canopy — never reads as a second character head)
   cyl(g, 0.12, 0.16, 0.2, '#6a4a38', 1.05, 1.1, 0.5);
   const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.22, 8, 8), mat('#3d6b4f'));
-  leaf.position.set(1.05, 1.4, 0.5);
+  leaf.scale.set(1.15, 0.55, 1.0);
+  leaf.position.set(1.05, 1.32, 0.5);
   g.add(leaf);
+  const leaf2 = new THREE.Mesh(new THREE.SphereGeometry(0.14, 8, 8), mat('#4a7a58'));
+  leaf2.scale.set(1.1, 0.5, 1.0);
+  leaf2.position.set(1.18, 1.42, 0.42);
+  g.add(leaf2);
 
   if (b.theme === 'workshop') {
     // Three mini station markers on the desk
@@ -457,6 +462,26 @@ export function buildRoom(textures) {
     p.position.set(x, 3.15, -7.65);
     root.add(p);
   });
+  // Upper wall dressing so crane / pull-out frames never show a bare brick band
+  const highPosterXs = [-9.5, -4.8, -0.8, 3.2, 7.8, 12.2];
+  highPosterXs.forEach((x, i) => {
+    const p = makePosterArt(i + 3, 0.7, 0.95);
+    p.position.set(x, 4.85, -7.65);
+    root.add(p);
+  });
+  for (const [lab, x, col] of [
+    ['STORY', -5.5, '#8a6a9a'],
+    ['LOGIC', -1.2, '#4a8a98'],
+    ['WORLD', 4.5, '#5a9a98'],
+    ['PLAY', 9.2, '#c4a35a'],
+  ]) {
+    const tag = makeSign(lab, 1.4, 0.38, '#1a2018', '#f0e6d0', col);
+    tag.position.set(x, 5.55, -7.55);
+    root.add(tag);
+  }
+  // Ceiling fascia strip with warm glow so high frames stay dressed
+  box(root, 30, 0.35, 0.5, '#4a3a2e', 0, 6.2, -7.5);
+  neonStrip(root, 26, '#d8b878', 0, 5.95, -7.45);
 
   addShelfUnit(root, -14.2, 2.5, Math.PI / 2);
   addShelfUnit(root, -14.2, -1.5, Math.PI / 2);

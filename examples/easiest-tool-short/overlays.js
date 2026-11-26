@@ -12,12 +12,14 @@ const BASE_FONT_PX = 70;
 const MIN_FONT_PX = 42;
 const TRACK_RATIO = -0.01;
 // top: above heads; low: lower third — kept below typical character feet so faces stay clear
-const BAND_Y = { top: 200, low: 1760 };
-const LOW_TOP_MIN = 1640;   // first line below character feet / lower body
-const BOTTOM_MARGIN = 50;   // keep clear of Shorts bottom UI
+const BAND_Y = { top: 200, low: 1840 };
+const LOW_TOP_MIN = 1740;   // first line below character feet / lower body
+const BOTTOM_MARGIN = 28;   // keep clear of Shorts bottom UI
 const WRAP_DANGLE = new Set(['a', 'an', 'the', 'or', 'and', 'of', 'in', 'on', 'to', 'at', 'by', 'for', 'with', 'its', "it's", 'where', 'can']);
 const FILL = '#f5e6b8';
 const STROKE = '#1c1810';
+// Fully opaque while held (fade only the first/last 3 frames).
+const CAP_FADE = 3;
 
 let LAYOUTS = null;
 
@@ -91,14 +93,14 @@ function wrapWords(words, visW, maxW, maxLines = 5) {
 function layoutCaption(c, kit) {
   const words = c.text.split(/\s+/).filter(Boolean);
   const lines = wrapWords(words, kit.visW, MAX_TEXT_W, 5);
+  // Pin low-band captions to the bottom safe strip so they sit below character feet
+  // even on chest-up / medium framings (never float mid-body).
   let cy = BAND_Y[c.band] ?? BAND_Y.top;
-  // Keep low-band blocks entirely in the lower third (below feet, above bottom margin)
   if (c.band === 'low') {
     const half = ((lines.length - 1) / 2) * kit.lineH;
-    const topY = cy - half - kit.lineH * 0.55;
-    if (topY < LOW_TOP_MIN) cy += (LOW_TOP_MIN - topY);
-    const botY = cy + half + kit.lineH * 0.55;
-    if (botY > H - BOTTOM_MARGIN) cy -= (botY - (H - BOTTOM_MARGIN));
+    const blockHalf = half + kit.lineH * 0.55;
+    cy = H - BOTTOM_MARGIN - blockHalf;
+    if (cy - blockHalf < LOW_TOP_MIN) cy = LOW_TOP_MIN + blockHalf;
   }
   const lineInfo = lines.map(([a, b], li) => {
     const str = words.slice(a, b).join(' ');
@@ -201,8 +203,8 @@ export function drawOverlays(ctx, f) {
   for (const c of LAYOUTS) {
     if (f < c.f || f > (c.end ?? c.f + 90)) continue;
     const life = f - c.f;
-    const fadeIn = smooth(clamp(life / 4));
-    const fadeOut = c.end != null ? smooth(clamp(((c.end) - f) / 4)) : 1;
+    const fadeIn = smooth(clamp(life / CAP_FADE));
+    const fadeOut = c.end != null ? smooth(clamp(((c.end) - f) / CAP_FADE)) : 1;
     const a = fadeIn * fadeOut;
     if (a <= 0.01) continue;
     ctx.save();

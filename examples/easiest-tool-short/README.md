@@ -14,6 +14,10 @@ This folder is a **film made with the [content-short skill](../../skill/content-
 > Number two, GDevelop for 2D game logic…
 > Number three, Nilo for a first 3D game world…
 
+## Camera
+
+Motivated free camera in `camera.js` (content-short `references/camera.md`): spherical poses around booth pivots, landings 0–4 frames before the named VO word, a different move kind each landing, and continuous drift between beats (no hold > 12 frames).
+
 ## Rebuild
 
 ```sh
@@ -21,7 +25,7 @@ npm install
 python3 tools/draw_chars.py          # SVG → PNG characters
 python3 tools/make_screens.py        # original in-scene UIs
 export CHROME=/path/to/chrome
-GPU=0 node render.mjs --stills stills 0 68 239 478 760
+GPU=0 node render.mjs --stills stills 0 16 66 146 248 486 770
 GPU=0 node render.mjs --seq frames
 python3 mix.py
 ffmpeg -framerate 24 -i frames/f%04d.png -i audio/mix.wav -map 0:v -map 1:a \

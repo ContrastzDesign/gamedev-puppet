@@ -10,7 +10,7 @@
 Cozy first-game maker's library/workshop labeled FIRST GAME LAB, with stations TWINE (passage cards + string links), GDEVELOP (key → open door event rule), NILO (type → build mini world). Neighbouring sketch/playtest desks, book shelves, posters, lamps. Original screen UIs; generic plain lettering only.
 
 ## Technical
-1080×1920, 24 fps, 998 frames, H.264 CRF 18 yuv420p + AAC. Integrated loudness −14.0 LUFS, true peak ≤ −1 dBTP. Rendered online with GPU=0 (SwiftShader). Captions sit in one lower band below the character’s feet, hard-clamped to an 80 px side safe zone (max line render width 920 px), and fail boot if any caption box overlaps a sign/screen mesh. Captions spell **Nilo**, **Twine**, **GDevelop**.
+1080×1920, 24 fps, 998 frames, H.264 CRF 18 yuv420p + AAC. Integrated loudness −14.0 LUFS, true peak ≤ −1 dBTP. Rendered online with GPU=0 (SwiftShader). Motivated free camera (`camera.js`): landings 0–4 frames before named VO words, varied move kinds (no back-to-back repeats), continuous drift between beats. Captions sit in one lower band below the character’s feet, hard-clamped to an 80 px side safe zone (max line render width 920 px), and fail boot if any caption box overlaps a sign/screen mesh. Captions spell **Nilo**, **Twine**, **GDevelop**.
 
 ## Paste-ready YouTube description
 
