@@ -10,7 +10,7 @@
 Realism-test screening lab labeled REALISM LAB, with stations CITY (street-level fly-through + geometry/light viz), FACE (close-up eye/skin/hair layers + softboxes), BUDGET (16.7 ms timer bar split city vs face). Neighbouring plate/grade desks, equipment racks, posters, lamps. Original screen UIs; generic plain lettering only. No Epic/Unity demo footage.
 
 ## Technical
-1080×1920, 24 fps, 1253 frames, H.264 CRF 18 yuv420p + AAC. Integrated loudness −14.0 LUFS, true peak ≤ −1 dBTP. Rendered online with GPU=0 (SwiftShader). Captions sit in one lower band below the character’s feet, hard-clamped to an 80 px side safe zone (max line render width 920 px), and fail boot if any caption box overlaps a sign/screen mesh. Captions spell **Unreal Engine 5**, **The Matrix Awakens**, **Nanite**, **Lumen**, **Enemies**, **High Definition Render Pipeline**, **sixty**, **16.7**.
+1080×1920, 24 fps, 1253 frames, H.264 CRF 18 yuv420p + AAC. Integrated loudness −14.0 LUFS, true peak ≤ −1 dBTP. Rendered online with GPU=0 (SwiftShader). Camera rebuilt to land 0–4 frames before each named VO beat with a different move kind each time (push-in, orbit, crane, pull-out, cut, low-hero, top-down, fly-through, whip); `assertMaxHold(12)` and a static-frame difference check (YAVG&lt;0.15) both pass. Captions are fully opaque in one lower band below the feet (bbox bottom ≤ y=1840), hard-clamped to an 80 px side safe zone, max 2 lines, and fail boot if any caption box overlaps a sign/screen mesh. Captions spell **Unreal Engine 5**, **The Matrix Awakens**, **Nanite**, **Lumen**, **Enemies**, **High Definition Render Pipeline**, **sixty**, **16.7**.
 
 ## Paste-ready YouTube description
 

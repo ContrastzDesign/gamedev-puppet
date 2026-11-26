@@ -1,6 +1,6 @@
 // Word-exact caption overlays — warm cream/yellow with dark outline (V1).
 // Hard safe zone: 80 px side margins → max rendered line width 920 px (incl. stroke).
-import { W, H, clamp, smooth } from './core.js';
+import { W, H } from './core.js';
 import { CAPTIONS } from './beats.js';
 
 const SIDE_MARGIN = 80;
@@ -9,12 +9,14 @@ const STROKE_W = 14;
 // Stroke is centered on the glyph path → half extends past each edge.
 const MAX_TEXT_W = MAX_RENDER_W - STROKE_W; // 906
 const BASE_FONT_PX = 70;
-const MIN_FONT_PX = 42;
+const MIN_FONT_PX = 36;
 const TRACK_RATIO = -0.01;
-// top: above heads; low: lower third — kept below typical character feet so faces stay clear
-const BAND_Y = { top: 200, low: 1760 };
-const LOW_TOP_MIN = 1640;   // first line below character feet / lower body
-const BOTTOM_MARGIN = 50;   // keep clear of Shorts bottom UI
+const MAX_LINES = 2;
+// One lower caption band below character feet. BBox bottom must be ≤ CAP_BOTTOM_MAX.
+const BAND_Y = { top: 200, low: 1720 };
+const LOW_TOP_MIN = 1620;
+const CAP_BOTTOM_MAX = 1840; // assertion: bbox.bottom <= 1840
+const BOTTOM_MARGIN = H - CAP_BOTTOM_MAX; // 80 — keep block above the cap floor
 const WRAP_DANGLE = new Set(['a', 'an', 'the', 'or', 'and', 'of', 'in', 'on', 'to', 'at', 'by', 'for', 'with', 'its', "it's", 'where', 'can']);
 const FILL = '#f5e6b8';
 const STROKE = '#1c1810';
@@ -41,7 +43,7 @@ function measureKit(fontPx) {
 }
 
 /** Balanced multi-line wrap: try 1..maxLines splits; pick the layout whose longest line is shortest. */
-function wrapWords(words, visW, maxW, maxLines = 5) {
+function wrapWords(words, visW, maxW, maxLines = MAX_LINES) {
   const n = words.length;
   if (n === 0) return [];
   if (n === 1 || visW(words.join(' ')) <= maxW) return [[0, n]];
@@ -90,15 +92,18 @@ function wrapWords(words, visW, maxW, maxLines = 5) {
 
 function layoutCaption(c, kit) {
   const words = c.text.split(/\s+/).filter(Boolean);
-  const lines = wrapWords(words, kit.visW, MAX_TEXT_W, 5);
+  const lines = wrapWords(words, kit.visW, MAX_TEXT_W, MAX_LINES);
+  if (lines.length > MAX_LINES) {
+    throw new Error(`Caption exceeds ${MAX_LINES} lines: "${c.text}"`);
+  }
   let cy = BAND_Y[c.band] ?? BAND_Y.top;
-  // Keep low-band blocks entirely in the lower third (below feet, above bottom margin)
+  // Keep low-band blocks entirely in the lower third (below feet, above CAP_BOTTOM_MAX)
   if (c.band === 'low') {
     const half = ((lines.length - 1) / 2) * kit.lineH;
     const topY = cy - half - kit.lineH * 0.55;
     if (topY < LOW_TOP_MIN) cy += (LOW_TOP_MIN - topY);
     const botY = cy + half + kit.lineH * 0.55;
-    if (botY > H - BOTTOM_MARGIN) cy -= (botY - (H - BOTTOM_MARGIN));
+    if (botY > CAP_BOTTOM_MAX) cy -= (botY - CAP_BOTTOM_MAX);
   }
   const lineInfo = lines.map(([a, b], li) => {
     const str = words.slice(a, b).join(' ');
@@ -108,7 +113,7 @@ function layoutCaption(c, kit) {
     return { text: str, width: lw, renderW, baseline };
   });
   const maxRender = lineInfo.length ? Math.max(...lineInfo.map((l) => l.renderW)) : 0;
-  return { ...c, fontPx: kit.fontPx, font: kit.font, track: kit.track, lineInfo, maxRender, cy };
+  return { ...c, fontPx: kit.fontPx, font: kit.font, track: kit.track, lineInfo, maxRender, cy, lineCount: lines.length };
 }
 
 export async function initOverlays() {
@@ -133,7 +138,12 @@ export async function initOverlays() {
 export function assertCaptionSafeZone() {
   if (!LAYOUTS) throw new Error('overlays: call initOverlays() first');
   const overflows = [];
+  const bottomFails = [];
+  const lineFails = [];
   for (const c of LAYOUTS) {
+    if (c.lineInfo.length > MAX_LINES) {
+      lineFails.push({ text: c.text, lines: c.lineInfo.length });
+    }
     for (const line of c.lineInfo) {
       const left = W / 2 - line.renderW / 2;
       const right = W / 2 + line.renderW / 2;
@@ -150,9 +160,26 @@ export function assertCaptionSafeZone() {
       }
     }
   }
+  for (const box of captionBoxes()) {
+    if (box.bottom > CAP_BOTTOM_MAX + 0.5) {
+      bottomFails.push({
+        text: box.text,
+        bottom: +box.bottom.toFixed(1),
+        max: CAP_BOTTOM_MAX,
+      });
+    }
+  }
+  if (lineFails.length) {
+    throw new Error(`Caption exceeds ${MAX_LINES} lines:\n`
+      + lineFails.map((o) => `  "${o.text}" lines=${o.lines}`).join('\n'));
+  }
   if (overflows.length) {
     throw new Error(`Caption overflow (safe zone ${SIDE_MARGIN}px / max ${MAX_RENDER_W}px):\n`
       + overflows.map((o) => `  "${o.line}" renderW=${o.renderW} font=${o.fontPx} left=${o.left} right=${o.right}`).join('\n'));
+  }
+  if (bottomFails.length) {
+    throw new Error(`Caption bbox bottom below y=${CAP_BOTTOM_MAX}:\n`
+      + bottomFails.map((o) => `  "${o.text}" bottom=${o.bottom}`).join('\n'));
   }
   return true;
 }
@@ -174,10 +201,10 @@ export function captionInfo() {
   }));
 }
 
-/** Screen-space axis-aligned boxes for every caption (incl. stroke padding). */
+/** Screen-space axis-aligned boxes for every caption (opaque plate + stroke). */
 export function captionBoxes() {
   if (!LAYOUTS) throw new Error('overlays: call initOverlays() first');
-  const vPad = STROKE_W / 2 + 4;
+  const vPad = STROKE_W / 2 + 10;
   return LAYOUTS.map((L) => {
     const lineH = Math.round(L.fontPx * 1.17);
     const tops = L.lineInfo.map((l) => l.baseline - lineH * 0.55 - vPad);
@@ -188,10 +215,10 @@ export function captionBoxes() {
       end: L.end ?? L.f + 90,
       text: L.text,
       band: L.band,
-      left: W / 2 - maxW / 2,
-      right: W / 2 + maxW / 2,
+      left: W / 2 - maxW / 2 - 18,
+      right: W / 2 + maxW / 2 + 18,
       top: Math.min(...tops),
-      bottom: Math.max(...bots),
+      bottom: Math.min(CAP_BOTTOM_MAX, Math.max(...bots)),
     };
   });
 }
@@ -200,13 +227,22 @@ export function drawOverlays(ctx, f) {
   if (!LAYOUTS) return;
   for (const c of LAYOUTS) {
     if (f < c.f || f > (c.end ?? c.f + 90)) continue;
-    const life = f - c.f;
-    const fadeIn = smooth(clamp(life / 4));
-    const fadeOut = c.end != null ? smooth(clamp(((c.end) - f) / 4)) : 1;
-    const a = fadeIn * fadeOut;
-    if (a <= 0.01) continue;
+    // Fully opaque caption block in the lower band (no fade, solid plate + solid glyphs).
     ctx.save();
-    ctx.globalAlpha = a;
+    ctx.globalAlpha = 1;
+    const lineH = Math.round(c.fontPx * 1.17);
+    const vPad = STROKE_W / 2 + 10;
+    const tops = c.lineInfo.map((l) => l.baseline - lineH * 0.55 - vPad);
+    const bots = c.lineInfo.map((l) => l.baseline + lineH * 0.55 + vPad);
+    const maxW = Math.max(...c.lineInfo.map((l) => l.renderW));
+    const left = W / 2 - maxW / 2 - 18;
+    const right = W / 2 + maxW / 2 + 18;
+    const top = Math.min(...tops);
+    const bottom = Math.min(CAP_BOTTOM_MAX, Math.max(...bots));
+    ctx.fillStyle = '#14110c';
+    ctx.beginPath();
+    ctx.roundRect(left, top, right - left, bottom - top, 18);
+    ctx.fill();
     ctx.font = c.font;
     ctx.letterSpacing = `${c.track}px`;
     ctx.textAlign = 'left';

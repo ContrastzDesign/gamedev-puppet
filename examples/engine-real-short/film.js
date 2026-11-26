@@ -1,9 +1,10 @@
 // Engine-real Short — content-short VERSION 1 (drawn SVG animals in a detailed 3D realism lab).
 import * as THREE from 'three';
 import { FPS, FRAMES, SHOTS } from './beats.js';
-import { W, H, clamp, easeInOut, lin } from './core.js';
+import { W, H } from './core.js';
 import { buildRoom } from './room.js';
 import { initOverlays, drawOverlays, captionInfo, assertCaptionSafeZone, captionBoxes } from './overlays.js';
+import { buildCamera, assertMaxHold, LANDINGS } from './camera.js';
 
 const glCanvas = document.querySelector('#gl');
 const film = document.querySelector('#film');
@@ -60,6 +61,7 @@ const POSES = ['neutral', 'talk', 'point', 'wow'];
 const OCCLUSION_MAX = 0.15;
 
 let room, chars = {}, shadowCatch;
+let camSys = null;
 let ready = false;
 const raycaster = new THREE.Raycaster();
 const _v = new THREE.Vector3();
@@ -118,65 +120,20 @@ function poseFor(shot, f) {
   return 'wow';
 }
 
-/** Character stands in the aisle in front of the station (full body readable). */
+/** Character stands in the aisle in front of the station (medium, readable). */
 function charLocal(shot) {
+  const id = typeof shot === 'string' ? shot : shot.id;
   const side = ({
     hook: 0, question: 0.1, unreal: -0.15, unity: 0.2, budget: -0.2,
-  })[shot.id] || 0;
-  const scale = shot.id === 'hook' || shot.id === 'question' ? 1.18 : 0.9;
+    lab: 0.05, city: -0.15, face: 0.2,
+  })[id] || 0;
+  const scale = (id === 'hook' || id === 'question' || id === 'lab') ? 1.12 : 0.95;
   return { side, z: 2.15, scale };
 }
 
-function cameraFor(shot, f) {
-  const booth = room.boothMeta[shot.booth];
-  const t = easeInOut(clamp((f - shot.f0) / Math.max(1, shot.f1 - shot.f0 - 1)));
-  const cl = charLocal(shot);
-  const charX = booth.x + cl.side;
-  const charZ = booth.z + cl.z;
-  const wantFov = shot.id === 'hook' || shot.id === 'question' ? 42 : 40;
-  if (camera.fov !== wantFov) {
-    camera.fov = wantFov;
-    camera.updateProjectionMatrix();
-  }
-  if (shot.id === 'hook' || shot.id === 'question') {
-    return {
-      x: lin(charX + 0.28, charX + 0.08, t),
-      y: lin(1.52, 1.42, t),
-      z: lin(charZ + 4.55, charZ + 3.95, t),
-      lx: charX - 0.02,
-      ly: 1.05,
-      lz: charZ - 0.15,
-    };
-  }
-  if (shot.id === 'unreal') {
-    return {
-      x: lin(charX + 0.85, charX + 0.45, t),
-      y: lin(1.5, 1.42, t),
-      z: lin(charZ + 4.85, charZ + 4.1, t),
-      lx: charX - 0.06,
-      ly: 0.85,
-      lz: charZ - 0.15,
-    };
-  }
-  if (shot.id === 'unity') {
-    return {
-      x: lin(charX - 0.85, charX - 0.4, t),
-      y: lin(1.52, 1.42, t),
-      z: lin(charZ + 4.9, charZ + 4.15, t),
-      lx: charX + 0.06,
-      ly: 0.85,
-      lz: charZ - 0.1,
-    };
-  }
-  // budget
-  return {
-    x: lin(charX - 0.7, charX - 0.3, t),
-    y: lin(1.55, 1.45, t),
-    z: lin(charZ + 4.9, charZ + 4.15, t),
-    lx: charX + 0.05,
-    ly: 0.88,
-    lz: charZ - 0.1,
-  };
+function cameraFor(_shot, f) {
+  if (!camSys) throw new Error('camera system not ready');
+  return camSys.camAt(f);
 }
 
 function syncBoothVisibility(shot) {
@@ -289,10 +246,19 @@ export function assertCharacterVisible(frames) {
   return results;
 }
 
+function isWorldVisible(obj) {
+  let o = obj;
+  while (o) {
+    if (o.visible === false) return false;
+    o = o.parent;
+  }
+  return true;
+}
+
 function collectSignScreenMeshes() {
   const out = [];
   scene.traverse((obj) => {
-    if (obj.isMesh && obj.userData && obj.userData.isSignOrScreen) out.push(obj);
+    if (obj.isMesh && obj.userData && obj.userData.isSignOrScreen && isWorldVisible(obj)) out.push(obj);
   });
   return out;
 }
@@ -393,6 +359,14 @@ function renderFrame(f) {
   f = ((f % FRAMES) + FRAMES) % FRAMES | 0;
   const shot = shotAt(f);
   const cam = cameraFor(shot, f);
+  // Slight FOV breathe with move kind
+  const land = camSys ? camSys.abs[camSys.landingIndexAt(f)] : null;
+  const wantFov = land && (land.kind === 'low-hero' || land.kind === 'push-in') ? 38
+    : land && land.kind === 'pull-out' ? 44 : 40;
+  if (Math.abs(camera.fov - wantFov) > 0.05) {
+    camera.fov = wantFov;
+    camera.updateProjectionMatrix();
+  }
   camera.position.set(cam.x, cam.y, cam.z);
   camera.lookAt(cam.lx, cam.ly, cam.lz);
   placeCharacter(shot, f);
@@ -427,6 +401,8 @@ async function boot() {
     chars[name] = bill;
   }
 
+  camSys = buildCamera(room, charLocal);
+  const holdInfo = assertMaxHold(camSys.camAt, FRAMES);
   await initOverlays();
   assertCaptionSafeZone();
   const occl = assertCharacterVisible('all');
@@ -436,6 +412,9 @@ async function boot() {
   window.assertCaptionSafeZone = assertCaptionSafeZone;
   window.assertCaptionClearOfSigns = assertCaptionClearOfSigns;
   window.assertCharacterVisible = assertCharacterVisible;
+  window.assertMaxHold = () => assertMaxHold(camSys.camAt, FRAMES);
+  window.cameraLandings = LANDINGS;
+  window.holdInfo = holdInfo;
   window.occlusionInfo = occl;
   window.signClearInfo = signClear;
   ready = true;

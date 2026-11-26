@@ -3,7 +3,7 @@
   "project": "examples/engine-real-short",
   "style": "content-short VERSION 1 (drawn SVG animals in detailed 3D worlds)",
   "video": {
-    "file": "engine-real-short.mp4",
+    "file": "engine-real-final.mp4",
     "width": 1080,
     "height": 1920,
     "fps": 24,
@@ -11,11 +11,12 @@
     "duration_s": 52.208333333333336,
     "video_codec": "libx264 CRF 18 yuv420p",
     "audio_codec": "AAC 192k",
-    "loudness_lufs": -14.1,
-    "true_peak_dbtp": -1.6,
+    "loudness_lufs": -14.0,
+    "true_peak_dbtp": -1.4,
     "renderer": "ANGLE SwiftShader GPU=0",
-    "sha256": "648b09ee15e45f605ed880d2b68a56dff52936fddc141d769b2dc9c79ca7d620",
-    "bytes": 13676429
+    "sha256": "9287ef0c6547278bd004d475e4e8f5f53154cb80c615757b3b516b6291c58e25",
+    "bytes": 17146319,
+    "static_check_max_yavg_lt_015_run": 0
   },
   "voiceover": {
     "file": "audio/vo.mp3",
@@ -39,7 +40,7 @@
   "sfx": [
     {
       "file": "soft-pop.wav",
-      "sha256": "6cc274edaaadd0a5b4ac6d2484826ed7c523c19439b770b95bbf8c67535d0d88",
+      "sha256": "8a506fe24766f25ee13577020be677ae9d03e153dfa708090467cd5255e5f9e0",
       "bytes": 43278,
       "license": "CC0",
       "url": "https://freesound.org/s/541993/",
@@ -49,7 +50,7 @@
     },
     {
       "file": "whoosh-short.wav",
-      "sha256": "73ef921ec7b9aafd3ba49109fff14055d86617931e2c6ae176764e7ac16b5f3d",
+      "sha256": "11df390247dd76dee80cae193f30f468b491f6e2cfd9e6b97b5444f0a801f28c",
       "bytes": 38478,
       "license": "CC0",
       "url": "https://freesound.org/s/372519/",
@@ -58,7 +59,7 @@
     },
     {
       "file": "whoosh-long.wav",
-      "sha256": "2af2dc8fcac430e16abb3afdbc566d5a5b9f8b46fd4eeb8fa859f70c29f37678",
+      "sha256": "4987c702b2b4b16d55058b62994f0b48b34a10f1150f45fa7c9dbaf3f45ba3e9",
       "bytes": 52878,
       "license": "CC0",
       "url": "https://freesound.org/s/416054/",
@@ -67,7 +68,7 @@
     },
     {
       "file": "ui-pop.wav",
-      "sha256": "23175dc4b1897b004555bcc9b86e0915afe14c2fc3a2fefa3861710dc62881a1",
+      "sha256": "2868787f607cfe72eecbcbdf22e2c3a0d981183b488b1a965dd06e688fcc3276",
       "bytes": 28878,
       "license": "CC0",
       "url": "https://freesound.org/s/878253/",
@@ -85,7 +86,7 @@
     },
     {
       "file": "swish-short.wav",
-      "sha256": "9f956707d33699fe35f49ca60b02ce25b585777e1fd00033f234cbcc18de7527",
+      "sha256": "749c663ef80b4cb7bee2ebb7f21706de9951afc3dfce26074210635d93545b45",
       "bytes": 38478,
       "license": "CC0",
       "url": "https://freesound.org/s/154648/",
@@ -112,7 +113,7 @@
     },
     {
       "file": "mouse-click.wav",
-      "sha256": "795684ab38facb168372b3fedc175f2a56f96da0a28be0fda4f4c2daed5268c3",
+      "sha256": "3a69162af06d0a8df00b2b216629bfd5973389cd1835ca820f54dc42a47cfda9",
       "bytes": 24078,
       "license": "CC0",
       "url": "https://freesound.org/s/534104/",
@@ -130,7 +131,7 @@
     },
     {
       "file": "chime-short.wav",
-      "sha256": "33007cb1c971969068645736c8ff33158a7538efa9230081fe807ea862af858b",
+      "sha256": "c523f6e791142dfa06f0e6349a4f50db09a361b9833a3fdc954a84ce12a688d1",
       "bytes": 67278,
       "license": "CC0",
       "url": "https://freesound.org/s/390863/",
@@ -139,7 +140,7 @@
     },
     {
       "file": "keyboard-short.wav",
-      "sha256": "bc2ce2085ecf647ee74b4d9fe5f2522f03dbcc14a546a8183a6992a2d69076ae",
+      "sha256": "c3d79a0a1e0a1b0262fefdf916606ee32ae86f547860621fd145abca2d85c685",
       "bytes": 52878,
       "license": "CC0",
       "url": "https://freesound.org/s/450282/",
@@ -149,7 +150,7 @@
     },
     {
       "file": "cheer-short.wav",
-      "sha256": "3cb398010e7ce39bfbe864dc25ccd32fe8ba0088e527d8202c98267d85124510",
+      "sha256": "5cbe14c30adf7d47dbdd4de74c99cdab87fcb6db8d622097c91b1bbdcb2e210e",
       "bytes": 67278,
       "license": "CC0",
       "url": "https://freesound.org/s/511788/",
@@ -207,5 +208,110 @@
       "puffin/tortoise species signals strengthened (beak/shell)"
     ],
     "artifacts": "/opt/cursor/artifacts/engine-real-final/"
+  },
+  "camera": {
+    "note": "Rebuilt free-moving camera per camera.md; landings 0-4 frames before named VO words; assertMaxHold<=12",
+    "landings": [
+      {
+        "f": 0,
+        "kind": "push-in",
+        "label": "hook"
+      },
+      {
+        "f": 108,
+        "kind": "orbit",
+        "label": "footage"
+      },
+      {
+        "f": 153,
+        "kind": "crane",
+        "label": "demos"
+      },
+      {
+        "f": 253,
+        "kind": "pull-out",
+        "label": "difference"
+      },
+      {
+        "f": 298,
+        "kind": "cut",
+        "label": "unreal"
+      },
+      {
+        "f": 336,
+        "kind": "low-hero",
+        "label": "street"
+      },
+      {
+        "f": 381,
+        "kind": "push-in",
+        "label": "matrix"
+      },
+      {
+        "f": 411,
+        "kind": "top-down",
+        "label": "nanite"
+      },
+      {
+        "f": 470,
+        "kind": "crane",
+        "label": "lumen"
+      },
+      {
+        "f": 525,
+        "kind": "fly-through",
+        "label": "flythrough"
+      },
+      {
+        "f": 613,
+        "kind": "cut",
+        "label": "unity"
+      },
+      {
+        "f": 668,
+        "kind": "whip",
+        "label": "enemies"
+      },
+      {
+        "f": 696,
+        "kind": "orbit",
+        "label": "hdrp"
+      },
+      {
+        "f": 747,
+        "kind": "low-hero",
+        "label": "eye"
+      },
+      {
+        "f": 852,
+        "kind": "push-in",
+        "label": "fills"
+      },
+      {
+        "f": 920,
+        "kind": "whip",
+        "label": "budget"
+      },
+      {
+        "f": 951,
+        "kind": "top-down",
+        "label": "sixty"
+      },
+      {
+        "f": 1003,
+        "kind": "push-in",
+        "label": "ms167"
+      },
+      {
+        "f": 1092,
+        "kind": "crane",
+        "label": "cityface"
+      },
+      {
+        "f": 1213,
+        "kind": "low-hero",
+        "label": "photo"
+      }
+    ]
   }
 }
