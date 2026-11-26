@@ -10,10 +10,13 @@
 - Finale: grad (shiba) — mortarboard, gown, gold sash, diploma
 
 ## Set
-Gamer bedroom (GAMER DEN) with TV showing a 200 GB day-one download, high shelves, posters and string lights; busy disc-press factory with presses, dual conveyors, shrink-wrap, disc/case stacks, pallets, shipping crates, forklift/pallet jack, hazard stripes, pipes/vents and warning signs; game studio with bug tickets, sticky wall and LAUNCH IN 4 DAYS board under packed shelves; certification lab with test consoles/monitors, filing cabinets, clipboards, stamp desk, PASS/FAIL bins, dev-kit shelves and checklist wall; bedroom COASTER MODE gag with disc under a soda. Original screen UIs; generic plain lettering only. No Activision / Call of Duty / Sony footage or logos.
+Gamer bedroom (GAMER DEN) with TV showing a 200 GB day-one download, high shelves, posters and string lights; busy disc-press factory with presses, dual conveyors, shrink-wrap, disc/case stacks, pallets, shipping crates, forklift/jack, hazard stripes, pipes/vents and warning signs; game studio with bug tickets, sticky wall and LAUNCH IN 4 DAYS board under packed shelves; certification lab with test consoles/monitors, filing cabinets, clipboards, stamp desk, PASS/FAIL bins, dev-kit shelves and checklist wall; bedroom COASTER MODE gag with disc under a soda. Original screen UIs; generic plain lettering only. No Activision / Call of Duty / Sony footage or logos.
+
+## Camera (v3 rebuild)
+Free key→key rail with varied move kinds (never the same kind twice in a row), landings 0–4 frames before named VO words, moves 12–30 eased frames, max hold ≤ 12 (boot assertion), near plane 0.35, path-clearance assertion. Booth changes use CUT so interpolation never flies through the void between sets.
 
 ## Technical
-1080×1920, 24 fps, 1019 frames, H.264 CRF 18 yuv420p + AAC. Integrated loudness −14.1 LUFS, true peak ≤ −1.5 dBTP. Rendered online with GPU=0 (SwiftShader). Captions sit in one lower band below the character’s feet, hard-clamped to an 80 px side safe zone (max line render width 920 px), and fail boot if any caption box overlaps a sign/screen mesh. Captions spell **disc**, **Call of Duty**, **200 Gigabyte**, **going gold**, **Sony**. Final v2 artifacts: `/opt/cursor/artifacts/new-game-update-final-v2/`.
+1080×1920, 24 fps, 1019 frames, H.264 CRF 18 yuv420p + AAC. Integrated loudness −14.0 LUFS, true peak ≤ −1.5 dBTP. Rendered online with GPU=0 (SwiftShader). Captions sit in one lower band below the character’s feet, fully opaque, max 2 lines, hard-clamped to an 80 px side safe zone, bbox bottom ≤ y=1840, and fail boot if any caption box overlaps a sign/screen mesh. Captions spell **disc**, **Call of Duty**, **200 Gigabyte**, **going gold**, **Sony**. Artifacts: `/opt/cursor/artifacts/new-game-update-final/`.
 
 ## Paste-ready YouTube description
 

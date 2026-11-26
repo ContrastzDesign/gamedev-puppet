@@ -1,9 +1,13 @@
 // New-game-update Short — content-short VERSION 1 (drawn SVG animals in detailed 3D worlds).
 import * as THREE from 'three';
 import { FPS, FRAMES, SHOTS } from './beats.js';
-import { W, H, clamp, easeInOut, lin } from './core.js';
+import { W, H, clamp } from './core.js';
 import { buildRoom } from './room.js';
-import { initOverlays, drawOverlays, captionInfo, assertCaptionSafeZone, captionBoxes } from './overlays.js';
+import { initOverlays, drawOverlays, captionInfo, assertCaptionSafeZone, captionBoxes, assertCaptionBottom } from './overlays.js';
+import {
+  cameraAt, assertMaxHold, landingKeys, midMoveFrames, cameraKeySummary,
+  NEAR_PLANE, OCCLUSION_MAX, MAX_HOLD,
+} from './camera.js';
 
 const glCanvas = document.querySelector('#gl');
 const film = document.querySelector('#film');
@@ -26,7 +30,7 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color('#5a5a60');
 scene.fog = new THREE.Fog('#5a5a60', 30, 55);
 
-const camera = new THREE.PerspectiveCamera(40, W / H, 0.1, 60);
+const camera = new THREE.PerspectiveCamera(40, W / H, NEAR_PLANE, 60);
 
 const hemi = new THREE.HemisphereLight('#fff8f0', '#6a5a4c', 1.55);
 scene.add(hemi);
@@ -57,8 +61,6 @@ const loadTex = (url) => new Promise((res, rej) => loader.load(url, (t) => {
 
 const CHAR_NAMES = ['shiba', 'okapi', 'narwhal', 'badger', 'mandrill', 'coast', 'grad'];
 const POSES = ['neutral', 'talk', 'point', 'wow'];
-const OCCLUSION_MAX = 0.15;
-
 let room, chars = {}, shadowCatch;
 let ready = false;
 const raycaster = new THREE.Raycaster();
@@ -142,68 +144,27 @@ function charLocal(shot) {
   return { side, z, scale };
 }
 
-function cameraFor(shot, f) {
-  const booth = room.boothMeta[shot.booth];
-  const t = easeInOut(clamp((f - shot.f0) / Math.max(1, shot.f1 - shot.f0 - 1)));
-  const cl = charLocal(shot);
-  const charX = booth.x + cl.side;
-  const charZ = booth.z + cl.z;
-  const wantFov = (shot.id === 'hook' || shot.id === 'buy') ? 42 : 40;
-  if (camera.fov !== wantFov) {
+function applyCamera(cam) {
+  const wantFov = cam.fov ?? 40;
+  if (Math.abs(camera.fov - wantFov) > 0.01) {
     camera.fov = wantFov;
     camera.updateProjectionMatrix();
   }
-  if (shot.id === 'hook' || shot.id === 'buy' || shot.id === 'why' || shot.id === 'coaster' || shot.id === 'grad') {
-    return {
-      x: lin(charX + 0.28, charX + 0.08, t),
-      y: lin(1.7, 1.55, t),
-      z: lin(charZ + 4.7, charZ + 4.1, t),
-      lx: charX - 0.02,
-      ly: 1.35,
-      lz: charZ - 0.25,
-    };
-  }
-  if (shot.id === 'factory') {
-    return {
-      x: lin(charX + 0.95, charX + 0.4, t),
-      y: lin(1.85, 1.68, t),
-      z: lin(charZ + 6.1, charZ + 5.15, t),
-      lx: charX - 0.05,
-      ly: 1.2,
-      lz: charZ - 0.55,
-    };
-  }
-  if (shot.id === 'gold' || shot.id === 'bugs') {
-    return {
-      x: lin(charX - 0.65, charX - 0.28, t),
-      y: lin(1.78, 1.62, t),
-      z: lin(charZ + 5.15, charZ + 4.35, t),
-      lx: charX + 0.05,
-      ly: 1.32,
-      lz: charZ - 0.3,
-    };
-  }
-  // cert
-  return {
-    x: lin(charX + 0.55, charX + 0.2, t),
-    y: lin(1.78, 1.62, t),
-    z: lin(charZ + 5.25, charZ + 4.4, t),
-    lx: charX - 0.02,
-    ly: 1.28,
-    lz: charZ - 0.3,
-  };
+  camera.position.set(cam.x, cam.y, cam.z);
+  camera.lookAt(cam.lx, cam.ly, cam.lz);
 }
 
-function syncBoothVisibility(shot) {
+function syncBoothVisibility(boothId) {
   const b = room.booths;
   for (const id of Object.keys(b)) {
-    b[id].visible = (id === shot.booth);
+    b[id].visible = (id === boothId);
   }
 }
 
-function placeCharacter(shot, f) {
-  syncBoothVisibility(shot);
-  const booth = room.boothMeta[shot.booth];
+function placeCharacter(shot, f, boothId) {
+  const bid = boothId || shot.booth;
+  syncBoothVisibility(bid);
+  const booth = room.boothMeta[bid];
   const name = shot.char;
   for (const n of CHAR_NAMES) chars[n].group.visible = false;
   const bill = chars[name];
@@ -271,25 +232,25 @@ function measureCharacterOcclusion(bill) {
 export function assertCharacterVisible(frames) {
   const results = [];
   const fails = [];
+  const sampleSet = new Set();
   for (const shot of SHOTS) {
-    const samples = [
-      shot.f0,
-      Math.floor((shot.f0 + shot.f1 - 1) / 2),
-      shot.f1 - 1,
-    ];
-    for (const f of samples) {
-      if (frames && !frames.includes(f) && frames !== 'all') continue;
-      const cam = cameraFor(shot, f);
-      camera.position.set(cam.x, cam.y, cam.z);
-      camera.lookAt(cam.lx, cam.ly, cam.lz);
-      placeCharacter(shot, f);
-      scene.updateMatrixWorld(true);
-      const bill = chars[shot.char];
-      const frac = measureCharacterOcclusion(bill);
-      const row = { shot: shot.id, f, occlusion: +frac.toFixed(3) };
-      results.push(row);
-      if (frac > OCCLUSION_MAX + 1e-6) fails.push(row);
-    }
+    sampleSet.add(shot.f0);
+    sampleSet.add(Math.floor((shot.f0 + shot.f1 - 1) / 2));
+    sampleSet.add(shot.f1 - 1);
+  }
+  for (const k of landingKeys()) sampleSet.add(k.f);
+  for (const f of sampleSet) {
+    if (frames && frames !== 'all' && !frames.includes(f)) continue;
+    const shot = shotAt(f);
+    const cam = cameraAt(f);
+    applyCamera(cam);
+    placeCharacter(shot, f, cam.booth);
+    scene.updateMatrixWorld(true);
+    const bill = chars[shot.char];
+    const frac = measureCharacterOcclusion(bill);
+    const row = { shot: shot.id, f, booth: cam.booth, occlusion: +frac.toFixed(3) };
+    results.push(row);
+    if (frac > OCCLUSION_MAX + 1e-6) fails.push(row);
   }
   if (fails.length) {
     throw new Error(
@@ -298,6 +259,79 @@ export function assertCharacterVisible(frames) {
     );
   }
   return results;
+}
+
+/** Path clearance: camera not inside set geometry; near plane clear; no heavy foreground occluder. */
+export function assertPathClearance() {
+  const fails = [];
+  const solid = [];
+  scene.traverse((obj) => {
+    if (!obj.isMesh) return;
+    if (obj === shadowCatch) return;
+    if (obj.name === 'characterPlane') return;
+    if (obj.material && obj.material.transparent && (obj.material.opacity ?? 1) < 0.5) return;
+    solid.push(obj);
+  });
+  const samples = [];
+  for (let f = 0; f < FRAMES; f += 2) samples.push(f);
+  for (const f of samples) {
+    const cam = cameraAt(f);
+    applyCamera(cam);
+    const shot = shotAt(f);
+    placeCharacter(shot, f, cam.booth);
+    scene.updateMatrixWorld(true);
+
+    // Camera must stay above the floor and not sit inside a mesh AABB.
+    if (cam.y < 0.45) {
+      fails.push({ f, reason: `camera y ${cam.y.toFixed(2)} too low (under/through set)` });
+      continue;
+    }
+    _p.set(cam.x, cam.y, cam.z);
+    for (const mesh of solid) {
+      let hidden = false;
+      let o = mesh;
+      while (o) {
+        if (o.visible === false) { hidden = true; break; }
+        o = o.parent;
+      }
+      if (hidden) continue;
+      if (!mesh.geometry.boundingBox) mesh.geometry.computeBoundingBox();
+      _box.copy(mesh.geometry.boundingBox).applyMatrix4(mesh.matrixWorld);
+      // shrink a bit so resting near walls is OK; fail only if deeply inside
+      _box.min.addScalar(0.08);
+      _box.max.addScalar(-0.08);
+      if (_box.max.x > _box.min.x && _box.containsPoint(_p)) {
+        fails.push({ f, reason: `camera inside mesh ${mesh.name || mesh.parent?.name || 'anon'} booth=${cam.booth}` });
+        break;
+      }
+    }
+
+    // Near-plane / look direction: nothing solid within NEAR_PLANE of the lens along view.
+    camera.getWorldDirection(_n);
+    raycaster.set(camera.position, _n);
+    raycaster.near = 0;
+    raycaster.far = NEAR_PLANE + 0.05;
+    const nearHits = raycaster.intersectObjects(solid, false)
+      .filter((h) => {
+        let o = h.object;
+        while (o) {
+          if (o.visible === false) return false;
+          o = o.parent;
+        }
+        return true;
+      });
+    if (nearHits.length && nearHits[0].distance < NEAR_PLANE) {
+      fails.push({ f, reason: `near-plane hit at ${nearHits[0].distance.toFixed(3)} (< ${NEAR_PLANE})` });
+    }
+  }
+  if (fails.length) {
+    const uniq = fails.slice(0, 24);
+    throw new Error(
+      `Path clearance failed (${fails.length} frames):\n`
+      + uniq.map((r) => `  f${r.f}: ${r.reason}`).join('\n'),
+    );
+  }
+  return { checked: samples.length, near: NEAR_PLANE };
 }
 
 function collectSignScreenMeshes() {
@@ -357,10 +391,9 @@ export function assertCaptionClearOfSigns() {
     for (const f of samples) {
       if (f < cap.f || f > cap.end) continue;
       const shot = shotAt(f);
-      const cam = cameraFor(shot, f);
-      camera.position.set(cam.x, cam.y, cam.z);
-      camera.lookAt(cam.lx, cam.ly, cam.lz);
-      placeCharacter(shot, f);
+      const cam = cameraAt(f);
+      applyCamera(cam);
+      placeCharacter(shot, f, cam.booth);
       scene.updateMatrixWorld(true);
       camera.updateMatrixWorld(true);
       for (const mesh of meshes) {
@@ -410,10 +443,9 @@ export function assertCaptionClearOfSigns() {
 function renderFrame(f) {
   f = ((f % FRAMES) + FRAMES) % FRAMES | 0;
   const shot = shotAt(f);
-  const cam = cameraFor(shot, f);
-  camera.position.set(cam.x, cam.y, cam.z);
-  camera.lookAt(cam.lx, cam.ly, cam.lz);
-  placeCharacter(shot, f);
+  const cam = cameraAt(f);
+  applyCamera(cam);
+  placeCharacter(shot, f, cam.booth);
 
   renderer.render(scene, camera);
   ctx.drawImage(glCanvas, 0, 0, W, H);
@@ -447,15 +479,27 @@ async function boot() {
 
   await initOverlays();
   assertCaptionSafeZone();
+  assertCaptionBottom();
+  const holdInfo = assertMaxHold();
   const occl = assertCharacterVisible('all');
   const signClear = assertCaptionClearOfSigns();
+  const pathClear = assertPathClearance();
   window.captionInfo = captionInfo;
   window.captionBoxes = captionBoxes;
   window.assertCaptionSafeZone = assertCaptionSafeZone;
+  window.assertCaptionBottom = assertCaptionBottom;
   window.assertCaptionClearOfSigns = assertCaptionClearOfSigns;
   window.assertCharacterVisible = assertCharacterVisible;
+  window.assertPathClearance = assertPathClearance;
+  window.assertMaxHold = assertMaxHold;
+  window.cameraKeySummary = cameraKeySummary;
+  window.landingKeys = landingKeys;
+  window.midMoveFrames = midMoveFrames;
   window.occlusionInfo = occl;
   window.signClearInfo = signClear;
+  window.pathClearInfo = pathClear;
+  window.holdInfo = holdInfo;
+  window.MAX_HOLD = MAX_HOLD;
   ready = true;
   window.filmReady = true;
   window.renderFrame = renderFrame;

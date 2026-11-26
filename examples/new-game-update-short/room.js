@@ -796,10 +796,10 @@ function buildCert(screens) {
   check.position.set(0, 2.5, -2.85);
   g.add(check);
   const rej = makeSign('REJECTED', 1.15, 0.34, '#3a1818', '#c45848', '#e0c070');
-  rej.position.set(1.55, 2.15, -2.85);
+  rej.position.set(1.55, 2.55, -2.85);
   g.add(rej);
   const rules = makeSign('TRC LIST', 1.1, 0.32, '#1a2228', '#d8e8f0', '#4a8a98');
-  rules.position.set(-1.55, 2.15, -2.85);
+  rules.position.set(-1.55, 2.55, -2.85);
   g.add(rules);
 
   // dense checklist wall covering grey
@@ -830,9 +830,9 @@ function buildCert(screens) {
   addFilingCabinet(g, -1.85, 0, 0.25, 1.05);
   addFilingCabinet(g, 1.9, 0, 0.3, 1.05);
 
-  // PASS/FAIL bins visible midground
-  addPassFailBins(g, -1.15, 0, 0.85);
-  addPassFailBins(g, 1.25, 0, 0.9);
+  // PASS/FAIL bins on the sides / back — keep out of the lower caption band during landings
+  addPassFailBins(g, -2.05, 0, -0.55);
+  addPassFailBins(g, 2.1, 0, -0.5);
 
   addClipboard(g, -1.2, 0.78, -1.2, 0.2);
   addClipboard(g, 0.7, 0.78, -1.25, -0.15);

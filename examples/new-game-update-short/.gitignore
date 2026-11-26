@@ -6,3 +6,4 @@ audio/mix.wav
 audio/music/*.wav
 audio/sfx/*.wav
 .DS_Store
+stills-qa/
