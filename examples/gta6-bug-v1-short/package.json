@@ -1,0 +1,16 @@
+{
+  "name": "gta6-bug-v1-short",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Jake Short: Why Can't GTA VI Just Fix a Bug Overnight? (content-short V1, 1080x1920, 24 fps, 1027 frames)",
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "scripts": {
+    "stills": "GPU=0 node render.mjs --stills stills",
+    "render": "GPU=0 node render.mjs --seq frames",
+    "mix": "python3 mix.py"
+  },
+  "dependencies": {
+    "puppeteer-core": "^23.11.1"
+  }
+}

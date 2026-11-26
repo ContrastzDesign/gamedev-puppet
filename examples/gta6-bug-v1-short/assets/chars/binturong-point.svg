@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <ellipse cx="300" cy="560" rx="125" ry="130" fill="#5a4838"/>
+  <!-- shirt + tie -->
+  <path d="M205,455 Q300,420 395,455 L408,645 Q300,675 192,645 Z" fill="#ebe4dc"/>
+  <path d="M285,470 L315,470 L330,620 L270,620 Z" fill="#c45848"/>
+  <path d="M300,470 L315,490 L300,510 L285,490 Z" fill="#a03830"/>
+  <!-- shaggy dark head -->
+  <ellipse cx="300" cy="285" rx="138" ry="120" fill="#6a5848"/>
+  <ellipse cx="300" cy="305" rx="108" ry="92" fill="#7a6858"/>
+  <!-- tufted ears -->
+  <ellipse cx="175" cy="195" rx="32" ry="40" fill="#5a4838"/>
+  <ellipse cx="425" cy="195" rx="32" ry="40" fill="#5a4838"/>
+  <ellipse cx="175" cy="185" rx="10" ry="16" fill="#4a3830"/>
+  <ellipse cx="425" cy="185" rx="10" ry="16" fill="#4a3830"/>
+  <ellipse cx="300" cy="345" rx="48" ry="32" fill="#9a8878"/>
+  <ellipse cx="300" cy="335" rx="14" ry="10" fill="#2a2118"/>
+  <!-- inspector visor -->
+  <ellipse cx="300" cy="205" rx="140" ry="24" fill="#2a3038"/>
+  <path d="M170,215 Q300,155 430,215" fill="none" stroke="#3a4858" stroke-width="28" stroke-linecap="round"/>
+  <rect x="175" y="220" width="250" height="28" rx="4" fill="#1a2428" opacity=".55"/>
+  <!-- red-frame shades -->
+  <rect x="228" y="268" width="58" height="38" rx="8" fill="#1a2428" opacity=".9"/>
+  <rect x="314" y="268" width="58" height="38" rx="8" fill="#1a2428" opacity=".9"/>
+  <path d="M286,287 H314" stroke="#c45848" stroke-width="5"/>
+  <!-- stamp in R hand when pointing -->
+  <rect x="400" y="420" width="50" height="40" rx="4" fill="#c45848"/>
+  <rect x="415" y="400" width="20" height="30" rx="3" fill="#8a3030"/>
+  
+  <ellipse cx="258" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="342" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="260" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="344" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="300" cy="390" rx="11" ry="13" fill="#3a2a24"/>
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#7a6858"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#7a6858"/>
+  
+  <ellipse cx="410" cy="410.0" rx="22" ry="70.0" fill="#7a6858"/>
+  <ellipse cx="428" cy="340" rx="20" ry="16" fill="#7a6858"/>
+  
+  <ellipse cx="230" cy="710" rx="28" ry="16" fill="#5a4838"/>
+  <ellipse cx="370" cy="710" rx="28" ry="16" fill="#5a4838"/>
+  <ellipse cx="230" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+  <ellipse cx="370" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+
+</svg>

@@ -1,0 +1,101 @@
+{
+  "title": "Why Can't GTA VI Just Fix a Bug Overnight?",
+  "project": "examples/gta6-bug-v1-short",
+  "style": "content-short VERSION 1 (drawn SVG animals in detailed 3D worlds)",
+  "video": {
+    "file": "gta6-bug-v1-short.mp4",
+    "width": 1080,
+    "height": 1920,
+    "fps": 24,
+    "frames": 1027,
+    "duration_s": 42.791667,
+    "video_codec": "libx264 CRF 18 yuv420p",
+    "audio_codec": "AAC 192k",
+    "loudness_lufs": -14.1,
+    "true_peak_dbtp": -1.5,
+    "renderer": "ANGLE SwiftShader GPU=0",
+    "sha256": "a419e7cebfe374e5a37ba93620fa5a05c361371833abf2eaa3746e8a3f5a0a89",
+    "bytes": 10524153
+  },
+  "voiceover": {
+    "file": "audio/vo.mp3",
+    "sha256": "8c8c5cf07794187dc4121fe18d7784afcf7cc0f53ac0ab0d57ae3181a3e1f7c7",
+    "bytes": 684660,
+    "duration_s": 42.762449,
+    "engine": "ElevenLabs eleven_v4 (pre-supplied; not regenerated)",
+    "note": "Use supplied seed VO unchanged; captions spell GTA VI, rulebooks, 10 years, ten minutes, regression, Sony"
+  },
+  "music": {
+    "title": "Monkeys Spinning Monkeys",
+    "artist": "Kevin MacLeod",
+    "url": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1400011",
+    "download": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Monkeys%20Spinning%20Monkeys.mp3",
+    "license": "CC BY 4.0",
+    "license_url": "http://creativecommons.org/licenses/by/4.0/",
+    "file": "monkeys-spinning-monkeys.wav",
+    "source_mp3_sha256": "a5bb345c23849ad0786aa0bc5157a9f2d4039660fe00282e55754d475f36dc14",
+    "note": "Trimmed for mix; not Carefree / Sneaky Snitch / Wallpaper / Local Forecast / Lobby Time / Investigations / Hidden Agenda"
+  },
+  "sfx": "see audio/sfx/SOURCES.json",
+  "characters": [
+    {
+      "beat": "hook / cars through bridge",
+      "species": "pika",
+      "outfit": "gaming headset, round shades, green hoodie"
+    },
+    {
+      "beat": "one line of code / hit upload",
+      "species": "aardvark",
+      "outfit": "knit beanie, shades, studio hoodie"
+    },
+    {
+      "beat": "patch the bridge",
+      "species": "aardvark (worker outfit)",
+      "outfit": "yellow hard hat, safety shades, hi-vis vest"
+    },
+    {
+      "beat": "boats / invisible wall",
+      "species": "walrus",
+      "outfit": "captain hat, jacket, gold band"
+    },
+    {
+      "beat": "QA replay",
+      "species": "kinkajou",
+      "outfit": "TESTER cap, shades, clipboard"
+    },
+    {
+      "beat": "cert / Sony rulebooks",
+      "species": "binturong",
+      "outfit": "inspector visor, red-frame shades, tie, FAIL stamp"
+    },
+    {
+      "beat": "10 years / prove it",
+      "species": "aardvark (tired outfit)",
+      "outfit": "messy beanie, beard, rumpled hoodie, coffee"
+    },
+    {
+      "beat": "finale / true game developer",
+      "species": "aardvark (grad outfit)",
+      "outfit": "mortarboard, gown, gold sash, diploma"
+    }
+  ],
+  "set": "Gamer bedroom, game studio, harbour under bridge, QA lab, certification office, year-10 / graduation studio. Original screen UIs; generic plain lettering only. No Rockstar/Sony footage or logos.",
+  "3d_assets": "Procedural Three.js geometry (original). Screen textures hand-authored. No Poly Haven downloads required for this build.",
+  "caption_font": {
+    "file": "assets/caption.woff2",
+    "family": "Montserrat ExtraBold",
+    "license": "OFL"
+  },
+  "notes": "Final render online GPU=0 overrides mac-render.md. Music is Monkeys Spinning Monkeys (new vs prior banned beds). examples/gta6-bug-short/ is retired V2 and was not reused.",
+  "qa": {
+    "version": "v1",
+    "fixes": [
+      "assertCaptionClearOfSigns + assertCharacterVisible boot checks",
+      "densified years booth with test-report mountain + 10 MIN timer",
+      "PROVE IT sign fully in frame",
+      "all captions in lower band with 80px side safe zone",
+      "original city/code/upload/harbour/qa/cert/years screens only"
+    ],
+    "artifacts": "/opt/cursor/artifacts/gta6-bug-v1-final/"
+  }
+}

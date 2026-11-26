@@ -1,0 +1,65 @@
+{
+ "file": "vo.mp3",
+ "duration": 42.762449,
+ "fps": 24,
+ "video_end": 1027,
+ "method": "faster-whisper small.en words aligned to spoken.txt; frames f=round(t*fps)+1; video_end=ceil(duration*fps-0.05)",
+ "lines": [
+  {
+   "line": 1,
+   "start": 0.0,
+   "end": 2.9,
+   "f_start": 1,
+   "f_end": 71,
+   "text": "Why Can't GTA VI Just Fix a Bug Overnight?"
+  },
+  {
+   "line": 2,
+   "start": 3.52,
+   "end": 12.94,
+   "f_start": 85,
+   "f_end": 312,
+   "text": "Say a bug makes every car in GTA VI fall through one bridge. To fix this you only need one line of code. But why does the patch take two weeks or even months?"
+  },
+  {
+   "line": 3,
+   "start": 13.5,
+   "end": 15.2,
+   "f_start": 325,
+   "f_end": 366,
+   "text": "Why not just fix it and hit upload?"
+  },
+  {
+   "line": 4,
+   "start": 15.72,
+   "end": 26.1,
+   "f_start": 378,
+   "f_end": 627,
+   "text": "To fix the bridge, and now boats under it hit an invisible wall. Fixing one thing broke another. This is what you call regression. So testers replay the game, not just the bridge."
+  },
+  {
+   "line": 5,
+   "start": 26.52,
+   "end": 31.6,
+   "f_start": 637,
+   "f_end": 759,
+   "text": "Then Sony checks it against their own rulebooks. Fail one rule, and you start all over again."
+  },
+  {
+   "line": 6,
+   "start": 32.04,
+   "end": 34.04,
+   "f_start": 770,
+   "f_end": 818,
+   "text": "This is why they take 10 years to build!"
+  },
+  {
+   "line": 7,
+   "start": 35.06,
+   "end": 42.3,
+   "f_start": 842,
+   "f_end": 1016,
+   "text": "The fix took ten minutes. Proving it didn't break anything took two weeks. Congratulations, you're now a true game developer!"
+  }
+ ]
+}

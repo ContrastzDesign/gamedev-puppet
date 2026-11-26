@@ -1,0 +1,111 @@
+1
+00:00:00,000 --> 00:00:01,800
+Why Can't GTA VI Just
+
+2
+00:00:01,800 --> 00:00:02,900
+Fix a Bug Overnight
+
+3
+00:00:03,520 --> 00:00:04,720
+Say a bug makes every
+
+4
+00:00:04,720 --> 00:00:06,060
+car in GTA VI fall
+
+5
+00:00:06,060 --> 00:00:07,720
+through one bridge. To fix
+
+6
+00:00:07,720 --> 00:00:09,060
+this you only need one
+
+7
+00:00:09,060 --> 00:00:10,520
+line of code. But why
+
+8
+00:00:10,520 --> 00:00:11,580
+does the patch take two
+
+9
+00:00:11,580 --> 00:00:12,940
+weeks or even months
+
+10
+00:00:13,500 --> 00:00:14,580
+Why not just fix it
+
+11
+00:00:14,580 --> 00:00:15,200
+and hit upload
+
+12
+00:00:15,720 --> 00:00:16,940
+To fix the bridge, and
+
+13
+00:00:16,940 --> 00:00:18,140
+now boats under it hit
+
+14
+00:00:18,140 --> 00:00:20,160
+an invisible wall. Fixing one
+
+15
+00:00:20,160 --> 00:00:22,060
+thing broke another. This is
+
+16
+00:00:22,060 --> 00:00:23,680
+what you call regression. So
+
+17
+00:00:23,680 --> 00:00:25,460
+testers replay the game, not
+
+18
+00:00:25,460 --> 00:00:26,100
+just the bridge
+
+19
+00:00:26,520 --> 00:00:27,720
+Then Sony checks it against
+
+20
+00:00:27,720 --> 00:00:29,620
+their own rulebooks. Fail one
+
+21
+00:00:29,620 --> 00:00:31,000
+rule, and you start all
+
+22
+00:00:31,000 --> 00:00:31,600
+over again
+
+23
+00:00:32,040 --> 00:00:32,960
+This is why they take
+
+24
+00:00:32,960 --> 00:00:34,040
+10 years to build!
+
+25
+00:00:35,060 --> 00:00:36,620
+The fix took ten minutes
+
+26
+00:00:37,120 --> 00:00:38,300
+Proving it didn't break anything
+
+27
+00:00:38,300 --> 00:00:40,880
+took two weeks. Congratulations, you're
+
+28
+00:00:40,880 --> 00:00:42,300
+now a true game developer!

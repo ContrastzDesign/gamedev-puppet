@@ -1,0 +1,1051 @@
+{
+ "file": "vo.mp3",
+ "fps": 24,
+ "duration": 42.762449,
+ "model": "faster-whisper-small.en",
+ "note": "aligned to script/spoken.txt (frames f=round(t*fps)+1)",
+ "unaligned": [],
+ "heard_differently": [],
+ "words": [
+  {
+   "w": "Why",
+   "start": 0.0,
+   "end": 0.36,
+   "line": 1,
+   "f_start": 1,
+   "f_end": 10
+  },
+  {
+   "w": "Can't",
+   "start": 0.36,
+   "end": 0.74,
+   "line": 1,
+   "f_start": 10,
+   "f_end": 19
+  },
+  {
+   "w": "GTA",
+   "start": 0.74,
+   "end": 1.04,
+   "line": 1,
+   "f_start": 19,
+   "f_end": 26
+  },
+  {
+   "w": "VI",
+   "start": 1.04,
+   "end": 1.42,
+   "line": 1,
+   "f_start": 26,
+   "f_end": 35
+  },
+  {
+   "w": "Just",
+   "start": 1.42,
+   "end": 1.8,
+   "line": 1,
+   "f_start": 35,
+   "f_end": 44
+  },
+  {
+   "w": "Fix",
+   "start": 1.8,
+   "end": 2.08,
+   "line": 1,
+   "f_start": 44,
+   "f_end": 51
+  },
+  {
+   "w": "a",
+   "start": 2.08,
+   "end": 2.28,
+   "line": 1,
+   "f_start": 51,
+   "f_end": 56
+  },
+  {
+   "w": "Bug",
+   "start": 2.28,
+   "end": 2.46,
+   "line": 1,
+   "f_start": 56,
+   "f_end": 60
+  },
+  {
+   "w": "Overnight?",
+   "start": 2.46,
+   "end": 2.9,
+   "line": 1,
+   "f_start": 60,
+   "f_end": 71
+  },
+  {
+   "w": "Say",
+   "start": 3.52,
+   "end": 3.66,
+   "line": 2,
+   "f_start": 85,
+   "f_end": 89
+  },
+  {
+   "w": "a",
+   "start": 3.66,
+   "end": 3.84,
+   "line": 2,
+   "f_start": 89,
+   "f_end": 93
+  },
+  {
+   "w": "bug",
+   "start": 3.84,
+   "end": 4.02,
+   "line": 2,
+   "f_start": 93,
+   "f_end": 97
+  },
+  {
+   "w": "makes",
+   "start": 4.02,
+   "end": 4.24,
+   "line": 2,
+   "f_start": 97,
+   "f_end": 103
+  },
+  {
+   "w": "every",
+   "start": 4.24,
+   "end": 4.72,
+   "line": 2,
+   "f_start": 103,
+   "f_end": 114
+  },
+  {
+   "w": "car",
+   "start": 4.72,
+   "end": 4.96,
+   "line": 2,
+   "f_start": 114,
+   "f_end": 120
+  },
+  {
+   "w": "in",
+   "start": 4.96,
+   "end": 5.12,
+   "line": 2,
+   "f_start": 120,
+   "f_end": 124
+  },
+  {
+   "w": "GTA",
+   "start": 5.12,
+   "end": 5.44,
+   "line": 2,
+   "f_start": 124,
+   "f_end": 132
+  },
+  {
+   "w": "VI",
+   "start": 5.44,
+   "end": 5.78,
+   "line": 2,
+   "f_start": 132,
+   "f_end": 140
+  },
+  {
+   "w": "fall",
+   "start": 5.78,
+   "end": 6.06,
+   "line": 2,
+   "f_start": 140,
+   "f_end": 146
+  },
+  {
+   "w": "through",
+   "start": 6.06,
+   "end": 6.28,
+   "line": 2,
+   "f_start": 146,
+   "f_end": 152
+  },
+  {
+   "w": "one",
+   "start": 6.28,
+   "end": 6.62,
+   "line": 2,
+   "f_start": 152,
+   "f_end": 160
+  },
+  {
+   "w": "bridge.",
+   "start": 6.62,
+   "end": 6.94,
+   "line": 2,
+   "f_start": 160,
+   "f_end": 168
+  },
+  {
+   "w": "To",
+   "start": 7.32,
+   "end": 7.52,
+   "line": 2,
+   "f_start": 177,
+   "f_end": 181
+  },
+  {
+   "w": "fix",
+   "start": 7.52,
+   "end": 7.72,
+   "line": 2,
+   "f_start": 181,
+   "f_end": 186
+  },
+  {
+   "w": "this",
+   "start": 7.72,
+   "end": 8.0,
+   "line": 2,
+   "f_start": 186,
+   "f_end": 193
+  },
+  {
+   "w": "you",
+   "start": 8.02,
+   "end": 8.18,
+   "line": 2,
+   "f_start": 193,
+   "f_end": 197
+  },
+  {
+   "w": "only",
+   "start": 8.18,
+   "end": 8.44,
+   "line": 2,
+   "f_start": 197,
+   "f_end": 204
+  },
+  {
+   "w": "need",
+   "start": 8.44,
+   "end": 8.7,
+   "line": 2,
+   "f_start": 204,
+   "f_end": 210
+  },
+  {
+   "w": "one",
+   "start": 8.7,
+   "end": 9.06,
+   "line": 2,
+   "f_start": 210,
+   "f_end": 218
+  },
+  {
+   "w": "line",
+   "start": 9.06,
+   "end": 9.28,
+   "line": 2,
+   "f_start": 218,
+   "f_end": 224
+  },
+  {
+   "w": "of",
+   "start": 9.28,
+   "end": 9.44,
+   "line": 2,
+   "f_start": 224,
+   "f_end": 228
+  },
+  {
+   "w": "code.",
+   "start": 9.44,
+   "end": 9.74,
+   "line": 2,
+   "f_start": 228,
+   "f_end": 235
+  },
+  {
+   "w": "But",
+   "start": 10.08,
+   "end": 10.22,
+   "line": 2,
+   "f_start": 243,
+   "f_end": 246
+  },
+  {
+   "w": "why",
+   "start": 10.22,
+   "end": 10.52,
+   "line": 2,
+   "f_start": 246,
+   "f_end": 253
+  },
+  {
+   "w": "does",
+   "start": 10.52,
+   "end": 10.66,
+   "line": 2,
+   "f_start": 253,
+   "f_end": 257
+  },
+  {
+   "w": "the",
+   "start": 10.66,
+   "end": 10.82,
+   "line": 2,
+   "f_start": 257,
+   "f_end": 261
+  },
+  {
+   "w": "patch",
+   "start": 10.82,
+   "end": 11.06,
+   "line": 2,
+   "f_start": 261,
+   "f_end": 266
+  },
+  {
+   "w": "take",
+   "start": 11.06,
+   "end": 11.26,
+   "line": 2,
+   "f_start": 266,
+   "f_end": 271
+  },
+  {
+   "w": "two",
+   "start": 11.26,
+   "end": 11.58,
+   "line": 2,
+   "f_start": 271,
+   "f_end": 279
+  },
+  {
+   "w": "weeks",
+   "start": 11.58,
+   "end": 11.9,
+   "line": 2,
+   "f_start": 279,
+   "f_end": 287
+  },
+  {
+   "w": "or",
+   "start": 11.9,
+   "end": 12.24,
+   "line": 2,
+   "f_start": 287,
+   "f_end": 295
+  },
+  {
+   "w": "even",
+   "start": 12.24,
+   "end": 12.6,
+   "line": 2,
+   "f_start": 295,
+   "f_end": 303
+  },
+  {
+   "w": "months?",
+   "start": 12.6,
+   "end": 12.94,
+   "line": 2,
+   "f_start": 303,
+   "f_end": 312
+  },
+  {
+   "w": "Why",
+   "start": 13.5,
+   "end": 13.74,
+   "line": 3,
+   "f_start": 325,
+   "f_end": 331
+  },
+  {
+   "w": "not",
+   "start": 13.74,
+   "end": 13.9,
+   "line": 3,
+   "f_start": 331,
+   "f_end": 335
+  },
+  {
+   "w": "just",
+   "start": 13.9,
+   "end": 14.1,
+   "line": 3,
+   "f_start": 335,
+   "f_end": 339
+  },
+  {
+   "w": "fix",
+   "start": 14.1,
+   "end": 14.38,
+   "line": 3,
+   "f_start": 339,
+   "f_end": 346
+  },
+  {
+   "w": "it",
+   "start": 14.38,
+   "end": 14.58,
+   "line": 3,
+   "f_start": 346,
+   "f_end": 351
+  },
+  {
+   "w": "and",
+   "start": 14.58,
+   "end": 14.7,
+   "line": 3,
+   "f_start": 351,
+   "f_end": 354
+  },
+  {
+   "w": "hit",
+   "start": 14.7,
+   "end": 14.88,
+   "line": 3,
+   "f_start": 354,
+   "f_end": 358
+  },
+  {
+   "w": "upload?",
+   "start": 14.88,
+   "end": 15.2,
+   "line": 3,
+   "f_start": 358,
+   "f_end": 366
+  },
+  {
+   "w": "To",
+   "start": 15.72,
+   "end": 15.9,
+   "line": 4,
+   "f_start": 378,
+   "f_end": 383
+  },
+  {
+   "w": "fix",
+   "start": 15.9,
+   "end": 16.08,
+   "line": 4,
+   "f_start": 383,
+   "f_end": 387
+  },
+  {
+   "w": "the",
+   "start": 16.08,
+   "end": 16.3,
+   "line": 4,
+   "f_start": 387,
+   "f_end": 392
+  },
+  {
+   "w": "bridge,",
+   "start": 16.3,
+   "end": 16.58,
+   "line": 4,
+   "f_start": 392,
+   "f_end": 399
+  },
+  {
+   "w": "and",
+   "start": 16.82,
+   "end": 16.94,
+   "line": 4,
+   "f_start": 405,
+   "f_end": 408
+  },
+  {
+   "w": "now",
+   "start": 16.94,
+   "end": 17.14,
+   "line": 4,
+   "f_start": 408,
+   "f_end": 412
+  },
+  {
+   "w": "boats",
+   "start": 17.14,
+   "end": 17.48,
+   "line": 4,
+   "f_start": 412,
+   "f_end": 421
+  },
+  {
+   "w": "under",
+   "start": 17.48,
+   "end": 17.8,
+   "line": 4,
+   "f_start": 421,
+   "f_end": 428
+  },
+  {
+   "w": "it",
+   "start": 17.8,
+   "end": 18.0,
+   "line": 4,
+   "f_start": 428,
+   "f_end": 433
+  },
+  {
+   "w": "hit",
+   "start": 18.0,
+   "end": 18.14,
+   "line": 4,
+   "f_start": 433,
+   "f_end": 436
+  },
+  {
+   "w": "an",
+   "start": 18.14,
+   "end": 18.26,
+   "line": 4,
+   "f_start": 436,
+   "f_end": 439
+  },
+  {
+   "w": "invisible",
+   "start": 18.26,
+   "end": 18.64,
+   "line": 4,
+   "f_start": 439,
+   "f_end": 448
+  },
+  {
+   "w": "wall.",
+   "start": 18.64,
+   "end": 19.12,
+   "line": 4,
+   "f_start": 448,
+   "f_end": 460
+  },
+  {
+   "w": "Fixing",
+   "start": 19.64,
+   "end": 19.9,
+   "line": 4,
+   "f_start": 472,
+   "f_end": 479
+  },
+  {
+   "w": "one",
+   "start": 19.9,
+   "end": 20.16,
+   "line": 4,
+   "f_start": 479,
+   "f_end": 485
+  },
+  {
+   "w": "thing",
+   "start": 20.16,
+   "end": 20.5,
+   "line": 4,
+   "f_start": 485,
+   "f_end": 493
+  },
+  {
+   "w": "broke",
+   "start": 20.5,
+   "end": 20.82,
+   "line": 4,
+   "f_start": 493,
+   "f_end": 501
+  },
+  {
+   "w": "another.",
+   "start": 20.82,
+   "end": 21.22,
+   "line": 4,
+   "f_start": 501,
+   "f_end": 510
+  },
+  {
+   "w": "This",
+   "start": 21.58,
+   "end": 21.86,
+   "line": 4,
+   "f_start": 519,
+   "f_end": 526
+  },
+  {
+   "w": "is",
+   "start": 21.86,
+   "end": 22.06,
+   "line": 4,
+   "f_start": 526,
+   "f_end": 530
+  },
+  {
+   "w": "what",
+   "start": 22.06,
+   "end": 22.22,
+   "line": 4,
+   "f_start": 530,
+   "f_end": 534
+  },
+  {
+   "w": "you",
+   "start": 22.22,
+   "end": 22.36,
+   "line": 4,
+   "f_start": 534,
+   "f_end": 538
+  },
+  {
+   "w": "call",
+   "start": 22.36,
+   "end": 22.56,
+   "line": 4,
+   "f_start": 538,
+   "f_end": 542
+  },
+  {
+   "w": "regression.",
+   "start": 22.56,
+   "end": 23.06,
+   "line": 4,
+   "f_start": 542,
+   "f_end": 554
+  },
+  {
+   "w": "So",
+   "start": 23.5,
+   "end": 23.68,
+   "line": 4,
+   "f_start": 565,
+   "f_end": 569
+  },
+  {
+   "w": "testers",
+   "start": 23.68,
+   "end": 24.02,
+   "line": 4,
+   "f_start": 569,
+   "f_end": 577
+  },
+  {
+   "w": "replay",
+   "start": 24.02,
+   "end": 24.48,
+   "line": 4,
+   "f_start": 577,
+   "f_end": 589
+  },
+  {
+   "w": "the",
+   "start": 24.48,
+   "end": 24.7,
+   "line": 4,
+   "f_start": 589,
+   "f_end": 594
+  },
+  {
+   "w": "game,",
+   "start": 24.7,
+   "end": 25.04,
+   "line": 4,
+   "f_start": 594,
+   "f_end": 602
+  },
+  {
+   "w": "not",
+   "start": 25.22,
+   "end": 25.46,
+   "line": 4,
+   "f_start": 606,
+   "f_end": 612
+  },
+  {
+   "w": "just",
+   "start": 25.46,
+   "end": 25.64,
+   "line": 4,
+   "f_start": 612,
+   "f_end": 616
+  },
+  {
+   "w": "the",
+   "start": 25.64,
+   "end": 25.84,
+   "line": 4,
+   "f_start": 616,
+   "f_end": 621
+  },
+  {
+   "w": "bridge.",
+   "start": 25.84,
+   "end": 26.1,
+   "line": 4,
+   "f_start": 621,
+   "f_end": 627
+  },
+  {
+   "w": "Then",
+   "start": 26.52,
+   "end": 26.78,
+   "line": 5,
+   "f_start": 637,
+   "f_end": 644
+  },
+  {
+   "w": "Sony",
+   "start": 26.78,
+   "end": 27.02,
+   "line": 5,
+   "f_start": 644,
+   "f_end": 649
+  },
+  {
+   "w": "checks",
+   "start": 27.02,
+   "end": 27.32,
+   "line": 5,
+   "f_start": 649,
+   "f_end": 657
+  },
+  {
+   "w": "it",
+   "start": 27.32,
+   "end": 27.52,
+   "line": 5,
+   "f_start": 657,
+   "f_end": 661
+  },
+  {
+   "w": "against",
+   "start": 27.52,
+   "end": 27.72,
+   "line": 5,
+   "f_start": 661,
+   "f_end": 666
+  },
+  {
+   "w": "their",
+   "start": 27.72,
+   "end": 27.94,
+   "line": 5,
+   "f_start": 666,
+   "f_end": 672
+  },
+  {
+   "w": "own",
+   "start": 27.94,
+   "end": 28.22,
+   "line": 5,
+   "f_start": 672,
+   "f_end": 678
+  },
+  {
+   "w": "rulebooks.",
+   "start": 28.22,
+   "end": 28.78,
+   "line": 5,
+   "f_start": 678,
+   "f_end": 692
+  },
+  {
+   "w": "Fail",
+   "start": 28.78,
+   "end": 29.32,
+   "line": 5,
+   "f_start": 692,
+   "f_end": 705
+  },
+  {
+   "w": "one",
+   "start": 29.32,
+   "end": 29.62,
+   "line": 5,
+   "f_start": 705,
+   "f_end": 712
+  },
+  {
+   "w": "rule,",
+   "start": 29.62,
+   "end": 29.96,
+   "line": 5,
+   "f_start": 712,
+   "f_end": 720
+  },
+  {
+   "w": "and",
+   "start": 30.24,
+   "end": 30.28,
+   "line": 5,
+   "f_start": 727,
+   "f_end": 728
+  },
+  {
+   "w": "you",
+   "start": 30.28,
+   "end": 30.4,
+   "line": 5,
+   "f_start": 728,
+   "f_end": 731
+  },
+  {
+   "w": "start",
+   "start": 30.4,
+   "end": 30.64,
+   "line": 5,
+   "f_start": 731,
+   "f_end": 736
+  },
+  {
+   "w": "all",
+   "start": 30.64,
+   "end": 31.0,
+   "line": 5,
+   "f_start": 736,
+   "f_end": 745
+  },
+  {
+   "w": "over",
+   "start": 31.0,
+   "end": 31.28,
+   "line": 5,
+   "f_start": 745,
+   "f_end": 752
+  },
+  {
+   "w": "again.",
+   "start": 31.28,
+   "end": 31.6,
+   "line": 5,
+   "f_start": 752,
+   "f_end": 759
+  },
+  {
+   "w": "This",
+   "start": 32.04,
+   "end": 32.2,
+   "line": 6,
+   "f_start": 770,
+   "f_end": 774
+  },
+  {
+   "w": "is",
+   "start": 32.2,
+   "end": 32.36,
+   "line": 6,
+   "f_start": 774,
+   "f_end": 778
+  },
+  {
+   "w": "why",
+   "start": 32.36,
+   "end": 32.56,
+   "line": 6,
+   "f_start": 778,
+   "f_end": 782
+  },
+  {
+   "w": "they",
+   "start": 32.56,
+   "end": 32.74,
+   "line": 6,
+   "f_start": 782,
+   "f_end": 787
+  },
+  {
+   "w": "take",
+   "start": 32.74,
+   "end": 32.96,
+   "line": 6,
+   "f_start": 787,
+   "f_end": 792
+  },
+  {
+   "w": "10",
+   "start": 32.96,
+   "end": 33.26,
+   "line": 6,
+   "f_start": 792,
+   "f_end": 799
+  },
+  {
+   "w": "years",
+   "start": 33.26,
+   "end": 33.48,
+   "line": 6,
+   "f_start": 799,
+   "f_end": 805
+  },
+  {
+   "w": "to",
+   "start": 33.48,
+   "end": 33.74,
+   "line": 6,
+   "f_start": 805,
+   "f_end": 811
+  },
+  {
+   "w": "build!",
+   "start": 33.74,
+   "end": 34.04,
+   "line": 6,
+   "f_start": 811,
+   "f_end": 818
+  },
+  {
+   "w": "The",
+   "start": 35.06,
+   "end": 35.22,
+   "line": 7,
+   "f_start": 842,
+   "f_end": 846
+  },
+  {
+   "w": "fix",
+   "start": 35.22,
+   "end": 35.54,
+   "line": 7,
+   "f_start": 846,
+   "f_end": 854
+  },
+  {
+   "w": "took",
+   "start": 35.54,
+   "end": 35.88,
+   "line": 7,
+   "f_start": 854,
+   "f_end": 862
+  },
+  {
+   "w": "ten",
+   "start": 35.88,
+   "end": 36.26,
+   "line": 7,
+   "f_start": 862,
+   "f_end": 871
+  },
+  {
+   "w": "minutes.",
+   "start": 36.26,
+   "end": 36.62,
+   "line": 7,
+   "f_start": 871,
+   "f_end": 880
+  },
+  {
+   "w": "Proving",
+   "start": 37.12,
+   "end": 37.28,
+   "line": 7,
+   "f_start": 892,
+   "f_end": 896
+  },
+  {
+   "w": "it",
+   "start": 37.28,
+   "end": 37.4,
+   "line": 7,
+   "f_start": 896,
+   "f_end": 899
+  },
+  {
+   "w": "didn't",
+   "start": 37.4,
+   "end": 37.68,
+   "line": 7,
+   "f_start": 899,
+   "f_end": 905
+  },
+  {
+   "w": "break",
+   "start": 37.68,
+   "end": 37.9,
+   "line": 7,
+   "f_start": 905,
+   "f_end": 911
+  },
+  {
+   "w": "anything",
+   "start": 37.9,
+   "end": 38.3,
+   "line": 7,
+   "f_start": 911,
+   "f_end": 920
+  },
+  {
+   "w": "took",
+   "start": 38.3,
+   "end": 38.54,
+   "line": 7,
+   "f_start": 920,
+   "f_end": 926
+  },
+  {
+   "w": "two",
+   "start": 38.54,
+   "end": 38.84,
+   "line": 7,
+   "f_start": 926,
+   "f_end": 933
+  },
+  {
+   "w": "weeks.",
+   "start": 38.84,
+   "end": 39.2,
+   "line": 7,
+   "f_start": 933,
+   "f_end": 942
+  },
+  {
+   "w": "Congratulations,",
+   "start": 39.86,
+   "end": 40.08,
+   "line": 7,
+   "f_start": 958,
+   "f_end": 963
+  },
+  {
+   "w": "you're",
+   "start": 40.66,
+   "end": 40.88,
+   "line": 7,
+   "f_start": 977,
+   "f_end": 982
+  },
+  {
+   "w": "now",
+   "start": 40.88,
+   "end": 41.1,
+   "line": 7,
+   "f_start": 982,
+   "f_end": 987
+  },
+  {
+   "w": "a",
+   "start": 41.1,
+   "end": 41.34,
+   "line": 7,
+   "f_start": 987,
+   "f_end": 993
+  },
+  {
+   "w": "true",
+   "start": 41.34,
+   "end": 41.7,
+   "line": 7,
+   "f_start": 993,
+   "f_end": 1002
+  },
+  {
+   "w": "game",
+   "start": 41.7,
+   "end": 41.96,
+   "line": 7,
+   "f_start": 1002,
+   "f_end": 1008
+  },
+  {
+   "w": "developer!",
+   "start": 41.96,
+   "end": 42.3,
+   "line": 7,
+   "f_start": 1008,
+   "f_end": 1016
+  }
+ ]
+}
