@@ -14,8 +14,8 @@
     "loudness_lufs": -14.0,
     "true_peak_dbtp": -1.5,
     "renderer": "ANGLE SwiftShader GPU=0",
-    "sha256": "PENDING",
-    "bytes": 0
+    "sha256": "bb74120e3b1566555bfa0d3ebeb4f81b3336892a3b2624b4209167efcebbc5f9",
+    "bytes": 10367670
   },
   "voiceover": {
     "file": "audio/vo.mp3",
