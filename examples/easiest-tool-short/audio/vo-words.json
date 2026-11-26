@@ -1,0 +1,947 @@
+{
+ "file": "vo.mp3",
+ "fps": 24,
+ "duration": 41.560816,
+ "model": "faster-whisper-small.en",
+ "note": "aligned to script/spoken.txt (frames f=round(t*fps)+1)",
+ "unaligned": [],
+ "heard_differently": [],
+ "words": [
+  {
+   "w": "The",
+   "start": 0.0,
+   "end": 0.26,
+   "line": 1,
+   "f_start": 1,
+   "f_end": 7
+  },
+  {
+   "w": "easiest",
+   "start": 0.26,
+   "end": 0.74,
+   "line": 1,
+   "f_start": 7,
+   "f_end": 19
+  },
+  {
+   "w": "tool",
+   "start": 0.74,
+   "end": 1.1,
+   "line": 1,
+   "f_start": 19,
+   "f_end": 27
+  },
+  {
+   "w": "for",
+   "start": 1.1,
+   "end": 1.38,
+   "line": 1,
+   "f_start": 27,
+   "f_end": 34
+  },
+  {
+   "w": "a",
+   "start": 1.38,
+   "end": 1.52,
+   "line": 1,
+   "f_start": 34,
+   "f_end": 37
+  },
+  {
+   "w": "first",
+   "start": 1.52,
+   "end": 1.8,
+   "line": 1,
+   "f_start": 37,
+   "f_end": 44
+  },
+  {
+   "w": "game",
+   "start": 1.8,
+   "end": 2.16,
+   "line": 1,
+   "f_start": 44,
+   "f_end": 53
+  },
+  {
+   "w": "Which",
+   "start": 2.82,
+   "end": 3.04,
+   "line": 2,
+   "f_start": 69,
+   "f_end": 74
+  },
+  {
+   "w": "game-making",
+   "start": 3.04,
+   "end": 3.72,
+   "line": 2,
+   "f_start": 74,
+   "f_end": 90
+  },
+  {
+   "w": "tool",
+   "start": 3.72,
+   "end": 4.04,
+   "line": 2,
+   "f_start": 90,
+   "f_end": 98
+  },
+  {
+   "w": "is",
+   "start": 4.04,
+   "end": 4.3,
+   "line": 2,
+   "f_start": 98,
+   "f_end": 104
+  },
+  {
+   "w": "easiest",
+   "start": 4.3,
+   "end": 4.7,
+   "line": 2,
+   "f_start": 104,
+   "f_end": 114
+  },
+  {
+   "w": "to",
+   "start": 4.7,
+   "end": 5.04,
+   "line": 2,
+   "f_start": 114,
+   "f_end": 122
+  },
+  {
+   "w": "learn?",
+   "start": 5.04,
+   "end": 5.32,
+   "line": 2,
+   "f_start": 122,
+   "f_end": 129
+  },
+  {
+   "w": "For",
+   "start": 6.0,
+   "end": 6.1,
+   "line": 2,
+   "f_start": 145,
+   "f_end": 147
+  },
+  {
+   "w": "a",
+   "start": 6.1,
+   "end": 6.24,
+   "line": 2,
+   "f_start": 147,
+   "f_end": 151
+  },
+  {
+   "w": "first",
+   "start": 6.24,
+   "end": 6.46,
+   "line": 2,
+   "f_start": 151,
+   "f_end": 156
+  },
+  {
+   "w": "project,",
+   "start": 6.46,
+   "end": 6.92,
+   "line": 2,
+   "f_start": 156,
+   "f_end": 167
+  },
+  {
+   "w": "the",
+   "start": 7.26,
+   "end": 7.36,
+   "line": 2,
+   "f_start": 175,
+   "f_end": 178
+  },
+  {
+   "w": "answer",
+   "start": 7.36,
+   "end": 7.54,
+   "line": 2,
+   "f_start": 178,
+   "f_end": 182
+  },
+  {
+   "w": "depends",
+   "start": 7.54,
+   "end": 7.92,
+   "line": 2,
+   "f_start": 182,
+   "f_end": 191
+  },
+  {
+   "w": "on",
+   "start": 7.92,
+   "end": 8.16,
+   "line": 2,
+   "f_start": 191,
+   "f_end": 197
+  },
+  {
+   "w": "what",
+   "start": 8.16,
+   "end": 8.34,
+   "line": 2,
+   "f_start": 197,
+   "f_end": 201
+  },
+  {
+   "w": "the",
+   "start": 8.34,
+   "end": 8.48,
+   "line": 2,
+   "f_start": 201,
+   "f_end": 205
+  },
+  {
+   "w": "game",
+   "start": 8.48,
+   "end": 8.68,
+   "line": 2,
+   "f_start": 205,
+   "f_end": 209
+  },
+  {
+   "w": "has",
+   "start": 8.68,
+   "end": 8.88,
+   "line": 2,
+   "f_start": 209,
+   "f_end": 214
+  },
+  {
+   "w": "to",
+   "start": 8.88,
+   "end": 9.08,
+   "line": 2,
+   "f_start": 214,
+   "f_end": 219
+  },
+  {
+   "w": "do.",
+   "start": 9.08,
+   "end": 9.84,
+   "line": 2,
+   "f_start": 219,
+   "f_end": 237
+  },
+  {
+   "w": "Number",
+   "start": 9.94,
+   "end": 9.98,
+   "line": 3,
+   "f_start": 240,
+   "f_end": 241
+  },
+  {
+   "w": "one,",
+   "start": 9.98,
+   "end": 10.38,
+   "line": 3,
+   "f_start": 241,
+   "f_end": 250
+  },
+  {
+   "w": "Twine",
+   "start": 10.84,
+   "end": 11.12,
+   "line": 3,
+   "f_start": 261,
+   "f_end": 268
+  },
+  {
+   "w": "for",
+   "start": 11.12,
+   "end": 11.4,
+   "line": 3,
+   "f_start": 268,
+   "f_end": 275
+  },
+  {
+   "w": "branching",
+   "start": 11.4,
+   "end": 11.74,
+   "line": 3,
+   "f_start": 275,
+   "f_end": 283
+  },
+  {
+   "w": "stories.",
+   "start": 11.74,
+   "end": 12.26,
+   "line": 3,
+   "f_start": 283,
+   "f_end": 295
+  },
+  {
+   "w": "Each",
+   "start": 12.78,
+   "end": 12.94,
+   "line": 3,
+   "f_start": 308,
+   "f_end": 312
+  },
+  {
+   "w": "passage",
+   "start": 12.94,
+   "end": 13.32,
+   "line": 3,
+   "f_start": 312,
+   "f_end": 321
+  },
+  {
+   "w": "holds",
+   "start": 13.32,
+   "end": 13.62,
+   "line": 3,
+   "f_start": 321,
+   "f_end": 328
+  },
+  {
+   "w": "a",
+   "start": 13.62,
+   "end": 13.8,
+   "line": 3,
+   "f_start": 328,
+   "f_end": 332
+  },
+  {
+   "w": "piece",
+   "start": 13.8,
+   "end": 14.04,
+   "line": 3,
+   "f_start": 332,
+   "f_end": 338
+  },
+  {
+   "w": "of",
+   "start": 14.04,
+   "end": 14.2,
+   "line": 3,
+   "f_start": 338,
+   "f_end": 342
+  },
+  {
+   "w": "the",
+   "start": 14.2,
+   "end": 14.32,
+   "line": 3,
+   "f_start": 342,
+   "f_end": 345
+  },
+  {
+   "w": "story.",
+   "start": 14.32,
+   "end": 14.66,
+   "line": 3,
+   "f_start": 345,
+   "f_end": 353
+  },
+  {
+   "w": "Linking",
+   "start": 15.08,
+   "end": 15.34,
+   "line": 3,
+   "f_start": 363,
+   "f_end": 369
+  },
+  {
+   "w": "two",
+   "start": 15.34,
+   "end": 15.58,
+   "line": 3,
+   "f_start": 369,
+   "f_end": 375
+  },
+  {
+   "w": "passages",
+   "start": 15.58,
+   "end": 15.96,
+   "line": 3,
+   "f_start": 375,
+   "f_end": 384
+  },
+  {
+   "w": "creates",
+   "start": 15.96,
+   "end": 16.36,
+   "line": 3,
+   "f_start": 384,
+   "f_end": 394
+  },
+  {
+   "w": "a",
+   "start": 16.36,
+   "end": 16.56,
+   "line": 3,
+   "f_start": 394,
+   "f_end": 398
+  },
+  {
+   "w": "choice,",
+   "start": 16.56,
+   "end": 16.88,
+   "line": 3,
+   "f_start": 398,
+   "f_end": 406
+  },
+  {
+   "w": "and",
+   "start": 17.16,
+   "end": 17.26,
+   "line": 3,
+   "f_start": 413,
+   "f_end": 415
+  },
+  {
+   "w": "a",
+   "start": 17.26,
+   "end": 17.38,
+   "line": 3,
+   "f_start": 415,
+   "f_end": 418
+  },
+  {
+   "w": "basic",
+   "start": 17.38,
+   "end": 17.6,
+   "line": 3,
+   "f_start": 418,
+   "f_end": 423
+  },
+  {
+   "w": "story",
+   "start": 17.6,
+   "end": 18.02,
+   "line": 3,
+   "f_start": 423,
+   "f_end": 433
+  },
+  {
+   "w": "requires",
+   "start": 18.02,
+   "end": 18.46,
+   "line": 3,
+   "f_start": 433,
+   "f_end": 444
+  },
+  {
+   "w": "no",
+   "start": 18.46,
+   "end": 18.84,
+   "line": 3,
+   "f_start": 444,
+   "f_end": 453
+  },
+  {
+   "w": "programming.",
+   "start": 18.84,
+   "end": 19.28,
+   "line": 3,
+   "f_start": 453,
+   "f_end": 464
+  },
+  {
+   "w": "Number",
+   "start": 19.92,
+   "end": 20.02,
+   "line": 4,
+   "f_start": 479,
+   "f_end": 481
+  },
+  {
+   "w": "two,",
+   "start": 20.02,
+   "end": 20.65,
+   "line": 4,
+   "f_start": 481,
+   "f_end": 497
+  },
+  {
+   "w": "GDevelop",
+   "start": 20.65,
+   "end": 21.28,
+   "line": 4,
+   "f_start": 497,
+   "f_end": 512
+  },
+  {
+   "w": "for",
+   "start": 21.28,
+   "end": 21.72,
+   "line": 4,
+   "f_start": 512,
+   "f_end": 522
+  },
+  {
+   "w": "2D",
+   "start": 21.72,
+   "end": 22.2,
+   "line": 4,
+   "f_start": 522,
+   "f_end": 534
+  },
+  {
+   "w": "game",
+   "start": 22.2,
+   "end": 22.4,
+   "line": 4,
+   "f_start": 534,
+   "f_end": 539
+  },
+  {
+   "w": "logic.",
+   "start": 22.4,
+   "end": 22.8,
+   "line": 4,
+   "f_start": 539,
+   "f_end": 548
+  },
+  {
+   "w": "Its",
+   "start": 23.18,
+   "end": 23.32,
+   "line": 4,
+   "f_start": 557,
+   "f_end": 561
+  },
+  {
+   "w": "event",
+   "start": 23.32,
+   "end": 23.64,
+   "line": 4,
+   "f_start": 561,
+   "f_end": 568
+  },
+  {
+   "w": "editor",
+   "start": 23.64,
+   "end": 23.98,
+   "line": 4,
+   "f_start": 568,
+   "f_end": 577
+  },
+  {
+   "w": "pairs",
+   "start": 23.98,
+   "end": 24.28,
+   "line": 4,
+   "f_start": 577,
+   "f_end": 584
+  },
+  {
+   "w": "conditions",
+   "start": 24.28,
+   "end": 24.84,
+   "line": 4,
+   "f_start": 584,
+   "f_end": 597
+  },
+  {
+   "w": "with",
+   "start": 24.84,
+   "end": 25.14,
+   "line": 4,
+   "f_start": 597,
+   "f_end": 604
+  },
+  {
+   "w": "actions.",
+   "start": 25.14,
+   "end": 25.6,
+   "line": 4,
+   "f_start": 604,
+   "f_end": 615
+  },
+  {
+   "w": "“Player",
+   "start": 25.6,
+   "end": 26.28,
+   "line": 4,
+   "f_start": 615,
+   "f_end": 632
+  },
+  {
+   "w": "touches",
+   "start": 26.28,
+   "end": 26.78,
+   "line": 4,
+   "f_start": 632,
+   "f_end": 644
+  },
+  {
+   "w": "key”",
+   "start": 26.78,
+   "end": 27.06,
+   "line": 4,
+   "f_start": 644,
+   "f_end": 650
+  },
+  {
+   "w": "can",
+   "start": 27.06,
+   "end": 27.38,
+   "line": 4,
+   "f_start": 650,
+   "f_end": 658
+  },
+  {
+   "w": "trigger",
+   "start": 27.38,
+   "end": 27.72,
+   "line": 4,
+   "f_start": 658,
+   "f_end": 666
+  },
+  {
+   "w": "“open",
+   "start": 27.72,
+   "end": 28.16,
+   "line": 4,
+   "f_start": 666,
+   "f_end": 677
+  },
+  {
+   "w": "door.”",
+   "start": 28.16,
+   "end": 28.48,
+   "line": 4,
+   "f_start": 677,
+   "f_end": 685
+  },
+  {
+   "w": "Beginners",
+   "start": 29.0,
+   "end": 29.2,
+   "line": 4,
+   "f_start": 697,
+   "f_end": 702
+  },
+  {
+   "w": "can",
+   "start": 29.2,
+   "end": 29.36,
+   "line": 4,
+   "f_start": 702,
+   "f_end": 706
+  },
+  {
+   "w": "read",
+   "start": 29.36,
+   "end": 29.6,
+   "line": 4,
+   "f_start": 706,
+   "f_end": 711
+  },
+  {
+   "w": "the",
+   "start": 29.6,
+   "end": 29.74,
+   "line": 4,
+   "f_start": 711,
+   "f_end": 715
+  },
+  {
+   "w": "rule",
+   "start": 29.74,
+   "end": 29.96,
+   "line": 4,
+   "f_start": 715,
+   "f_end": 720
+  },
+  {
+   "w": "directly",
+   "start": 29.96,
+   "end": 30.36,
+   "line": 4,
+   "f_start": 720,
+   "f_end": 730
+  },
+  {
+   "w": "in",
+   "start": 30.36,
+   "end": 30.7,
+   "line": 4,
+   "f_start": 730,
+   "f_end": 738
+  },
+  {
+   "w": "the",
+   "start": 30.7,
+   "end": 30.8,
+   "line": 4,
+   "f_start": 738,
+   "f_end": 740
+  },
+  {
+   "w": "editor.",
+   "start": 30.8,
+   "end": 31.12,
+   "line": 4,
+   "f_start": 740,
+   "f_end": 748
+  },
+  {
+   "w": "Number",
+   "start": 31.66,
+   "end": 31.72,
+   "line": 5,
+   "f_start": 761,
+   "f_end": 762
+  },
+  {
+   "w": "three,",
+   "start": 31.72,
+   "end": 32.16,
+   "line": 5,
+   "f_start": 762,
+   "f_end": 773
+  },
+  {
+   "w": "Nilo",
+   "start": 32.7,
+   "end": 32.88,
+   "line": 5,
+   "f_start": 786,
+   "f_end": 790
+  },
+  {
+   "w": "for",
+   "start": 32.88,
+   "end": 33.2,
+   "line": 5,
+   "f_start": 790,
+   "f_end": 798
+  },
+  {
+   "w": "a",
+   "start": 33.2,
+   "end": 33.36,
+   "line": 5,
+   "f_start": 798,
+   "f_end": 802
+  },
+  {
+   "w": "first",
+   "start": 33.36,
+   "end": 33.64,
+   "line": 5,
+   "f_start": 802,
+   "f_end": 808
+  },
+  {
+   "w": "3D",
+   "start": 33.64,
+   "end": 34.14,
+   "line": 5,
+   "f_start": 808,
+   "f_end": 820
+  },
+  {
+   "w": "game",
+   "start": 34.14,
+   "end": 34.36,
+   "line": 5,
+   "f_start": 820,
+   "f_end": 826
+  },
+  {
+   "w": "world.",
+   "start": 34.36,
+   "end": 34.68,
+   "line": 5,
+   "f_start": 826,
+   "f_end": 833
+  },
+  {
+   "w": "You",
+   "start": 35.04,
+   "end": 35.12,
+   "line": 5,
+   "f_start": 842,
+   "f_end": 844
+  },
+  {
+   "w": "can",
+   "start": 35.12,
+   "end": 35.26,
+   "line": 5,
+   "f_start": 844,
+   "f_end": 847
+  },
+  {
+   "w": "type",
+   "start": 35.26,
+   "end": 35.46,
+   "line": 5,
+   "f_start": 847,
+   "f_end": 852
+  },
+  {
+   "w": "in",
+   "start": 35.46,
+   "end": 35.62,
+   "line": 5,
+   "f_start": 852,
+   "f_end": 856
+  },
+  {
+   "w": "a",
+   "start": 35.62,
+   "end": 35.74,
+   "line": 5,
+   "f_start": 856,
+   "f_end": 859
+  },
+  {
+   "w": "text",
+   "start": 35.74,
+   "end": 35.94,
+   "line": 5,
+   "f_start": 859,
+   "f_end": 864
+  },
+  {
+   "w": "description",
+   "start": 35.94,
+   "end": 36.38,
+   "line": 5,
+   "f_start": 864,
+   "f_end": 874
+  },
+  {
+   "w": "and",
+   "start": 36.38,
+   "end": 36.7,
+   "line": 5,
+   "f_start": 874,
+   "f_end": 882
+  },
+  {
+   "w": "it",
+   "start": 36.7,
+   "end": 36.8,
+   "line": 5,
+   "f_start": 882,
+   "f_end": 884
+  },
+  {
+   "w": "starts",
+   "start": 36.8,
+   "end": 37.04,
+   "line": 5,
+   "f_start": 884,
+   "f_end": 890
+  },
+  {
+   "w": "the",
+   "start": 37.04,
+   "end": 37.26,
+   "line": 5,
+   "f_start": 890,
+   "f_end": 895
+  },
+  {
+   "w": "build.",
+   "start": 37.26,
+   "end": 37.5,
+   "line": 5,
+   "f_start": 895,
+   "f_end": 901
+  },
+  {
+   "w": "That",
+   "start": 37.82,
+   "end": 38.0,
+   "line": 5,
+   "f_start": 909,
+   "f_end": 913
+  },
+  {
+   "w": "gives",
+   "start": 38.0,
+   "end": 38.22,
+   "line": 5,
+   "f_start": 913,
+   "f_end": 918
+  },
+  {
+   "w": "beginners",
+   "start": 38.22,
+   "end": 38.54,
+   "line": 5,
+   "f_start": 918,
+   "f_end": 926
+  },
+  {
+   "w": "a",
+   "start": 38.54,
+   "end": 38.76,
+   "line": 5,
+   "f_start": 926,
+   "f_end": 931
+  },
+  {
+   "w": "way",
+   "start": 38.76,
+   "end": 38.88,
+   "line": 5,
+   "f_start": 931,
+   "f_end": 934
+  },
+  {
+   "w": "to",
+   "start": 38.88,
+   "end": 39.04,
+   "line": 5,
+   "f_start": 934,
+   "f_end": 938
+  },
+  {
+   "w": "practice",
+   "start": 39.04,
+   "end": 39.36,
+   "line": 5,
+   "f_start": 938,
+   "f_end": 946
+  },
+  {
+   "w": "playtesting",
+   "start": 39.36,
+   "end": 40.04,
+   "line": 5,
+   "f_start": 946,
+   "f_end": 962
+  },
+  {
+   "w": "before",
+   "start": 40.04,
+   "end": 40.56,
+   "line": 5,
+   "f_start": 962,
+   "f_end": 974
+  },
+  {
+   "w": "writing",
+   "start": 40.56,
+   "end": 40.94,
+   "line": 5,
+   "f_start": 974,
+   "f_end": 984
+  },
+  {
+   "w": "code.",
+   "start": 40.94,
+   "end": 41.28,
+   "line": 5,
+   "f_start": 984,
+   "f_end": 992
+  }
+ ]
+}

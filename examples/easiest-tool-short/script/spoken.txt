@@ -1,0 +1,5 @@
+The easiest tool for a first game
+Which game-making tool is easiest to learn? For a first project, the answer depends on what the game has to do.
+Number one, Twine for branching stories. Each passage holds a piece of the story. Linking two passages creates a choice, and a basic story requires no programming.
+Number two, GDevelop for 2D game logic. Its event editor pairs conditions with actions. “Player touches key” can trigger “open door.” Beginners can read the rule directly in the editor.
+Number three, Nilo for a first 3D game world. You can type in a text description and it starts the build. That gives beginners a way to practice playtesting before writing code.

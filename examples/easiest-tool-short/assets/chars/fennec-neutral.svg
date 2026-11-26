@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <ellipse cx="300" cy="565" rx="108" ry="128" fill="#e0b888"/>
+  <!-- teal explorer hoodie -->
+  <path d="M210,470 Q300,430 390,470 L400,640 Q300,675 200,640 Z" fill="#3a7a78"/>
+  <path d="M230,490 Q300,455 370,490 L375,630 Q300,650 225,630 Z" fill="#4a8a88"/>
+  <path d="M250,500 Q300,520 350,500" fill="none" stroke="#2a5a58" stroke-width="6"/>
+  <!-- orange portal scarf -->
+  <path d="M220,475 Q300,455 380,475 L370,510 Q300,495 230,510 Z" fill="#c4785a"/>
+  <path d="M360,495 Q390,560 370,620" fill="none" stroke="#c4785a" stroke-width="18" stroke-linecap="round"/>
+  <!-- head -->
+  <ellipse cx="300" cy="295" rx="140" ry="128" fill="#f0c898"/>
+  <ellipse cx="300" cy="315" rx="110" ry="98" fill="#f8d8b0"/>
+  <!-- huge fennec ears -->
+  <ellipse cx="175" cy="140" rx="42" ry="90" fill="#e0b888" transform="rotate(-12 175 140)"/>
+  <ellipse cx="425" cy="140" rx="42" ry="90" fill="#e0b888" transform="rotate(12 425 140)"/>
+  <ellipse cx="175" cy="150" rx="18" ry="55" fill="#e8b4a0" transform="rotate(-12 175 150)"/>
+  <ellipse cx="425" cy="150" rx="18" ry="55" fill="#e8b4a0" transform="rotate(12 425 150)"/>
+  <!-- explorer goggles -->
+  <ellipse cx="258" cy="275" rx="32" ry="26" fill="#1e3840" opacity=".9"/>
+  <ellipse cx="342" cy="275" rx="32" ry="26" fill="#1e3840" opacity=".9"/>
+  <path d="M290,275 H310" stroke="#2a4850" stroke-width="6"/>
+  <ellipse cx="250" cy="268" rx="10" ry="8" fill="#7ec" opacity=".35"/>
+  <ellipse cx="334" cy="268" rx="10" ry="8" fill="#7ec" opacity=".35"/>
+  <path d="M170,250 Q300,220 430,250" fill="none" stroke="#2a4850" stroke-width="8"/>
+  <ellipse cx="300" cy="340" rx="48" ry="34" fill="#f8e8d0"/>
+  <ellipse cx="300" cy="328" rx="12" ry="9" fill="#2a2118"/>
+  
+  <ellipse cx="258" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="342" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="258" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="342" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <path d="M282,362 Q300,378 318,362" fill="none" stroke="#3a2a24" stroke-width="5" stroke-linecap="round"/>
+  <!-- tiny backpack -->
+  <ellipse cx="420" cy="540" rx="28" ry="40" fill="#5a6a48"/>
+  <rect x="408" y="510" width="24" height="10" rx="3" fill="#3a4a30"/>
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#f0c898"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#f0c898"/>
+  
+  <ellipse cx="410" cy="515.0" rx="22" ry="55.0" fill="#f0c898"/>
+  <ellipse cx="410" cy="550" rx="20" ry="16" fill="#f0c898"/>
+  
+  <ellipse cx="230" cy="710" rx="28" ry="16" fill="#e0b888"/>
+  <ellipse cx="370" cy="710" rx="28" ry="16" fill="#e0b888"/>
+  <ellipse cx="230" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+  <ellipse cx="370" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+
+</svg>

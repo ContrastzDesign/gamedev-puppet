@@ -1,0 +1,103 @@
+1
+00:00:00,000 --> 00:00:01,520
+The easiest tool for a
+
+2
+00:00:01,520 --> 00:00:02,160
+first game
+
+3
+00:00:02,820 --> 00:00:04,700
+Which game-making tool is easiest
+
+4
+00:00:04,700 --> 00:00:06,460
+to learn? For a first
+
+5
+00:00:06,460 --> 00:00:08,160
+project, the answer depends on
+
+6
+00:00:08,160 --> 00:00:09,080
+what the game has to
+
+7
+00:00:09,080 --> 00:00:09,840
+do
+
+8
+00:00:09,940 --> 00:00:11,740
+Number one, Twine for branching
+
+9
+00:00:11,740 --> 00:00:13,800
+stories. Each passage holds a
+
+10
+00:00:13,800 --> 00:00:15,340
+piece of the story. Linking
+
+11
+00:00:15,340 --> 00:00:16,880
+two passages creates a choice
+
+12
+00:00:17,160 --> 00:00:18,460
+and a basic story requires
+
+13
+00:00:18,460 --> 00:00:19,280
+no programming
+
+14
+00:00:19,920 --> 00:00:22,200
+Number two, GDevelop for 2D
+
+15
+00:00:22,200 --> 00:00:23,980
+game logic. Its event editor
+
+16
+00:00:23,980 --> 00:00:26,280
+pairs conditions with actions. “Player
+
+17
+00:00:26,280 --> 00:00:28,160
+touches key” can trigger “open
+
+18
+00:00:28,160 --> 00:00:29,740
+door.” Beginners can read the
+
+19
+00:00:29,740 --> 00:00:31,120
+rule directly in the editor
+
+20
+00:00:31,660 --> 00:00:33,360
+Number three, Nilo for a
+
+21
+00:00:33,360 --> 00:00:35,120
+first 3D game world. You
+
+22
+00:00:35,120 --> 00:00:35,940
+can type in a text
+
+23
+00:00:35,940 --> 00:00:37,260
+description and it starts the
+
+24
+00:00:37,260 --> 00:00:38,760
+build. That gives beginners a
+
+25
+00:00:38,760 --> 00:00:40,560
+way to practice playtesting before
+
+26
+00:00:40,560 --> 00:00:41,280
+writing code

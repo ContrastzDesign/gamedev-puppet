@@ -1,0 +1,49 @@
+{
+ "file": "vo.mp3",
+ "duration": 41.560816,
+ "fps": 24,
+ "video_end": 998,
+ "method": "faster-whisper small.en words aligned to spoken.txt; frames f=round(t*fps)+1; video_end=ceil(duration*fps-0.05)",
+ "lines": [
+  {
+   "line": 1,
+   "start": 0.0,
+   "end": 2.16,
+   "f_start": 1,
+   "f_end": 53,
+   "text": "The easiest tool for a first game"
+  },
+  {
+   "line": 2,
+   "start": 2.82,
+   "end": 9.84,
+   "f_start": 69,
+   "f_end": 237,
+   "text": "Which game-making tool is easiest to learn? For a first project, the answer depends on what the game has to do."
+  },
+  {
+   "line": 3,
+   "start": 9.94,
+   "end": 19.28,
+   "f_start": 240,
+   "f_end": 464,
+   "text": "Number one, Twine for branching stories. Each passage holds a piece of the story. Linking two passages creates a choice, and a basic story requires no programming."
+  },
+  {
+   "line": 4,
+   "start": 19.92,
+   "end": 31.12,
+   "f_start": 479,
+   "f_end": 748,
+   "text": "Number two, GDevelop for 2D game logic. Its event editor pairs conditions with actions. “Player touches key” can trigger “open door.” Beginners can read the rule directly in the editor."
+  },
+  {
+   "line": 5,
+   "start": 31.66,
+   "end": 41.28,
+   "f_start": 761,
+   "f_end": 992,
+   "text": "Number three, Nilo for a first 3D game world. You can type in a text description and it starts the build. That gives beginners a way to practice playtesting before writing code."
+  }
+ ]
+}

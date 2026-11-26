@@ -1,0 +1,197 @@
+{
+  "title": "The easiest tool for a first game",
+  "project": "examples/easiest-tool-short",
+  "style": "content-short VERSION 1 (drawn SVG animals in detailed 3D worlds)",
+  "video": {
+    "file": "easiest-tool-final.mp4",
+    "width": 1080,
+    "height": 1920,
+    "fps": 24,
+    "frames": 998,
+    "duration_s": 41.583333333333336,
+    "video_codec": "libx264 CRF 18 yuv420p",
+    "audio_codec": "AAC 192k",
+    "loudness_lufs": -14.0,
+    "true_peak_dbtp": -1.5,
+    "renderer": "ANGLE SwiftShader GPU=0",
+    "sha256": "d930e98f0d4c8508ce8842e4d0a0ad86c2eb47d22301afc39df0b64555827ce6",
+    "bytes": 16559814,
+    "duration": 24
+  },
+  "voiceover": {
+    "file": "audio/vo.mp3",
+    "sha256": "1968f8f56bae697e7393b141453d0f1923bce4f81558eb7edd6a96d520df99c1",
+    "bytes": 665434,
+    "duration_s": 41.560816,
+    "engine": "ElevenLabs eleven_v4 (pre-supplied; not regenerated)",
+    "note": "Use supplied seed VO unchanged; captions spell Nilo, Twine, GDevelop"
+  },
+  "music": {
+    "title": "Local Forecast",
+    "artist": "Kevin MacLeod",
+    "url": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1300010",
+    "download": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Local%20Forecast.mp3",
+    "license": "CC BY 4.0",
+    "license_url": "http://creativecommons.org/licenses/by/4.0/",
+    "file": "local-forecast.wav",
+    "sha256": "26d955c28cd673ab7c9e6145e09b8633c9097eb5c4a4dc8f0541f3753241edb5",
+    "source_mp3_sha256": "c0b120cb91a62468f5024162c8942dd2310696c076b6a1df2b88892350575b87"
+  },
+  "sfx": [
+    {
+      "file": "cheer-short.wav",
+      "sha256": "1bc811b29e15824a23860f4d675c45ff244e7d31189db76deaaa5ad5672d54fa",
+      "bytes": 67278,
+      "license": "CC0",
+      "url": "https://freesound.org/s/511788/",
+      "freesound_id": 511788,
+      "user": "Kinoton",
+      "note": "trimmed preview"
+    },
+    {
+      "file": "chime-short.wav",
+      "sha256": "f26aecefcbb58383afb24d23b7c2afa8fc54db4ffa27fc6ddf4f506b33b39425",
+      "bytes": 67278,
+      "license": "CC0",
+      "url": "https://freesound.org/s/390863/",
+      "freesound_id": 390863,
+      "note": "trimmed"
+    },
+    {
+      "file": "kenney-click.wav",
+      "sha256": "366a86202b215395eb9bb7376da4200453a0fb6751884e338a9e720f036fce0a",
+      "bytes": 9876,
+      "license": "CC0",
+      "url": "https://kenney.nl/assets/ui-audio",
+      "source": "Kenney UI Audio",
+      "note": "OpenGameArt UI_SFX_Set click2"
+    },
+    {
+      "file": "kenney-switch.wav",
+      "sha256": "4302484e4ff8d4091adedab252b3f57e65be7ff5b6117bf8936a501b4f90b04c",
+      "bytes": 49762,
+      "license": "CC0",
+      "url": "https://kenney.nl/assets/ui-audio",
+      "source": "Kenney UI Audio",
+      "note": "OpenGameArt UI_SFX_Set switch27"
+    },
+    {
+      "file": "keyboard-short.wav",
+      "sha256": "99ec3be7a2a3de98783eac0e796e75b2d72feb0fd5ddde384e1f8801eac1c794",
+      "bytes": 52878,
+      "license": "CC0",
+      "url": "https://freesound.org/s/450282/",
+      "freesound_id": 450282,
+      "user": "stu556",
+      "note": "trimmed preview"
+    },
+    {
+      "file": "mouse-click.wav",
+      "sha256": "2643d1ab92874af5f22656f23e1283f558de06eb188b63e8794d59d918dabefa",
+      "bytes": 24078,
+      "license": "CC0",
+      "url": "https://freesound.org/s/534104/",
+      "freesound_id": 534104,
+      "user": "pbimal"
+    },
+    {
+      "file": "paper-rustle.wav",
+      "sha256": "cb5653d176f10c1574d59c88adc200dd4ee5ce5315123241815c5ae9518ebec0",
+      "bytes": 48078,
+      "license": "CC0",
+      "url": "https://freesound.org/s/181774/",
+      "freesound_id": 181774,
+      "note": "trimmed"
+    },
+    {
+      "file": "soft-pop.wav",
+      "sha256": "86cd4b6e675cc58ca3bb804541f09c14ad1a4d67a996d2f6fde0e765d63e3f2b",
+      "bytes": 43278,
+      "license": "CC0",
+      "url": "https://freesound.org/s/541993/",
+      "freesound_id": 541993,
+      "user": "Rob_Marion"
+    },
+    {
+      "file": "swish-short.wav",
+      "sha256": "ec3ad9326f98543199cbbb9e99f34a94e151afaedb27b62732766514bad33994",
+      "bytes": 38478,
+      "license": "CC0",
+      "url": "https://freesound.org/s/154648/",
+      "freesound_id": 154648,
+      "note": "trimmed"
+    },
+    {
+      "file": "ui-pop.wav",
+      "sha256": "41e513160291528357e618136c6734b25c11b8a09374d478b3526c43861596e9",
+      "bytes": 28878,
+      "license": "CC0",
+      "url": "https://freesound.org/s/878253/",
+      "freesound_id": 878253,
+      "user": "Qvantor"
+    },
+    {
+      "file": "whoosh-long.wav",
+      "sha256": "7d1c3d7761191ae56577e6b012516eb0d58c67cc130ad1a63fae4353489346df",
+      "bytes": 52878,
+      "license": "CC0",
+      "url": "https://freesound.org/s/416054/",
+      "freesound_id": 416054,
+      "note": "trimmed"
+    },
+    {
+      "file": "whoosh-short.wav",
+      "sha256": "0289d2daef798c375174918737b15006d32aa468510f9949e0f365b966861b9c",
+      "bytes": 38478,
+      "license": "CC0",
+      "url": "https://freesound.org/s/372519/",
+      "freesound_id": 372519,
+      "note": "trimmed"
+    }
+  ],
+  "characters": [
+    {
+      "beat": "hook / question",
+      "species": "alpaca",
+      "outfit": "soft green beanie, round sunglasses, cream maker cardigan"
+    },
+    {
+      "beat": "Twine",
+      "species": "chinchilla",
+      "outfit": "storyteller hat with quill, reading glasses, librarian robe, pocket book"
+    },
+    {
+      "beat": "GDevelop",
+      "species": "meerkat",
+      "outfit": "forehead goggles, logic-tinker vest, key badge"
+    },
+    {
+      "beat": "Nilo",
+      "species": "fennec fox",
+      "outfit": "explorer goggles, teal hoodie, orange portal scarf, backpack"
+    }
+  ],
+  "set": "First-game maker's library/workshop with three stations: TWINE (passage cards + string), GDEVELOP (Player touches key \u2192 open door), NILO (type \u2192 build mini world). Shelves, posters, lamps, neighbouring desks. Original screen UIs; generic plain lettering only.",
+  "3d_assets": "Procedural Three.js geometry (original). Screen textures hand-authored. No Poly Haven downloads required for this build.",
+  "caption_font": {
+    "file": "assets/caption.woff2",
+    "family": "Montserrat ExtraBold",
+    "license": "OFL"
+  },
+  "notes": "Final render online GPU=0 overrides mac-render.md. Music is Local Forecast (not Carefree / Sneaky Snitch / Wallpaper).",
+  "qa": {
+    "version": "v2-caption-bottom-safe",
+    "static_yavg_thresh": 0.15,
+    "static_max_run": 0,
+    "static_pass": true,
+    "caption_bottom_max": 1840,
+    "caption_bottom_assert": true,
+    "fixes": [
+      "caption bbox bottom pinned \u2264 y=1840 (\u226580px from frame bottom)",
+      "prefer \u22642 caption lines with slightly smaller font",
+      "assertCaptionBottomSafe boot check",
+      "camera/VO/word timings/characters/set/music/SFX unchanged"
+    ],
+    "artifacts": "/opt/cursor/artifacts/easiest-tool-final-v2/"
+  }
+}

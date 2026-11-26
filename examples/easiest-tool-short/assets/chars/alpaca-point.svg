@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <ellipse cx="300" cy="565" rx="115" ry="130" fill="#d8c4a8"/>
+  <!-- cream maker cardigan -->
+  <path d="M205,465 Q300,430 395,465 L405,645 Q300,680 195,645 Z" fill="#c4a878"/>
+  <path d="M225,485 Q300,455 375,485 L380,635 Q300,655 220,635 Z" fill="#d4bc90"/>
+  <rect x="280" y="530" width="40" height="22" rx="4" fill="#8a6e48"/>
+  <path d="M250,505 Q300,520 350,505" fill="none" stroke="#8a6e48" stroke-width="5"/>
+  <!-- fluffy alpaca head -->
+  <ellipse cx="300" cy="290" rx="150" ry="140" fill="#ead8c0"/>
+  <ellipse cx="300" cy="310" rx="118" ry="105" fill="#f2e4d0"/>
+  <!-- tall banana ears -->
+  <ellipse cx="195" cy="160" rx="28" ry="58" fill="#d8c4a8" transform="rotate(-18 195 160)"/>
+  <ellipse cx="405" cy="160" rx="28" ry="58" fill="#d8c4a8" transform="rotate(18 405 160)"/>
+  <ellipse cx="195" cy="165" rx="12" ry="30" fill="#e8b4a0" transform="rotate(-18 195 165)"/>
+  <ellipse cx="405" cy="165" rx="12" ry="30" fill="#e8b4a0" transform="rotate(18 405 165)"/>
+  <!-- soft beanie -->
+  <path d="M170,210 Q300,80 430,210" fill="#6b8f6a"/>
+  <ellipse cx="300" cy="205" rx="135" ry="28" fill="#5a7a5a"/>
+  <circle cx="300" cy="95" r="18" fill="#c4785a"/>
+  <!-- muzzle -->
+  <ellipse cx="300" cy="355" rx="48" ry="38" fill="#f7ebe0"/>
+  <ellipse cx="300" cy="340" rx="14" ry="10" fill="#2a2118"/>
+  
+  <ellipse cx="264" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="336" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="268" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="340" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <!-- round sunglasses -->
+  <circle cx="264" cy="278" r="28" fill="#2a3028" opacity=".88"/>
+  <circle cx="336" cy="278" r="28" fill="#2a3028" opacity=".88"/>
+  <path d="M292,278 H308" stroke="#3a4038" stroke-width="5"/>
+  <circle cx="254" cy="270" r="7" fill="#8ab" opacity=".28"/>
+  <circle cx="326" cy="270" r="7" fill="#8ab" opacity=".28"/>
+  <ellipse cx="300" cy="375" rx="11" ry="13" fill="#3a2a24"/>
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#ead8c0"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#ead8c0"/>
+  
+  <ellipse cx="410" cy="410.0" rx="22" ry="70.0" fill="#ead8c0"/>
+  <ellipse cx="428" cy="340" rx="20" ry="16" fill="#ead8c0"/>
+  
+  <ellipse cx="230" cy="710" rx="28" ry="16" fill="#d8c4a8"/>
+  <ellipse cx="370" cy="710" rx="28" ry="16" fill="#d8c4a8"/>
+  <ellipse cx="230" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+  <ellipse cx="370" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+
+</svg>
