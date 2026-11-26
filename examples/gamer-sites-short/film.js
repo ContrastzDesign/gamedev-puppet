@@ -1,7 +1,7 @@
 // Gamer-sites Short — content-short VERSION 1 (drawn SVG animals in a detailed 3D cafe).
 import * as THREE from 'three';
 import { FPS, FRAMES, SHOTS } from './beats.js';
-import { W, H, clamp, easeInOut, lin } from './core.js';
+import { W, H, clamp, easeInOut, easeIn, easeOut, lin } from './core.js';
 import { buildRoom } from './room.js';
 import { initOverlays, drawOverlays, captionInfo, assertCaptionSafeZone } from './overlays.js';
 
@@ -123,66 +123,191 @@ function charLocal(shot) {
   // Slight side offset for variety, but never enough to hide behind a partition
   const side = ({ hook: -0.15, steam: 0.2, poki: -0.2, roblox: 0.15, twitch: -0.1 })[shot.id] || 0;
   // z ≥ 2.15 keeps the desk top behind the feet in projection (no neck-gap slab)
-  // Slightly smaller so feet sit above the lower-third caption band
-  return { side, z: 2.2, scale: shot.id === 'hook' ? 0.95 : 0.9 };
+  return { side, z: 2.2, scale: shot.id === 'hook' ? 1.0 : 0.95 };
+}
+
+/**
+ * Motivated camera landings (offsets relative to the active character).
+ * Land 0–4 frames before the VO word; move kinds never repeat back-to-back
+ * (cut at shot opens resets). Move durations 12–30 frames.
+ *
+ * Beat moves:
+ *   hook   cut → drop → orbit → push
+ *   steam  cut → whip → follow → push → orbit
+ *   poki   cut → crane → orbit → low → pull
+ *   roblox cut → follow → push → crane → orbit
+ *   twitch cut → drop → orbit → whip → push → pull
+ */
+const LANDINGS = [
+  // —— hook / WEB MAP ("What websites…") ——
+  { f: 0,   dur: 1,  kind: 'cut',    dx: 0.55, dy: 3.6,  dz: 5.6,  lx: -0.06, ly: 0.75, lz: -0.35, vo: 'open' },
+  { f: 16,  dur: 16, kind: 'drop',   dx: 0.22, dy: 1.48, dz: 4.25, lx: -0.04, ly: 1.02, lz: -0.12, vo: 'websites' },
+  { f: 40,  dur: 18, kind: 'orbit',  dx: -0.42, dy: 1.5, dz: 4.15, lx: 0.06, ly: 1.05, lz: -0.1, vo: 'gamers' },
+  { f: 64,  dur: 14, kind: 'push',   dx: 0.12, dy: 1.42, dz: 4.05, lx: -0.02, ly: 1.05, lz: -0.08, vo: 'most' },
+
+  // —— steam / PC LIBRARY ("Number five, Steam…") ——
+  { f: 75,  dur: 1,  kind: 'cut',    dx: 1.15, dy: 1.55, dz: 5.1,  lx: -0.12, ly: 0.95, lz: -0.2, vo: 'Number' },
+  { f: 97,  dur: 20, kind: 'whip',   dx: 0.28, dy: 1.18, dz: 4.15, lx: -0.04, ly: 1.12, lz: -0.1, vo: 'Steam' },
+  { f: 128, dur: 18, kind: 'follow', dx: -0.62, dy: 1.46, dz: 4.25, lx: 0.1, ly: 1.02, lz: -0.14, vo: 'far' },
+  { f: 162, dur: 16, kind: 'push',   dx: 0.18, dy: 1.4,  dz: 3.95, lx: 0, ly: 1.08, lz: -0.08, vo: 'best games' },
+  { f: 186, dur: 14, kind: 'orbit',  dx: 0.72, dy: 1.52, dz: 4.15, lx: -0.08, ly: 1.05, lz: -0.1, vo: 'in' },
+
+  // —— poki / BROWSER PLAY ("Number four, Poki…") ——
+  { f: 196, dur: 1,  kind: 'cut',    dx: -0.95, dy: 1.25, dz: 4.9, lx: 0.12, ly: 1.0, lz: -0.15, vo: 'Number' },
+  { f: 219, dur: 22, kind: 'crane',  dx: -0.28, dy: 1.58, dz: 4.15, lx: 0.05, ly: 1.08, lz: -0.1, vo: 'Poki' },
+  { f: 268, dur: 18, kind: 'orbit',  dx: 0.58, dy: 1.48, dz: 4.25, lx: -0.05, ly: 1.05, lz: -0.12, vo: 'browser' },
+  { f: 316, dur: 20, kind: 'low',    dx: 0.12, dy: 1.05, dz: 3.95, lx: 0, ly: 1.22, lz: -0.05, vo: 'Mobile' },
+  { f: 346, dur: 16, kind: 'pull',   dx: -0.38, dy: 1.62, dz: 4.55, lx: 0.05, ly: 1.0, lz: -0.18, vo: 'browser!' },
+
+  // —— roblox / BLOCK WORLD ("Number three, roblox.com…") ——
+  { f: 363, dur: 1,  kind: 'cut',    dx: -1.05, dy: 1.62, dz: 5.15, lx: 0.14, ly: 0.92, lz: -0.22, vo: 'Number' },
+  { f: 391, dur: 24, kind: 'follow', dx: 0.22, dy: 1.42, dz: 4.1,  lx: -0.04, ly: 1.06, lz: -0.1, vo: 'roblox.com' },
+  { f: 436, dur: 18, kind: 'push',   dx: 0.08, dy: 1.38, dz: 3.95, lx: 0, ly: 1.1, lz: -0.08, vo: 'most played' },
+  { f: 468, dur: 20, kind: 'crane',  dx: 0.48, dy: 2.05, dz: 4.45, lx: -0.05, ly: 1.0, lz: -0.18, vo: 'platform' },
+  { f: 494, dur: 14, kind: 'orbit',  dx: -0.58, dy: 1.5,  dz: 4.15, lx: 0.08, ly: 1.05, lz: -0.1, vo: 'time' },
+
+  // —— twitch / LIVE WATCH ("And finally Number two… Twitch") ——
+  { f: 507, dur: 1,  kind: 'cut',    dx: 0.85, dy: 3.15, dz: 5.45, lx: -0.1, ly: 0.82, lz: -0.28, vo: 'And' },
+  { f: 534, dur: 24, kind: 'drop',   dx: 0.18, dy: 1.45, dz: 4.2,  lx: -0.03, ly: 1.05, lz: -0.12, vo: 'Number two' },
+  { f: 575, dur: 18, kind: 'orbit',  dx: -0.52, dy: 1.5,  dz: 4.1,  lx: 0.06, ly: 1.08, lz: -0.1, vo: 'platform' },
+  { f: 648, dur: 22, kind: 'whip',   dx: 0.32, dy: 1.4,  dz: 4.0,  lx: -0.04, ly: 1.08, lz: -0.08, vo: 'livestreams' },
+  { f: 701, dur: 20, kind: 'push',   dx: 0.06, dy: 1.38, dz: 3.9,  lx: 0, ly: 1.1, lz: -0.05, vo: 'Twitch' },
+  { f: 724, dur: 14, kind: 'pull',   dx: 0.18, dy: 1.5,  dz: 4.2,  lx: 0, ly: 1.05, lz: -0.1, vo: 'hold' },
+];
+
+function copyPose(p) {
+  return { dx: p.dx, dy: p.dy, dz: p.dz, lx: p.lx, ly: p.ly, lz: p.lz, fov: p.fov || 40 };
+}
+
+function lerpPose(a, b, t) {
+  return {
+    dx: lin(a.dx, b.dx, t),
+    dy: lin(a.dy, b.dy, t),
+    dz: lin(a.dz, b.dz, t),
+    lx: lin(a.lx, b.lx, t),
+    ly: lin(a.ly, b.ly, t),
+    lz: lin(a.lz, b.lz, t),
+    fov: lin(a.fov || 40, b.fov || 40, t),
+  };
+}
+
+function movePose(from, to, kind, u) {
+  if (kind === 'cut' || from === to) return copyPose(to);
+  const e = easeInOut(u);
+  if (kind === 'push' || kind === 'pull' || kind === 'follow') {
+    return lerpPose(from, to, e);
+  }
+  if (kind === 'orbit') {
+    const mid = lerpPose(from, to, 0.5);
+    mid.dx += (to.dx >= from.dx ? 1 : -1) * 0.55;
+    mid.dy += 0.12;
+    mid.dz += 0.15;
+    if (u < 0.5) return lerpPose(from, mid, easeInOut(u * 2));
+    return lerpPose(mid, to, easeInOut((u - 0.5) * 2));
+  }
+  if (kind === 'crane') {
+    const mid = lerpPose(from, to, 0.45);
+    mid.dy = Math.max(from.dy, to.dy) + 0.45;
+    mid.dz = lin(from.dz, to.dz, 0.35);
+    if (u < 0.55) return lerpPose(from, mid, easeInOut(u / 0.55));
+    return lerpPose(mid, to, easeInOut((u - 0.55) / 0.45));
+  }
+  if (kind === 'drop') {
+    const hi = copyPose(to);
+    hi.dy = to.dy + 1.15;
+    hi.dz = to.dz + 0.55;
+    hi.ly = to.ly + 0.2;
+    if (u < 0.35) return lerpPose(from, hi, easeOut(u / 0.35));
+    return lerpPose(hi, to, easeInOut((u - 0.35) / 0.65));
+  }
+  if (kind === 'low') {
+    const mid = lerpPose(from, to, 0.4);
+    mid.dy = Math.min(from.dy, to.dy) - 0.25;
+    mid.ly = to.ly + 0.15;
+    if (u < 0.45) return lerpPose(from, mid, easeInOut(u / 0.45));
+    return lerpPose(mid, to, easeInOut((u - 0.45) / 0.55));
+  }
+  if (kind === 'whip') {
+    const side = (to.dx >= from.dx ? 1 : -1);
+    const arc = lerpPose(from, to, 0.5);
+    arc.dx += side * 1.35;
+    arc.dy += 0.25;
+    arc.dz = lin(from.dz, to.dz, 0.4) - 0.2;
+    arc.lx += side * 0.4;
+    if (u < 0.22) return lerpPose(from, lerpPose(from, arc, 0.35), easeIn(u / 0.22));
+    if (u < 0.72) return lerpPose(lerpPose(from, arc, 0.35), arc, easeInOut((u - 0.22) / 0.5));
+    return lerpPose(arc, to, easeOut((u - 0.72) / 0.28));
+  }
+  return lerpPose(from, to, e);
+}
+
+/** Continuous drift so holds never exceed ~12f. */
+function driftPose(pose, f, landF) {
+  const age = Math.max(0, f - landF);
+  const o = copyPose(pose);
+  const turn = Math.sin((f + landF) * 0.045) * 0.012;
+  const rise = age * 0.0045;
+  const push = age * 0.007;
+  o.dx += turn;
+  o.dy += Math.min(0.18, rise);
+  o.dz = Math.max(3.55, o.dz - Math.min(0.35, push));
+  o.lx += turn * 0.25;
+  return o;
+}
+
+function resolveOffsets(shot, f) {
+  let prev = LANDINGS[0], next = null;
+  for (let i = 0; i < LANDINGS.length; i++) {
+    if (LANDINGS[i].f <= f) prev = LANDINGS[i];
+    else { next = LANDINGS[i]; break; }
+  }
+  if (prev.f < shot.f0) {
+    const open = LANDINGS.find((L) => L.f === shot.f0);
+    if (open && f >= shot.f0) prev = open;
+  }
+
+  if (next && next.kind !== 'cut') {
+    const start = next.f - next.dur;
+    if (f >= start && f <= next.f) {
+      const from = (start <= prev.f) ? prev : driftPose(prev, start, prev.f);
+      const u = (f - start) / Math.max(1, next.dur);
+      return movePose(from, next, next.kind, clamp(u));
+    }
+  }
+
+  if (next && next.kind === 'cut' && f >= next.f) {
+    return copyPose(next);
+  }
+  return driftPose(prev, f, prev.f);
 }
 
 function cameraFor(shot, f) {
   const booth = room.boothMeta[shot.booth];
-  const t = easeInOut(clamp((f - shot.f0) / Math.max(1, shot.f1 - shot.f0 - 1)));
   const cl = charLocal(shot);
   const charX = booth.x + cl.side;
   const charZ = booth.z + cl.z;
-  // Eye-level aisle cameras, pulled back so feet clear the lower-third caption band.
-  if (shot.id === 'hook') {
-    return {
-      x: lin(charX + 0.5, charX + 0.2, t),
-      y: lin(1.55, 1.45, t),
-      z: lin(charZ + 5.0, charZ + 4.2, t),
-      lx: charX - 0.08,
-      ly: 0.85,
-      lz: charZ - 0.1,
-    };
+  const r = resolveOffsets(shot, f);
+  const wantFov = r.fov || 40;
+  if (Math.abs(camera.fov - wantFov) > 0.05) {
+    camera.fov = wantFov;
+    camera.updateProjectionMatrix();
   }
-  if (shot.id === 'steam') {
-    return {
-      x: lin(charX + 0.85, charX + 0.5, t),
-      y: lin(1.5, 1.42, t),
-      z: lin(charZ + 4.8, charZ + 4.1, t),
-      lx: charX - 0.06,
-      ly: 0.85,
-      lz: charZ - 0.15,
-    };
-  }
-  if (shot.id === 'poki') {
-    return {
-      x: lin(charX - 0.8, charX - 0.4, t),
-      y: lin(1.55, 1.45, t),
-      z: lin(charZ + 4.9, charZ + 4.15, t),
-      lx: charX + 0.06,
-      ly: 0.88,
-      lz: charZ - 0.1,
-    };
-  }
-  if (shot.id === 'roblox') {
-    return {
-      x: lin(charX - 0.9, charX - 0.45, t),
-      y: lin(1.5, 1.42, t),
-      z: lin(charZ + 4.85, charZ + 4.1, t),
-      lx: charX + 0.08,
-      ly: 0.85,
-      lz: charZ - 0.1,
-    };
-  }
-  // twitch: straight-on — full body + floor under feet for captions
   return {
-    x: lin(charX + 0.3, charX + 0.08, t),
-    y: lin(1.5, 1.42, t),
-    z: lin(charZ + 4.95, charZ + 4.15, t),
-    lx: charX - 0.03,
-    ly: 0.85,
-    lz: charZ - 0.08,
+    x: charX + r.dx,
+    y: r.dy,
+    z: charZ + r.dz,
+    lx: charX + r.lx,
+    ly: r.ly,
+    lz: charZ + r.lz,
   };
+}
+
+/** Expose landings for QA / reports. */
+export function cameraMoveList() {
+  return LANDINGS.map((L) => {
+    const shot = SHOTS.find((s) => L.f >= s.f0 && L.f < s.f1) || SHOTS[SHOTS.length - 1];
+    return { f: L.f, dur: L.dur, kind: L.kind, vo: L.vo, shot: shot.id, booth: shot.booth };
+  });
 }
 
 function placeCharacter(shot, f) {
@@ -332,6 +457,7 @@ async function boot() {
   window.captionInfo = captionInfo;
   window.assertCaptionSafeZone = assertCaptionSafeZone;
   window.assertCharacterVisible = assertCharacterVisible;
+  window.cameraMoveList = cameraMoveList;
   window.occlusionInfo = occl;
   ready = true;
   window.filmReady = true;

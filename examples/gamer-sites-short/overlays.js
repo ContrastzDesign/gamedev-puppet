@@ -11,10 +11,10 @@ const MAX_TEXT_W = MAX_RENDER_W - STROKE_W; // 906
 const BASE_FONT_PX = 70;
 const MIN_FONT_PX = 42;
 const TRACK_RATIO = -0.01;
-// top: above heads; low: lower third — kept below typical character feet so faces stay clear
-const BAND_Y = { top: 200, low: 1760 };
-const LOW_TOP_MIN = 1640;   // first line below character feet / lower body
-const BOTTOM_MARGIN = 50;   // keep clear of Shorts bottom UI
+// One lower caption band (below feet, clear of Shorts UI). top kept as alias → low.
+const BAND_Y = { top: 1720, low: 1720 };
+const LOW_TOP_MIN = 1620;   // first line below character feet / lower body
+const BOTTOM_MARGIN = 55;   // keep clear of Shorts bottom UI
 const WRAP_DANGLE = new Set(['a', 'an', 'the', 'or', 'and', 'of', 'in', 'on', 'to', 'at', 'by', 'for', 'with', 'its', "it's", 'where', 'can']);
 const FILL = '#f5e6b8';
 const STROKE = '#1c1810';
@@ -177,14 +177,11 @@ export function captionInfo() {
 export function drawOverlays(ctx, f) {
   if (!LAYOUTS) return;
   for (const c of LAYOUTS) {
-    if (f < c.f || f > (c.end ?? c.f + 90)) continue;
-    const life = f - c.f;
-    const fadeIn = smooth(clamp(life / 4));
-    const fadeOut = c.end != null ? smooth(clamp(((c.end) - f) / 4)) : 1;
-    const a = fadeIn * fadeOut;
-    if (a <= 0.01) continue;
+    // end is exclusive so adjacent captions never stack
+    if (f < c.f || f >= (c.end ?? c.f + 90)) continue;
+    // Fully opaque for the entire caption window (no washed-out fades).
     ctx.save();
-    ctx.globalAlpha = a;
+    ctx.globalAlpha = 1;
     ctx.font = c.font;
     ctx.letterSpacing = `${c.track}px`;
     ctx.textAlign = 'left';

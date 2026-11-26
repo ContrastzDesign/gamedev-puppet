@@ -311,12 +311,26 @@ function buildHeroBooth(g, b, textures) {
   box(g, 0.55, 0.55, 0.07, '#3d4654', 0.85, 0.9, 0.1, 0, 0.9, 0, { round: 0.04 });
   box(g, 0.07, 0.07, 0.35, '#2a3038', 0.62, 0.7, -0.1, 0, 0.9, 0);
   box(g, 0.07, 0.07, 0.35, '#2a3038', 1.08, 0.7, -0.2, 0, 0.9, 0);
-  // booth sign
+  // booth sign — high enough to stay fully in frame during push/orbit/low moves
   const sign = makeSign(b.label);
-  sign.position.set(0, 2.55, -0.35);
+  sign.position.set(0, 2.72, -0.35);
   g.add(sign);
   // neon under sign
-  neonStrip(g, 1.5, b.neon || '#c4a35a', 0, 2.35, -0.32);
+  neonStrip(g, 1.5, b.neon || '#c4a35a', 0, 2.48, -0.32);
+  // Overhang shelf + hanging bits above the sign (fills empty upper brick on eye-level shots)
+  box(g, 2.4, 0.08, 0.35, '#4a3628', 0, 3.35, -0.25);
+  box(g, 0.18, 0.35, 0.12, '#6a8fbf', -0.7, 3.55, -0.15);
+  box(g, 0.18, 0.28, 0.12, '#c4a35a', -0.4, 3.52, -0.15);
+  box(g, 0.18, 0.4, 0.12, '#c4785a', 0.55, 3.58, -0.15);
+  box(g, 0.18, 0.32, 0.12, '#5a9a88', 0.85, 3.54, -0.15);
+  // small hanging pendant above booth
+  cyl(g, 0.04, 0.06, 0.2, '#3a3028', 0, 3.7, 0.05);
+  const bulb = new THREE.Mesh(
+    new THREE.SphereGeometry(0.1, 10, 10),
+    new THREE.MeshStandardMaterial({ color: '#f5e0b0', emissive: '#f0d080', emissiveIntensity: 1.2 }),
+  );
+  bulb.position.set(0, 3.55, 0.05);
+  g.add(bulb);
   // side panels / booth frame — shorter toward aisle so they don't slab the foreground
   box(g, 0.1, 2.4, 1.2, '#6a5545', -1.4, 1.2, -0.15);
   box(g, 0.1, 2.4, 1.2, '#6a5545', 1.4, 1.2, -0.15);
@@ -431,24 +445,43 @@ export function buildRoom(textures) {
   addBgBooth(root, 2.45, -5.35, 1, null);
   addBgBooth(root, 6.85, -5.35, 2, null);
 
-  // Posters with generic original art — mid height so mid shots catch them
-  const posterXs = [-11.2, -6.4, -2.0, 2.4, 6.8, 11.5];
+  // Posters with generic original art — dense mid + upper wall so eye-level shots aren't bare brick
+  const posterXs = [-11.2, -9.0, -6.4, -4.0, -2.0, 0.5, 2.4, 4.5, 6.8, 9.2, 11.5];
   posterXs.forEach((x, i) => {
     const p = makePosterArt(i, 0.85, 1.15);
     p.position.set(x, 3.15, -7.65);
     root.add(p);
   });
-  // Extra smaller posters lower between booths
-  [-9.6, -5.2, -0.8, 3.6, 8.0].forEach((x, i) => {
-    const p = makePosterArt(i + 3, 0.55, 0.75);
-    p.position.set(x, 4.35, -7.65);
+  // Upper band posters (fill the top third on eye-level / push frames)
+  [-10.4, -7.2, -3.8, -0.4, 3.0, 6.2, 9.6].forEach((x, i) => {
+    const p = makePosterArt(i + 3, 0.7, 0.95);
+    p.position.set(x, 4.55, -7.65);
     root.add(p);
   });
+  // Extra smaller posters between booths
+  [-9.6, -5.2, -0.8, 3.6, 8.0].forEach((x, i) => {
+    const p = makePosterArt(i + 8, 0.55, 0.75);
+    p.position.set(x, 5.35, -7.65);
+    root.add(p);
+  });
+  // Hanging banner strips under ceiling (break empty top bands)
+  for (const x of [-8.5, -4.2, 0.2, 4.6, 9.0]) {
+    box(root, 1.4, 0.55, 0.04, ['#6a5545', '#5a483c', '#4a5a48', '#5a4a58', '#4a4858'][Math.abs(x | 0) % 5],
+      x, 5.7, -7.4);
+    box(root, 0.04, 0.35, 0.04, '#3a2e24', x - 0.65, 6.05, -7.4);
+    box(root, 0.04, 0.35, 0.04, '#3a2e24', x + 0.65, 6.05, -7.4);
+  }
   // Side wall posters
-  for (let i = 0; i < 4; i++) {
-    const p = makePosterArt(i + 7, 0.75, 1.05);
-    p.position.set(-15.25, 2.8 + (i % 2) * 0.2, -4 + i * 2.2);
+  for (let i = 0; i < 6; i++) {
+    const p = makePosterArt(i + 11, 0.75, 1.05);
+    p.position.set(-15.25, 2.6 + (i % 3) * 1.1, -5 + i * 1.8);
     p.rotation.y = Math.PI / 2;
+    root.add(p);
+  }
+  for (let i = 0; i < 4; i++) {
+    const p = makePosterArt(i + 17, 0.7, 1.0);
+    p.position.set(15.25, 2.8 + (i % 2) * 1.2, -4 + i * 2.0);
+    p.rotation.y = -Math.PI / 2;
     root.add(p);
   }
 
@@ -457,8 +490,20 @@ export function buildRoom(textures) {
   addShelfUnit(root, -14.2, -1.5, Math.PI / 2);
   addShelfUnit(root, 14.2, 1.0, -Math.PI / 2);
 
-  // Center rug
+  // Center rug + aisle runners (fill mid-move / crane / drop frames)
   box(root, 6, 0.018, 4, '#8a5a4a', 0, 0.022, 2.2);
+  box(root, 22, 0.016, 1.6, '#7a5a48', 0, 0.02, -1.4);
+  // Floor planters / stools in the aisle gaps (never blocking hero sightlines)
+  for (const [x, z] of [[-6.3, -2.4], [-2.0, -2.5], [2.4, -2.4], [6.8, -2.5], [-10.5, 0.5], [10.8, 0.8]]) {
+    cyl(root, 0.18, 0.22, 0.28, '#5a4030', x, 0.14, z);
+    const bush = new THREE.Mesh(new THREE.SphereGeometry(0.28, 8, 8), mat('#3d6b4f'));
+    bush.position.set(x, 0.48, z);
+    root.add(bush);
+  }
+  for (const [x, z] of [[-3.2, 1.2], [3.5, 1.4], [-7.5, 3.2], [7.8, 3.0]]) {
+    cyl(root, 0.22, 0.24, 0.08, '#4a3a30', x, 0.45, z);
+    cyl(root, 0.05, 0.06, 0.42, '#3a3028', x, 0.2, z);
+  }
 
   // Lounge sofa + coffee table (foreground depth)
   box(root, 3.2, 0.45, 1.1, '#6a5548', -1.5, 0.35, 5.5, 0, 0.15, 0, { round: 0.08 });

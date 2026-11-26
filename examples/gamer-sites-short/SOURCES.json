@@ -3,8 +3,8 @@
   "project": "examples/gamer-sites-short",
   "style": "content-short VERSION 1 (drawn SVG animals in detailed 3D worlds)",
   "video": {
-    "file": "gamer-sites-short.mp4",
-    "sha256": "c5c88c995cf6b6f5b36186f54e9fbb535e708c610a2e056858650828754d6b95",
+    "file": "gamer-sites-final.mp4",
+    "sha256": "a59520643ee169074e7387abec8d2e1baffae803f77806b84f751c16984826ac",
     "width": 1080,
     "height": 1920,
     "fps": 24,
@@ -14,7 +14,9 @@
     "audio_codec": "AAC 192k",
     "loudness_lufs": -14.0,
     "true_peak_dbtp": -2.5,
-    "renderer": "ANGLE SwiftShader GPU=0"
+    "renderer": "ANGLE SwiftShader GPU=0",
+    "bytes": 11407727,
+    "note": "Camera re-render: motivated LANDINGS (drop/whip/crane/orbit/low/follow/push/pull), continuous drift; captions all lower-band opaque; denser cafe dressing."
   },
   "voiceover": {
     "file": "audio/vo.mp3",
@@ -170,5 +172,64 @@
     "file": "assets/caption.woff2",
     "family": "Montserrat ExtraBold",
     "license": "OFL"
+  },
+  "camera_moves": [
+    {
+      "shot": "hook",
+      "moves": [
+        "cut",
+        "drop",
+        "orbit",
+        "push"
+      ]
+    },
+    {
+      "shot": "steam",
+      "moves": [
+        "cut",
+        "whip",
+        "follow",
+        "push",
+        "orbit"
+      ]
+    },
+    {
+      "shot": "poki",
+      "moves": [
+        "cut",
+        "crane",
+        "orbit",
+        "low",
+        "pull"
+      ]
+    },
+    {
+      "shot": "roblox",
+      "moves": [
+        "cut",
+        "follow",
+        "push",
+        "crane",
+        "orbit"
+      ]
+    },
+    {
+      "shot": "twitch",
+      "moves": [
+        "cut",
+        "drop",
+        "orbit",
+        "whip",
+        "push",
+        "pull"
+      ]
+    }
+  ],
+  "qa": {
+    "static_yavg_threshold": 0.15,
+    "static_runs": 0,
+    "max_static_run": 0,
+    "pass": true,
+    "method": "scale=108:192,format=gray + tblend=all_mode=difference + signalstats YAVG"
   }
 }
