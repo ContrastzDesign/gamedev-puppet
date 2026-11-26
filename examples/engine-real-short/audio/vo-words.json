@@ -1,0 +1,1107 @@
+{
+ "file": "vo.mp3",
+ "fps": 24,
+ "duration": 52.192653,
+ "model": "faster-whisper-small.en",
+ "note": "aligned to script/spoken.txt (frames f=round(t*fps)+1)",
+ "unaligned": [],
+ "heard_differently": [],
+ "words": [
+  {
+   "w": "Which",
+   "start": 0.0,
+   "end": 0.34,
+   "line": 1,
+   "f_start": 1,
+   "f_end": 9
+  },
+  {
+   "w": "engine",
+   "start": 0.34,
+   "end": 0.62,
+   "line": 1,
+   "f_start": 9,
+   "f_end": 16
+  },
+  {
+   "w": "looks",
+   "start": 0.62,
+   "end": 0.9,
+   "line": 1,
+   "f_start": 16,
+   "f_end": 23
+  },
+  {
+   "w": "the",
+   "start": 0.9,
+   "end": 1.12,
+   "line": 1,
+   "f_start": 23,
+   "f_end": 28
+  },
+  {
+   "w": "most",
+   "start": 1.12,
+   "end": 1.34,
+   "line": 1,
+   "f_start": 28,
+   "f_end": 33
+  },
+  {
+   "w": "real?",
+   "start": 1.34,
+   "end": 1.7,
+   "line": 1,
+   "f_start": 33,
+   "f_end": 42
+  },
+  {
+   "w": "Which",
+   "start": 2.34,
+   "end": 2.58,
+   "line": 2,
+   "f_start": 57,
+   "f_end": 63
+  },
+  {
+   "w": "game",
+   "start": 2.58,
+   "end": 2.82,
+   "line": 2,
+   "f_start": 63,
+   "f_end": 69
+  },
+  {
+   "w": "engine",
+   "start": 2.82,
+   "end": 3.12,
+   "line": 2,
+   "f_start": 69,
+   "f_end": 76
+  },
+  {
+   "w": "comes",
+   "start": 3.12,
+   "end": 3.42,
+   "line": 2,
+   "f_start": 76,
+   "f_end": 83
+  },
+  {
+   "w": "closest",
+   "start": 3.42,
+   "end": 3.8,
+   "line": 2,
+   "f_start": 83,
+   "f_end": 92
+  },
+  {
+   "w": "to",
+   "start": 3.8,
+   "end": 4.2,
+   "line": 2,
+   "f_start": 92,
+   "f_end": 102
+  },
+  {
+   "w": "real-world",
+   "start": 4.2,
+   "end": 4.64,
+   "line": 2,
+   "f_start": 102,
+   "f_end": 112
+  },
+  {
+   "w": "footage?",
+   "start": 4.64,
+   "end": 5.1,
+   "line": 2,
+   "f_start": 112,
+   "f_end": 123
+  },
+  {
+   "w": "Two",
+   "start": 5.84,
+   "end": 6.0,
+   "line": 2,
+   "f_start": 141,
+   "f_end": 145
+  },
+  {
+   "w": "real-time",
+   "start": 6.0,
+   "end": 6.52,
+   "line": 2,
+   "f_start": 145,
+   "f_end": 157
+  },
+  {
+   "w": "demos",
+   "start": 6.52,
+   "end": 6.9,
+   "line": 2,
+   "f_start": 157,
+   "f_end": 167
+  },
+  {
+   "w": "show",
+   "start": 6.9,
+   "end": 7.2,
+   "line": 2,
+   "f_start": 167,
+   "f_end": 174
+  },
+  {
+   "w": "what",
+   "start": 7.2,
+   "end": 7.38,
+   "line": 2,
+   "f_start": 174,
+   "f_end": 178
+  },
+  {
+   "w": "developers",
+   "start": 7.38,
+   "end": 7.78,
+   "line": 2,
+   "f_start": 178,
+   "f_end": 188
+  },
+  {
+   "w": "can",
+   "start": 7.78,
+   "end": 8.02,
+   "line": 2,
+   "f_start": 188,
+   "f_end": 193
+  },
+  {
+   "w": "achieve,",
+   "start": 8.02,
+   "end": 8.4,
+   "line": 2,
+   "f_start": 193,
+   "f_end": 203
+  },
+  {
+   "w": "and",
+   "start": 8.82,
+   "end": 8.9,
+   "line": 2,
+   "f_start": 213,
+   "f_end": 215
+  },
+  {
+   "w": "one",
+   "start": 8.9,
+   "end": 9.16,
+   "line": 2,
+   "f_start": 215,
+   "f_end": 221
+  },
+  {
+   "w": "production",
+   "start": 9.16,
+   "end": 9.54,
+   "line": 2,
+   "f_start": 221,
+   "f_end": 230
+  },
+  {
+   "w": "constraint",
+   "start": 9.54,
+   "end": 10.04,
+   "line": 2,
+   "f_start": 230,
+   "f_end": 242
+  },
+  {
+   "w": "explains",
+   "start": 10.04,
+   "end": 10.46,
+   "line": 2,
+   "f_start": 242,
+   "f_end": 252
+  },
+  {
+   "w": "the",
+   "start": 10.46,
+   "end": 10.68,
+   "line": 2,
+   "f_start": 252,
+   "f_end": 257
+  },
+  {
+   "w": "difference.",
+   "start": 10.68,
+   "end": 11.06,
+   "line": 2,
+   "f_start": 257,
+   "f_end": 266
+  },
+  {
+   "w": "Number",
+   "start": 11.84,
+   "end": 11.84,
+   "line": 3,
+   "f_start": 285,
+   "f_end": 285
+  },
+  {
+   "w": "one,",
+   "start": 11.84,
+   "end": 12.22,
+   "line": 3,
+   "f_start": 285,
+   "f_end": 294
+  },
+  {
+   "w": "Unreal",
+   "start": 12.56,
+   "end": 12.9,
+   "line": 3,
+   "f_start": 302,
+   "f_end": 311
+  },
+  {
+   "w": "Engine",
+   "start": 12.9,
+   "end": 13.22,
+   "line": 3,
+   "f_start": 311,
+   "f_end": 318
+  },
+  {
+   "w": "5",
+   "start": 13.22,
+   "end": 13.66,
+   "line": 3,
+   "f_start": 318,
+   "f_end": 329
+  },
+  {
+   "w": "for",
+   "start": 13.66,
+   "end": 13.98,
+   "line": 3,
+   "f_start": 329,
+   "f_end": 337
+  },
+  {
+   "w": "a",
+   "start": 13.98,
+   "end": 14.14,
+   "line": 3,
+   "f_start": 337,
+   "f_end": 340
+  },
+  {
+   "w": "city",
+   "start": 14.14,
+   "end": 14.36,
+   "line": 3,
+   "f_start": 340,
+   "f_end": 346
+  },
+  {
+   "w": "at",
+   "start": 14.36,
+   "end": 14.58,
+   "line": 3,
+   "f_start": 346,
+   "f_end": 351
+  },
+  {
+   "w": "street",
+   "start": 14.58,
+   "end": 14.98,
+   "line": 3,
+   "f_start": 351,
+   "f_end": 361
+  },
+  {
+   "w": "level.",
+   "start": 14.98,
+   "end": 15.3,
+   "line": 3,
+   "f_start": 361,
+   "f_end": 368
+  },
+  {
+   "w": "In",
+   "start": 15.76,
+   "end": 15.88,
+   "line": 3,
+   "f_start": 379,
+   "f_end": 382
+  },
+  {
+   "w": "The",
+   "start": 15.88,
+   "end": 15.98,
+   "line": 3,
+   "f_start": 382,
+   "f_end": 385
+  },
+  {
+   "w": "Matrix",
+   "start": 15.98,
+   "end": 16.32,
+   "line": 3,
+   "f_start": 385,
+   "f_end": 393
+  },
+  {
+   "w": "Awakens,",
+   "start": 16.32,
+   "end": 16.78,
+   "line": 3,
+   "f_start": 393,
+   "f_end": 404
+  },
+  {
+   "w": "Nanite",
+   "start": 17.26,
+   "end": 17.5,
+   "line": 3,
+   "f_start": 415,
+   "f_end": 421
+  },
+  {
+   "w": "handled",
+   "start": 17.5,
+   "end": 17.86,
+   "line": 3,
+   "f_start": 421,
+   "f_end": 430
+  },
+  {
+   "w": "highly",
+   "start": 17.86,
+   "end": 18.26,
+   "line": 3,
+   "f_start": 430,
+   "f_end": 439
+  },
+  {
+   "w": "detailed",
+   "start": 18.26,
+   "end": 18.68,
+   "line": 3,
+   "f_start": 439,
+   "f_end": 449
+  },
+  {
+   "w": "geometry",
+   "start": 18.68,
+   "end": 19.26,
+   "line": 3,
+   "f_start": 449,
+   "f_end": 463
+  },
+  {
+   "w": "and",
+   "start": 19.26,
+   "end": 19.7,
+   "line": 3,
+   "f_start": 463,
+   "f_end": 474
+  },
+  {
+   "w": "Lumen",
+   "start": 19.7,
+   "end": 20.08,
+   "line": 3,
+   "f_start": 474,
+   "f_end": 483
+  },
+  {
+   "w": "calculated",
+   "start": 20.08,
+   "end": 20.56,
+   "line": 3,
+   "f_start": 483,
+   "f_end": 494
+  },
+  {
+   "w": "lighting.",
+   "start": 20.56,
+   "end": 20.96,
+   "line": 3,
+   "f_start": 494,
+   "f_end": 504
+  },
+  {
+   "w": "The",
+   "start": 21.46,
+   "end": 21.6,
+   "line": 3,
+   "f_start": 516,
+   "f_end": 519
+  },
+  {
+   "w": "player",
+   "start": 21.6,
+   "end": 21.8,
+   "line": 3,
+   "f_start": 519,
+   "f_end": 524
+  },
+  {
+   "w": "could",
+   "start": 21.8,
+   "end": 22.02,
+   "line": 3,
+   "f_start": 524,
+   "f_end": 529
+  },
+  {
+   "w": "move",
+   "start": 22.02,
+   "end": 22.28,
+   "line": 3,
+   "f_start": 529,
+   "f_end": 536
+  },
+  {
+   "w": "through",
+   "start": 22.28,
+   "end": 22.5,
+   "line": 3,
+   "f_start": 536,
+   "f_end": 541
+  },
+  {
+   "w": "the",
+   "start": 22.5,
+   "end": 22.68,
+   "line": 3,
+   "f_start": 541,
+   "f_end": 545
+  },
+  {
+   "w": "city",
+   "start": 22.68,
+   "end": 22.92,
+   "line": 3,
+   "f_start": 545,
+   "f_end": 551
+  },
+  {
+   "w": "while",
+   "start": 22.92,
+   "end": 23.16,
+   "line": 3,
+   "f_start": 551,
+   "f_end": 557
+  },
+  {
+   "w": "the",
+   "start": 23.16,
+   "end": 23.34,
+   "line": 3,
+   "f_start": 557,
+   "f_end": 561
+  },
+  {
+   "w": "engine",
+   "start": 23.34,
+   "end": 23.6,
+   "line": 3,
+   "f_start": 561,
+   "f_end": 567
+  },
+  {
+   "w": "rendered",
+   "start": 23.6,
+   "end": 23.94,
+   "line": 3,
+   "f_start": 567,
+   "f_end": 576
+  },
+  {
+   "w": "it.",
+   "start": 23.94,
+   "end": 24.3,
+   "line": 3,
+   "f_start": 576,
+   "f_end": 584
+  },
+  {
+   "w": "Number",
+   "start": 24.68,
+   "end": 24.8,
+   "line": 4,
+   "f_start": 593,
+   "f_end": 596
+  },
+  {
+   "w": "two,",
+   "start": 24.8,
+   "end": 25.16,
+   "line": 4,
+   "f_start": 596,
+   "f_end": 605
+  },
+  {
+   "w": "Unity",
+   "start": 25.68,
+   "end": 25.94,
+   "line": 4,
+   "f_start": 617,
+   "f_end": 624
+  },
+  {
+   "w": "for",
+   "start": 25.94,
+   "end": 26.3,
+   "line": 4,
+   "f_start": 624,
+   "f_end": 632
+  },
+  {
+   "w": "a",
+   "start": 26.3,
+   "end": 26.5,
+   "line": 4,
+   "f_start": 632,
+   "f_end": 637
+  },
+  {
+   "w": "close-up",
+   "start": 26.5,
+   "end": 26.86,
+   "line": 4,
+   "f_start": 637,
+   "f_end": 646
+  },
+  {
+   "w": "face.",
+   "start": 26.86,
+   "end": 27.22,
+   "line": 4,
+   "f_start": 646,
+   "f_end": 654
+  },
+  {
+   "w": "Its",
+   "start": 27.22,
+   "end": 27.94,
+   "line": 4,
+   "f_start": 654,
+   "f_end": 672
+  },
+  {
+   "w": "Enemies",
+   "start": 27.94,
+   "end": 28.32,
+   "line": 4,
+   "f_start": 672,
+   "f_end": 681
+  },
+  {
+   "w": "demo",
+   "start": 28.32,
+   "end": 28.66,
+   "line": 4,
+   "f_start": 681,
+   "f_end": 689
+  },
+  {
+   "w": "used",
+   "start": 28.66,
+   "end": 28.92,
+   "line": 4,
+   "f_start": 689,
+   "f_end": 695
+  },
+  {
+   "w": "the",
+   "start": 28.92,
+   "end": 29.14,
+   "line": 4,
+   "f_start": 695,
+   "f_end": 700
+  },
+  {
+   "w": "High",
+   "start": 29.14,
+   "end": 29.36,
+   "line": 4,
+   "f_start": 700,
+   "f_end": 706
+  },
+  {
+   "w": "Definition",
+   "start": 29.36,
+   "end": 29.74,
+   "line": 4,
+   "f_start": 706,
+   "f_end": 715
+  },
+  {
+   "w": "Render",
+   "start": 29.74,
+   "end": 30.14,
+   "line": 4,
+   "f_start": 715,
+   "f_end": 724
+  },
+  {
+   "w": "Pipeline,",
+   "start": 30.14,
+   "end": 30.68,
+   "line": 4,
+   "f_start": 724,
+   "f_end": 737
+  },
+  {
+   "w": "detailed",
+   "start": 31.04,
+   "end": 31.26,
+   "line": 4,
+   "f_start": 746,
+   "f_end": 751
+  },
+  {
+   "w": "eye",
+   "start": 31.26,
+   "end": 31.66,
+   "line": 4,
+   "f_start": 751,
+   "f_end": 761
+  },
+  {
+   "w": "and",
+   "start": 31.66,
+   "end": 31.82,
+   "line": 4,
+   "f_start": 761,
+   "f_end": 765
+  },
+  {
+   "w": "skin",
+   "start": 31.82,
+   "end": 32.1,
+   "line": 4,
+   "f_start": 765,
+   "f_end": 771
+  },
+  {
+   "w": "shaders,",
+   "start": 32.1,
+   "end": 32.52,
+   "line": 4,
+   "f_start": 771,
+   "f_end": 781
+  },
+  {
+   "w": "and",
+   "start": 32.78,
+   "end": 32.84,
+   "line": 4,
+   "f_start": 788,
+   "f_end": 789
+  },
+  {
+   "w": "simulated",
+   "start": 32.84,
+   "end": 33.3,
+   "line": 4,
+   "f_start": 789,
+   "f_end": 800
+  },
+  {
+   "w": "hair.",
+   "start": 33.3,
+   "end": 33.72,
+   "line": 4,
+   "f_start": 800,
+   "f_end": 810
+  },
+  {
+   "w": "Those",
+   "start": 34.18,
+   "end": 34.32,
+   "line": 4,
+   "f_start": 821,
+   "f_end": 825
+  },
+  {
+   "w": "details",
+   "start": 34.32,
+   "end": 34.66,
+   "line": 4,
+   "f_start": 825,
+   "f_end": 833
+  },
+  {
+   "w": "matter",
+   "start": 34.66,
+   "end": 35.04,
+   "line": 4,
+   "f_start": 833,
+   "f_end": 842
+  },
+  {
+   "w": "because",
+   "start": 35.04,
+   "end": 35.42,
+   "line": 4,
+   "f_start": 842,
+   "f_end": 851
+  },
+  {
+   "w": "the",
+   "start": 35.42,
+   "end": 35.62,
+   "line": 4,
+   "f_start": 851,
+   "f_end": 856
+  },
+  {
+   "w": "face",
+   "start": 35.62,
+   "end": 35.88,
+   "line": 4,
+   "f_start": 856,
+   "f_end": 862
+  },
+  {
+   "w": "fills",
+   "start": 35.88,
+   "end": 36.28,
+   "line": 4,
+   "f_start": 862,
+   "f_end": 872
+  },
+  {
+   "w": "the",
+   "start": 36.28,
+   "end": 36.52,
+   "line": 4,
+   "f_start": 872,
+   "f_end": 877
+  },
+  {
+   "w": "frame.",
+   "start": 36.52,
+   "end": 36.88,
+   "line": 4,
+   "f_start": 877,
+   "f_end": 886
+  },
+  {
+   "w": "Number",
+   "start": 37.54,
+   "end": 37.54,
+   "line": 5,
+   "f_start": 902,
+   "f_end": 902
+  },
+  {
+   "w": "three,",
+   "start": 37.54,
+   "end": 37.96,
+   "line": 5,
+   "f_start": 902,
+   "f_end": 912
+  },
+  {
+   "w": "the",
+   "start": 38.34,
+   "end": 38.46,
+   "line": 5,
+   "f_start": 921,
+   "f_end": 924
+  },
+  {
+   "w": "frame",
+   "start": 38.46,
+   "end": 38.78,
+   "line": 5,
+   "f_start": 924,
+   "f_end": 932
+  },
+  {
+   "w": "budget.",
+   "start": 38.78,
+   "end": 39.14,
+   "line": 5,
+   "f_start": 932,
+   "f_end": 940
+  },
+  {
+   "w": "At",
+   "start": 39.6,
+   "end": 39.74,
+   "line": 5,
+   "f_start": 951,
+   "f_end": 955
+  },
+  {
+   "w": "sixty",
+   "start": 39.74,
+   "end": 40.1,
+   "line": 5,
+   "f_start": 955,
+   "f_end": 963
+  },
+  {
+   "w": "frames",
+   "start": 40.1,
+   "end": 40.3,
+   "line": 5,
+   "f_start": 963,
+   "f_end": 968
+  },
+  {
+   "w": "per",
+   "start": 40.3,
+   "end": 40.56,
+   "line": 5,
+   "f_start": 968,
+   "f_end": 974
+  },
+  {
+   "w": "second,",
+   "start": 40.56,
+   "end": 40.92,
+   "line": 5,
+   "f_start": 974,
+   "f_end": 983
+  },
+  {
+   "w": "an",
+   "start": 41.14,
+   "end": 41.26,
+   "line": 5,
+   "f_start": 988,
+   "f_end": 991
+  },
+  {
+   "w": "engine",
+   "start": 41.26,
+   "end": 41.48,
+   "line": 5,
+   "f_start": 991,
+   "f_end": 997
+  },
+  {
+   "w": "has",
+   "start": 41.48,
+   "end": 41.7,
+   "line": 5,
+   "f_start": 997,
+   "f_end": 1002
+  },
+  {
+   "w": "about",
+   "start": 41.7,
+   "end": 41.92,
+   "line": 5,
+   "f_start": 1002,
+   "f_end": 1007
+  },
+  {
+   "w": "16.7",
+   "start": 41.92,
+   "end": 43.04,
+   "line": 5,
+   "f_start": 1007,
+   "f_end": 1034
+  },
+  {
+   "w": "milliseconds",
+   "start": 43.04,
+   "end": 43.52,
+   "line": 5,
+   "f_start": 1034,
+   "f_end": 1045
+  },
+  {
+   "w": "to",
+   "start": 43.52,
+   "end": 43.88,
+   "line": 5,
+   "f_start": 1045,
+   "f_end": 1054
+  },
+  {
+   "w": "draw",
+   "start": 43.88,
+   "end": 44.12,
+   "line": 5,
+   "f_start": 1054,
+   "f_end": 1060
+  },
+  {
+   "w": "each",
+   "start": 44.12,
+   "end": 44.34,
+   "line": 5,
+   "f_start": 1060,
+   "f_end": 1065
+  },
+  {
+   "w": "frame.",
+   "start": 44.34,
+   "end": 44.72,
+   "line": 5,
+   "f_start": 1065,
+   "f_end": 1074
+  },
+  {
+   "w": "A",
+   "start": 45.2,
+   "end": 45.26,
+   "line": 5,
+   "f_start": 1086,
+   "f_end": 1087
+  },
+  {
+   "w": "realistic",
+   "start": 45.26,
+   "end": 45.64,
+   "line": 5,
+   "f_start": 1087,
+   "f_end": 1096
+  },
+  {
+   "w": "city",
+   "start": 45.64,
+   "end": 46.06,
+   "line": 5,
+   "f_start": 1096,
+   "f_end": 1106
+  },
+  {
+   "w": "and",
+   "start": 46.06,
+   "end": 46.48,
+   "line": 5,
+   "f_start": 1106,
+   "f_end": 1117
+  },
+  {
+   "w": "a",
+   "start": 46.48,
+   "end": 46.58,
+   "line": 5,
+   "f_start": 1117,
+   "f_end": 1119
+  },
+  {
+   "w": "realistic",
+   "start": 46.58,
+   "end": 46.96,
+   "line": 5,
+   "f_start": 1119,
+   "f_end": 1128
+  },
+  {
+   "w": "face",
+   "start": 46.96,
+   "end": 47.42,
+   "line": 5,
+   "f_start": 1128,
+   "f_end": 1139
+  },
+  {
+   "w": "spend",
+   "start": 47.42,
+   "end": 47.76,
+   "line": 5,
+   "f_start": 1139,
+   "f_end": 1147
+  },
+  {
+   "w": "that",
+   "start": 47.76,
+   "end": 47.98,
+   "line": 5,
+   "f_start": 1147,
+   "f_end": 1153
+  },
+  {
+   "w": "budget",
+   "start": 47.98,
+   "end": 48.26,
+   "line": 5,
+   "f_start": 1153,
+   "f_end": 1159
+  },
+  {
+   "w": "on",
+   "start": 48.26,
+   "end": 48.46,
+   "line": 5,
+   "f_start": 1159,
+   "f_end": 1164
+  },
+  {
+   "w": "different",
+   "start": 48.46,
+   "end": 48.8,
+   "line": 5,
+   "f_start": 1164,
+   "f_end": 1172
+  },
+  {
+   "w": "work.",
+   "start": 48.8,
+   "end": 49.18,
+   "line": 5,
+   "f_start": 1172,
+   "f_end": 1181
+  },
+  {
+   "w": "Both",
+   "start": 49.66,
+   "end": 49.82,
+   "line": 5,
+   "f_start": 1193,
+   "f_end": 1197
+  },
+  {
+   "w": "engines",
+   "start": 49.82,
+   "end": 50.16,
+   "line": 5,
+   "f_start": 1197,
+   "f_end": 1205
+  },
+  {
+   "w": "can",
+   "start": 50.16,
+   "end": 50.38,
+   "line": 5,
+   "f_start": 1205,
+   "f_end": 1210
+  },
+  {
+   "w": "produce",
+   "start": 50.38,
+   "end": 50.68,
+   "line": 5,
+   "f_start": 1210,
+   "f_end": 1217
+  },
+  {
+   "w": "photorealistic",
+   "start": 50.68,
+   "end": 51.48,
+   "line": 5,
+   "f_start": 1217,
+   "f_end": 1237
+  },
+  {
+   "w": "shots.",
+   "start": 51.48,
+   "end": 51.84,
+   "line": 5,
+   "f_start": 1237,
+   "f_end": 1245
+  }
+ ]
+}

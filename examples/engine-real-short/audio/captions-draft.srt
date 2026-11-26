@@ -1,0 +1,119 @@
+1
+00:00:00,000 --> 00:00:01,340
+Which engine looks the most
+
+2
+00:00:01,340 --> 00:00:01,700
+real
+
+3
+00:00:02,340 --> 00:00:03,800
+Which game engine comes closest
+
+4
+00:00:03,800 --> 00:00:06,520
+to real-world footage? Two real-time
+
+5
+00:00:06,520 --> 00:00:08,020
+demos show what developers can
+
+6
+00:00:08,020 --> 00:00:10,040
+achieve, and one production constraint
+
+7
+00:00:10,040 --> 00:00:11,060
+explains the difference
+
+8
+00:00:11,840 --> 00:00:13,660
+Number one, Unreal Engine 5
+
+9
+00:00:13,660 --> 00:00:14,980
+for a city at street
+
+10
+00:00:14,980 --> 00:00:16,780
+level. In The Matrix Awakens
+
+11
+00:00:17,260 --> 00:00:19,260
+Nanite handled highly detailed geometry
+
+12
+00:00:19,260 --> 00:00:21,600
+and Lumen calculated lighting. The
+
+13
+00:00:21,600 --> 00:00:22,680
+player could move through the
+
+14
+00:00:22,680 --> 00:00:23,940
+city while the engine rendered
+
+15
+00:00:23,940 --> 00:00:24,300
+it
+
+16
+00:00:24,680 --> 00:00:26,500
+Number two, Unity for a
+
+17
+00:00:26,500 --> 00:00:28,660
+close-up face. Its Enemies demo
+
+18
+00:00:28,660 --> 00:00:30,140
+used the High Definition Render
+
+19
+00:00:30,140 --> 00:00:32,100
+Pipeline, detailed eye and skin
+
+20
+00:00:32,100 --> 00:00:34,320
+shaders, and simulated hair. Those
+
+21
+00:00:34,320 --> 00:00:35,880
+details matter because the face
+
+22
+00:00:35,880 --> 00:00:36,880
+fills the frame
+
+23
+00:00:37,540 --> 00:00:39,140
+Number three, the frame budget
+
+24
+00:00:39,600 --> 00:00:40,920
+At sixty frames per second
+
+25
+00:00:41,140 --> 00:00:43,040
+an engine has about 16.7
+
+26
+00:00:43,040 --> 00:00:44,720
+milliseconds to draw each frame
+
+27
+00:00:45,200 --> 00:00:46,580
+A realistic city and a
+
+28
+00:00:46,580 --> 00:00:48,260
+realistic face spend that budget
+
+29
+00:00:48,260 --> 00:00:50,160
+on different work. Both engines
+
+30
+00:00:50,160 --> 00:00:51,840
+can produce photorealistic shots

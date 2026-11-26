@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <!-- black back / white belly puffin body -->
+  <ellipse cx="300" cy="565" rx="112" ry="128" fill="#2a2e34"/>
+  <ellipse cx="300" cy="580" rx="78" ry="100" fill="#f4f0ea"/>
+  <!-- cream makeup apron over belly -->
+  <path d="M230,490 Q300,460 370,490 L375,640 Q300,660 225,640 Z" fill="#e8dcc8" opacity=".92"/>
+  <rect x="275" y="540" width="50" height="36" rx="4" fill="#c4785a"/>
+  <circle cx="300" cy="558" r="7" fill="#e0c070"/>
+  <!-- black head with white face -->
+  <ellipse cx="300" cy="295" rx="138" ry="128" fill="#2a2e34"/>
+  <ellipse cx="300" cy="325" rx="95" ry="88" fill="#f4f0ea"/>
+  <ellipse cx="225" cy="315" rx="38" ry="48" fill="#f4f0ea"/>
+  <ellipse cx="375" cy="315" rx="38" ry="48" fill="#f4f0ea"/>
+  <!-- small tufts -->
+  <ellipse cx="195" cy="200" rx="20" ry="26" fill="#2a2e34"/>
+  <ellipse cx="405" cy="200" rx="20" ry="26" fill="#2a2e34"/>
+  <!-- photographer beret -->
+  <path d="M185,215 Q300,145 415,215" fill="#5a4868"/>
+  <ellipse cx="300" cy="220" rx="120" ry="18" fill="#4a3858"/>
+  <circle cx="380" cy="185" r="9" fill="#c45848"/>
+  <!-- big colorful puffin beak (species signal) -->
+  <path d="M300,330 L220,355 L235,390 L300,375 L365,390 L380,355 Z" fill="#e07050"/>
+  <path d="M300,330 L250,350 L260,375 L300,365 L340,375 L350,350 Z" fill="#e8c878"/>
+  <path d="M300,330 L280,348 L300,358 L320,348 Z" fill="#2a2118"/>
+  <rect x="255" y="352" width="90" height="8" rx="2" fill="#c45848"/>
+  
+  <ellipse cx="260" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="340" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="260" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="340" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <!-- round makeup/photo glasses -->
+  <circle cx="260" cy="278" r="28" fill="none" stroke="#c4a35a" stroke-width="5"/>
+  <circle cx="340" cy="278" r="28" fill="none" stroke="#c4a35a" stroke-width="5"/>
+  <path d="M288,278 H312" stroke="#c4a35a" stroke-width="4"/>
+  <ellipse cx="300" cy="400" rx="16" ry="14" fill="#3a2a24"/><ellipse cx="300" cy="404" rx="10" ry="6" fill="#c47a7a"/>
+  <!-- close-up lens prop -->
+  <circle cx="150" cy="520" r="32" fill="#2a3038"/>
+  <circle cx="150" cy="520" r="22" fill="#4a7a88" opacity=".7"/>
+  <circle cx="150" cy="520" r="10" fill="#1a2830"/>
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#f4f0ea"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#f4f0ea"/>
+  
+  <ellipse cx="410" cy="410.0" rx="22" ry="70.0" fill="#f4f0ea"/>
+  <ellipse cx="428" cy="340" rx="20" ry="16" fill="#f4f0ea"/>
+  <!-- orange webbed feet -->
+  
+  <ellipse cx="230" cy="710" rx="28" ry="16" fill="#e07050"/>
+  <ellipse cx="370" cy="710" rx="28" ry="16" fill="#e07050"/>
+  <ellipse cx="230" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+  <ellipse cx="370" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+
+</svg>
