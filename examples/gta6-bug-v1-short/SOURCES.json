@@ -14,8 +14,8 @@
     "loudness_lufs": -14.1,
     "true_peak_dbtp": -1.5,
     "renderer": "ANGLE SwiftShader GPU=0",
-    "sha256": "a419e7cebfe374e5a37ba93620fa5a05c361371833abf2eaa3746e8a3f5a0a89",
-    "bytes": 10524153
+    "sha256": "ad09d7b14cd5fb97fd84c3611ea365943f0d72f05c31870c812635a6371d3d84",
+    "bytes": 12935685
   },
   "voiceover": {
     "file": "audio/vo.mp3",
@@ -90,11 +90,12 @@
   "qa": {
     "version": "v1",
     "fixes": [
-      "assertCaptionClearOfSigns + assertCharacterVisible boot checks",
-      "densified years booth with test-report mountain + 10 MIN timer",
-      "PROVE IT sign fully in frame",
-      "all captions in lower band with 80px side safe zone",
-      "original city/code/upload/harbour/qa/cert/years screens only"
+      "redrawn species-readable SVGs (aardvark snout/ears, walrus tusks/flippers, kinkajou tail, binturong bushy tail, pika tiny ears)",
+      "densified studio/years with desks, monitors, chairs, pizza, sticky notes, server racks, plants",
+      "outdoor harbour with water, bridge, boats, buoys, pier, invisible-wall shimmer (no indoor shelves)",
+      "QA lab with dual rows of stations + 3 kinkajou testers + city map pins",
+      "BUG-4412 / ONE LINE / INVISIBLE WALL signs kept fully in frame",
+      "assertCaptionClearOfSigns + assertCharacterVisible boot checks"
     ],
     "artifacts": "/opt/cursor/artifacts/gta6-bug-v1-final/"
   }

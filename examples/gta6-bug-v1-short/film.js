@@ -158,7 +158,9 @@ function cameraFor(shot, f) {
   const cl = charLocal(shot);
   const charX = booth.x + cl.side;
   const charZ = booth.z + cl.z;
-  const wantFov = (shot.id === 'hook' || shot.id === 'cars') ? 42 : 40;
+  const wantFov = (shot.id === 'hook' || shot.id === 'cars') ? 42
+    : (shot.id === 'bridge' || shot.id === 'boats') ? 46
+    : 40;
   if (camera.fov !== wantFov) {
     camera.fov = wantFov;
     camera.updateProjectionMatrix();
@@ -174,33 +176,34 @@ function cameraFor(shot, f) {
     };
   }
   if (shot.id === 'bridge' || shot.id === 'boats') {
+    // Wide harbour view: bridge overhead, boats midground, water floor
     return {
-      x: lin(charX + 0.7, charX + 0.3, t),
-      y: lin(1.85, 1.65, t),
-      z: lin(charZ + 5.4, charZ + 4.5, t),
-      lx: charX - 0.05,
-      ly: 1.25,
-      lz: charZ - 0.4,
+      x: lin(charX + 0.15, charX, t),
+      y: lin(2.35, 2.15, t),
+      z: lin(charZ + 6.8, charZ + 5.9, t),
+      lx: charX,
+      ly: 1.75,
+      lz: charZ - 1.6,
     };
   }
   if (shot.id === 'code' || shot.id === 'upload') {
     return {
-      x: lin(charX - 0.55, charX - 0.2, t),
-      y: lin(1.75, 1.6, t),
-      z: lin(charZ + 5.0, charZ + 4.3, t),
-      lx: charX + 0.05,
-      ly: 1.3,
-      lz: charZ - 0.3,
+      x: lin(charX - 0.35, charX - 0.1, t),
+      y: lin(1.85, 1.7, t),
+      z: lin(charZ + 5.4, charZ + 4.6, t),
+      lx: charX + 0.02,
+      ly: 1.45,
+      lz: charZ - 0.6,
     };
   }
-  // qa / cert
+  // qa / cert — wider so side stations / shelves stay in frame
   return {
-    x: lin(charX + 0.5, charX + 0.18, t),
-    y: lin(1.78, 1.62, t),
-    z: lin(charZ + 5.2, charZ + 4.35, t),
-    lx: charX - 0.02,
-    ly: 1.28,
-    lz: charZ - 0.3,
+    x: lin(charX + 0.35, charX + 0.12, t),
+    y: lin(1.9, 1.72, t),
+    z: lin(charZ + 5.6, charZ + 4.7, t),
+    lx: charX,
+    ly: 1.4,
+    lz: charZ - 0.55,
   };
 }
 
@@ -211,11 +214,21 @@ function syncBoothVisibility(shot) {
   }
 }
 
+/** Extra QA tester billboards seated at side stations (not the speaker). */
+const QA_EXTRAS = [
+  { name: 'kinkajou', side: -1.2, z: 1.5, scale: 0.9, pose: 'talk' },
+  { name: 'kinkajou', side: 1.2, z: 1.45, scale: 0.88, pose: 'point' },
+]
+
 function placeCharacter(shot, f) {
   syncBoothVisibility(shot);
   const booth = room.boothMeta[shot.booth];
   const name = shot.char;
   for (const n of CHAR_NAMES) chars[n].group.visible = false;
+  // hide extras by default (reuse same mesh slots via temporary clones stored on chars)
+  if (chars._extras) {
+    for (const e of chars._extras) e.group.visible = false;
+  }
   const bill = chars[name];
   bill.group.visible = true;
   setPose(bill, chars[name].poses[poseFor(shot, f)]);
@@ -231,6 +244,23 @@ function placeCharacter(shot, f) {
   shadowCatch.position.set(bill.group.position.x, 0.035, bill.group.position.z);
   shadowCatch.scale.setScalar(cl.scale);
   shadowCatch.visible = true;
+
+  // QA: show two additional testers at side desks (smaller, midground)
+  if (shot.id === 'qa' && chars._extras) {
+    QA_EXTRAS.forEach((spec, i) => {
+      const ex = chars._extras[i];
+      if (!ex) return;
+      setPose(ex, chars.kinkajou.poses[spec.pose]);
+      ex.group.visible = true;
+      ex.group.scale.set(spec.scale, spec.scale, spec.scale);
+      const eb = Math.sin(f * 0.17 + i) * 0.015;
+      ex.group.position.set(booth.x + spec.side, eb, booth.z + spec.z);
+      ex.group.rotation.y = Math.atan2(
+        camera.position.x - ex.group.position.x,
+        camera.position.z - ex.group.position.z,
+      );
+    });
+  }
 }
 
 function isCharacterHit(obj) {
@@ -454,6 +484,16 @@ async function boot() {
     bill.poses = poses;
     scene.add(bill.group);
     chars[name] = bill;
+  }
+  // Extra kinkajou billboards for QA lab (several testers)
+  chars._extras = [];
+  for (let i = 0; i < QA_EXTRAS.length; i++) {
+    const poses = chars.kinkajou.poses;
+    const bill = makeBillboard(poses.neutral);
+    bill.poses = poses;
+    bill.group.visible = false;
+    scene.add(bill.group);
+    chars._extras.push(bill);
   }
 
   await initOverlays();

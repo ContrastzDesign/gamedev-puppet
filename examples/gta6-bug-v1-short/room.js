@@ -1,6 +1,6 @@
-// GTA VI bug story sets for the gta6-bug-v1 Short (V1 drawn animals).
-// Booths: gamer bedroom, game studio, harbour, QA lab, cert office, year-10 studio.
-// Generic plain-lettering signs only — no Rockstar/Sony logos.
+// GTA VI bug story sets — densely dressed V1 booths.
+// Bedroom, studio, harbour (water/boats/wall), QA lab, cert, year-10.
+// Signs stay fully inside frame; generic plain lettering only.
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 
@@ -537,6 +537,11 @@ function buildBedroom(screens) {
   box(g, 0.7, 0.55, 0.7, '#5a4030', 1.5, 0.28, 1.0, 0, 0, 0, { round: 0.04 });
   box(g, 0.18, 0.28, 0.04, '#3a4858', 1.35, 0.7, 1.0, 0, 0.2, 0, { round: 0.01 });
   box(g, 0.9, 0.45, 0.9, '#c45848', -1.2, 0.25, 1.2, 0, 0.3, 0, { round: 0.2 });
+  // midground clutter
+  box(g, 0.55, 0.45, 0.55, '#5a4030', 2.0, 0.25, 0.8, 0, 0, 0, { round: 0.04 });
+  box(g, 0.2, 0.28, 0.05, '#3a4858', 1.9, 0.6, 0.85, 0, 0.2, 0, { round: 0.01 });
+  box(g, 0.2, 0.28, 0.05, '#4a5868', 2.1, 0.6, 0.9, 0, -0.1, 0, { round: 0.01 });
+  addShelf(g, 2.5, 0, 0.2);
   addStringLights(g, 2.95, -2.72, -3.1, 3.1, 12);
   const sp1 = makePosterArt(4, 0.6, 0.85);
   sp1.position.set(-3.4, 2.4, -0.5);
@@ -550,50 +555,168 @@ function buildBedroom(screens) {
   return g;
 }
 
+
+function addChair(parent, x, y, z, ry = 0) {
+  const g = new THREE.Group();
+  g.position.set(x, y, z);
+  g.rotation.y = ry;
+  box(g, 0.45, 0.08, 0.45, '#3a3a40', 0, 0.42, 0, 0, 0, 0, { round: 0.04 });
+  box(g, 0.45, 0.55, 0.08, '#4a4a50', 0, 0.72, -0.18, 0, 0, 0, { round: 0.02 });
+  box(g, 0.06, 0.42, 0.06, '#2a2a30', -0.16, 0.21, -0.16);
+  box(g, 0.06, 0.42, 0.06, '#2a2a30', 0.16, 0.21, -0.16);
+  box(g, 0.06, 0.42, 0.06, '#2a2a30', -0.16, 0.21, 0.16);
+  box(g, 0.06, 0.42, 0.06, '#2a2a30', 0.16, 0.21, 0.16);
+  parent.add(g);
+  return g;
+}
+
+function addWhiteboard(parent, x, y, z, w = 1.8, h = 1.1) {
+  const g = new THREE.Group();
+  g.position.set(x, y, z);
+  box(g, w, h, 0.05, '#ebe4dc', 0, 0, 0);
+  box(g, w + 0.08, h + 0.08, 0.03, '#5a4030', 0, 0, -0.02);
+  // sticky notes
+  const cols = ['#c4a35a', '#6b8f6a', '#a87890', '#4a8a98', '#c45848'];
+  for (let i = 0; i < 8; i++) {
+    box(g, 0.18, 0.18, 0.02, cols[i % cols.length], -w / 2 + 0.25 + (i % 4) * 0.4, h / 2 - 0.25 - Math.floor(i / 4) * 0.35, 0.04);
+  }
+  parent.add(g);
+  return g;
+}
+
+function addServerRack(parent, x, y, z) {
+  const g = new THREE.Group();
+  g.position.set(x, y, z);
+  box(g, 0.7, 2.2, 0.6, '#2a2a30', 0, 1.1, 0, 0, 0, 0, { round: 0.03 });
+  for (let i = 0; i < 8; i++) {
+    box(g, 0.6, 0.12, 0.5, i % 2 ? '#3a3a40' : '#1a1a20', 0, 0.3 + i * 0.24, 0.05);
+    cyl(g, 0.02, 0.02, 0.02, i % 3 === 0 ? '#6b8f6a' : '#c45848', 0.2, 0.3 + i * 0.24, 0.32);
+  }
+  parent.add(g);
+  return g;
+}
+
+function addPizzaBox(parent, x, y, z) {
+  box(parent, 0.45, 0.06, 0.45, '#ebe4dc', x, y, z, 0, 0.2, 0, { round: 0.01 });
+  box(parent, 0.35, 0.02, 0.35, '#c45848', x, y + 0.04, z, 0, 0.2, 0);
+}
+
+function addCable(parent, x0, y0, z0, x1, y1, z1) {
+  const mx = (x0 + x1) / 2, my = (y0 + y1) / 2 - 0.1, mz = (z0 + z1) / 2;
+  box(parent, 0.04, 0.04, Math.hypot(x1 - x0, z1 - z0) || 0.3, '#2a2a30', mx, my, mz, 0.2, Math.atan2(x1 - x0, z1 - z0), 0, { noShadow: true });
+}
+
+function addBoat(parent, x, y, z, color, ry = 0, scale = 1) {
+  const g = new THREE.Group();
+  g.position.set(x, y, z);
+  g.rotation.y = ry;
+  g.scale.setScalar(scale);
+  // pointed bow (wedge) + hull + cabin + mast — readable side silhouette
+  box(g, 1.5, 0.4, 0.65, color, 0.1, 0.28, 0, 0, 0, 0, { round: 0.08 });
+  box(g, 0.55, 0.35, 0.55, color, -0.75, 0.28, 0, 0, 0.7, 0, { round: 0.02 }); // bow taper
+  box(g, 0.85, 0.5, 0.5, '#f0e6d0', 0.25, 0.7, 0, 0, 0, 0, { round: 0.05 });
+  box(g, 0.08, 0.9, 0.08, '#5a4030', -0.2, 0.85, 0);
+  box(g, 0.6, 0.4, 0.04, '#ebe4dc', -0.2, 1.2, 0);
+  box(g, 0.35, 0.2, 0.04, '#4a8a98', 0.3, 0.75, 0.27);
+  cyl(g, 0.08, 0.08, 0.12, '#c45848', 0.5, 0.95, 0);
+  parent.add(g);
+  return g;
+}
+
 function buildStudio(screens) {
   const g = new THREE.Group();
   g.name = 'studio';
   roomShell(g, 8, 6.5, '#5a6058', '#3a3830');
-  // desks
-  addDesk(g, -1.6, 0, -1.9, 1.8);
-  addDesk(g, 1.5, 0, -1.9, 1.8);
-  addMonitor(g, screens.code, -1.6, 0.72, -1.9);
-  addMonitor(g, screens.upload, 1.5, 0.72, -1.9);
-  addCalendar(g, -0.1, 2.0, -3.05);
-  // giant UPLOAD button prop (right side, clear of character aisle)
-  box(g, 1.1, 0.55, 0.25, '#6b8f6a', 2.2, 1.1, -0.2, 0, -0.2, 0, { round: 0.06 });
-  const up = makeSign('UPLOAD', 1.0, 0.35, '#6b8f6a', '#f0e6d0', '#c4a35a');
-  up.position.set(2.2, 1.1, -0.05);
-  up.rotation.y = -0.2;
+  // floor cable mats / rugs so floor isn't bare
+  box(g, 2.2, 0.03, 1.4, '#4a4038', -1.4, 0.03, 0.4, 0, 0, 0, { round: 0.05 });
+  box(g, 2.0, 0.03, 1.3, '#3a4840', 1.5, 0.03, 0.5, 0, 0.1, 0, { round: 0.05 });
+  // row of desks with dual monitors
+  addDesk(g, -2.0, 0, -2.0, 1.6);
+  addDesk(g, 0.0, 0, -2.0, 1.6);
+  addDesk(g, 2.0, 0, -2.0, 1.6);
+  addMonitor(g, screens.code, -2.15, 0.72, -2.0, 0.15);
+  addMonitor(g, screens.upload, -1.7, 0.72, -2.05, -0.2);
+  addMonitor(g, screens.code, -0.2, 0.72, -2.0, 0.1);
+  addMonitor(g, screens.years, 0.25, 0.72, -2.05, -0.15);
+  addMonitor(g, screens.upload, 1.85, 0.72, -2.0, 0.1);
+  addMonitor(g, screens.code, 2.25, 0.72, -2.05, -0.2);
+  addChair(g, -2.0, 0, -1.2, 0.1);
+  addChair(g, 0.0, 0, -1.15, -0.05);
+  addChair(g, 2.0, 0, -1.2, 0.08);
+  // midground side desk
+  addDesk(g, -2.6, 0, 0.3, 1.2);
+  addMonitor(g, screens.code, -2.6, 0.72, 0.3, 0.6);
+  addChair(g, -2.0, 0, 0.5, 1.2);
+  addDesk(g, 2.6, 0, 0.4, 1.2);
+  addMonitor(g, screens.upload, 2.6, 0.72, 0.4, -0.5);
+  addCalendar(g, 0.0, 2.15, -3.05);
+  // UPLOAD button — keep clear of character aisle (z~2.3)
+  box(g, 1.0, 0.5, 0.22, '#6b8f6a', 2.4, 1.15, -0.4, 0, -0.25, 0, { round: 0.06 });
+  const up = makeSign('UPLOAD', 0.9, 0.32, '#6b8f6a', '#f0e6d0', '#c4a35a');
+  up.position.set(2.4, 1.15, -0.25);
+  up.rotation.y = -0.25;
   g.add(up);
-  // bug ticket boards
-  addFilingCabinet(g, -2.8, 0, -1.5, 1.5);
-  addDevKitShelf(g, 2.8, 0, -2.0);
-  addPlant(g, -2.8, 0, 1.5);
-  addLamp(g, 2.6, 0, 1.2);
-  // coffee cups + sticky notes
-  for (let i = 0; i < 4; i++) {
-    cyl(g, 0.05, 0.06, 0.1, '#ebe4dc', -1.2 + i * 0.25, 0.82, -1.7);
-  }
-  box(g, 0.2, 0.02, 0.2, '#c4a35a', -0.8, 0.78, -1.6);
-  box(g, 0.2, 0.02, 0.2, '#6b8f6a', 0.9, 0.78, -1.6);
-  // wall signs high (above caption/character)
-  const s1 = makeSign('BUG-4412', 1.4, 0.32, '#3a1818', '#c45848', '#e0c070');
-  s1.position.set(-1.5, 2.55, -3.1);
+  addFilingCabinet(g, -3.2, 0, -1.6, 1.5);
+  addFilingCabinet(g, -3.2, 0, 1.2, 1.3);
+  addDevKitShelf(g, 3.1, 0, -2.0);
+  addServerRack(g, 3.1, 0, 0.8);
+  addWhiteboard(g, -0.2, 2.2, -3.1, 2.2, 1.0);
+  // signs fully inside frame — mid wall, well below top crop
+  const s1 = makeSign('BUG-4412', 1.1, 0.28, '#3a1818', '#c45848', '#e0c070');
+  s1.position.set(-0.65, 2.45, -3.02);
   g.add(s1);
-  const s2 = makeSign('ONE LINE', 1.3, 0.32, '#1a3020', '#6b8f6a', '#c4a35a');
-  s2.position.set(1.4, 2.55, -3.1);
+  const s2 = makeSign('ONE LINE', 1.0, 0.28, '#1a3020', '#6b8f6a', '#c4a35a');
+  s2.position.set(0.8, 2.45, -3.02);
   g.add(s2);
-  addWallShelf(g, 0, 3.0, -3.1, 5.5);
+  // coffee, sticky notes, pizza, cables
+  for (let i = 0; i < 6; i++) {
+    cyl(g, 0.05, 0.06, 0.1, '#ebe4dc', -2.2 + i * 0.7, 0.82, -1.75);
+  }
+  for (let i = 0; i < 5; i++) {
+    box(g, 0.16, 0.02, 0.16, ['#c4a35a', '#6b8f6a', '#a87890', '#4a8a98', '#c45848'][i],
+      -1.5 + i * 0.55, 0.78, -1.55);
+  }
+  addPizzaBox(g, -1.0, 0.1, 1.0);
+  addPizzaBox(g, 1.2, 0.1, 1.15);
+  addPizzaBox(g, 0.2, 0.1, 1.35);
+  addPlant(g, -1.8, 0, 1.5);
+  addPlant(g, 1.8, 0, 1.55);
+  // hanging sticky strips mid wall (fills empty band)
+  for (let i = 0; i < 8; i++) {
+    box(g, 0.18, 0.22, 0.02, ['#c4a35a', '#6b8f6a', '#a87890', '#4a8a98'][i % 4],
+      -1.6 + i * 0.45, 1.55, -3.05);
+  }
+  // side mid shelves of boxes
+  for (let i = 0; i < 4; i++) {
+    box(g, 0.35, 0.25, 0.3, ['#4a8a98', '#c45848', '#6b8f6a', '#c4a35a'][i],
+      -3.3, 0.9 + i * 0.35, 0.2, 0, 0.1, 0, { round: 0.02 });
+    box(g, 0.35, 0.25, 0.3, ['#c4a35a', '#3a4858', '#a87890', '#4a8a98'][i],
+      3.3, 0.9 + i * 0.35, 0.3, 0, -0.1, 0, { round: 0.02 });
+  }
+  addCable(g, -2.0, 0.05, -1.5, -1.5, 0.05, -0.5);
+  addCable(g, 0.2, 0.05, -1.5, 0.8, 0.05, 0.2);
+  addCable(g, 2.0, 0.05, -1.5, 2.5, 0.05, -0.3);
+  addPlant(g, -3.0, 0, 1.8);
+  addPlant(g, 3.0, 0, 1.6);
+  addLamp(g, 2.8, 0, 1.3);
+  addLamp(g, -2.8, 0, -0.5);
+  // posters mid wall
+  for (let i = 0; i < 3; i++) {
+    const p = makePosterArt(i + 2, 0.5, 0.7);
+    p.position.set(-2.4 + i * 2.2, 1.6, -3.1);
+    g.add(p);
+  }
+  addWallShelf(g, 0, 3.15, -3.1, 5.8);
   addCeilingBeam(g, 0, 3.8, -1.5, 7);
   addCeilingBeam(g, 0, 3.8, 0.2, 7);
-  for (const lx of [-1.5, 0, 1.5]) {
-    box(g, 1.6, 0.1, 0.35, '#ebe4dc', lx, 3.7, -0.5, 0, 0, 0, {
+  addCeilingBeam(g, 0, 3.8, 1.4, 7);
+  for (const lx of [-1.8, -0.6, 0.6, 1.8]) {
+    box(g, 1.2, 0.1, 0.3, '#ebe4dc', lx, 3.7, -0.4, 0, 0, 0, {
       mat: { emissive: '#f5f0e0', emissiveIntensity: 0.5 },
     });
   }
-  addUpperWallDressing(g, -3.1, -3.2, 3.2, 2.9);
-  const fl = new THREE.PointLight('#f5f0e0', 0.7, 8, 2);
+  addUpperWallDressing(g, -3.1, -3.2, 3.2, 2.95);
+  const fl = new THREE.PointLight('#f5f0e0', 0.75, 9, 2);
   fl.position.set(0, 3.1, 0);
   g.add(fl);
   return g;
@@ -602,105 +725,188 @@ function buildStudio(screens) {
 function buildHarbour(screens) {
   const g = new THREE.Group();
   g.name = 'harbour';
-  // open outdoor-ish shell with water floor
-  roomShell(g, 9, 8, '#6a8aa0', '#3a6a78');
-  // pier / dock platforms
-  box(g, 8, 0.15, 2.5, '#5a4030', 0, 0.08, 1.2);
-  box(g, 8, 0.15, 1.5, '#4a3020', 0, 0.08, -0.8);
-  // suspension bridge (back)
-  box(g, 7, 0.2, 1.2, '#5a5a60', 0, 2.2, -3.2);
-  box(g, 0.35, 2.4, 0.35, '#4a4a50', -3.0, 1.2, -3.2);
-  box(g, 0.35, 2.4, 0.35, '#4a4a50', 3.0, 1.2, -3.2);
-  // cables
-  for (let i = 0; i < 6; i++) {
-    const x = -2.5 + i * 1.0;
-    box(g, 0.04, 1.2, 0.04, '#c8c8c8', x, 2.8, -3.2, 0.3, 0, 0, { noShadow: true });
+  // OUTDOOR harbour — no indoor ceiling/shelves (those made it read as a room)
+  const wallH = 5.5;
+  box(g, 12, 0.08, 11, '#1a7090', 0, 0, -0.5); // water floor
+  // sky backdrop (no book shelves)
+  box(g, 12, wallH, 0.2, '#7ab0c8', 0, wallH / 2, -5.0, 0, 0, 0, { noShadow: true });
+  box(g, 0.2, wallH, 11, '#6aa0b8', -6, wallH / 2, -0.5, 0, 0, 0, { noShadow: true });
+  box(g, 0.2, wallH, 11, '#6aa0b8', 6, wallH / 2, -0.5, 0, 0, 0, { noShadow: true });
+  // open sky “ceiling” light wash (not a room lid)
+  box(g, 12, 0.05, 11, '#a8c8d8', 0, wallH, -0.5, 0, 0, 0, {
+    mat: { emissive: '#c8e0f0', emissiveIntensity: 0.45 }, noShadow: true,
+  });
+  // water ripples
+  for (let i = 0; i < 16; i++) {
+    box(g, 11, 0.02, 0.14, i % 2 ? '#4ab0c8' : '#0a5070', 0, 0.05, -4.2 + i * 0.5, 0, 0, 0, { noShadow: true });
   }
-  // patch plate on bridge
-  box(g, 1.2, 0.08, 1.0, '#c4a35a', 0, 2.35, -3.1);
-  // invisible wall shimmer (vertical translucent boxes under bridge)
-  for (let i = 0; i < 10; i++) {
-    box(g, 0.06, 1.6, 0.06, '#c8e8f0', -0.5 + i * 0.1, 1.0, -2.6, 0, 0, 0, {
-      mat: { transparent: true, opacity: 0.45, emissive: '#a0d0e0', emissiveIntensity: 0.6 },
+  // wooden pier — side docks + short front planks (center aisle clear for character)
+  box(g, 3.4, 0.22, 2.6, '#6a4a30', -3.4, 0.14, 2.0);
+  box(g, 3.4, 0.22, 2.6, '#6a4a30', 3.4, 0.14, 2.0);
+  box(g, 2.8, 0.22, 1.8, '#5a3a20', -3.2, 0.14, 0.3);
+  box(g, 2.8, 0.22, 1.8, '#5a3a20', 3.2, 0.14, 0.3);
+  // pier plank lines
+  for (let i = 0; i < 6; i++) {
+    box(g, 3.2, 0.02, 0.08, '#4a3020', -3.4, 0.26, 1.0 + i * 0.35, 0, 0, 0, { noShadow: true });
+    box(g, 3.2, 0.02, 0.08, '#4a3020', 3.4, 0.26, 1.0 + i * 0.35, 0, 0, 0, { noShadow: true });
+  }
+  for (const [x, z] of [[-4.5, 2.8], [-4.5, 1.2], [4.5, 2.8], [4.5, 1.2], [-4.5, -0.2], [4.5, -0.2]]) {
+    cyl(g, 0.12, 0.14, 0.85, '#3a2818', x, 0.25, z);
+  }
+  // suspension bridge OVERHEAD — closer so it fills the top of frame
+  box(g, 9, 0.3, 1.6, '#5a5a60', 0, 2.35, -1.6);
+  box(g, 0.45, 2.6, 0.45, '#4a4a50', -3.8, 1.3, -1.6);
+  box(g, 0.45, 2.6, 0.45, '#4a4a50', 3.8, 1.3, -1.6);
+  box(g, 0.3, 0.9, 0.3, '#3a3a40', -3.8, 2.85, -1.6);
+  box(g, 0.3, 0.9, 0.3, '#3a3a40', 3.8, 2.85, -1.6);
+  for (let i = 0; i < 9; i++) {
+    const x = -3.5 + i * 0.85;
+    box(g, 0.06, 1.4, 0.06, '#d0d0d0', x, 2.95, -1.6, 0.3, 0, 0, { noShadow: true });
+  }
+  box(g, 1.6, 0.12, 1.2, '#c4a35a', 0, 2.52, -1.5); // patch plate
+  box(g, 0.5, 0.22, 0.28, '#c45848', -1.6, 2.65, -1.45, 0, 0.1, 0, { round: 0.03 });
+  box(g, 0.5, 0.22, 0.28, '#4a8a98', 1.3, 2.65, -1.5, 0, -0.1, 0, { round: 0.03 });
+  // INVISIBLE WALL shimmer behind captain boat
+  for (let i = 0; i < 20; i++) {
+    box(g, 0.12, 2.0, 0.12, '#c8e8f0', -0.6 + i * 0.14, 1.1, 0.35, 0, 0, 0, {
+      mat: { transparent: true, opacity: 0.65, emissive: '#a8e0f0', emissiveIntensity: 1.0 },
       noShadow: true,
     });
   }
-  // boats
-  box(g, 1.2, 0.35, 0.5, '#c45848', -1.8, 0.35, -1.5, 0, 0.3, 0, { round: 0.05 });
-  box(g, 0.3, 0.4, 0.08, '#ebe4dc', -1.5, 0.65, -1.5);
-  box(g, 1.0, 0.3, 0.45, '#4a8a98', 1.6, 0.3, -1.8, 0, -0.4, 0, { round: 0.05 });
-  // buoys
-  for (const [x, z] of [[-3.2, 0.5], [3.2, 0.2], [-2.5, -2.0], [2.8, -1.2]]) {
-    cyl(g, 0.12, 0.12, 0.35, '#c45848', x, 0.25, z);
-    cyl(g, 0.08, 0.08, 0.1, '#ebe4dc', x, 0.45, z);
-  }
-  // harbour monitor
-  addMonitor(g, screens.harbour, 2.4, 0.1, 1.0, -0.4);
-  const sign = makeSign('HARBOUR', 1.6, 0.36, '#2a3848', '#f0e6d0', '#4a8a98');
-  sign.position.set(0, 3.2, -3.5);
-  g.add(sign);
-  const wallSign = makeSign('WALL?', 1.0, 0.3, '#3a1818', '#c8e8f0', '#c45848');
-  wallSign.position.set(0, 1.8, -2.4);
-  g.add(wallSign);
-  // crates on dock (sides, not blocking character)
-  addCrate(g, -2.8, 0.15, 1.5, 'DOCK');
-  addCrate(g, 2.8, 0.15, 1.4, 'BUOY');
-  addPlant(g, -3.2, 0.15, 2.0);
-  // sky dressing
-  for (const lx of [-2, 0, 2]) {
-    box(g, 1.8, 0.1, 0.3, '#ebe4dc', lx, 3.7, -1.0, 0, 0, 0, {
-      mat: { emissive: '#f5f0e0', emissiveIntensity: 0.4 },
+  for (let i = 0; i < 7; i++) {
+    box(g, 2.9, 0.06, 0.06, '#e0f4f8', 0.6, 0.35 + i * 0.28, 0.4, 0, 0, 0, {
+      mat: { transparent: true, opacity: 0.6, emissive: '#c0e8f0', emissiveIntensity: 0.85 },
+      noShadow: true,
     });
   }
-  addCeilingBeam(g, 0, 3.85, -2.0, 8);
-  addCeilingBeam(g, 0, 3.85, 0.5, 8);
-  addUpperWallDressing(g, -3.85, -3.5, 3.5, 3.0);
-  const waterLight = new THREE.PointLight('#8ab0c0', 0.6, 10, 2);
-  waterLight.position.set(0, 2.5, 0);
+  // BOATS — large, flanking character + captain boat into wall
+  // foam around boats
+  for (const [fx, fz] of [[0.85, 1.05], [-1.85, 1.7], [1.95, 1.65]]) {
+    cyl(g, 0.55, 0.55, 0.04, '#d8eef4', fx, 0.08, fz, 0, 0, 0, {
+      mat: { transparent: true, opacity: 0.55, emissive: '#e8f6fa', emissiveIntensity: 0.4 }, noShadow: true,
+    });
+  }
+  addBoat(g, 0.85, 0.28, 1.05, '#c45848', 0.55, 1.65); // captain hitting wall (offset so visible)
+  addBoat(g, -1.85, 0.28, 1.7, '#4a8a98', -0.55, 1.45);
+  addBoat(g, 1.95, 0.28, 1.65, '#e0c070', 0.5, 1.4);
+  cyl(g, 0.14, 0.14, 0.14, '#e0c070', 0.7, 0.85, -0.25, 0, 0, 0, {
+    mat: { emissive: '#e0c070', emissiveIntensity: 1.5 },
+  });
+  // buoys
+  for (const [x, z] of [[-1.2, 1.6], [1.3, 1.55], [-2.6, 0.2], [2.7, 0.15], [-3.5, 1.8], [3.5, 1.7]]) {
+    cyl(g, 0.18, 0.18, 0.5, '#c45848', x, 0.35, z);
+    cyl(g, 0.14, 0.14, 0.16, '#ebe4dc', x, 0.62, z);
+  }
+  addCrate(g, -3.5, 0.25, 2.2, 'DOCK');
+  addCrate(g, 3.5, 0.25, 2.1, 'GEAR');
+  cyl(g, 0.28, 0.3, 0.5, '#8a6a40', -2.7, 0.45, 2.5);
+  cyl(g, 0.28, 0.3, 0.5, '#8a6a40', 2.7, 0.45, 2.4);
+  // skyline under bridge
+  for (let i = 0; i < 8; i++) {
+    box(g, 0.7, 1.0 + (i % 3) * 0.5, 0.55, i % 2 ? '#3a4858' : '#2a3848',
+      -3.5 + i * 1.0, 0.7 + (i % 3) * 0.25, -3.6);
+  }
+  const wallSign = makeSign('INVISIBLE WALL', 1.7, 0.3, '#1a3038', '#c8e8f0', '#4a8a98');
+  wallSign.position.set(1.35, 2.15, 0.7);
+  g.add(wallSign);
+  // soft sky discs (not hanging fixtures)
+  for (const lx of [-2.5, 2.5]) {
+    cyl(g, 0.9, 0.9, 0.15, '#d8e8f0', lx, 4.2, -3.2, 0, 0, 0, {
+      mat: { emissive: '#e8f4f8', emissiveIntensity: 0.35 }, noShadow: true,
+    });
+  }
+  const waterLight = new THREE.PointLight('#8ab0c0', 0.85, 14, 2);
+  waterLight.position.set(0, 3.0, 1);
   g.add(waterLight);
+  const sunH = new THREE.PointLight('#f5e6c8', 0.7, 16, 2);
+  sunH.position.set(2, 4.0, 3);
+  g.add(sunH);
   return g;
 }
 
 function buildQa(screens) {
   const g = new THREE.Group();
   g.name = 'qa';
-  roomShell(g, 8, 6.5, '#4a5a58', '#3a3a40');
-  // test stations
-  for (let i = 0; i < 3; i++) {
-    addDesk(g, -2.2 + i * 2.2, 0, -2.0, 1.5);
-    addMonitor(g, screens.qa, -2.2 + i * 2.2, 0.72, -2.0);
-    // controllers
-    box(g, 0.28, 0.08, 0.18, '#2a2a30', -2.0 + i * 2.2, 0.8, -1.7, 0, 0, 0, { round: 0.03 });
+  roomShell(g, 9, 7, '#4a5a58', '#3a3a40');
+  // floor stripe mats
+  for (let i = 0; i < 6; i++) {
+    box(g, 1.2, 0.02, 5.5, i % 2 ? '#4a5058' : '#2a3038', -3 + i * 1.2, 0.03, 0);
   }
-  // giant city map with pins on back wall
-  box(g, 3.5, 2.2, 0.08, '#2a3840', 0, 2.0, -3.1);
-  box(g, 3.3, 2.0, 0.02, '#4a6a70', 0, 2.0, -3.05);
-  const pinCols = ['#c45848', '#c4a35a', '#6b8f6a', '#4a8a98', '#a87890'];
-  for (let i = 0; i < 18; i++) {
-    const px = -1.3 + (i % 6) * 0.5;
-    const py = 1.3 + Math.floor(i / 6) * 0.55;
-    cyl(g, 0.05, 0.02, 0.08, pinCols[i % pinCols.length], px, py, -3.0);
+  // TWO rows of test stations
+  for (let row = 0; row < 2; row++) {
+    const z = -2.2 + row * 1.5;
+    for (let i = 0; i < 4; i++) {
+      const x = -2.7 + i * 1.8;
+      addDesk(g, x, 0, z, 1.4);
+      addMonitor(g, screens.qa, x - 0.15, 0.72, z, 0.05);
+      addMonitor(g, screens.city, x + 0.35, 0.72, z + 0.05, -0.15);
+      box(g, 0.28, 0.08, 0.18, '#2a2a30', x + 0.2, 0.8, z + 0.25, 0, 0, 0, { round: 0.03 });
+      addChair(g, x, 0, z + 0.75, 0.05 * (i % 2 ? 1 : -1));
+      // headset on desk
+      cyl(g, 0.08, 0.08, 0.04, '#3a3a40', x - 0.4, 0.8, z + 0.15);
+    }
   }
-  const mapSign = makeSign('CITY MAP', 1.5, 0.32, '#2a3848', '#f0e6d0', '#6b8f6a');
-  mapSign.position.set(0, 3.25, -3.05);
+  // giant city map board with water/land patches + pins
+  box(g, 5.6, 2.7, 0.1, '#2a3840', 0, 2.15, -3.3);
+  box(g, 5.3, 2.5, 0.04, '#3a6a78', 0, 2.15, -3.24); // water base
+  // land blocks
+  for (let i = 0; i < 10; i++) {
+    box(g, 0.7 + (i % 3) * 0.2, 0.55 + (i % 2) * 0.25, 0.03,
+      i % 2 ? '#6b8f6a' : '#8a9a60',
+      -2.1 + (i % 5) * 1.05, 1.35 + Math.floor(i / 5) * 1.1, -3.21, 0, 0, 0, { noShadow: true });
+  }
+  // streets
+  for (let i = 0; i < 5; i++) {
+    box(g, 4.9, 0.04, 0.02, '#d8c8a0', 0, 1.3 + i * 0.4, -3.2, 0, 0, 0, { noShadow: true });
+    box(g, 0.04, 2.2, 0.02, '#d8c8a0', -1.8 + i * 0.9, 2.15, -3.2, 0, 0, 0, { noShadow: true });
+  }
+  // bridge mark on map
+  box(g, 1.8, 0.08, 0.03, '#5a5a60', 0.2, 2.0, -3.19);
+  const pinCols = ['#c45848', '#c4a35a', '#6b8f6a', '#4a8a98', '#a87890', '#e0c070'];
+  for (let i = 0; i < 40; i++) {
+    const px = -2.3 + (i % 10) * 0.5;
+    const py = 1.15 + Math.floor(i / 10) * 0.5;
+    cyl(g, 0.07, 0.02, 0.12, pinCols[i % pinCols.length], px, py, -3.17);
+  }
+  const mapSign = makeSign('CITY MAP — FULL REPLAY', 2.4, 0.32, '#2a3848', '#f0e6d0', '#6b8f6a');
+  mapSign.position.set(0, 3.4, -3.2);
   g.add(mapSign);
-  addFilingCabinet(g, -3.2, 0, 0.5, 1.6);
-  addFilingCabinet(g, 3.2, 0, 0.5, 1.6);
-  addClipboard(g, 1.5, 0.85, -1.6);
-  addPlant(g, -3.0, 0, 1.8);
-  addLamp(g, 3.0, 0, 1.5);
-  addWallShelf(g, -1.5, 3.0, -3.1, 2.0);
-  addWallShelf(g, 1.5, 3.0, -3.1, 2.0);
-  addCeilingBeam(g, 0, 3.8, -1.5, 7);
-  addCeilingBeam(g, 0, 3.8, 0.3, 7);
-  for (const lx of [-1.5, 0, 1.5]) {
-    box(g, 1.6, 0.1, 0.3, '#ebe4dc', lx, 3.7, -0.4, 0, 0, 0, {
+  // side shelves / cabinets
+  addFilingCabinet(g, -3.8, 0, 0.2, 1.8);
+  addFilingCabinet(g, 3.8, 0, 0.2, 1.8);
+  addDevKitShelf(g, -3.8, 0, -2.0);
+  addServerRack(g, 3.8, 0, -2.0);
+  addWhiteboard(g, 1.6, 2.35, -3.22, 1.3, 0.85);
+  // midground prop tables with controllers / clipboards
+  box(g, 1.2, 0.55, 0.6, '#5a4030', -2.5, 0.28, 1.6, 0, 0, 0, { round: 0.04 });
+  box(g, 1.2, 0.55, 0.6, '#5a4030', 2.5, 0.28, 1.6, 0, 0, 0, { round: 0.04 });
+  for (let i = 0; i < 3; i++) {
+    box(g, 0.28, 0.08, 0.18, '#2a2a30', -2.8 + i * 0.3, 0.6, 1.6, 0, 0, 0, { round: 0.03 });
+    box(g, 0.28, 0.08, 0.18, '#3a3a40', 2.2 + i * 0.3, 0.6, 1.6, 0, 0, 0, { round: 0.03 });
+  }
+  addClipboard(g, -2.3, 0.65, 1.5);
+  addClipboard(g, 2.7, 0.65, 1.5);
+  addPlant(g, -3.5, 0, 2.2);
+  addPlant(g, 3.5, 0, 2.2);
+  addLamp(g, -3.5, 0, 1.0);
+  addLamp(g, 3.5, 0, 1.0);
+  // coffee cups
+  for (let i = 0; i < 5; i++) {
+    cyl(g, 0.05, 0.06, 0.1, '#ebe4dc', -1.5 + i * 0.7, 0.12, 2.0);
+  }
+  addWallShelf(g, -1.8, 3.15, -3.25, 2.4);
+  addWallShelf(g, 1.8, 3.15, -3.25, 2.4);
+  addCeilingBeam(g, 0, 3.85, -1.8, 8);
+  addCeilingBeam(g, 0, 3.85, 0, 8);
+  addCeilingBeam(g, 0, 3.85, 1.5, 8);
+  for (const lx of [-2, -0.7, 0.7, 2]) {
+    box(g, 1.3, 0.1, 0.3, '#ebe4dc', lx, 3.75, -0.3, 0, 0, 0, {
       mat: { emissive: '#f5f0e0', emissiveIntensity: 0.5 },
     });
   }
-  addUpperWallDressing(g, -3.1, -3.2, 3.2, 2.85);
-  const fl = new THREE.PointLight('#f5f0e0', 0.75, 8, 2);
-  fl.position.set(0, 3.1, 0);
+  addUpperWallDressing(g, -3.3, -3.8, 3.8, 2.95);
+  const fl = new THREE.PointLight('#f5f0e0', 0.85, 10, 2);
+  fl.position.set(0, 3.2, 0);
   g.add(fl);
   return g;
 }
@@ -708,42 +914,72 @@ function buildQa(screens) {
 function buildCert(screens) {
   const g = new THREE.Group();
   g.name = 'cert';
-  roomShell(g, 7.5, 6, '#5a5550', '#3a3835');
-  addStampDesk(g, 0.3, 0, -1.8);
-  addMonitor(g, screens.cert, -1.5, 0.72, -2.0, 0.2);
-  // towering rulebook shelves
-  for (let col = 0; col < 4; col++) {
-    box(g, 0.55, 2.4, 0.4, '#5a4030', -2.6 + col * 0.65, 1.2, -2.8);
-    for (let row = 0; row < 6; row++) {
-      const cols = ['#c45848', '#4a8a98', '#6b8f6a', '#c4a35a', '#a87890', '#3a4858'];
+  roomShell(g, 8, 6.5, '#5a5550', '#3a3835');
+  box(g, 3.0, 0.03, 2.0, '#4a4038', 0.2, 0.03, 0.5, 0, 0, 0, { round: 0.05 });
+  addStampDesk(g, 0.2, 0, -1.9);
+  addDesk(g, -2.0, 0, -1.9, 1.4);
+  addDesk(g, 2.0, 0, -1.9, 1.4);
+  addMonitor(g, screens.cert, -2.0, 0.72, -1.9, 0.1);
+  addMonitor(g, screens.cert, 0.0, 0.85, -1.85, 0);
+  addMonitor(g, screens.qa, 2.0, 0.72, -1.9, -0.1);
+  addChair(g, -2.0, 0, -1.1);
+  addChair(g, 0.3, 0, -1.15);
+  addChair(g, 2.0, 0, -1.1);
+  // towering rulebook shelves — both walls, dense
+  for (let col = 0; col < 6; col++) {
+    box(g, 0.55, 2.5, 0.4, '#5a4030', -3.0 + col * 0.6, 1.25, -3.0);
+    for (let row = 0; row < 7; row++) {
+      const cols = ['#c45848', '#4a8a98', '#6b8f6a', '#c4a35a', '#a87890', '#3a4858', '#8a6a40'];
       box(g, 0.45, 0.12, 0.3, cols[(col + row) % cols.length],
-        -2.6 + col * 0.65, 0.35 + row * 0.35, -2.65, 0, 0.05, 0, { round: 0.01 });
+        -3.0 + col * 0.6, 0.3 + row * 0.32, -2.85, 0, 0.04, 0, { round: 0.01 });
     }
   }
-  addPassFailBins(g, 2.0, 0, -1.5);
-  addFilingCabinet(g, 2.8, 0, 0.5, 1.8);
-  addClipboard(g, -0.3, 0.85, -1.5);
-  // big FAILED stamp prop (high enough not to collide with captions)
-  box(g, 0.7, 0.15, 0.7, '#c45848', 1.5, 1.4, -0.5, 0, 0.3, 0, { round: 0.04 });
-  cyl(g, 0.12, 0.15, 0.35, '#8a3030', 1.5, 1.7, -0.5);
-  const fail = makeSign('FAILED', 1.2, 0.32, '#3a1818', '#c45848', '#e0c070');
-  fail.position.set(0, 2.6, -2.85);
+  // more shelves on right
+  for (let col = 0; col < 3; col++) {
+    box(g, 0.55, 2.2, 0.4, '#5a4030', 2.2 + col * 0.55, 1.1, -3.0);
+    for (let row = 0; row < 6; row++) {
+      box(g, 0.45, 0.12, 0.3, ['#4a8a98', '#c45848', '#c4a35a'][row % 3],
+        2.2 + col * 0.55, 0.3 + row * 0.32, -2.85, 0, 0, 0, { round: 0.01 });
+    }
+  }
+  addPassFailBins(g, 2.4, 0, -0.8);
+  addFilingCabinet(g, -3.3, 0, 0.3, 1.8);
+  addFilingCabinet(g, 3.3, 0, 0.5, 1.6);
+  addClipboard(g, -0.4, 0.85, -1.55);
+  addWhiteboard(g, 0.5, 2.35, -3.05, 1.6, 0.9);
+  // big FAILED stamp — mid-right, not blocking character
+  box(g, 0.7, 0.15, 0.7, '#c45848', 1.8, 1.35, 0.2, 0, 0.25, 0, { round: 0.04 });
+  cyl(g, 0.12, 0.15, 0.35, '#8a3030', 1.8, 1.65, 0.2);
+  // signs fully in frame
+  const fail = makeSign('FAILED', 1.1, 0.3, '#3a1818', '#c45848', '#e0c070');
+  fail.position.set(1.2, 2.85, -3.0);
   g.add(fail);
-  const books = makeSign('RULEBOOKS', 1.5, 0.3, '#2a3228', '#f0e6d0', '#c4a35a');
-  books.position.set(-1.5, 2.7, -2.85);
+  const books = makeSign('RULEBOOKS', 1.3, 0.3, '#2a3228', '#f0e6d0', '#c4a35a');
+  books.position.set(-1.4, 2.85, -3.0);
   g.add(books);
-  addPlant(g, -3.0, 0, 1.5);
-  addLamp(g, 2.8, 0, 1.5);
-  addWallShelf(g, 0.5, 3.05, -2.85, 3.5);
-  addCeilingBeam(g, 0, 3.8, -1.5, 6.5);
-  addCeilingBeam(g, 0, 3.8, 0.2, 6.5);
-  for (const lx of [-1.4, 0, 1.4]) {
-    box(g, 1.5, 0.1, 0.3, '#ebe4dc', lx, 3.7, -0.3, 0, 0, 0, {
+  // stacks of paper midground
+  for (let layer = 0; layer < 5; layer++) {
+    box(g, 0.4, 0.06, 0.3, '#ebe4dc', -2.2, 0.15 + layer * 0.07, 1.2, 0, 0.05, 0, { round: 0.01 });
+    box(g, 0.4, 0.06, 0.3, '#d8c8a0', 2.2, 0.15 + layer * 0.07, 1.3, 0, -0.05, 0, { round: 0.01 });
+  }
+  addPlant(g, -3.2, 0, 1.8);
+  addPlant(g, 3.2, 0, 1.8);
+  addLamp(g, -3.0, 0, -0.5);
+  addLamp(g, 3.0, 0, -0.5);
+  for (let i = 0; i < 4; i++) {
+    cyl(g, 0.05, 0.06, 0.1, '#ebe4dc', -1.0 + i * 0.5, 0.82, -1.6);
+  }
+  addWallShelf(g, 0, 3.2, -3.05, 5.5);
+  addCeilingBeam(g, 0, 3.85, -1.5, 7);
+  addCeilingBeam(g, 0, 3.85, 0.2, 7);
+  addCeilingBeam(g, 0, 3.85, 1.4, 7);
+  for (const lx of [-1.6, 0, 1.6]) {
+    box(g, 1.5, 0.1, 0.3, '#ebe4dc', lx, 3.75, -0.3, 0, 0, 0, {
       mat: { emissive: '#f5f0e0', emissiveIntensity: 0.5 },
     });
   }
-  addUpperWallDressing(g, -2.85, -3.0, 3.0, 2.9);
-  const fl = new THREE.PointLight('#f5f0e0', 0.8, 8, 2);
+  addUpperWallDressing(g, -3.05, -3.4, 3.4, 2.95);
+  const fl = new THREE.PointLight('#f5f0e0', 0.85, 9, 2);
   fl.position.set(0, 3.1, 0);
   g.add(fl);
   return g;
@@ -752,56 +988,79 @@ function buildCert(screens) {
 function buildYears(screens) {
   const g = new THREE.Group();
   g.name = 'years';
-  roomShell(g, 8, 6.5, '#5a5048', '#3a3028');
-  addDesk(g, 0, 0, -2.0, 2.2);
-  addMonitor(g, screens.years, 0, 0.72, -2.0);
-  // YEAR 10 calendar (large, high on wall)
-  box(g, 1.4, 1.6, 0.06, '#f4f0ea', -2.0, 2.2, -3.05);
-  box(g, 1.4, 0.3, 0.07, '#c45848', -2.0, 2.85, -3.03);
-  const y10 = makeSign('YEAR 10', 1.2, 0.4, '#c45848', '#f0e6d0', '#e0c070');
-  y10.position.set(-2.0, 2.3, -3.0);
+  roomShell(g, 8.5, 6.5, '#5a5048', '#3a3028');
+  box(g, 3.2, 0.03, 2.2, '#4a4038', 0, 0.03, 0.6, 0, 0, 0, { round: 0.05 });
+  // multiple desks
+  addDesk(g, -1.8, 0, -2.0, 1.6);
+  addDesk(g, 0.3, 0, -2.0, 1.8);
+  addDesk(g, 2.2, 0, -2.0, 1.4);
+  addMonitor(g, screens.years, -1.8, 0.72, -2.0);
+  addMonitor(g, screens.code, 0.1, 0.72, -2.0);
+  addMonitor(g, screens.upload, 0.55, 0.72, -2.05, -0.2);
+  addMonitor(g, screens.years, 2.2, 0.72, -2.0);
+  addChair(g, -1.8, 0, -1.2);
+  addChair(g, 0.3, 0, -1.15);
+  addChair(g, 2.2, 0, -1.2);
+  // YEAR 10 calendar — fully in frame
+  box(g, 1.3, 1.5, 0.06, '#f4f0ea', -1.8, 2.25, -3.05);
+  box(g, 1.3, 0.28, 0.07, '#c45848', -1.8, 2.85, -3.03);
+  const y10 = makeSign('YEAR 10', 1.1, 0.36, '#c45848', '#f0e6d0', '#e0c070');
+  y10.position.set(-1.8, 2.3, -3.0);
   g.add(y10);
-  // mountain of test reports (camera-right, readable pile)
-  for (let layer = 0; layer < 10; layer++) {
+  // mountain of test reports — camera right midground
+  for (let layer = 0; layer < 12; layer++) {
     for (let i = 0; i < 4; i++) {
-      box(g, 0.5 - layer * 0.02, 0.07, 0.38,
+      box(g, 0.5 - layer * 0.015, 0.07, 0.38,
         ['#ebe4dc', '#d8c8a0', '#c8d4c0', '#f0e6d0'][i % 4],
-        1.55 + (i - 1.5) * 0.12, 0.18 + layer * 0.09, 0.85 + i * 0.04, 0, 0.04 * i, 0, { round: 0.01 });
+        1.7 + (i - 1.5) * 0.12, 0.18 + layer * 0.09, 0.9 + i * 0.04, 0, 0.04 * i, 0, { round: 0.01 });
     }
   }
-  const reports = makeSign('TEST REPORTS', 1.2, 0.28, '#2a3228', '#f0e6d0', '#c4a35a');
-  reports.position.set(1.55, 1.25, 1.05);
+  const reports = makeSign('TEST REPORTS', 1.15, 0.26, '#2a3228', '#f0e6d0', '#c4a35a');
+  reports.position.set(1.7, 1.4, 1.1);
   g.add(reports);
-  // tiny egg timer (desk, camera-left of monitor)
-  cyl(g, 0.1, 0.14, 0.06, '#c4a35a', -1.35, 0.78, -1.65);
-  cyl(g, 0.025, 0.025, 0.28, '#8a6a40', -1.35, 0.96, -1.65);
-  cyl(g, 0.12, 0.1, 0.14, '#ebe4dc', -1.35, 1.14, -1.65, 0, 0, 0, {
+  // egg timer
+  cyl(g, 0.1, 0.14, 0.06, '#c4a35a', -1.0, 0.78, -1.65);
+  cyl(g, 0.025, 0.025, 0.28, '#8a6a40', -1.0, 0.96, -1.65);
+  cyl(g, 0.12, 0.1, 0.14, '#ebe4dc', -1.0, 1.14, -1.65, 0, 0, 0, {
     mat: { transparent: true, opacity: 0.75 },
   });
-  const timer = makeSign('10 MIN', 0.7, 0.22, '#3a3028', '#e0c070', '#c4a35a');
-  timer.position.set(-1.35, 1.4, -1.5);
+  const timer = makeSign('10 MIN', 0.65, 0.2, '#3a3028', '#e0c070', '#c4a35a');
+  timer.position.set(-1.0, 1.4, -1.5);
   g.add(timer);
-  // coffee cups everywhere
-  for (let i = 0; i < 6; i++) {
-    cyl(g, 0.05, 0.06, 0.1, '#ebe4dc', -2.5 + i * 0.35, 0.12, 1.2);
-  }
-  addShelf(g, 2.8, 0, -1.5);
-  addPlant(g, -3.0, 0, 1.5);
-  addLamp(g, 2.8, 0, 1.5);
-  addFilingCabinet(g, -3.0, 0, -1.0, 1.5);
-  const prove = makeSign('PROVE IT', 1.3, 0.32, '#1a3020', '#6b8f6a', '#c4a35a');
-  prove.position.set(1.1, 2.65, -3.05);
+  addServerRack(g, -3.4, 0, -1.5);
+  addFilingCabinet(g, -3.4, 0, 0.8, 1.5);
+  addShelf(g, 3.2, 0, -1.5);
+  addDevKitShelf(g, 3.2, 0, 0.5);
+  addWhiteboard(g, 1.0, 2.3, -3.05, 1.8, 1.0);
+  const prove = makeSign('PROVE IT', 1.2, 0.3, '#1a3020', '#6b8f6a', '#c4a35a');
+  prove.position.set(1.2, 2.9, -3.0);
   g.add(prove);
-  addWallShelf(g, 0.5, 3.1, -3.05, 4.0);
-  addCeilingBeam(g, 0, 3.8, -1.5, 7);
-  addCeilingBeam(g, 0, 3.8, 0.3, 7);
-  for (const lx of [-1.5, 0, 1.5]) {
-    box(g, 1.6, 0.1, 0.3, '#ebe4dc', lx, 3.7, -0.4, 0, 0, 0, {
+  // coffee cups everywhere
+  for (let i = 0; i < 8; i++) {
+    cyl(g, 0.05, 0.06, 0.1, '#ebe4dc', -2.6 + i * 0.55, 0.12, 1.4);
+  }
+  for (let i = 0; i < 4; i++) {
+    cyl(g, 0.05, 0.06, 0.1, '#ebe4dc', -1.5 + i * 0.4, 0.82, -1.7);
+  }
+  addPizzaBox(g, -2.2, 0.1, 1.0);
+  addPizzaBox(g, 0.5, 0.1, 1.3);
+  addCable(g, -1.5, 0.05, -1.5, -0.5, 0.05, 0.5);
+  addCable(g, 1.0, 0.05, -1.5, 1.8, 0.05, 0.8);
+  addPlant(g, -3.2, 0, 2.0);
+  addPlant(g, 3.2, 0, 2.0);
+  addLamp(g, 2.8, 0, 1.5);
+  addLamp(g, -2.8, 0, 1.5);
+  addWallShelf(g, 0, 3.2, -3.05, 5.5);
+  addCeilingBeam(g, 0, 3.85, -1.5, 7.5);
+  addCeilingBeam(g, 0, 3.85, 0.2, 7.5);
+  addCeilingBeam(g, 0, 3.85, 1.5, 7.5);
+  for (const lx of [-1.8, -0.6, 0.6, 1.8]) {
+    box(g, 1.2, 0.1, 0.3, '#ebe4dc', lx, 3.75, -0.3, 0, 0, 0, {
       mat: { emissive: '#f5f0e0', emissiveIntensity: 0.5 },
     });
   }
-  addUpperWallDressing(g, -3.05, -3.2, 3.2, 2.9);
-  const fl = new THREE.PointLight('#f5f0e0', 0.75, 8, 2);
+  addUpperWallDressing(g, -3.05, -3.5, 3.5, 2.95);
+  const fl = new THREE.PointLight('#f5f0e0', 0.8, 9, 2);
   fl.position.set(0, 3.1, 0);
   g.add(fl);
   return g;

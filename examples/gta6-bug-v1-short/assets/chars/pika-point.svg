@@ -1,50 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
 
-  <ellipse cx="300" cy="560" rx="115" ry="128" fill="#c8a078"/>
-  <!-- hoodie -->
-  <path d="M205,460 Q300,420 395,460 L410,650 Q300,680 190,650 Z" fill="#5a6a58"/>
-  <path d="M230,485 Q300,450 370,485 L375,630 Q300,655 225,630 Z" fill="#6a7a68"/>
-  <path d="M270,500 Q300,520 330,500" fill="none" stroke="#2a3830" stroke-width="6"/>
-  <ellipse cx="300" cy="455" rx="68" ry="26" fill="#4a5848"/>
-  <!-- round pika head + short rounded ears -->
-  <ellipse cx="300" cy="290" rx="132" ry="118" fill="#d8b088"/>
-  <ellipse cx="300" cy="310" rx="102" ry="88" fill="#e0c098"/>
-  <ellipse cx="185" cy="200" rx="32" ry="42" fill="#d0a880"/>
-  <ellipse cx="415" cy="200" rx="32" ry="42" fill="#d0a880"/>
-  <ellipse cx="185" cy="205" rx="14" ry="22" fill="#f0c8b0"/>
-  <ellipse cx="415" cy="205" rx="14" ry="22" fill="#f0c8b0"/>
-  <!-- soft muzzle -->
-  <ellipse cx="300" cy="348" rx="46" ry="30" fill="#f4e8d8"/>
-  <ellipse cx="300" cy="338" rx="14" ry="10" fill="#2a2118"/>
-  <!-- gaming headset -->
-  <path d="M170,250 Q300,165 430,250" fill="none" stroke="#2a3038" stroke-width="16" stroke-linecap="round"/>
-  <rect x="145" y="255" width="42" height="70" rx="12" fill="#3a4048"/>
-  <rect x="413" y="255" width="42" height="70" rx="12" fill="#3a4048"/>
-  <rect x="150" y="265" width="32" height="50" rx="8" fill="#1a2028"/>
-  <rect x="418" y="265" width="32" height="50" rx="8" fill="#1a2028"/>
-  <path d="M187,310 Q250,360 300,355" fill="none" stroke="#2a3038" stroke-width="8" stroke-linecap="round"/>
-  <rect x="285" y="348" width="36" height="22" rx="8" fill="#4a5058"/>
+  <!-- very round chunky body -->
+  <ellipse cx="300" cy="560" rx="130" ry="120" fill="#d4a878"/>
+  <ellipse cx="300" cy="540" rx="110" ry="90" fill="#e0b888"/>
+  <!-- green hoodie -->
+  <path d="M200,470 Q300,430 400,470 L415,640 Q300,675 185,640 Z" fill="#5a6a58"/>
+  <path d="M228,495 Q300,460 372,495 L378,620 Q300,650 222,620 Z" fill="#6a7a68"/>
+  <ellipse cx="300" cy="465" rx="65" ry="24" fill="#4a5848"/>
+  <!-- oversized round head -->
+  <ellipse cx="300" cy="300" rx="145" ry="130" fill="#e8c090"/>
+  <ellipse cx="300" cy="320" rx="115" ry="100" fill="#f0d0a0"/>
+  <!-- TINY round ears (pika hallmark) -->
+  <ellipse cx="200" cy="195" rx="22" ry="24" fill="#d4a878"/>
+  <ellipse cx="400" cy="195" rx="22" ry="24" fill="#d4a878"/>
+  <ellipse cx="200" cy="198" rx="10" ry="12" fill="#f0c8b0"/>
+  <ellipse cx="400" cy="198" rx="10" ry="12" fill="#f0c8b0"/>
+  <!-- short blunt muzzle -->
+  <ellipse cx="300" cy="355" rx="42" ry="28" fill="#f8ecd8"/>
+  <ellipse cx="300" cy="345" rx="12" ry="9" fill="#2a2118"/>
+  <!-- headset -->
+  <path d="M165,255 Q300,160 435,255" fill="none" stroke="#2a3038" stroke-width="16" stroke-linecap="round"/>
+  <rect x="140" y="260" width="44" height="72" rx="12" fill="#3a4048"/>
+  <rect x="416" y="260" width="44" height="72" rx="12" fill="#3a4048"/>
+  <path d="M184,315 Q250,365 300,360" fill="none" stroke="#2a3038" stroke-width="8" stroke-linecap="round"/>
+  <rect x="285" y="352" width="36" height="22" rx="8" fill="#4a5058"/>
   <!-- round shades -->
-  <circle cx="262" cy="285" r="28" fill="#1a2428" opacity=".9"/>
-  <circle cx="338" cy="285" r="28" fill="#1a2428" opacity=".9"/>
-  <path d="M290,285 H310" stroke="#6a7a68" stroke-width="5"/>
+  <circle cx="262" cy="290" r="28" fill="#1a2428" opacity=".9"/>
+  <circle cx="338" cy="290" r="28" fill="#1a2428" opacity=".9"/>
+  <path d="M290,290 H310" stroke="#6a7a68" stroke-width="5"/>
   
-  <ellipse cx="262" cy="275" rx="7" ry="8" fill="#2a2118"/>
-  <ellipse cx="338" cy="275" rx="7" ry="8" fill="#2a2118"/>
-  <ellipse cx="265" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
-  <ellipse cx="341" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
-  <ellipse cx="300" cy="385" rx="11" ry="13" fill="#3a2a24"/>
+  <ellipse cx="262" cy="280" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="338" cy="280" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="265" cy="278" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="341" cy="278" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="300" cy="395" rx="11" ry="13" fill="#3a2a24"/>
   
-  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#d8b088"/>
-  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#d8b088"/>
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#e8c090"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#e8c090"/>
   
-  <ellipse cx="410" cy="410.0" rx="22" ry="70.0" fill="#d8b088"/>
-  <ellipse cx="428" cy="340" rx="20" ry="16" fill="#d8b088"/>
+  <ellipse cx="410" cy="410.0" rx="22" ry="70.0" fill="#e8c090"/>
+  <ellipse cx="428" cy="340" rx="20" ry="16" fill="#e8c090"/>
   
-  <ellipse cx="230" cy="710" rx="28" ry="16" fill="#c8a078"/>
-  <ellipse cx="370" cy="710" rx="28" ry="16" fill="#c8a078"/>
-  <ellipse cx="230" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
-  <ellipse cx="370" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+  <ellipse cx="225" cy="710" rx="28" ry="16" fill="#d4a878"/>
+  <ellipse cx="375" cy="710" rx="28" ry="16" fill="#d4a878"/>
 
 </svg>
