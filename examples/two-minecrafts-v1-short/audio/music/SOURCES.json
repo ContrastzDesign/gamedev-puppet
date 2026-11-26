@@ -1,0 +1,11 @@
+{
+  "title": "Bit Quest",
+  "artist": "Kevin MacLeod",
+  "url": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1500078",
+  "download": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Bit%20Quest.mp3",
+  "license": "CC BY 4.0",
+  "license_url": "http://creativecommons.org/licenses/by/4.0/",
+  "file": "bit-quest.wav",
+  "source_mp3_sha256": "6467ae09a7ed2e95e021031d230cfc71175b9081845d2778c2c0240feb8f3c94",
+  "note": "Trimmed to ~42s for mix; not Carefree / Sneaky Snitch / Wallpaper / Local Forecast / Lobby Time / Investigations / Hidden Agenda / Monkeys Spinning Monkeys / Pixel Peeker Polka"
+}

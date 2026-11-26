@@ -1,0 +1,97 @@
+[
+  {
+    "file": "soft-pop.wav",
+    "freesound_id": 541993,
+    "user": "Rob_Marion",
+    "license": "CC0",
+    "url": "https://freesound.org/s/541993/"
+  },
+  {
+    "file": "whoosh-short.wav",
+    "freesound_id": 372519,
+    "license": "CC0",
+    "url": "https://freesound.org/s/372519/",
+    "note": "trimmed atrim=0:0.8"
+  },
+  {
+    "file": "ui-pop.wav",
+    "freesound_id": 878253,
+    "user": "Qvantor",
+    "license": "CC0",
+    "url": "https://freesound.org/s/878253/"
+  },
+  {
+    "file": "whoosh-long.wav",
+    "freesound_id": 416054,
+    "license": "CC0",
+    "url": "https://freesound.org/s/416054/",
+    "note": "trimmed atrim=0:1.2"
+  },
+  {
+    "file": "sizzle.wav",
+    "freesound_id": 514951,
+    "license": "CC0",
+    "url": "https://freesound.org/s/514951/",
+    "note": "trimmed atrim=0:1.5"
+  },
+  {
+    "file": "fan-whir.wav",
+    "freesound_id": 243550,
+    "license": "CC0",
+    "url": "https://freesound.org/s/243550/",
+    "note": "trimmed atrim=0:1.5"
+  },
+  {
+    "file": "water-splash.wav",
+    "freesound_id": 341695,
+    "license": "CC0",
+    "url": "https://freesound.org/s/341695/"
+  },
+  {
+    "file": "swish-short.wav",
+    "freesound_id": 154648,
+    "license": "CC0",
+    "url": "https://freesound.org/s/154648/",
+    "note": "trimmed atrim=0:0.9"
+  },
+  {
+    "file": "stamp.wav",
+    "freesound_id": 31769,
+    "license": "CC0",
+    "url": "https://freesound.org/s/31769/",
+    "note": "trimmed atrim=0:0.8"
+  },
+  {
+    "file": "tick.wav",
+    "freesound_id": 253886,
+    "license": "CC0",
+    "url": "https://freesound.org/s/253886/"
+  },
+  {
+    "file": "impact-metal.wav",
+    "freesound_id": 346776,
+    "license": "CC0",
+    "url": "https://freesound.org/s/346776/",
+    "note": "trimmed atrim=0:1.0"
+  },
+  {
+    "file": "kenney-switch.wav",
+    "freesound_id": 264981,
+    "license": "CC0",
+    "url": "https://freesound.org/s/264981/",
+    "note": "CC0 switch click used under Kenney-named cue slot"
+  },
+  {
+    "file": "kenney-click.wav",
+    "freesound_id": 391660,
+    "license": "CC0",
+    "url": "https://freesound.org/s/391660/"
+  },
+  {
+    "file": "chime-short.wav",
+    "freesound_id": 390863,
+    "license": "CC0",
+    "url": "https://freesound.org/s/390863/",
+    "note": "trimmed atrim=0:1.2"
+  }
+]

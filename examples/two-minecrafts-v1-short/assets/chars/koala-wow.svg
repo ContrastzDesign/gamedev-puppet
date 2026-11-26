@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <!-- no visible tail (koala) — stump hint -->
+  <ellipse cx="380" cy="630" rx="14" ry="10" fill="#8a8a88" opacity=".5"/>
+  <!-- chunky grey body -->
+  <ellipse cx="300" cy="560" rx="125" ry="115" fill="#8a8a88"/>
+  <ellipse cx="300" cy="540" rx="105" ry="90" fill="#b0b0a8"/>
+  <!-- coffee-cup-print cardigan -->
+  <path d="M205,465 Q300,425 395,465 L408,645 Q300,675 192,645 Z" fill="#6a5040"/>
+  <path d="M228,490 Q300,455 372,490 L378,625 Q300,650 222,625 Z" fill="#7a6050"/>
+  <ellipse cx="300" cy="460" rx="62" ry="22" fill="#5a4030"/>
+  
+  <ellipse cx="255" cy="520" rx="14" ry="10" fill="#ebe4dc"/>
+  <ellipse cx="255" cy="512" rx="10" ry="4" fill="#d8d0c8"/>
+  <rect x="252" y="502" width="6" height="10" rx="1" fill="#ebe4dc"/>
+  <ellipse cx="320" cy="555" rx="14" ry="10" fill="#ebe4dc"/>
+  <ellipse cx="320" cy="547" rx="10" ry="4" fill="#d8d0c8"/>
+  <rect x="317" y="537" width="6" height="10" rx="1" fill="#ebe4dc"/>
+  <ellipse cx="280" cy="590" rx="14" ry="10" fill="#ebe4dc"/>
+  <ellipse cx="280" cy="582" rx="10" ry="4" fill="#d8d0c8"/>
+  <rect x="277" y="572" width="6" height="10" rx="1" fill="#ebe4dc"/>
+  <!-- oversized grey head -->
+  <ellipse cx="300" cy="285" rx="135" ry="120" fill="#8a8a88"/>
+  <ellipse cx="300" cy="305" rx="110" ry="95" fill="#b0b0a8"/>
+  <!-- LARGE black koala nose (hallmark) -->
+  <ellipse cx="300" cy="350" rx="32" ry="28" fill="#2a2118"/>
+  <ellipse cx="292" cy="342" rx="8" ry="6" fill="#4a4038" opacity=".5"/>
+  <!-- cream muzzle under nose -->
+  <ellipse cx="300" cy="385" rx="38" ry="22" fill="#d8d0c0"/>
+  <!-- HUGE fluffy round ears with white inner -->
+  <ellipse cx="165" cy="200" rx="55" ry="58" fill="#8a8a88"/>
+  <ellipse cx="435" cy="200" rx="55" ry="58" fill="#8a8a88"/>
+  <ellipse cx="165" cy="205" rx="32" ry="34" fill="#f0ece4"/>
+  <ellipse cx="435" cy="205" rx="32" ry="34" fill="#f0ece4"/>
+  <ellipse cx="155" cy="185" rx="18" ry="14" fill="#8a8a88" opacity=".45"/>
+  <ellipse cx="445" cy="185" rx="18" ry="14" fill="#8a8a88" opacity=".45"/>
+  <!-- reading glasses -->
+  <ellipse cx="255" cy="285" rx="32" ry="26" fill="none" stroke="#4a5058" stroke-width="6"/>
+  <ellipse cx="345" cy="285" rx="32" ry="26" fill="none" stroke="#4a5058" stroke-width="6"/>
+  <path d="M287,285 H313" stroke="#4a5058" stroke-width="5"/>
+  <path d="M223,280 Q180,260 155,220" fill="none" stroke="#4a5058" stroke-width="5"/>
+  <path d="M377,280 Q420,260 445,220" fill="none" stroke="#4a5058" stroke-width="5"/>
+  
+  <ellipse cx="258" cy="280" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="342" cy="280" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="258" cy="278" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="342" cy="278" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="300" cy="405" rx="16" ry="14" fill="#3a2a24"/><ellipse cx="300" cy="409" rx="10" ry="6" fill="#c47a7a"/>
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#8a8a88"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#8a8a88"/>
+  
+  <ellipse cx="410" cy="410.0" rx="22" ry="70.0" fill="#8a8a88"/>
+  <ellipse cx="428" cy="340" rx="20" ry="16" fill="#8a8a88"/>
+  
+  <ellipse cx="228" cy="710" rx="28" ry="16" fill="#8a8a88"/>
+  <ellipse cx="372" cy="710" rx="28" ry="16" fill="#8a8a88"/>
+  <!-- coffee mug prop when pointing -->
+  <ellipse cx='450' cy='340' rx='28' ry='22' fill='#ebe4dc'/><rect x='422' y='340' width='56' height='50' rx='4' fill='#ebe4dc'/><ellipse cx='450' cy='390' rx='28' ry='10' fill='#d8d0c8'/><ellipse cx='450' cy='355' rx='18' ry='8' fill='#6a4030'/><path d='M478,355 Q500,360 498,380 Q496,395 478,390' fill='none' stroke='#ebe4dc' stroke-width='8'/>
+
+</svg>

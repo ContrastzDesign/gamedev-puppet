@@ -1,0 +1,73 @@
+{
+ "file": "vo.mp3",
+ "duration": 38.269388,
+ "fps": 24,
+ "video_end": 919,
+ "method": "faster-whisper small.en words aligned to spoken.txt; frames f=round(t*fps)+1; video_end=ceil(duration*fps-0.05)",
+ "lines": [
+  {
+   "line": 1,
+   "start": 0.0,
+   "end": 2.14,
+   "f_start": 1,
+   "f_end": 52,
+   "text": "Why Are There Two Minecrafts?"
+  },
+  {
+   "line": 2,
+   "start": 2.48,
+   "end": 8.96,
+   "f_start": 61,
+   "f_end": 216,
+   "text": "Say your redstone farm works on Java. Then you open Bedrock, and it breaks. But why did they even make two versions?"
+  },
+  {
+   "line": 3,
+   "start": 9.52,
+   "end": 11.34,
+   "f_start": 229,
+   "f_end": 273,
+   "text": "And why not just merge them into one?"
+  },
+  {
+   "line": 4,
+   "start": 11.84,
+   "end": 19.44,
+   "f_start": 285,
+   "f_end": 468,
+   "text": "Well Java is the original code minecraft was written in but doesn't run on consoles or phones, so Bedrock was built in another programming language."
+  },
+  {
+   "line": 5,
+   "start": 19.9,
+   "end": 24.9,
+   "f_start": 479,
+   "f_end": 599,
+   "text": "Now every feature gets built twice, and both have to match. This is what you call parity."
+  },
+  {
+   "line": 6,
+   "start": 25.48,
+   "end": 31.38,
+   "f_start": 613,
+   "f_end": 754,
+   "text": "Now if you merge them, millions of worlds and mods stop working. So you'd break the thing players love most."
+  },
+  {
+   "line": 7,
+   "start": 32.16,
+   "end": 34.66,
+   "f_start": 773,
+   "f_end": 833,
+   "text": "This is why the comments are still fighting about it."
+  },
+  {
+   "line": 8,
+   "start": 34.92,
+   "end": 37.98,
+   "f_start": 839,
+   "f_end": 913,
+   "text": "It's one game on the box. But It's two games in the code."
+  }
+ ]
+}

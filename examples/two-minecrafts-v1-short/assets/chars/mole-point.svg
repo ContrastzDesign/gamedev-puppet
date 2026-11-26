@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <!-- short mole tail -->
+  <ellipse cx="405" cy="630" rx="16" ry="28" fill="#c4a090"/>
+  <!-- dark velvet body -->
+  <ellipse cx="300" cy="560" rx="120" ry="112" fill="#4a3830"/>
+  <ellipse cx="300" cy="540" rx="100" ry="88" fill="#3a2820"/>
+  <!-- judge robe -->
+  <path d="M200,460 Q300,420 400,460 L415,655 Q300,685 185,655 Z" fill="#2a2828"/>
+  <path d="M225,485 Q300,450 375,485 L385,635 Q300,660 215,635 Z" fill="#3a3838"/>
+  <ellipse cx="300" cy="455" rx="58" ry="20" fill="#1a1818"/>
+  <!-- white jabot / collar -->
+  <ellipse cx="300" cy="480" rx="28" ry="18" fill="#ebe4dc"/>
+  <ellipse cx="285" cy="500" rx="12" ry="16" fill="#ebe4dc"/>
+  <ellipse cx="315" cy="500" rx="12" ry="16" fill="#ebe4dc"/>
+  <ellipse cx="300" cy="518" rx="10" ry="14" fill="#ebe4dc"/>
+  <!-- oversized dark head -->
+  <ellipse cx="300" cy="285" rx="130" ry="115" fill="#4a3830"/>
+  <ellipse cx="300" cy="305" rx="105" ry="90" fill="#3a2820"/>
+  <!-- pointed PINK mole nose (hallmark) -->
+  <ellipse cx="300" cy="365" rx="28" ry="35" fill="#e8a090"/>
+  <ellipse cx="300" cy="395" rx="18" ry="16" fill="#f0b0a0"/>
+  <ellipse cx="300" cy="408" rx="10" ry="8" fill="#d48078"/>
+  <!-- tiny hidden / squinty eyes -->
+  <path d="M255,280 Q270,275 285,280" fill="none" stroke="#2a2118" stroke-width="5" stroke-linecap="round"/>
+  <path d="M315,280 Q330,275 345,280" fill="none" stroke="#2a2118" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="270" cy="282" rx="4" ry="3" fill="#2a2118"/>
+  <ellipse cx="330" cy="282" rx="4" ry="3" fill="#2a2118"/>
+  <!-- tiny hidden ears under fur -->
+  <ellipse cx="190" cy="200" rx="18" ry="16" fill="#4a3830"/>
+  <ellipse cx="410" cy="200" rx="18" ry="16" fill="#4a3830"/>
+  <!-- judge wig curls hint -->
+  <ellipse cx="220" cy="175" rx="30" ry="28" fill="#ebe4dc"/>
+  <ellipse cx="260" cy="155" rx="28" ry="26" fill="#ebe4dc"/>
+  <ellipse cx="300" cy="148" rx="30" ry="28" fill="#ebe4dc"/>
+  <ellipse cx="340" cy="155" rx="28" ry="26" fill="#ebe4dc"/>
+  <ellipse cx="380" cy="175" rx="30" ry="28" fill="#ebe4dc"/>
+  <ellipse cx="300" cy="190" rx="100" ry="30" fill="#ebe4dc"/>
+  <ellipse cx="300" cy="430" rx="11" ry="13" fill="#3a2a24"/>
+  <!-- LARGE digging paws (mole hallmark) on arms -->
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#4a3830"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#4a3830"/>
+  
+  <ellipse cx="410" cy="410.0" rx="22" ry="70.0" fill="#4a3830"/>
+  <ellipse cx="428" cy="340" rx="20" ry="16" fill="#4a3830"/>
+  <!-- oversized clawed digging feet -->
+  <ellipse cx="230" cy="710" rx="40" ry="18" fill="#4a3830"/>
+  <ellipse cx="370" cy="710" rx="40" ry="18" fill="#4a3830"/>
+  <ellipse cx="210" cy="702" rx="6" ry="10" fill="#c4a090"/>
+  <ellipse cx="225" cy="698" rx="6" ry="10" fill="#c4a090"/>
+  <ellipse cx="240" cy="698" rx="6" ry="10" fill="#c4a090"/>
+  <ellipse cx="255" cy="702" rx="6" ry="10" fill="#c4a090"/>
+  <ellipse cx="345" cy="702" rx="6" ry="10" fill="#c4a090"/>
+  <ellipse cx="360" cy="698" rx="6" ry="10" fill="#c4a090"/>
+  <ellipse cx="375" cy="698" rx="6" ry="10" fill="#c4a090"/>
+  <ellipse cx="390" cy="702" rx="6" ry="10" fill="#c4a090"/>
+  <!-- magnifying glass when pointing -->
+  <circle cx='455' cy='330' r='36' fill='none' stroke='#8a7030' stroke-width='10'/><circle cx='455' cy='330' r='28' fill='#8ab8c8' opacity='.45'/><rect x='475' y='350' width='14' height='70' rx='4' fill='#8a7030' transform='rotate(35 482 385)'/>
+
+</svg>

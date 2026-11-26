@@ -1,0 +1,11 @@
+{
+  "recovered_from_history": false,
+  "new_paid_generations": 1,
+  "settings": "same fields as prior poker body; stored voice defaults; no overrides",
+  "model": "eleven_v4",
+  "authorization": "Ricardo standing order: Jake Shorts hourly build (tab t.32kj0lg6abn0)",
+  "request_id": "fqfFMH4Z7IrnF3mZW4BR",
+  "history_item_id": "24WguSnMGmMN6H2XybQe",
+  "sha256": "cea6f006208d3d3904f1dbc7ef09c0f02a639e1ddf2057bfb8689caec975e996",
+  "bytes": 612771
+}

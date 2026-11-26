@@ -1,0 +1,103 @@
+1
+00:00:00,000 --> 00:00:02,140
+Why Are There Two Minecrafts
+
+2
+00:00:02,480 --> 00:00:03,780
+Say your redstone farm works
+
+3
+00:00:03,780 --> 00:00:05,360
+on Java. Then you open
+
+4
+00:00:05,360 --> 00:00:07,300
+Bedrock, and it breaks. But
+
+5
+00:00:07,300 --> 00:00:08,360
+why did they even make
+
+6
+00:00:08,360 --> 00:00:08,960
+two versions
+
+7
+00:00:09,520 --> 00:00:10,600
+And why not just merge
+
+8
+00:00:10,600 --> 00:00:11,340
+them into one
+
+9
+00:00:11,840 --> 00:00:13,160
+Well Java is the original
+
+10
+00:00:13,160 --> 00:00:14,740
+code minecraft was written in
+
+11
+00:00:14,840 --> 00:00:16,120
+but doesn't run on consoles
+
+12
+00:00:16,120 --> 00:00:17,840
+or phones, so Bedrock was
+
+13
+00:00:17,840 --> 00:00:19,440
+built in another programming language
+
+14
+00:00:19,900 --> 00:00:21,420
+Now every feature gets built
+
+15
+00:00:21,420 --> 00:00:22,960
+twice, and both have to
+
+16
+00:00:22,960 --> 00:00:24,320
+match. This is what you
+
+17
+00:00:24,320 --> 00:00:24,900
+call parity
+
+18
+00:00:25,480 --> 00:00:26,560
+Now if you merge them
+
+19
+00:00:26,860 --> 00:00:28,060
+millions of worlds and mods
+
+20
+00:00:28,060 --> 00:00:29,780
+stop working. So you'd break
+
+21
+00:00:29,780 --> 00:00:31,380
+the thing players love most
+
+22
+00:00:32,160 --> 00:00:33,300
+This is why the comments
+
+23
+00:00:33,300 --> 00:00:34,660
+are still fighting about it
+
+24
+00:00:34,920 --> 00:00:35,900
+It's one game on the
+
+25
+00:00:35,900 --> 00:00:37,420
+box. But It's two games
+
+26
+00:00:37,420 --> 00:00:37,980
+in the code

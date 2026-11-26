@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <!-- tiny stubby hamster tail -->
+  <ellipse cx="410" cy="620" rx="18" ry="12" fill="#d4a878"/>
+  <!-- chunky body -->
+  <ellipse cx="300" cy="560" rx="118" ry="112" fill="#d4a878"/>
+  <ellipse cx="300" cy="540" rx="98" ry="85" fill="#e0b888"/>
+  <!-- teal hoodie -->
+  <path d="M205,470 Q300,430 395,470 L408,640 Q300,675 192,640 Z" fill="#3a7a78"/>
+  <path d="M230,495 Q300,460 370,495 L376,620 Q300,650 224,620 Z" fill="#4a8a88"/>
+  <ellipse cx="300" cy="465" rx="60" ry="22" fill="#2a6868"/>
+  <ellipse cx="255" cy="530" rx="14" ry="10" fill="#2a6868" opacity=".35"/>
+  <ellipse cx="345" cy="530" rx="14" ry="10" fill="#2a6868" opacity=".35"/>
+  <!-- oversized round head -->
+  <ellipse cx="300" cy="280" rx="130" ry="115" fill="#d4a878"/>
+  <ellipse cx="300" cy="300" rx="105" ry="90" fill="#e0b888"/>
+  <!-- BIG chubby cheek pouches (hamster hallmark) -->
+  <ellipse cx="200" cy="320" rx="48" ry="42" fill="#e8b898"/>
+  <ellipse cx="400" cy="320" rx="48" ry="42" fill="#e8b898"/>
+  <ellipse cx="195" cy="325" rx="28" ry="24" fill="#f0c8a8" opacity=".6"/>
+  <ellipse cx="405" cy="325" rx="28" ry="24" fill="#f0c8a8" opacity=".6"/>
+  <!-- short stubby snout -->
+  <ellipse cx="300" cy="355" rx="36" ry="28" fill="#f0dcc0"/>
+  <ellipse cx="300" cy="348" rx="10" ry="8" fill="#2a2118"/>
+  <!-- tiny ROUND hamster ears -->
+  <ellipse cx="200" cy="175" rx="28" ry="26" fill="#d4a878"/>
+  <ellipse cx="400" cy="175" rx="28" ry="26" fill="#d4a878"/>
+  <ellipse cx="200" cy="175" rx="14" ry="13" fill="#e8b4a0"/>
+  <ellipse cx="400" cy="175" rx="14" ry="13" fill="#e8b4a0"/>
+  <!-- gaming headset -->
+  <path d="M170,245 Q300,150 430,245" fill="none" stroke="#2a3038" stroke-width="16" stroke-linecap="round"/>
+  <rect x="145" y="250" width="42" height="68" rx="12" fill="#3a4048"/>
+  <rect x="413" y="250" width="42" height="68" rx="12" fill="#3a4048"/>
+  <path d="M187,305 Q250,355 300,350" fill="none" stroke="#2a3038" stroke-width="8" stroke-linecap="round"/>
+  <rect x="285" y="343" width="34" height="20" rx="7" fill="#4a5058"/>
+  <!-- round sunglasses -->
+  <circle cx="260" cy="280" r="26" fill="#1a2428" opacity=".92"/>
+  <circle cx="340" cy="280" r="26" fill="#1a2428" opacity=".92"/>
+  <path d="M286,280 H314" stroke="#4a8a88" stroke-width="5"/>
+  
+  <ellipse cx="260" cy="270" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="340" cy="270" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="263" cy="268" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="343" cy="268" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="300" cy="390" rx="11" ry="13" fill="#3a2a24"/>
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#d4a878"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#d4a878"/>
+  
+  <ellipse cx="410" cy="410.0" rx="22" ry="70.0" fill="#d4a878"/>
+  <ellipse cx="428" cy="340" rx="20" ry="16" fill="#d4a878"/>
+  
+  <ellipse cx="230" cy="710" rx="28" ry="16" fill="#d4a878"/>
+  <ellipse cx="370" cy="710" rx="28" ry="16" fill="#d4a878"/>
+  <!-- laptop/console prop when pointing -->
+  <rect x='400' y='300' width='90' height='60' rx='6' fill='#2a3038'/><rect x='408' y='308' width='74' height='42' rx='3' fill='#4a9a78'/><rect x='420' y='360' width='50' height='10' rx='2' fill='#3a4048'/>
+
+</svg>

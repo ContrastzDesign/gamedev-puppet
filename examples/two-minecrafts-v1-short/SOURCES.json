@@ -1,0 +1,38 @@
+{
+  "title": "Why Are There Two Minecrafts?",
+  "project": "examples/two-minecrafts-v1-short",
+  "style": "content-short VERSION 1 (drawn SVG animals in detailed 3D worlds)",
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 24,
+    "frames": 919,
+    "duration_s": 38.269388,
+    "codec": "H.264 CRF 18 yuv420p + AAC"
+  },
+  "cast": [
+    { "species": "hamster", "role": "gamer" },
+    { "species": "koala", "role": "Java veteran coder" },
+    { "species": "panda", "role": "Bedrock builder" },
+    { "species": "mole", "role": "parity judge" },
+    { "species": "lynx", "role": "referee / curator" }
+  ],
+  "music": {
+    "title": "Bit Quest",
+    "artist": "Kevin MacLeod",
+    "license": "CC BY 4.0",
+    "file": "audio/music/bit-quest.wav",
+    "details": "audio/music/SOURCES.json"
+  },
+  "sfx": "audio/sfx/SOURCES.json",
+  "vo": {
+    "file": "audio/vo.mp3",
+    "engine": "ElevenLabs eleven_v4",
+    "note": "Supplied with seed; not regenerated"
+  },
+  "fonts": {
+    "caption": "assets/caption.woff2 (Montserrat ExtraBold; OFL — assets/Montserrat-OFL.txt)"
+  },
+  "three": "vendor/three.module.js (MIT — vendor/THREE-LICENSE.txt)",
+  "note": "No Minecraft/Mojang/Microsoft logos, textures, or characters. Original generic voxel sandbox screen art."
+}
