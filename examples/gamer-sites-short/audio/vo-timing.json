@@ -1,0 +1,49 @@
+{
+ "file": "vo.mp3",
+ "duration": 30.432653,
+ "fps": 24,
+ "video_end": 731,
+ "method": "faster-whisper small.en words aligned to spoken.txt; frames f=round(t*fps)+1; video_end=ceil(duration*fps-0.05)",
+ "lines": [
+  {
+   "line": 1,
+   "start": 0.0,
+   "end": 2.44,
+   "f_start": 1,
+   "f_end": 60,
+   "text": "What websites do gamers visit the most?"
+  },
+  {
+   "line": 2,
+   "start": 3.14,
+   "end": 7.66,
+   "f_start": 76,
+   "f_end": 185,
+   "text": "Number five, Steam. By far where all most of the best games are in!"
+  },
+  {
+   "line": 3,
+   "start": 8.16,
+   "end": 14.5,
+   "f_start": 197,
+   "f_end": 349,
+   "text": "Number four, Poki. Its a games platform run in the browser. It’s the place where people can play Mobile games on their browser!"
+  },
+  {
+   "line": 4,
+   "start": 15.14,
+   "end": 20.54,
+   "f_start": 364,
+   "f_end": 494,
+   "text": "Number three, roblox.com. Probably the most played game platform of all time!"
+  },
+  {
+   "line": 5,
+   "start": 21.12,
+   "end": 29.92,
+   "f_start": 508,
+   "f_end": 719,
+   "text": "And finally Number two, It’s not even a gaming platform. It’s the only place where gamers can watch livestreams of every game being played! Twitch"
+  }
+ ]
+}
