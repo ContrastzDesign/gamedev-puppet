@@ -14,8 +14,8 @@
     "loudness_lufs": -14.0,
     "true_peak_dbtp": -1.5,
     "renderer": "ANGLE SwiftShader GPU=0",
-    "sha256": "9c119aa1372d23e83e4b2de76393781d432b61c9351af8c3a5079923cbacb7bf",
-    "bytes": 16478372,
+    "sha256": "d930e98f0d4c8508ce8842e4d0a0ad86c2eb47d22301afc39df0b64555827ce6",
+    "bytes": 16559814,
     "duration": 24
   },
   "voiceover": {
@@ -180,18 +180,18 @@
   },
   "notes": "Final render online GPU=0 overrides mac-render.md. Music is Local Forecast (not Carefree / Sneaky Snitch / Wallpaper).",
   "qa": {
-    "version": "v2-camera-rerender",
+    "version": "v2-caption-bottom-safe",
     "static_yavg_thresh": 0.15,
     "static_max_run": 0,
     "static_pass": true,
-    "camera_static_hold_max": 7,
+    "caption_bottom_max": 1840,
+    "caption_bottom_assert": true,
     "fixes": [
-      "motivated free camera (camera.js) with varied landings per VO beat",
-      "no back-to-back repeated move kinds",
-      "captions pinned to bottom band below feet",
-      "upper-wall dressing for crane/pull-out frames",
-      "assertMoveVariety + maxStaticRun boot checks"
+      "caption bbox bottom pinned \u2264 y=1840 (\u226580px from frame bottom)",
+      "prefer \u22642 caption lines with slightly smaller font",
+      "assertCaptionBottomSafe boot check",
+      "camera/VO/word timings/characters/set/music/SFX unchanged"
     ],
-    "artifacts": "/opt/cursor/artifacts/easiest-tool-final/"
+    "artifacts": "/opt/cursor/artifacts/easiest-tool-final-v2/"
   }
 }
