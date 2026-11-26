@@ -33,22 +33,30 @@ function cyl(parent, rTop, rBot, h, color, x, y, z, rx = 0, ry = 0, rz = 0, opts
 
 function makeSign(text, w = 1.6, h = 0.45, bg = '#2a3228', fg = '#f0e6d0', border = '#c4a35a') {
   const c = document.createElement('canvas');
-  c.width = 512; c.height = 128;
+  c.width = 1024; c.height = 256;
   const ctx = c.getContext('2d');
   ctx.fillStyle = bg;
-  ctx.fillRect(0, 0, 512, 128);
+  ctx.fillRect(0, 0, 1024, 256);
   ctx.strokeStyle = border;
-  ctx.lineWidth = 8;
-  ctx.strokeRect(8, 8, 496, 112);
+  ctx.lineWidth = 14;
+  ctx.strokeRect(14, 14, 996, 228);
   ctx.fillStyle = fg;
-  ctx.font = 'bold 52px sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText(text, 256, 68);
+  // Fit long labels (e.g. ROBLOX STUDIO) without clipping glyphs.
+  let px = 110;
+  ctx.font = `bold ${px}px sans-serif`;
+  while (px > 48 && ctx.measureText(text).width > 920) {
+    px -= 4;
+    ctx.font = `bold ${px}px sans-serif`;
+  }
+  ctx.fillText(text, 512, 136);
   const tex = new THREE.CanvasTexture(c);
   tex.colorSpace = THREE.SRGBColorSpace;
+  // Widen the plane for long booth titles so letters stay readable in-frame.
+  const planeW = text.length > 10 ? Math.max(w, 2.05) : w;
   const mesh = new THREE.Mesh(
-    new THREE.PlaneGeometry(w, h),
+    new THREE.PlaneGeometry(planeW, h),
     new THREE.MeshBasicMaterial({ map: tex }),
   );
   // Tagged for caption-vs-sign screen-space overlap checks.
@@ -387,10 +395,11 @@ function buildHeroBooth(g, b) {
   box(g, 0.55, 0.55, 0.07, '#3d4654', 0.85, 0.9, 0.1, 0, 0.9, 0, { round: 0.04 });
   box(g, 0.07, 0.07, 0.35, '#2a3038', 0.62, 0.7, -0.1, 0, 0.9, 0);
   box(g, 0.07, 0.07, 0.35, '#2a3038', 1.08, 0.7, -0.2, 0, 0.9, 0);
+  // Raised so hard hats / tall ears never cover the booth name during medium shots.
   const sign = makeSign(b.label);
-  sign.position.set(0, 2.55, -0.35);
+  sign.position.set(0, 2.78, -0.35);
   g.add(sign);
-  neonStrip(g, 1.5, b.neon || '#c4a35a', 0, 2.35, -0.32);
+  neonStrip(g, 1.5, b.neon || '#c4a35a', 0, 2.55, -0.32);
   box(g, 0.1, 2.4, 1.2, '#6a5545', -1.4, 1.2, -0.15);
   box(g, 0.1, 2.4, 1.2, '#6a5545', 1.4, 1.2, -0.15);
   box(g, 0.03, 2.2, 0.03, b.neon || '#c4a35a', -1.34, 1.2, 0.35, 0, 0, 0, {
@@ -574,9 +583,55 @@ export function buildRoom(textures) {
   addShelfUnit(root, -14.2, -1.5, Math.PI / 2);
   addShelfUnit(root, 14.2, 1.0, -Math.PI / 2);
 
-  // Small side rug only — keep the camera aisle clear of the old untextured
-  // reddish center slab that filled the bottom of wide hook frames.
-  box(root, 2.4, 0.018, 1.6, '#8a5a4a', -9.5, 0.022, 3.4);
+  // Aisle runners + floor decals so mid/low camera angles never read as empty planks.
+  // Keep the center walkway clear of tall props (characters stand ~z=-3).
+  box(root, 2.2, 0.016, 1.3, '#8a5a4a', -9.5, 0.022, 3.4);
+  box(root, 2.4, 0.015, 5.5, '#6e4a3c', -2.4, 0.02, -0.6, 0, 0.05, 0);
+  box(root, 2.4, 0.015, 5.5, '#6e4a3c', 2.4, 0.02, -0.6, 0, -0.05, 0);
+  box(root, 1.6, 0.015, 3.2, '#5a3a30', 0.0, 0.019, 1.2);
+  // painted wayfinding arrows / platform marks (higher contrast so they read on camera)
+  for (const [x, z, col] of [
+    [-3.6, -2.0, '#e09070'], [0.0, -2.0, '#88b888'], [3.6, -2.0, '#78c8c0'],
+    [-2.2, 0.2, '#e0c070'], [2.2, 0.2, '#e0c070'], [-1.0, 1.4, '#d0a060'], [1.0, 1.4, '#d0a060'],
+  ]) {
+    box(root, 0.7, 0.014, 0.22, col, x, 0.028, z, 0, 0, 0, { noShadow: true });
+    box(root, 0.28, 0.014, 0.28, col, x, 0.028, z + 0.32, 0, 0, Math.PI / 4, { noShadow: true });
+  }
+  // low planter boxes along aisle edges (fill lower corners without blocking characters)
+  for (const x of [-5.6, -2.2, 2.2, 5.6]) {
+    box(root, 0.75, 0.32, 0.5, '#4a3628', x, 0.16, 1.15, 0, 0, 0, { round: 0.04 });
+    const bush = new THREE.Mesh(new THREE.SphereGeometry(0.32, 8, 8), mat('#3d6b4f'));
+    bush.position.set(x, 0.5, 1.15);
+    root.add(bush);
+  }
+  // crate stacks in foreground corners (fill empty lower bands on medium shots)
+  for (const [x, z] of [[-4.2, 2.2], [4.2, 2.2], [-3.0, 2.8], [3.0, 2.8]]) {
+    box(root, 0.55, 0.4, 0.55, '#6a4a32', x, 0.2, z, 0, 0.2, 0, { round: 0.03 });
+    box(root, 0.45, 0.35, 0.45, '#5a3a28', x + 0.1, 0.55, z - 0.05, 0, -0.15, 0, { round: 0.03 });
+  }
+  // hanging banner row under ceiling lamps — kills empty top bands on medium shots
+  for (const [x, label, col] of [
+    [-3.6, 'BLOCKS', '#c4785a'], [0.0, 'OPEN', '#6b8f6a'], [3.6, 'PORTAL', '#5a9a98'],
+  ]) {
+    const b = makeSign(label, 1.2, 0.36, '#1a1814', '#f0e6d0', col);
+    b.position.set(x, 3.85, -4.4);
+    root.add(b);
+  }
+  // string lights / hanging bulbs across the aisle (upper-frame fill)
+  for (let i = -5; i <= 5; i++) {
+    const bulb = new THREE.Mesh(
+      new THREE.SphereGeometry(0.08, 8, 8),
+      new THREE.MeshStandardMaterial({
+        color: '#f5e0b0', emissive: '#f0d080', emissiveIntensity: 1.3, roughness: 0.4,
+      }),
+    );
+    bulb.position.set(i * 1.15, 3.55, -2.8);
+    root.add(bulb);
+  }
+  // cable snakes / power strips in aisle foreground
+  for (let i = 0; i < 6; i++) {
+    box(root, 1.0 + (i % 2) * 0.5, 0.035, 0.05, '#2a2a30', -5 + i * 1.9, 0.03, 0.5 + (i % 3) * 0.4);
+  }
 
   // Lounge sofa + coffee table — parked to the side so the street aisle stays clear
   box(root, 3.2, 0.45, 1.1, '#6a5548', -10.5, 0.35, 2.5, 0, 0.6, 0, { round: 0.08 });

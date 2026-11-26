@@ -4,6 +4,7 @@ This folder is a **film made with the [content-short skill](../../skill/content-
 
 - **Format:** 1080×1920, exactly 24 fps, 1136 frames (~47.33 s), H.264 CRF 18 yuv420p + AAC.
 - **Look:** Game-maker's street with three booths (Roblox Studio, Godot, Nilo), original editor/browser screen content, plain-lettered signs only.
+- **Camera:** Motivated free 3D moves in `camera.js` (fly-through, push-in, cut, orbit, whip, crane, top-down, low-hero, pull-out) landing 0–4 frames before named VO words; continuous drift between landings.
 - **Cast:** capybara, wombat, hedgehog, ferret, sugar glider (species not reused from gamer-sites).
 
 ## Script (locked)

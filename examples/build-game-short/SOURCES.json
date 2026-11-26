@@ -3,7 +3,7 @@
   "project": "examples/build-game-short",
   "style": "content-short VERSION 1 (drawn SVG animals in detailed 3D worlds)",
   "video": {
-    "file": "build-game-short.mp4",
+    "file": "build-game-final.mp4",
     "width": 1080,
     "height": 1920,
     "fps": 24,
@@ -11,11 +11,11 @@
     "duration_s": 47.333333,
     "video_codec": "libx264 CRF 18 yuv420p",
     "audio_codec": "AAC 192k",
-    "loudness_lufs": -14.1,
-    "true_peak_dbtp": -1.7,
+    "loudness_lufs": -14.0,
+    "true_peak_dbtp": -1.6,
     "renderer": "ANGLE SwiftShader GPU=0",
-    "sha256": "29aabb6ad964673e5c635870230c88f86f05c1f1f45fb6a32ca6713b48bf12f0",
-    "bytes": 13260980
+    "sha256": "5cd2f35aaaf23d92226bf030a6effec05ac7b763618ab4d41be03c3fa120e08a",
+    "bytes": 18620020
   },
   "voiceover": {
     "file": "audio/vo.mp3",
@@ -201,15 +201,19 @@
     "family": "Montserrat ExtraBold",
     "license": "OFL"
   },
-  "notes": "",
+  "notes": "Camera re-render: motivated spherical keyframed moves (fly/push/cut/orbit/whip/crane/top-down/low-hero/pull-out); aisle set dressing denser; captions lower band.",
   "qa": {
-    "version": "v2",
+    "version": "camera-rerender",
+    "static_yavg_max_run": 1,
+    "static_yavg_threshold": 0.15,
+    "static_yavg_frames": 1135,
+    "artifacts": "/opt/cursor/artifacts/build-game-final/",
     "fixes": [
-      "hook/platform medium framing (~40-50% character height)",
-      "removed aisle reddish rug slab",
-      "all captions in lower band",
-      "assertCaptionClearOfSigns boot check"
-    ],
-    "artifacts": "/opt/cursor/artifacts/build-game-final-v2/"
+      "keyframed free camera with varied move kinds, no hold >12 frames",
+      "landings 0-4 frames before named VO words",
+      "denser aisle/ceiling set dressing for mid-move frames",
+      "captions pushed lower below feet; opaque stroke fill",
+      "booth signs raised + longer labels fit canvas"
+    ]
   }
 }

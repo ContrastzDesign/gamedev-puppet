@@ -12,9 +12,9 @@ const BASE_FONT_PX = 70;
 const MIN_FONT_PX = 42;
 const TRACK_RATIO = -0.01;
 // top: above heads; low: lower third — kept below typical character feet so faces stay clear
-const BAND_Y = { top: 200, low: 1760 };
-const LOW_TOP_MIN = 1640;   // first line below character feet / lower body
-const BOTTOM_MARGIN = 50;   // keep clear of Shorts bottom UI
+const BAND_Y = { top: 200, low: 1825 };
+const LOW_TOP_MIN = 1745;   // first line below character feet / lower body
+const BOTTOM_MARGIN = 28;   // keep clear of Shorts bottom UI
 const WRAP_DANGLE = new Set(['a', 'an', 'the', 'or', 'and', 'of', 'in', 'on', 'to', 'at', 'by', 'for', 'with', 'its', "it's", 'where', 'can']);
 const FILL = '#f5e6b8';
 const STROKE = '#1c1810';
