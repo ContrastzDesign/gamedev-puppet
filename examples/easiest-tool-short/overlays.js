@@ -11,10 +11,14 @@ const MAX_TEXT_W = MAX_RENDER_W - STROKE_W; // 906
 const BASE_FONT_PX = 70;
 const MIN_FONT_PX = 42;
 const TRACK_RATIO = -0.01;
+// Stroke + small pad — must match captionBoxes() vertical extent.
+const BOX_VPAD = STROKE_W / 2 + 4;
 // top: above heads; low: lower third — kept below typical character feet so faces stay clear
 const BAND_Y = { top: 200, low: 1840 };
-const LOW_TOP_MIN = 1740;   // first line below character feet / lower body
-const BOTTOM_MARGIN = 28;   // keep clear of Shorts bottom UI
+// Hard floor: bbox bottom ≤ 1840 → ≥ 80 px clear of the 1080×1920 frame bottom.
+// (Multi-line blocks move up as needed; bottom clearance always wins over feet clearance.)
+const BOTTOM_CLEAR = 80;
+const MAX_BOTTOM = H - BOTTOM_CLEAR; // 1840
 const WRAP_DANGLE = new Set(['a', 'an', 'the', 'or', 'and', 'of', 'in', 'on', 'to', 'at', 'by', 'for', 'with', 'its', "it's", 'where', 'can']);
 const FILL = '#f5e6b8';
 const STROKE = '#1c1810';
@@ -90,17 +94,20 @@ function wrapWords(words, visW, maxW, maxLines = 5) {
   return best || [[0, n]];
 }
 
-function layoutCaption(c, kit) {
+function layoutCaption(c, kit, maxLines = 2) {
   const words = c.text.split(/\s+/).filter(Boolean);
-  const lines = wrapWords(words, kit.visW, MAX_TEXT_W, 5);
+  const lines = wrapWords(words, kit.visW, MAX_TEXT_W, maxLines);
   // Pin low-band captions to the bottom safe strip so they sit below character feet
-  // even on chest-up / medium framings (never float mid-body).
+  // even on chest-up / medium framings (never float mid-body). Tall wraps move UP
+  // so the bbox bottom stays ≤ MAX_BOTTOM (80 px clear of the frame edge).
   let cy = BAND_Y[c.band] ?? BAND_Y.top;
   if (c.band === 'low') {
     const half = ((lines.length - 1) / 2) * kit.lineH;
     const blockHalf = half + kit.lineH * 0.55;
-    cy = H - BOTTOM_MARGIN - blockHalf;
-    if (cy - blockHalf < LOW_TOP_MIN) cy = LOW_TOP_MIN + blockHalf;
+    // Match captionBoxes(): bottom = lastBaseline + lineH*0.55 + BOX_VPAD
+    // with lastBaseline = cy + baseOff + half → bottom = cy + baseOff + blockHalf + BOX_VPAD.
+    // Tall wraps move UP so the block stays inside the lower band.
+    cy = MAX_BOTTOM - kit.baseOff - blockHalf - BOX_VPAD;
   }
   const lineInfo = lines.map(([a, b], li) => {
     const str = words.slice(a, b).join(' ');
@@ -117,18 +124,29 @@ export async function initOverlays() {
   await document.fonts.load(`800 ${BASE_FONT_PX}px Caption`);
   if (!document.fonts.check(`800 ${BASE_FONT_PX}px Caption`)) throw new Error('Caption font missing');
 
+  // Prefer ≤2 lines (slightly smaller font) so the lower band stays clear of the
+  // bottom edge; fall back to 3 lines only if width still overflows at MIN_FONT.
   LAYOUTS = CAPTIONS.map((c) => {
     let fontPx = BASE_FONT_PX;
-    let layout = layoutCaption(c, measureKit(fontPx));
+    let layout = layoutCaption(c, measureKit(fontPx), 2);
     while (layout.maxRender > MAX_RENDER_W + 0.5 && fontPx > MIN_FONT_PX) {
       fontPx -= 2;
-      layout = layoutCaption(c, measureKit(fontPx));
+      layout = layoutCaption(c, measureKit(fontPx), 2);
+    }
+    if (layout.maxRender > MAX_RENDER_W + 0.5) {
+      layout = layoutCaption(c, measureKit(fontPx), 3);
+      while (layout.maxRender > MAX_RENDER_W + 0.5 && fontPx > MIN_FONT_PX) {
+        fontPx -= 2;
+        layout = layoutCaption(c, measureKit(fontPx), 3);
+      }
     }
     return layout;
   });
 
-  // Hard fail if any line still overflows the 80 px safe zone.
+  // Hard fail if any line still overflows the 80 px side safe zone,
+  // or if any caption bbox hangs below y = 1840.
   assertCaptionSafeZone();
+  assertCaptionBottomSafe();
 }
 
 /** Measure every caption line's rendered width; throw if any exceeds the safe zone. */
@@ -159,6 +177,28 @@ export function assertCaptionSafeZone() {
   return true;
 }
 
+/** Hard fail if any caption bounding box bottom is below y = 1840 (80 px from frame bottom). */
+export function assertCaptionBottomSafe() {
+  if (!LAYOUTS) throw new Error('overlays: call initOverlays() first');
+  const fails = [];
+  for (const box of captionBoxes()) {
+    if (box.bottom > MAX_BOTTOM + 0.5) {
+      fails.push({
+        text: box.text,
+        bottom: +box.bottom.toFixed(1),
+        max: MAX_BOTTOM,
+        top: +box.top.toFixed(1),
+        band: box.band,
+      });
+    }
+  }
+  if (fails.length) {
+    throw new Error(`Caption bottom overflow (must be ≤ y=${MAX_BOTTOM}):\n`
+      + fails.map((o) => `  "${o.text}" bottom=${o.bottom} top=${o.top} band=${o.band}`).join('\n'));
+  }
+  return true;
+}
+
 export function captionInfo() {
   if (!LAYOUTS) throw new Error('overlays: call initOverlays() first');
   return LAYOUTS.map((L) => ({
@@ -179,7 +219,7 @@ export function captionInfo() {
 /** Screen-space axis-aligned boxes for every caption (incl. stroke padding). */
 export function captionBoxes() {
   if (!LAYOUTS) throw new Error('overlays: call initOverlays() first');
-  const vPad = STROKE_W / 2 + 4;
+  const vPad = BOX_VPAD;
   return LAYOUTS.map((L) => {
     const lineH = Math.round(L.fontPx * 1.17);
     const tops = L.lineInfo.map((l) => l.baseline - lineH * 0.55 - vPad);

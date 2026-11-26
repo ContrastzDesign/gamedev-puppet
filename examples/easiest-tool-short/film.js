@@ -3,7 +3,9 @@ import * as THREE from 'three';
 import { FPS, FRAMES, SHOTS } from './beats.js';
 import { W, H, clamp } from './core.js';
 import { buildRoom } from './room.js';
-import { initOverlays, drawOverlays, captionInfo, assertCaptionSafeZone, captionBoxes } from './overlays.js';
+import {
+  initOverlays, drawOverlays, captionInfo, assertCaptionSafeZone, assertCaptionBottomSafe, captionBoxes,
+} from './overlays.js';
 import {
   cameraFor as camPose, charLocal, assertMoveVariety, cameraMovesSummary, maxStaticRun,
 } from './camera.js';
@@ -380,6 +382,7 @@ async function boot() {
 
   await initOverlays();
   assertCaptionSafeZone();
+  assertCaptionBottomSafe();
   const moves = assertMoveVariety();
   const staticRun = maxStaticRun(room.boothMeta);
   if (staticRun.maxRun > 12) {
@@ -390,6 +393,7 @@ async function boot() {
   window.captionInfo = captionInfo;
   window.captionBoxes = captionBoxes;
   window.assertCaptionSafeZone = assertCaptionSafeZone;
+  window.assertCaptionBottomSafe = assertCaptionBottomSafe;
   window.assertCaptionClearOfSigns = assertCaptionClearOfSigns;
   window.assertCharacterVisible = assertCharacterVisible;
   window.cameraMovesSummary = cameraMovesSummary;
