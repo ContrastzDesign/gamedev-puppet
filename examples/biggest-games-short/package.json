@@ -1,0 +1,16 @@
+{
+  "name": "biggest-games-short",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Jake Short: The biggest games, 2000s to 2011 (content-short V1, 1080x1920, 24 fps, 1247 frames)",
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "scripts": {
+    "stills": "GPU=0 node render.mjs --stills stills",
+    "render": "GPU=0 node render.mjs --seq frames",
+    "mix": "python3 mix.py"
+  },
+  "dependencies": {
+    "puppeteer-core": "^23.11.1"
+  }
+}

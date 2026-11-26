@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <!-- armored shell body with clear bands (species signal) -->
+  <ellipse cx="300" cy="565" rx="140" ry="128" fill="#6a5a48"/>
+  <ellipse cx="300" cy="550" rx="125" ry="110" fill="#8a7860"/>
+  <path d="M185,485 Q300,430 415,485 L400,520 Q300,475 200,520 Z" fill="#a09070"/>
+  <path d="M180,530 Q300,480 420,530 L405,565 Q300,520 195,565 Z" fill="#7a6a58"/>
+  <path d="M185,575 Q300,530 415,575 L400,610 Q300,570 200,610 Z" fill="#a09070"/>
+  <path d="M200,620 Q300,590 400,620 L380,655 Q300,630 220,655 Z" fill="#7a6a58"/>
+  <!-- rock tee over shell rim -->
+  <path d="M220,455 Q300,425 380,455 L385,520 Q300,500 215,520 Z" fill="#2a2838"/>
+  <path d="M270,475 L300,505 L330,475 L315,520 L285,520 Z" fill="#c45848"/>
+  <!-- pointed armadillo snout head -->
+  <ellipse cx="300" cy="295" rx="120" ry="110" fill="#b8a080"/>
+  <ellipse cx="300" cy="310" rx="95" ry="85" fill="#c8b090"/>
+  <path d="M300,340 L240,380 L260,400 L300,385 L340,400 L360,380 Z" fill="#a89070"/>
+  <ellipse cx="300" cy="355" rx="22" ry="14" fill="#2a2118"/>
+  <ellipse cx="200" cy="215" rx="22" ry="28" fill="#8a7860"/>
+  <ellipse cx="400" cy="215" rx="22" ry="28" fill="#8a7860"/>
+  <!-- spiky rock hair / bandana -->
+  <path d="M175,220 L210,140 L250,200 L300,125 L350,200 L390,140 L425,220" fill="#2a2838"/>
+  <path d="M190,215 Q300,175 410,215" fill="#c45848"/>
+  <ellipse cx="300" cy="220" rx="115" ry="16" fill="#a04038"/>
+  <!-- star shades -->
+  <path d="M235,270 L255,250 L275,270 L255,290 Z" fill="#1a1828" opacity=".92"/>
+  <path d="M325,270 L345,250 L365,270 L345,290 Z" fill="#1a1828" opacity=".92"/>
+  <path d="M275,270 H325" stroke="#c4a35a" stroke-width="4"/>
+  
+  <ellipse cx="260" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="340" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="260" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="340" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="300" cy="395" rx="16" ry="14" fill="#3a2a24"/><ellipse cx="300" cy="399" rx="10" ry="6" fill="#c47a7a"/>
+  <!-- wristbands -->
+  <rect x="160" y="520" width="50" height="18" rx="4" fill="#c45848"/>
+  <rect x="160" y="520" width="50" height="6" fill="#f0e6d0"/>
+  <rect x="390" y="500" width="50" height="18" rx="4" fill="#4a8a98"/>
+  <rect x="390" y="500" width="50" height="6" fill="#f0e6d0"/>
+  <!-- plastic guitar controller (clear guitar silhouette) -->
+  <g transform="translate(455,520) rotate(35)">
+    <ellipse cx="0" cy="30" rx="42" ry="55" fill="#2a2e38"/>
+    <rect x="-12" y="-110" width="24" height="120" rx="6" fill="#3a3e48"/>
+    <rect x="-8" y="-100" width="16" height="8" rx="2" fill="#c45848"/>
+    <rect x="-8" y="-85" width="16" height="8" rx="2" fill="#6b8f6a"/>
+    <rect x="-8" y="-70" width="16" height="8" rx="2" fill="#c4a35a"/>
+    <rect x="-8" y="-55" width="16" height="8" rx="2" fill="#4a8a98"/>
+    <rect x="-8" y="-40" width="16" height="8" rx="2" fill="#a87890"/>
+    <circle cx="-12" cy="20" r="8" fill="#c45848"/>
+    <circle cx="12" cy="20" r="8" fill="#6b8f6a"/>
+    <circle cx="-12" cy="40" r="8" fill="#c4a35a"/>
+    <circle cx="12" cy="40" r="8" fill="#4a8a98"/>
+    <rect x="-6" y="70" width="12" height="35" rx="3" fill="#1a1e28"/>
+  </g>
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#c8b090"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#c8b090"/>
+  
+  <ellipse cx="410" cy="410.0" rx="22" ry="70.0" fill="#c8b090"/>
+  <ellipse cx="428" cy="340" rx="20" ry="16" fill="#c8b090"/>
+  
+  <ellipse cx="230" cy="710" rx="28" ry="16" fill="#8a7860"/>
+  <ellipse cx="370" cy="710" rx="28" ry="16" fill="#8a7860"/>
+  <ellipse cx="230" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+  <ellipse cx="370" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+
+</svg>

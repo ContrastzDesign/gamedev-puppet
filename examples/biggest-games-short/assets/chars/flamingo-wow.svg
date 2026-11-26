@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <ellipse cx="300" cy="565" rx="108" ry="125" fill="#e8a0b0"/>
+  <!-- pastel Miami suit -->
+  <path d="M210,465 Q300,430 390,465 L400,640 Q300,670 200,640 Z" fill="#7ab8c8"/>
+  <path d="M230,485 Q300,455 370,485 L375,625 Q300,645 225,625 Z" fill="#98d0dc"/>
+  <rect x="275" y="520" width="50" height="8" rx="2" fill="#e8c878"/>
+  <!-- flamingo neck hint under head -->
+  <ellipse cx="300" cy="430" rx="28" ry="45" fill="#e8a0b0"/>
+  <!-- head -->
+  <ellipse cx="300" cy="280" rx="125" ry="115" fill="#f0b0c0"/>
+  <ellipse cx="300" cy="300" rx="95" ry="88" fill="#f8c0d0"/>
+  <!-- flamingo beak (species signal) -->
+  <path d="M300,330 L220,360 L235,395 L300,370 L365,395 L380,360 Z" fill="#2a2118"/>
+  <path d="M300,330 L250,350 L260,375 L300,360 L340,375 L350,350 Z" fill="#e8c878"/>
+  <path d="M235,375 L365,375" stroke="#c45848" stroke-width="6"/>
+  <!-- small ears / head tuft -->
+  <ellipse cx="210" cy="195" rx="18" ry="24" fill="#e090a0"/>
+  <ellipse cx="390" cy="195" rx="18" ry="24" fill="#e090a0"/>
+  <!-- white fedora -->
+  <ellipse cx="300" cy="185" rx="135" ry="28" fill="#f4f0ea"/>
+  <path d="M195,190 Q300,125 405,190" fill="#ebe4dc"/>
+  <ellipse cx="300" cy="200" rx="90" ry="18" fill="#d8d0c8"/>
+  <ellipse cx="360" cy="210" rx="70" ry="12" fill="#f4f0ea"/>
+  <!-- neon round sunglasses -->
+  <circle cx="262" cy="275" r="30" fill="#2a1848" opacity=".92"/>
+  <circle cx="338" cy="275" r="30" fill="#2a1848" opacity=".92"/>
+  <path d="M292,275 H308" stroke="#c4a35a" stroke-width="5"/>
+  <circle cx="252" cy="268" r="7" fill="#e8a0f0" opacity=".35"/>
+  <circle cx="328" cy="268" r="7" fill="#e8a0f0" opacity=".35"/>
+  
+  <ellipse cx="262" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="338" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="262" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="338" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="300" cy="395" rx="16" ry="14" fill="#3a2a24"/><ellipse cx="300" cy="399" rx="10" ry="6" fill="#c47a7a"/>
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#f0b0c0"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#f0b0c0"/>
+  
+  <ellipse cx="410" cy="410.0" rx="22" ry="70.0" fill="#f0b0c0"/>
+  <ellipse cx="428" cy="340" rx="20" ry="16" fill="#f0b0c0"/>
+  <!-- pink flamingo feet -->
+  
+  <ellipse cx="230" cy="710" rx="28" ry="16" fill="#e07090"/>
+  <ellipse cx="370" cy="710" rx="28" ry="16" fill="#e07090"/>
+  <ellipse cx="230" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+  <ellipse cx="370" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+
+</svg>

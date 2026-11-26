@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <ellipse cx="300" cy="560" rx="118" ry="130" fill="#6a6258"/>
+  <!-- analyst blazer -->
+  <path d="M205,460 Q300,425 395,460 L405,645 Q300,675 195,645 Z" fill="#3a4858"/>
+  <path d="M225,480 Q300,450 375,480 L380,630 Q300,650 220,630 Z" fill="#4a5868"/>
+  <path d="M250,505 Q300,520 350,505" fill="none" stroke="#c4a35a" stroke-width="4"/>
+  <!-- chart clipboard -->
+  <rect x="145" y="500" width="70" height="90" rx="6" fill="#d8c8a0"/>
+  <rect x="155" y="512" width="50" height="8" rx="2" fill="#c45848"/>
+  <rect x="155" y="528" width="40" height="6" rx="2" fill="#6b8f6a"/>
+  <rect x="155" y="542" width="45" height="6" rx="2" fill="#4a8a98"/>
+  <rect x="155" y="556" width="30" height="6" rx="2" fill="#a87890"/>
+  <!-- tapir body shade (pale saddle) -->
+  <ellipse cx="300" cy="600" rx="70" ry="50" fill="#ebe4dc" opacity=".7"/>
+  <!-- head -->
+  <ellipse cx="300" cy="290" rx="140" ry="125" fill="#7a7268"/>
+  <ellipse cx="300" cy="310" rx="110" ry="95" fill="#8a8278"/>
+  <!-- prominent tapir trunk/snout (species signal) -->
+  <ellipse cx="300" cy="340" rx="48" ry="36" fill="#5a5248"/>
+  <path d="M270,350 Q300,420 330,350 Q320,390 300,405 Q280,390 270,350 Z" fill="#4a4238"/>
+  <ellipse cx="300" cy="400" rx="28" ry="18" fill="#3a3228"/>
+  <ellipse cx="288" cy="402" rx="7" ry="5" fill="#2a2118"/>
+  <ellipse cx="312" cy="402" rx="7" ry="5" fill="#2a2118"/>
+  <!-- round ears -->
+  <ellipse cx="185" cy="200" rx="30" ry="36" fill="#6a6258"/>
+  <ellipse cx="415" cy="200" rx="30" ry="36" fill="#6a6258"/>
+  <ellipse cx="185" cy="205" rx="14" ry="18" fill="#e8b4a0"/>
+  <ellipse cx="415" cy="205" rx="14" ry="18" fill="#e8b4a0"/>
+  <!-- time-travel visor hat -->
+  <ellipse cx="300" cy="195" rx="130" ry="40" fill="#2a3848"/>
+  <path d="M180,205 Q300,130 420,205" fill="#3a4858"/>
+  <ellipse cx="300" cy="215" rx="135" ry="14" fill="#1a2838"/>
+  <rect x="210" y="200" width="180" height="28" rx="8" fill="#4a8a98" opacity=".85"/>
+  <rect x="220" y="206" width="40" height="16" rx="3" fill="#a0e0f0" opacity=".55"/>
+  <rect x="280" y="206" width="40" height="16" rx="3" fill="#a0e0f0" opacity=".4"/>
+  <rect x="340" y="206" width="40" height="16" rx="3" fill="#a0e0f0" opacity=".55"/>
+  <circle cx="390" cy="175" r="10" fill="#c45848"/>
+  <!-- round analyst shades -->
+  <circle cx="260" cy="285" r="28" fill="#1a2428" opacity=".9"/>
+  <circle cx="340" cy="285" r="28" fill="#1a2428" opacity=".9"/>
+  <path d="M288,285 H312" stroke="#3a4850" stroke-width="5"/>
+  <circle cx="250" cy="278" r="6" fill="#8ab" opacity=".3"/>
+  <circle cx="330" cy="278" r="6" fill="#8ab" opacity=".3"/>
+  
+  <ellipse cx="260" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="340" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="260" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="340" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="300" cy="420" rx="16" ry="14" fill="#3a2a24"/><ellipse cx="300" cy="424" rx="10" ry="6" fill="#c47a7a"/>
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#8a8278"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#8a8278"/>
+  
+  <ellipse cx="410" cy="410.0" rx="22" ry="70.0" fill="#8a8278"/>
+  <ellipse cx="428" cy="340" rx="20" ry="16" fill="#8a8278"/>
+  
+  <ellipse cx="230" cy="710" rx="28" ry="16" fill="#6a6258"/>
+  <ellipse cx="370" cy="710" rx="28" ry="16" fill="#6a6258"/>
+  <ellipse cx="230" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+  <ellipse cx="370" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+
+</svg>

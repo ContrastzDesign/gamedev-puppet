@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <ellipse cx="300" cy="565" rx="118" ry="128" fill="#6a7a68"/>
+  <!-- split outfit: left military, right fantasy robe -->
+  <path d="M200,465 Q270,430 300,450 L300,650 Q250,665 195,640 Z" fill="#3a4840"/>
+  <path d="M300,450 Q330,430 400,465 L405,640 Q350,665 300,650 Z" fill="#5a4868"/>
+  <path d="M220,500 Q260,490 300,505" fill="none" stroke="#6b8f6a" stroke-width="5"/>
+  <path d="M300,505 Q340,490 380,500" fill="none" stroke="#c4a35a" stroke-width="5"/>
+  <!-- ammo pouch / spell pouch -->
+  <rect x="215" y="545" width="40" height="35" rx="4" fill="#2a3830"/>
+  <ellipse cx="365" cy="560" rx="22" ry="18" fill="#3a2a48"/>
+  <!-- head -->
+  <ellipse cx="300" cy="290" rx="130" ry="115" fill="#8a9a78"/>
+  <ellipse cx="300" cy="305" rx="100" ry="88" fill="#9aaa88"/>
+  <!-- wide platypus duckbill (species signal) -->
+  <ellipse cx="300" cy="370" rx="95" ry="38" fill="#c4a070"/>
+  <ellipse cx="300" cy="372" rx="78" ry="28" fill="#d8b888"/>
+  <path d="M230,365 Q300,385 370,365" fill="none" stroke="#2a2118" stroke-width="4" opacity=".4"/>
+  <ellipse cx="265" cy="375" rx="10" ry="6" fill="#2a2118" opacity=".25"/>
+  <ellipse cx="335" cy="375" rx="10" ry="6" fill="#2a2118" opacity=".25"/>
+  <!-- dual helmet: left soldier, right horned helm -->
+  <path d="M170,225 Q240,140 300,165 L300,245 Q225,240 175,245 Z" fill="#4a5850"/>
+  <path d="M300,165 Q360,140 430,225 L425,245 Q375,240 300,245 Z" fill="#6a5868"/>
+  <ellipse cx="235" cy="195" rx="58" ry="24" fill="#3a4840"/>
+  <rect x="205" y="205" width="60" height="20" rx="3" fill="#2a3830"/>
+  <circle cx="215" cy="215" r="4" fill="#6b8f6a"/>
+  <!-- fantasy horns (tall, readable) -->
+  <path d="M350,175 L365,95 L385,178 Z" fill="#e8dcc0"/>
+  <path d="M395,180 L420,100 L435,185 Z" fill="#e8dcc0"/>
+  <ellipse cx="300" cy="225" rx="120" ry="14" fill="#2a2830" opacity=".5"/>
+  <!-- sport/tactical shades -->
+  <rect x="230" y="268" width="55" height="26" rx="6" fill="#1a2420" opacity=".9"/>
+  <rect x="315" y="268" width="55" height="26" rx="6" fill="#1a2420" opacity=".9"/>
+  <path d="M285,281 H315" stroke="#6b8f6a" stroke-width="4"/>
+  
+  <ellipse cx="260" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="340" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="260" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="340" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <path d="M282,415 Q300,431 318,415" fill="none" stroke="#3a2a24" stroke-width="5" stroke-linecap="round"/>
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#9aaa88"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#9aaa88"/>
+  
+  <ellipse cx="410" cy="515.0" rx="22" ry="55.0" fill="#9aaa88"/>
+  <ellipse cx="410" cy="550" rx="20" ry="16" fill="#9aaa88"/>
+  <!-- wide webbed feet -->
+  <ellipse cx="230" cy="715" rx="40" ry="14" fill="#c4a070"/>
+  <ellipse cx="370" cy="715" rx="40" ry="14" fill="#c4a070"/>
+  <path d="M200,715 L215,700 L230,715 L245,700 L260,715" fill="none" stroke="#a88050" stroke-width="3"/>
+  <path d="M340,715 L355,700 L370,715 L385,700 L400,715" fill="none" stroke="#a88050" stroke-width="3"/>
+
+</svg>
