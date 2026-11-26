@@ -11,12 +11,12 @@
     "duration_s": 52.208333333333336,
     "video_codec": "libx264 CRF 18 yuv420p",
     "audio_codec": "AAC 192k",
-    "loudness_lufs": -14.0,
-    "true_peak_dbtp": -1.4,
+    "loudness_lufs": -14.1,
+    "true_peak_dbtp": -1.5,
     "renderer": "ANGLE SwiftShader GPU=0",
-    "sha256": "9287ef0c6547278bd004d475e4e8f5f53154cb80c615757b3b516b6291c58e25",
-    "bytes": 17146319,
-    "static_check_max_yavg_lt_015_run": 0
+    "sha256": "f570f39759606caf799f05fabcd7a60c42196e6f5be88997e490e0b6883aa3fd",
+    "bytes": 19468019,
+    "static_check_max_yavg_lt_015_run": 1
   },
   "voiceover": {
     "file": "audio/vo.mp3",
@@ -205,12 +205,15 @@
       "deterministic set (no Math.random)",
       "all captions in lower band with 80px side safe zone",
       "assertCaptionClearOfSigns + assertCharacterVisible boot checks",
-      "puffin/tortoise species signals strengthened (beak/shell)"
+      "puffin/tortoise species signals strengthened (beak/shell)",
+      "camAt move interpolation bug (continue skipped KEY→KEY; fell into outro under set)",
+      "assertCameraPathClear near-plane + ≤15% foreground occluder",
+      "softboxes show eye/skin/hair content (no blank white panels); night-city window panes"
     ],
     "artifacts": "/opt/cursor/artifacts/engine-real-final/"
   },
   "camera": {
-    "note": "Rebuilt free-moving camera per camera.md; landings 0-4 frames before named VO words; assertMaxHold<=12",
+    "note": "Free-moving camera per camera.md; landings 0-4 frames before named VO words; assertMaxHold<=12; assertCameraPathClear; near=0.35",
     "landings": [
       {
         "f": 0,

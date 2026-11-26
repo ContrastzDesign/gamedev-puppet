@@ -27,7 +27,7 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color('#3a3840');
 scene.fog = new THREE.Fog('#3a3840', 28, 52);
 
-const camera = new THREE.PerspectiveCamera(40, W / H, 0.1, 60);
+const camera = new THREE.PerspectiveCamera(40, W / H, 0.35, 60);
 
 const hemi = new THREE.HemisphereLight('#fff8f0', '#6a5a4c', 1.55);
 scene.add(hemi);
@@ -246,6 +246,77 @@ export function assertCharacterVisible(frames) {
   return results;
 }
 
+/** Near-plane / path clearance: camera stays in open air with clear sightline to look-at. */
+export function assertCameraPathClear(step = 3) {
+  const NEAR_MIN = 0.35;
+  const FLOOR_MIN = 0.85;
+  const CEIL_MAX = 5.6;
+  const fails = [];
+  const samples = [];
+  for (let f = 0; f < FRAMES; f += step) {
+    const shot = shotAt(f);
+    const cam = cameraFor(shot, f);
+    placeCharacter(shot, f);
+    camera.position.set(cam.x, cam.y, cam.z);
+    camera.lookAt(cam.lx, cam.ly, cam.lz);
+    scene.updateMatrixWorld(true);
+
+    if (cam.y < FLOOR_MIN || cam.y > CEIL_MAX) {
+      fails.push({ f, why: `cam y=${cam.y.toFixed(2)} outside aisle band` });
+      continue;
+    }
+
+    // Forward ray toward look-at: first solid hit must be past near plane and not fill as a wall-hug
+    _n.set(cam.lx - cam.x, cam.ly - cam.y, cam.lz - cam.z);
+    const aimDist = _n.length();
+    _n.normalize();
+    raycaster.set(camera.position, _n);
+    raycaster.near = 0.02;
+    raycaster.far = Math.max(0.5, aimDist - 0.05);
+    const hits = raycaster.intersectObjects(scene.children, true)
+      .filter((h) => !isIgnoredHit(h.object) && !isCharacterHit(h.object));
+    if (hits.length && hits[0].distance < NEAR_MIN) {
+      fails.push({
+        f,
+        why: `near-plane hit @ ${hits[0].distance.toFixed(3)} (${hits[0].object.name || hits[0].object.type})`,
+      });
+      continue;
+    }
+
+    // Sample a 3×5 grid over the view: foreground occluders (closer than 55% of aim) ≤ 15%
+    let total = 0, occluded = 0;
+    for (let iy = 0; iy < 5; iy++) {
+      for (let ix = 0; ix < 3; ix++) {
+        const ndcX = (ix / 2) * 1.6 - 0.8;
+        const ndcY = (iy / 4) * 1.5 - 0.55;
+        _v.set(ndcX, ndcY, 0.5).unproject(camera);
+        _n.copy(_v).sub(camera.position).normalize();
+        raycaster.set(camera.position, _n);
+        raycaster.near = 0.02;
+        raycaster.far = aimDist * 0.55;
+        const gh = raycaster.intersectObjects(scene.children, true)
+          .filter((h) => !isIgnoredHit(h.object) && !isCharacterHit(h.object));
+        total++;
+        if (gh.length) occluded++;
+      }
+    }
+    const frac = total ? occluded / total : 0;
+    samples.push({ f, occl: +frac.toFixed(3) });
+    if (frac > OCCLUSION_MAX + 1e-6) {
+      fails.push({ f, why: `foreground occluder ${(frac * 100).toFixed(0)}% > 15%` });
+    }
+  }
+  if (fails.length) {
+    const show = fails.slice(0, 24);
+    throw new Error(
+      `Camera path clearance failed (${fails.length} samples):\n`
+      + show.map((r) => `  f${r.f}: ${r.why}`).join('\n')
+      + (fails.length > 24 ? `\n  … +${fails.length - 24} more` : ''),
+    );
+  }
+  return { checked: samples.length, step, maxOccl: Math.max(0, ...samples.map((s) => s.occl)) };
+}
+
 function isWorldVisible(obj) {
   let o = obj;
   while (o) {
@@ -407,16 +478,20 @@ async function boot() {
   assertCaptionSafeZone();
   const occl = assertCharacterVisible('all');
   const signClear = assertCaptionClearOfSigns();
+  const pathClear = assertCameraPathClear(2);
   window.captionInfo = captionInfo;
   window.captionBoxes = captionBoxes;
   window.assertCaptionSafeZone = assertCaptionSafeZone;
   window.assertCaptionClearOfSigns = assertCaptionClearOfSigns;
   window.assertCharacterVisible = assertCharacterVisible;
+  window.assertCameraPathClear = assertCameraPathClear;
   window.assertMaxHold = () => assertMaxHold(camSys.camAt, FRAMES);
   window.cameraLandings = LANDINGS;
+  window.camAt = (f) => camSys.camAt(f);
   window.holdInfo = holdInfo;
   window.occlusionInfo = occl;
   window.signClearInfo = signClear;
+  window.pathClearInfo = pathClear;
   ready = true;
   window.filmReady = true;
   window.renderFrame = renderFrame;

@@ -22,10 +22,10 @@ export const MOVE_KINDS = [
 export const LANDINGS = [
   // Hook — already moving into the realism lab (character medium)
   { f: 0,   kind: 'push-in',     booth: 'lab',    pivot: 'char',     phi: 10,  el: 14, d: 5.4,  lookY: 1.05, label: 'hook' },
-  // "footage?" f_start 112 → land ~108
-  { f: 108, kind: 'orbit',       booth: 'lab',    pivot: 'screens',  phi: -28, el: 16, d: 4.0,  lookY: 1.75, label: 'footage' },
-  // "demos" f_start 157 → land ~153
-  { f: 153, kind: 'crane',       booth: 'lab',    pivot: 'screens',  phi: 18,  el: 28, d: 4.6,  lookY: 1.85, label: 'demos' },
+  // "footage?" f_start 112 → land ~108 — stay in aisle, clear of side towers
+  { f: 108, kind: 'orbit',       booth: 'lab',    pivot: 'screens',  phi: -18, el: 14, d: 4.4,  lookY: 1.75, label: 'footage' },
+  // "demos" f_start 157 → land ~153 — moderate crane, keep under ceiling beams
+  { f: 153, kind: 'crane',       booth: 'lab',    pivot: 'screens',  phi: 14,  el: 22, d: 4.8,  lookY: 1.85, label: 'demos' },
   // "difference." f_start 257 → land ~253
   { f: 253, kind: 'pull-out',    booth: 'lab',    pivot: 'char',     phi: 6,   el: 18, d: 6.2,  lookY: 1.15, label: 'difference' },
   // "Unreal" f_start 302 → land ~298
@@ -38,18 +38,18 @@ export const LANDINGS = [
   { f: 411, kind: 'top-down',    booth: 'city',   pivot: 'wire',     phi: -10, el: 48, d: 3.3,  lookY: 1.65, label: 'nanite' },
   // "Lumen" f_start 474 → land ~470
   { f: 470, kind: 'crane',       booth: 'city',   pivot: 'screen',   phi: 30,  el: 22, d: 3.8,  lookY: 1.8,  label: 'lumen' },
-  // "move" f_start 529 → land ~525 (fly through the city desk)
-  { f: 525, kind: 'fly-through', booth: 'city',   pivot: 'aisle',    phi: -28, el: 12, d: 3.6,  lookY: 1.35, label: 'flythrough' },
+  // "move" f_start 529 → land ~525 (fly through the city aisle, keep clear of desk underside)
+  { f: 525, kind: 'fly-through', booth: 'city',   pivot: 'aisle',    phi: -16, el: 14, d: 4.0,  lookY: 1.45, label: 'flythrough' },
   // "Unity" f_start 617 → land ~613
   { f: 613, kind: 'cut',         booth: 'face',   pivot: 'char',     phi: 14,  el: 12, d: 5.0,  lookY: 0.95, label: 'unity' },
   // "Enemies" f_start 672 → land ~668
   { f: 668, kind: 'whip',        booth: 'face',   pivot: 'screen',   phi: -8,  el: 11, d: 3.1,  lookY: 1.85, label: 'enemies' },
   // "High" (HDRP) f_start 700 → land ~696
   { f: 696, kind: 'orbit',       booth: 'face',   pivot: 'screen',   phi: 35,  el: 14, d: 3.4,  lookY: 1.8,  label: 'hdrp' },
-  // "eye" f_start 751 → land ~747
-  { f: 747, kind: 'low-hero',    booth: 'face',   pivot: 'skin',     phi: -20, el: 6,  d: 2.6,  lookY: 1.7,  label: 'eye' },
+  // "eye" f_start 751 → land ~747 — frontal on skin panel so softboxes stay out of frame
+  { f: 747, kind: 'low-hero',    booth: 'face',   pivot: 'skin',     phi: -6,  el: 8,  d: 2.9,  lookY: 1.7,  label: 'eye' },
   // "face" (fills) f_start 856 → land ~852
-  { f: 852, kind: 'push-in',     booth: 'face',   pivot: 'screen',   phi: 2,   el: 9,  d: 2.7,  lookY: 1.85, label: 'fills' },
+  { f: 852, kind: 'push-in',     booth: 'face',   pivot: 'screen',   phi: 4,   el: 10, d: 2.8,  lookY: 1.85, label: 'fills' },
   // "frame" (budget) f_start 924 → land ~920
   { f: 920, kind: 'whip',        booth: 'budget', pivot: 'char',     phi: -16, el: 13, d: 5.1,  lookY: 0.95, label: 'budget' },
   // "sixty" f_start 955 → land ~951 — tighter on timer/desk so floor doesn't read empty
@@ -238,33 +238,23 @@ export function buildCamera(room, charLocal) {
     for (let i = 0; i < abs.length; i++) {
       const land = abs[i];
       const next = abs[i + 1];
-      const start = starts[i];
+      const nextStart = next ? starts[i + 1] : null;
 
-      if (next && f >= starts[i + 1] && f < next.f) {
-        // Moving into next landing
-        continue;
-      }
-      if (next && f >= starts[i + 1]) {
-        // handled by next iteration / below
+      // Holding / drifting on landing i (before the next move departs)
+      if (f >= land.f && (nextStart == null || f < nextStart)) {
+        const D = drifted(i, f);
+        return poseToCam(D.pivot, D.phi, D.el, D.d);
       }
 
-      if (!next || f < starts[i + 1]) {
-        // Holding / drifting on landing i
-        if (f >= land.f && (!next || f < starts[i + 1])) {
-          const D = drifted(i, f);
-          return poseToCam(D.pivot, D.phi, D.el, D.d);
-        }
-      }
-
-      if (next && f >= starts[i + 1] && f <= next.f) {
-        const from = drifted(i, starts[i + 1]);
+      // Moving into the next landing (inclusive of the landing frame)
+      if (next && nextStart != null && f >= nextStart && f <= next.f) {
+        const from = drifted(i, Math.max(land.f, nextStart - 1));
         const to = poseAtLanding(i + 1);
         if (next.kind === 'cut') {
           return poseToCam(to.pivot, to.phi, to.el, to.d);
         }
-        // Whip: ease out of from, arc apex mid-way, ease into to
-        const span = Math.max(1, next.f - starts[i + 1]);
-        const u = (f - starts[i + 1]) / span;
+        const span = Math.max(1, next.f - nextStart);
+        const u = (f - nextStart) / span;
         if (next.kind === 'whip') {
           const apexT = 0.45;
           const apex = {
@@ -282,28 +272,28 @@ export function buildCamera(room, charLocal) {
           }
           return lerpPose(apex, to, (u - apexT) / (1 - apexT));
         }
-        // fly-through: keep low, lerp pivot through aisle
+        // fly-through: stay chest-height in the aisle (never under desks / through towers)
         if (next.kind === 'fly-through') {
           const mid = {
             pivot: {
-              x: lin(from.pivot.x, to.pivot.x, 0.5) + 0.3,
-              y: 1.1,
-              z: lin(from.pivot.z, to.pivot.z, 0.5) + 0.6,
+              x: lin(from.pivot.x, to.pivot.x, 0.5),
+              y: Math.max(1.35, lin(from.pivot.y, to.pivot.y, 0.5)),
+              z: lin(from.pivot.z, to.pivot.z, 0.5) + 0.35,
             },
             phi: lin(from.phi, to.phi, 0.5),
-            el: 6,
-            d: lin(from.d, to.d, 0.5),
+            el: 12,
+            d: Math.max(3.4, lin(from.d, to.d, 0.5)),
           };
           if (u < 0.5) return lerpPose(from, mid, u / 0.5);
           return lerpPose(mid, to, (u - 0.5) / 0.5);
         }
-        // top-down: start high then drop
+        // top-down: start high then drop (cap height so ceiling beams stay out of near plane)
         if (next.kind === 'top-down') {
           const high = {
             pivot: { ...to.pivot },
             phi: to.phi,
-            el: 78,
-            d: to.d * 1.15,
+            el: 68,
+            d: to.d * 1.12,
           };
           if (u < 0.35) return lerpPose(from, high, u / 0.35);
           return lerpPose(high, to, (u - 0.35) / 0.65);
@@ -314,8 +304,8 @@ export function buildCamera(room, charLocal) {
 
     // Past last landing — slow drift outro
     const last = abs[abs.length - 1];
-    const D = drifted(abs.length - 1, f);
-    const extra = (f - last.f) / 40;
+    const D = drifted(abs.length - 1, Math.max(f, last.f));
+    const extra = Math.max(0, (f - last.f) / 40);
     return poseToCam(
       D.pivot,
       D.phi + 3 * Math.sin(extra * Math.PI),

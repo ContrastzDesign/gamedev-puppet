@@ -173,16 +173,86 @@ function addMiniCity(parent, x, y, z) {
   return g;
 }
 
-function addSoftbox(parent, x, y, z, ry = 0) {
+function makeSoftboxFace(kind = 'eye') {
+  const c = document.createElement('canvas');
+  c.width = 512; c.height = 640;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#1a1418';
+  ctx.fillRect(0, 0, 512, 640);
+  ctx.strokeStyle = '#c4a35a';
+  ctx.lineWidth = 14;
+  ctx.strokeRect(16, 16, 480, 608);
+  if (kind === 'eye') {
+    ctx.fillStyle = '#e8b898';
+    ctx.beginPath(); ctx.arc(256, 280, 150, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#f5f0e8';
+    ctx.beginPath(); ctx.ellipse(256, 275, 110, 70, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#2a5a48';
+    ctx.beginPath(); ctx.arc(256, 275, 48, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#101018';
+    ctx.beginPath(); ctx.arc(256, 275, 22, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = '#2a2118';
+    ctx.lineWidth = 8;
+    ctx.beginPath(); ctx.arc(256, 220, 90, Math.PI * 1.15, Math.PI * 1.85); ctx.stroke();
+    ctx.fillStyle = '#d8c8b0';
+    ctx.font = 'bold 36px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('EYE / SKIN', 256, 520);
+    ctx.font = '28px sans-serif';
+    ctx.fillStyle = '#a89888';
+    ctx.fillText('iris · wetness · scatter', 256, 565);
+  } else {
+    ctx.fillStyle = '#e8b898';
+    ctx.beginPath(); ctx.arc(256, 300, 160, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = '#6a4a38';
+    ctx.lineWidth = 10;
+    for (let i = 0; i < 7; i++) {
+      const x0 = 140 + i * 28;
+      ctx.beginPath();
+      ctx.moveTo(x0, 160);
+      ctx.quadraticCurveTo(x0 + 10, 120, x0 + 30, 150);
+      ctx.stroke();
+    }
+    ctx.fillStyle = '#f5f0e8';
+    ctx.beginPath(); ctx.ellipse(200, 290, 36, 28, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(312, 290, 36, 28, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#2a5a48';
+    ctx.beginPath(); ctx.arc(200, 290, 14, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(312, 290, 14, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#d8c8b0';
+    ctx.font = 'bold 36px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('HAIR SIM', 256, 520);
+    ctx.font = '28px sans-serif';
+    ctx.fillStyle = '#a89888';
+    ctx.fillText('strands · motion', 256, 565);
+  }
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
+function addSoftbox(parent, x, y, z, ry = 0, faceKind = 'eye') {
   const g = new THREE.Group();
   g.position.set(x, y, z);
   g.rotation.y = ry;
-  box(g, 0.55, 0.7, 0.08, '#e8e0d0', 0, 0, 0, 0, 0, 0, {
-    mat: { emissive: '#f0e8d8', emissiveIntensity: 0.8, roughness: 0.4 },
+  // Dark bezel — never a blank white panel in frame
+  box(g, 0.6, 0.75, 0.05, '#2a2a2e', 0, 0, -0.04);
+  const face = new THREE.Mesh(
+    new THREE.PlaneGeometry(0.52, 0.66),
+    new THREE.MeshBasicMaterial({ map: makeSoftboxFace(faceKind) }),
+  );
+  face.position.set(0, 0, 0.02);
+  face.userData.isSignOrScreen = true;
+  face.userData.signText = faceKind === 'eye' ? 'EYE / SKIN' : 'HAIR SIM';
+  g.add(face);
+  // Warm rim so it still reads as a soft light
+  box(g, 0.58, 0.04, 0.04, '#e8d0a0', 0, 0.36, 0.01, 0, 0, 0, {
+    mat: { emissive: '#e8d0a0', emissiveIntensity: 1.2, roughness: 0.4 },
+    noShadow: true,
   });
-  box(g, 0.6, 0.75, 0.04, '#2a2a2e', 0, 0, -0.05);
   cyl(g, 0.03, 0.05, 1.2, '#3a3a40', 0, -0.9, 0);
-  const pl = new THREE.PointLight('#fff5e8', 1.2, 4, 2);
+  const pl = new THREE.PointLight('#fff5e8', 1.0, 4, 2);
   pl.position.set(0, 0, 0.3);
   g.add(pl);
   parent.add(g);
@@ -323,8 +393,9 @@ function buildHeroStation(g, b) {
     tip.position.set(-0.65, 2.4, -0.05);
     g.add(tip);
   } else if (b.theme === 'face') {
-    addSoftbox(g, -0.9, 1.7, 0.45, 0.5);
-    addSoftbox(g, 0.55, 1.7, 0.5, -0.4);
+    // Content softboxes (eye/skin + hair) — never blank white panels
+    addSoftbox(g, -1.15, 1.85, 0.15, 0.55, 'eye');
+    addSoftbox(g, 1.05, 1.85, 0.2, -0.5, 'hair');
     const tip = makeSign('CLOSE-UP', 0.7, 0.26, '#201018', '#f0d0e0', '#a87890');
     tip.position.set(0.1, 2.4, -0.05);
     g.add(tip);
@@ -540,10 +611,26 @@ export function buildRoom(textures) {
   root.add(title);
   neonStrip(root, 3.0, '#c4a35a', 0, 5.05, -7.5);
 
-  for (const [wx, wz] of [[-15.25, 5.5], [-15.25, 7.5], [15.25, 4.5], [15.25, 6.8]]) {
+  for (const [wx, wz, seed] of [[-15.25, 5.5, 0], [-15.25, 7.5, 1], [15.25, 4.5, 2], [15.25, 6.8, 3]]) {
+    // Night city panes — never a blank white rectangle
+    const c = document.createElement('canvas');
+    c.width = 256; c.height = 192;
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = '#1a2838';
+    ctx.fillRect(0, 0, 256, 192);
+    ctx.fillStyle = '#c8d8e8';
+    for (let i = 0; i < 18; i++) {
+      const bx = 12 + ((i * 37 + seed * 13) % 220);
+      const by = 20 + ((i * 53 + seed * 19) % 140);
+      ctx.globalAlpha = 0.35 + (i % 3) * 0.2;
+      ctx.fillRect(bx, by, 10, 14);
+    }
+    ctx.globalAlpha = 1;
+    const tex = new THREE.CanvasTexture(c);
+    tex.colorSpace = THREE.SRGBColorSpace;
     const win = new THREE.Mesh(
       new THREE.PlaneGeometry(2.4, 2.0),
-      new THREE.MeshBasicMaterial({ color: '#d8ecf0' }),
+      new THREE.MeshBasicMaterial({ map: tex }),
     );
     win.position.set(wx, 3.4, wz);
     win.rotation.y = wx < 0 ? Math.PI / 2 : -Math.PI / 2;
