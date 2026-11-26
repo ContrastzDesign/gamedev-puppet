@@ -1,6 +1,6 @@
 // Two Minecrafts Short — content-short VERSION 1 (drawn SVG animals in detailed 3D worlds).
 import * as THREE from 'three';
-import { FPS, FRAMES, SHOTS } from './beats.js';
+import { FPS, FRAMES, SHOTS, LANDINGS } from './beats.js';
 import { W, H, clamp, easeInOut, lin } from './core.js';
 import { buildRoom } from './room.js';
 import { initOverlays, drawOverlays, captionInfo, assertCaptionSafeZone, captionBoxes } from './overlays.js';
@@ -13,8 +13,8 @@ const renderer = new THREE.WebGLRenderer({ canvas: glCanvas, antialias: true, al
 renderer.setSize(W, H, false);
 renderer.setPixelRatio(1);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
-renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+// Soft contact blob under characters only — map shadows on SwiftShader draw black scratch lines on floors.
+renderer.shadowMap.enabled = false;
 
 window.glInfo = (() => {
   const gl = renderer.getContext();
@@ -32,14 +32,7 @@ const hemi = new THREE.HemisphereLight('#fff8f0', '#6a5a4c', 1.55);
 scene.add(hemi);
 const sun = new THREE.DirectionalLight('#fff0d8', 1.9);
 sun.position.set(5, 11, 7);
-sun.castShadow = true;
-sun.shadow.mapSize.set(1024, 1024);
-sun.shadow.camera.near = 1;
-sun.shadow.camera.far = 45;
-sun.shadow.camera.left = -14;
-sun.shadow.camera.right = 14;
-sun.shadow.camera.top = 14;
-sun.shadow.camera.bottom = -14;
+sun.castShadow = false;
 scene.add(sun);
 scene.add(new THREE.AmbientLight('#f0e6d4', 0.85));
 const fill = new THREE.DirectionalLight('#e8f4f8', 0.85);
@@ -153,69 +146,210 @@ function charLocal(shot) {
   return { side, z, scale };
 }
 
-function cameraFor(shot, f) {
-  const booth = room.boothMeta[shot.booth];
-  const t = easeInOut(clamp((f - shot.f0) / Math.max(1, shot.f1 - shot.f0 - 1)));
-  const cl = charLocal(shot);
-  const charX = booth.x + cl.side;
-  const charZ = booth.z + cl.z;
+/**
+ * Ricardo content-short camera rules:
+ * - Fly to whatever the VO names; land 0–4 frames before the word (see LANDINGS).
+ * - Vary move kind; never the same kind twice in a row.
+ * - Moves 12–30 frames, eased. Whips: EASE → ARC → land.
+ * - Never stop: drift between landings. No hold > 12 frames.
+ * - Characters chest-up or full figure. Signs stay inside the portrait frame.
+ */
+function setFovFor(shot) {
   const wantFov = (shot.id === 'hook' || shot.id === 'farm' || shot.id === 'finale') ? 42
-    : (shot.id === 'arena' || shot.id === 'yard') ? 44
+    : (shot.id === 'arena' || shot.id === 'parity') ? 44
     : 40;
   if (camera.fov !== wantFov) {
     camera.fov = wantFov;
     camera.updateProjectionMatrix();
   }
-  if (shot.id === 'finale') {
-    // Slightly wider so store signs stay fully inside the portrait frame.
-    return {
-      x: lin(charX + 0.15, charX, t),
-      y: lin(1.72, 1.58, t),
-      z: lin(charZ + 5.4, charZ + 4.7, t),
-      lx: charX,
-      ly: 1.35,
-      lz: charZ - 0.3,
-    };
-  }
-  if (shot.id === 'hook' || shot.id === 'farm') {
-    return {
-      x: lin(charX + 0.28, charX + 0.08, t),
-      y: lin(1.7, 1.55, t),
-      z: lin(charZ + 4.7, charZ + 4.1, t),
-      lx: charX - 0.02,
-      ly: 1.35,
-      lz: charZ - 0.25,
-    };
-  }
-  if (shot.id === 'merge' || shot.id === 'arena') {
-    return {
-      x: lin(charX, charX, t),
-      y: lin(1.75, 1.6, t),
-      z: lin(charZ + 5.8, charZ + 5.1, t),
-      lx: charX,
-      ly: 1.35,
-      lz: charZ - 0.4,
-    };
-  }
-  if (shot.id === 'parity' || shot.id === 'library') {
-    return {
-      x: lin(charX + 0.2, charX, t),
-      y: lin(1.9, 1.72, t),
-      z: lin(charZ + 5.5, charZ + 4.7, t),
-      lx: charX,
-      ly: 1.4,
-      lz: charZ - 0.55,
-    };
-  }
-  // java / bedrock
+}
+
+function lerpPose(a, b, t) {
   return {
-    x: lin(charX + 0.25, charX + 0.08, t),
-    y: lin(1.85, 1.68, t),
-    z: lin(charZ + 5.3, charZ + 4.5, t),
-    lx: charX,
-    ly: 1.4,
-    lz: charZ - 0.5,
+    x: lin(a.x, b.x, t), y: lin(a.y, b.y, t), z: lin(a.z, b.z, t),
+    lx: lin(a.lx, b.lx, t), ly: lin(a.ly, b.ly, t), lz: lin(a.lz, b.lz, t),
   };
+}
+
+/** Hero framing pose for a landing aim inside the active shot's booth. */
+function landingPose(shot, landing) {
+  const booth = room.boothMeta[shot.booth];
+  const cl = charLocal(shot);
+  const cx = booth.x + cl.side;
+  const cz = booth.z + cl.z;
+  const chest = landing.frame === 'chest';
+  const dist = chest ? 4.15 : 5.25;
+  const camY = chest ? 1.48 : 1.68;
+  const lookY = chest ? 1.35 : 1.28;
+
+  // Aim offsets (local booth space) — kept near center so signs stay in portrait FOV.
+  const aims = {
+    char:     { lx: 0,     ly: lookY, lz: -0.25, dx: 0.04,  dy: 0,    dz: dist },
+    room:     { lx: 0,     ly: 1.45,  lz: -0.6,  dx: 0.08,  dy: 0.15, dz: dist + 0.35 },
+    tv:       { lx: 0.15,  ly: 1.55,  lz: -1.4,  dx: 0.1,   dy: 0.05, dz: dist + 0.1 },
+    javaSign: { lx: -0.35, ly: 1.7,   lz: -1.5,  dx: -0.12, dy: 0.12, dz: dist + 0.15 },
+    bedSign:  { lx: 0.4,   ly: 1.7,   lz: -1.5,  dx: 0.18,  dy: 0.1,  dz: dist + 0.1 },
+    pillars:  { lx: 0,     ly: 1.5,   lz: -0.8,  dx: 0,     dy: 0.08, dz: dist + 0.45 },
+    crt:      { lx: -0.15, ly: 1.35,  lz: -1.2,  dx: 0.05,  dy: 0.02, dz: dist - 0.15 },
+    devices:  { lx: 0.2,   ly: 1.35,  lz: -0.9,  dx: 0.15,  dy: 0.05, dz: dist + 0.1 },
+    scaffold: { lx: 0,     ly: 1.55,  lz: -0.9,  dx: 0.1,   dy: 0.18, dz: dist + 0.4 },
+    match:    { lx: 0,     ly: 1.75,  lz: -1.6,  dx: 0,     dy: 0.15, dz: dist + 0.2 },
+    parity:   { lx: 0,     ly: 1.85,  lz: -1.6,  dx: 0.05,  dy: 0.2,  dz: dist + 0.15 },
+    shelves:  { lx: 0,     ly: 1.7,   lz: -1.4,  dx: -0.1,  dy: 0.12, dz: dist + 0.25 },
+    worlds:   { lx: 0,     ly: 1.65,  lz: -1.3,  dx: 0.08,  dy: 0.1,  dz: dist + 0.2 },
+    lever:    { lx: 0,     ly: 1.2,   lz: 0.1,   dx: 0.05,  dy: -0.05, dz: dist - 0.2 },
+    banners:  { lx: 0,     ly: 1.7,   lz: -1.5,  dx: 0,     dy: 0.15, dz: dist + 0.3 },
+    box:      { lx: 0,     ly: 1.25,  lz: -0.6,  dx: 0.05,  dy: 0,    dz: dist },
+    towers:   { lx: 0,     ly: 1.7,   lz: -1.6,  dx: 0,     dy: 0.18, dz: dist + 0.2 },
+  };
+  const a = aims[landing.aim] || aims.char;
+  return {
+    x: cx + a.dx,
+    y: camY + a.dy,
+    z: cz + a.dz,
+    lx: cx + a.lx,
+    ly: a.ly,
+    lz: cz + a.lz,
+  };
+}
+
+/** Start pose for a move kind, relative to the landing pose. */
+function startPoseFor(kind, end, seed) {
+  const s = end;
+  switch (kind) {
+    case 'push':
+      return { ...s, z: s.z + 0.95, y: s.y + 0.12, x: s.x + 0.18 };
+    case 'pull':
+      return { ...s, z: s.z - 0.55, y: s.y - 0.05, x: s.x - 0.12 };
+    case 'drop':
+      return { ...s, y: s.y + 1.15, z: s.z + 0.35, ly: s.ly + 0.35 };
+    case 'crane':
+      return { ...s, y: s.y - 0.55, z: s.z + 0.7, x: s.x + 0.2 };
+    case 'orbit':
+      return { ...s, x: s.x - 0.55, z: s.z + 0.25, y: s.y + 0.08 };
+    case 'follow':
+      return { ...s, x: s.x - 0.7, z: s.z + 0.15 };
+    case 'low':
+      return { ...s, y: s.y + 0.45, z: s.z + 0.5, ly: s.ly - 0.15 };
+    case 'whip':
+      return { ...s, x: s.x + (seed % 2 ? 0.85 : -0.85), y: s.y + 0.2, z: s.z + 0.4 };
+    case 'cut':
+      return { ...s }; // unused — cut jumps
+    default:
+      return { ...s, z: s.z + 0.7 };
+  }
+}
+
+/** Whip: EASE → ARC → land. Returns eased t in 0..1 with arc lateral offset factor. */
+function whipProgress(u) {
+  // u in 0..1 along the move
+  let t;
+  if (u < 0.32) t = easeInOut(u / 0.32) * 0.22;
+  else if (u < 0.68) t = 0.22 + easeInOut((u - 0.32) / 0.36) * 0.55;
+  else t = 0.77 + easeInOut((u - 0.68) / 0.32) * 0.23;
+  const arc = Math.sin(Math.PI * clamp(u)) * 0.35; // peak mid-move
+  return { t, arc };
+}
+
+function driftPose(base, framesSinceLand, seed) {
+  // Continuous micro-motion — never a hold > 12 frames.
+  const d = framesSinceLand;
+  const push = (d % 48) / 48;
+  const rise = Math.sin(d * 0.07 + seed) * 0.04;
+  const turn = Math.sin(d * 0.045 + seed * 1.7) * 0.06;
+  return {
+    x: base.x + turn,
+    y: base.y + rise + push * 0.03,
+    z: base.z - push * 0.12,
+    lx: base.lx + turn * 0.3,
+    ly: base.ly + rise * 0.4,
+    lz: base.lz,
+  };
+}
+
+function cameraFor(shot, f) {
+  setFovFor(shot);
+  // Landings that belong to this shot (or global timeline — filter by shot id).
+  const mine = LANDINGS.filter((L) => L.shot === shot.id);
+  if (!mine.length) {
+    const booth = room.boothMeta[shot.booth];
+    const cl = charLocal(shot);
+    return landingPose(shot, { aim: 'char', frame: 'full' });
+  }
+
+  // Find surrounding landings on the global timeline for this shot.
+  let prev = null;
+  let next = null;
+  for (const L of mine) {
+    if (L.landF <= f) prev = L;
+    if (L.landF > f && !next) next = L;
+  }
+
+  const seed = shot.f0;
+  if (!prev && next) {
+    // Before first landing: ease from a wide start into the first move window.
+    const end = landingPose(shot, next);
+    const start = startPoseFor(next.kind === 'cut' ? 'push' : next.kind, end, seed);
+    const moveStart = next.landF - next.len;
+    if (f < moveStart) {
+      return driftPose(start, f - shot.f0, seed);
+    }
+    if (next.kind === 'cut') return end;
+    const u = clamp((f - moveStart) / next.len);
+    return interpolateMove(next.kind, start, end, u, seed);
+  }
+
+  if (prev && !next) {
+    // After last landing in this shot: drift (never park).
+    const base = landingPose(shot, prev);
+    return driftPose(base, f - prev.landF, seed + prev.landF);
+  }
+
+  // Between prev and next.
+  const end = landingPose(shot, next);
+  const prevPose = landingPose(shot, prev);
+  const moveStart = next.landF - next.len;
+
+  if (f < moveStart) {
+    // Drift from prev landing — cap static feel by continuous drift.
+    return driftPose(prevPose, f - prev.landF, seed + prev.landF);
+  }
+
+  if (next.kind === 'cut') {
+    return f >= next.landF - 1 ? end : driftPose(prevPose, f - prev.landF, seed);
+  }
+
+  const start = startPoseFor(next.kind, end, seed + next.landF);
+  // Blend start from where drift actually is, for continuity.
+  const from = lerpPose(prevPose, start, 0.55);
+  const u = clamp((f - moveStart) / next.len);
+  return interpolateMove(next.kind, from, end, u, seed + next.landF);
+}
+
+function interpolateMove(kind, start, end, u, seed) {
+  if (kind === 'whip') {
+    const { t, arc } = whipProgress(u);
+    const pose = lerpPose(start, end, t);
+    const side = (seed % 2) ? 1 : -1;
+    pose.x += arc * side;
+    pose.y += arc * 0.25;
+    return pose;
+  }
+  if (kind === 'orbit') {
+    const t = easeInOut(u);
+    // Arc around the look-at while pushing in.
+    const pose = lerpPose(start, end, t);
+    pose.x += Math.sin(Math.PI * t) * 0.28;
+    return pose;
+  }
+  if (kind === 'follow') {
+    const t = easeInOut(u);
+    const pose = lerpPose(start, end, t);
+    pose.x = lin(start.x, end.x, easeInOut(clamp(u * 1.15)));
+    return pose;
+  }
+  // push / pull / drop / crane / low — eased lerp
+  return lerpPose(start, end, easeInOut(u));
 }
 
 function syncBoothVisibility(shot) {
@@ -431,6 +565,68 @@ export function assertCaptionClearOfSigns() {
   return { checked: boxes.length, meshes: meshes.length, samples: boxes.length * 3 };
 }
 
+/** Signs/labels must sit fully inside the frame (80 px safe margin). Screens excluded. */
+const SIGN_EDGE_MARGIN = 80;
+export function assertSignsInFrame() {
+  const fails = [];
+  for (const shot of SHOTS) {
+    const samples = [
+      shot.f0,
+      Math.floor((shot.f0 + shot.f1 - 1) / 2),
+      shot.f1 - 1,
+    ];
+    for (const f of samples) {
+      const cam = cameraFor(shot, f);
+      camera.position.set(cam.x, cam.y, cam.z);
+      camera.lookAt(cam.lx, cam.ly, cam.lz);
+      placeCharacter(shot, f);
+      scene.updateMatrixWorld(true);
+      camera.updateMatrixWorld(true);
+      const meshes = collectSignScreenMeshes().filter((m) => {
+        const t = (m.userData.signText || '').toUpperCase();
+        // Only text signs — skip in-scene screens/TV/monitors/devices
+        if (!t || /^(TV|MONITOR|CRT|PHONE|TABLET|CHECKLIST|BOX ART|CODE TOWERS)$/.test(t)) return false;
+        let o = m;
+        while (o) {
+          if (o.visible === false) return false;
+          o = o.parent;
+        }
+        return true;
+      });
+      for (const mesh of meshes) {
+        const mb = meshScreenBBox(mesh);
+        if (!mb) {
+          fails.push({ shot: shot.id, f, sign: mesh.userData.signText, reason: 'offscreen/clipped' });
+          continue;
+        }
+        if (
+          mb.left < SIGN_EDGE_MARGIN
+          || mb.right > W - SIGN_EDGE_MARGIN
+          || mb.top < SIGN_EDGE_MARGIN
+          || mb.bottom > H - SIGN_EDGE_MARGIN
+        ) {
+          fails.push({
+            shot: shot.id,
+            f,
+            sign: mesh.userData.signText,
+            box: {
+              l: +mb.left.toFixed(1), r: +mb.right.toFixed(1),
+              t: +mb.top.toFixed(1), b: +mb.bottom.toFixed(1),
+            },
+          });
+        }
+      }
+    }
+  }
+  if (fails.length) {
+    throw new Error(
+      `Signs cut by frame edge (need ${SIGN_EDGE_MARGIN}px margin):\n`
+      + fails.map((r) => `  ${r.shot} f${r.f} "${r.sign}" ${r.reason || JSON.stringify(r.box)}`).join('\n'),
+    );
+  }
+  return { shots: SHOTS.length, margin: SIGN_EDGE_MARGIN };
+}
+
 function renderFrame(f) {
   f = ((f % FRAMES) + FRAMES) % FRAMES | 0;
   const shot = shotAt(f);
@@ -475,13 +671,16 @@ async function boot() {
   assertCaptionSafeZone();
   const occl = assertCharacterVisible('all');
   const signClear = assertCaptionClearOfSigns();
+  const signsInFrame = assertSignsInFrame();
   window.captionInfo = captionInfo;
   window.captionBoxes = captionBoxes;
   window.assertCaptionSafeZone = assertCaptionSafeZone;
   window.assertCaptionClearOfSigns = assertCaptionClearOfSigns;
+  window.assertSignsInFrame = assertSignsInFrame;
   window.assertCharacterVisible = assertCharacterVisible;
   window.occlusionInfo = occl;
   window.signClearInfo = signClear;
+  window.signsInFrameInfo = signsInFrame;
   ready = true;
   window.filmReady = true;
   window.renderFrame = renderFrame;

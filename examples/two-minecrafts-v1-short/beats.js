@@ -22,6 +22,53 @@ export const SHOTS = [
 // Word-exact caption groups from script/spoken.txt / vo-words.json.
 // Capitalise proper noun "Minecraft"; write "it's" in normal case.
 // f/end are 0-based (f_start-1 .. f_end-1).
+/**
+ * VO-timed camera landings (Ricardo content-short camera rules).
+ * landF = 0-based arrival frame (0–4 frames before the named VO word).
+ * kind never repeats consecutively. Moves are 12–30 frames.
+ * aim = framing target inside the active booth.
+ */
+export const LANDINGS = [
+  // hook — "Minecrafts?"
+  { landF: 24,  len: 22, kind: 'push',   shot: 'hook',    aim: 'char',     frame: 'full' },
+  // farm — redstone farm / Java / Bedrock / breaks / versions
+  { landF: 65,  len: 18, kind: 'follow', shot: 'farm',    aim: 'tv',       frame: 'full' },
+  { landF: 93,  len: 24, kind: 'pull',   shot: 'farm',    aim: 'javaSign', frame: 'full' },
+  { landF: 126, len: 16, kind: 'whip',   shot: 'farm',    aim: 'bedSign',  frame: 'chest' },
+  { landF: 148, len: 20, kind: 'drop',   shot: 'farm',    aim: 'char',     frame: 'chest' },
+  { landF: 204, len: 26, kind: 'crane',  shot: 'farm',    aim: 'room',     frame: 'full' },
+  // merge — merge / one
+  { landF: 244, len: 18, kind: 'orbit',  shot: 'merge',   aim: 'pillars',  frame: 'full' },
+  { landF: 261, len: 14, kind: 'low',    shot: 'merge',   aim: 'char',     frame: 'chest' },
+  // java — Java / original code / consoles / phones
+  { landF: 285, len: 14, kind: 'cut',    shot: 'java',    aim: 'crt',      frame: 'full' },
+  { landF: 305, len: 20, kind: 'push',   shot: 'java',    aim: 'crt',      frame: 'chest' },
+  { landF: 377, len: 16, kind: 'follow', shot: 'java',    aim: 'room',     frame: 'full' },
+  { landF: 390, len: 18, kind: 'pull',   shot: 'java',    aim: 'char',     frame: 'full' },
+  // bedrock — Bedrock / programming language
+  { landF: 409, len: 16, kind: 'whip',   shot: 'bedrock', aim: 'devices',  frame: 'full' },
+  { landF: 443, len: 22, kind: 'crane',  shot: 'bedrock', aim: 'char',     frame: 'chest' },
+  // parity — feature / twice / match / parity
+  { landF: 490, len: 18, kind: 'orbit',  shot: 'parity',  aim: 'scaffold', frame: 'full' },
+  { landF: 511, len: 20, kind: 'drop',   shot: 'parity',  aim: 'scaffold', frame: 'full' },
+  { landF: 548, len: 24, kind: 'push',   shot: 'parity',  aim: 'match',    frame: 'chest' },
+  { landF: 586, len: 16, kind: 'low',    shot: 'parity',  aim: 'parity',   frame: 'chest' },
+  // library — merge / worlds / mods / break / love
+  { landF: 621, len: 18, kind: 'follow', shot: 'library', aim: 'shelves',  frame: 'full' },
+  { landF: 655, len: 22, kind: 'pull',   shot: 'library', aim: 'worlds',   frame: 'full' },
+  { landF: 665, len: 14, kind: 'orbit',  shot: 'library', aim: 'shelves',  frame: 'chest' },
+  { landF: 707, len: 16, kind: 'whip',   shot: 'library', aim: 'lever',    frame: 'chest' },
+  { landF: 728, len: 20, kind: 'push',   shot: 'library', aim: 'char',     frame: 'chest' },
+  // arena — comments / fighting
+  { landF: 789, len: 18, kind: 'drop',   shot: 'arena',   aim: 'banners',  frame: 'full' },
+  { landF: 808, len: 22, kind: 'crane',  shot: 'arena',   aim: 'char',     frame: 'chest' },
+  // finale — one / box / games / code
+  { landF: 840, len: 14, kind: 'cut',    shot: 'finale',  aim: 'box',      frame: 'full' },
+  { landF: 859, len: 18, kind: 'push',   shot: 'finale',  aim: 'box',      frame: 'chest' },
+  { landF: 888, len: 20, kind: 'orbit',  shot: 'finale',  aim: 'towers',   frame: 'full' },
+  { landF: 902, len: 16, kind: 'low',    shot: 'finale',  aim: 'towers',   frame: 'chest' },
+];
+
 export const CAPTIONS = [
   { f: 0,   end: 51,  text: 'Why Are There Two Minecrafts?', band: 'low' },
   { f: 60,  end: 104, text: 'Say your redstone farm works on Java.', band: 'low' },

@@ -252,11 +252,9 @@ function addChair(parent, x, y, z) {
   g.position.set(x, y, z);
   box(g, 0.5, 0.08, 0.5, '#3a4858', 0, 0.45, 0, 0, 0, 0, { round: 0.03 });
   box(g, 0.5, 0.55, 0.08, '#3a4858', 0, 0.75, -0.22, 0, 0, 0, { round: 0.02 });
-  cyl(g, 0.04, 0.04, 0.45, '#2a3038', 0, 0.22, 0);
-  for (let i = 0; i < 5; i++) {
-    const a = (i / 5) * Math.PI * 2;
-    cyl(g, 0.03, 0.03, 0.08, '#2a3038', Math.cos(a) * 0.22, 0.04, Math.sin(a) * 0.22, 0, 0, Math.PI / 2);
-  }
+  // warm stem + stubby feet (no thin black caster arms — those read as floor scratches)
+  cyl(g, 0.05, 0.05, 0.45, '#5a5048', 0, 0.22, 0);
+  box(g, 0.42, 0.06, 0.42, '#6a6058', 0, 0.05, 0, 0, 0, 0, { round: 0.04 });
   parent.add(g);
   return g;
 }
@@ -482,12 +480,12 @@ function buildBedroom(screens) {
   addPlant(g, 3.0, 0, 2.0);
   addCouch(g, 0.2, 0, 1.0);
 
-  // signs — high, centered-ish, above caption band
-  const javaOk = makeSign('JAVA OK', 1.05, 0.28, '#1a3028', '#8ad0a0', '#6b8f6a');
-  javaOk.position.set(-1.15, 2.95, -3.05);
+  // signs — inset from frame edges (portrait FOV is narrow horizontally)
+  const javaOk = makeSign('JAVA OK', 0.95, 0.26, '#1a3028', '#8ad0a0', '#6b8f6a');
+  javaOk.position.set(-0.7, 2.55, -3.05);
   g.add(javaOk);
-  const bedQ = makeSign('BEDROCK?', 1.05, 0.28, '#3a2020', '#e0a070', '#c45848');
-  bedQ.position.set(1.15, 2.95, -3.05);
+  const bedQ = makeSign('BEDROCK?', 0.95, 0.26, '#3a2020', '#e0a070', '#c45848');
+  bedQ.position.set(0.7, 2.55, -3.05);
   g.add(bedQ);
 
   addCeilingBeam(g, 0, 3.95, -1.2, 7.5);
@@ -502,7 +500,15 @@ function buildBedroom(screens) {
 
 function buildMerge(screens) {
   const g = boothShell('#6a6058', '#c0b098');
-  addRug(g, 0, 0, 0.5, 3.0, 2.0, '#5a5040', '#8a7a60');
+  addRug(g, 0, 0, 0.6, 3.4, 2.4, '#5a5040', '#8a7a60');
+  addRug(g, -1.0, 0, -1.1, 1.5, 1.2, '#4a4540', '#6a6050');
+  addRug(g, 1.0, 0, -1.1, 1.5, 1.2, '#4a4540', '#6a6050');
+  // floor tile pattern so the backdrop never reads as a blank slab
+  for (let i = -2; i <= 2; i++) {
+    for (let j = -1; j <= 2; j++) {
+      box(g, 0.9, 0.03, 0.9, (i + j) % 2 ? '#7a7060' : '#6a6050', i * 0.95, 0.03, j * 0.95);
+    }
+  }
 
   // twin giant block towers — teal vs amber
   for (let level = 0; level < 5; level++) {
@@ -536,13 +542,54 @@ function buildMerge(screens) {
   box(g, 0.06, 0.04, 0.12, '#2a3038', 0, 0.78, 0.68);
   cyl(g, 0.03, 0.03, 0.25, '#3a3a40', 0.12, 0.72, 0.6, 0, 0, Math.PI / 2);
 
-  // MERGE? banners — centered high
-  const merge1 = makeSign('MERGE?', 1.2, 0.32, '#2a3228', '#f0e6d0', '#c4a35a');
-  merge1.position.set(0, 2.85, -3.05);
+  // MERGE? banners — centered, below ceiling beams so INTO ONE? stays fully visible
+  const merge1 = makeSign('MERGE?', 1.05, 0.3, '#2a3228', '#f0e6d0', '#c4a35a');
+  merge1.position.set(0, 2.45, -3.05);
   g.add(merge1);
-  const one = makeSign('INTO ONE?', 1.1, 0.28, '#1a3040', '#8ab0c8', '#4a8a98');
-  one.position.set(0, 3.25, -3.05);
+  const one = makeSign('INTO ONE?', 1.0, 0.26, '#1a3040', '#8ab0c8', '#4a8a98');
+  one.position.set(0, 2.85, -3.05);
   g.add(one);
+
+  // fill the gap BETWEEN the two pillars (no plain backdrop) — all IN FRAME
+  box(g, 1.6, 0.12, 0.9, '#5a5040', 0, 0.08, -1.0, 0, 0, 0, { round: 0.02 });
+  for (let i = 0; i < 5; i++) {
+    box(g, 0.28, 0.28, 0.28, ['#3a9a98', '#d0a040', '#6b8f6a', '#c45848', '#4a8a98'][i],
+      -0.55 + i * 0.28, 0.28, -0.95, 0, 0.12 * i, 0, { round: 0.02 });
+  }
+  // back-wall panels between pillars (below the MERGE signs)
+  box(g, 2.0, 1.2, 0.08, '#4a4540', 0, 1.45, -3.05);
+  box(g, 1.7, 0.85, 0.04, '#ebe4dc', 0, 1.4, -3.0);
+  for (let i = 0; i < 4; i++) {
+    box(g, 0.65 - i * 0.08, 0.03, 0.02, '#4a8a98', 0, 1.7 - i * 0.12, -2.97);
+  }
+  // tool boards flanking the whiteboard — not over the signs
+  addPegTools(g, -1.15, 1.9, -3.08);
+  addPegTools(g, 1.15, 1.9, -3.08);
+  // mid floor props flanking character (visible in portrait)
+  box(g, 0.5, 0.32, 0.4, '#6a5848', -0.75, 0.18, 0.5, 0, 0.15, 0, { round: 0.03 });
+  box(g, 0.5, 0.32, 0.4, '#5a4838', 0.75, 0.18, 0.5, 0, -0.1, 0, { round: 0.03 });
+  cyl(g, 0.14, 0.16, 0.38, '#c45848', -0.45, 0.2, 1.15);
+  cyl(g, 0.14, 0.16, 0.38, '#4a8a98', 0.45, 0.2, 1.15);
+  addPlant(g, -0.95, 0, 1.5);
+  addPlant(g, 0.95, 0, 1.5);
+  addBlockPile(g, -0.7, 0, 1.5, '#3a9a98', 4);
+  addBlockPile(g, 0.7, 0, 1.5, '#d0a040', 4);
+  // side banners (keep clear of centered INTO ONE? / MERGE? signs)
+  box(g, 0.45, 0.65, 0.04, '#3a9a98', -1.15, 3.05, -2.6);
+  box(g, 0.45, 0.65, 0.04, '#d0a040', 1.15, 3.05, -2.6);
+  // dense floor scatter BEHIND the lynx (z < char) — never covering feet
+  for (let i = 0; i < 10; i++) {
+    const col = ['#3a9a98', '#d0a040', '#6b8f6a', '#c45848', '#4a8a98'][i % 5];
+    box(g, 0.2, 0.2, 0.2, col,
+      -0.9 + (i % 5) * 0.35, 0.12, 0.15 + Math.floor(i / 5) * 0.35, 0, 0.1 * i, 0, { round: 0.02 });
+  }
+  box(g, 1.4, 0.06, 0.9, '#6a5848', 0, 0.05, -0.2, 0, 0, 0, { round: 0.02 });
+  // mid-height props between towers
+  box(g, 0.7, 0.55, 0.5, '#5a5040', 0, 0.35, -0.55, 0, 0, 0, { round: 0.03 });
+  cyl(g, 0.1, 0.12, 0.35, '#ebe4dc', -0.15, 0.75, -0.5);
+  cyl(g, 0.05, 0.07, 0.15, '#c45848', -0.15, 1.0, -0.5);
+  // fill the beige wall band above MERGE with a second shelf strip
+  addWallShelf(g, 0, 3.35, -3.1, 3.2);
 
   // bleachers / crates left & right
   addBleachers(g, -2.6, 0.3, 1);
@@ -554,9 +601,15 @@ function buildMerge(screens) {
       2.1 + (i % 3) * 0.45, 0.2 + Math.floor(i / 3) * 0.35, 1.7, 0, -0.1, 0, { round: 0.02 });
   }
 
-  // foam / block piles midground
+  // foam / block piles midground + extra floor scatter
   addBlockPile(g, -1.8, 0, 1.3, '#3a9a98', 6);
   addBlockPile(g, 1.8, 0, 1.3, '#d0a040', 6);
+  addBlockPile(g, -2.2, 0, 0.2, '#3a9a98', 5);
+  addBlockPile(g, 2.2, 0, 0.2, '#d0a040', 5);
+  for (let i = 0; i < 8; i++) {
+    box(g, 0.22, 0.22, 0.22, ['#3a9a98', '#d0a040', '#6b8f6a', '#c4a35a'][i % 4],
+      -1.4 + (i % 4) * 0.35, 0.12, 1.85 + Math.floor(i / 4) * 0.3, 0, 0.1, 0, { round: 0.02 });
+  }
 
   // wall dressing
   addWallShelf(g, -2.0, 3.45, -3.1, 2.0);
@@ -567,19 +620,34 @@ function buildMerge(screens) {
   const p2 = makePosterArt(3, 0.55, 0.75);
   p2.position.set(2.3, 2.2, -3.08);
   g.add(p2);
+  const p3 = makePosterArt(0, 0.5, 0.7);
+  p3.position.set(-1.5, 1.9, -3.08);
+  g.add(p3);
+  const p4 = makePosterArt(2, 0.5, 0.7);
+  p4.position.set(1.5, 1.9, -3.08);
+  g.add(p4);
 
   addShelf(g, -3.3, 0, -2.0);
   addShelf(g, 3.3, 0, -2.0);
+  addShelf(g, -3.3, 0, 0.3);
+  addShelf(g, 3.3, 0, 0.3);
   addLamp(g, -3.2, 0, 0.5);
   addLamp(g, 3.2, 0, 0.5);
   addPlant(g, -3.1, 0, 2.1);
   addPlant(g, 3.1, 0, 2.1);
+  addPlant(g, -1.6, 0, 2.0);
+  addPlant(g, 1.6, 0, 2.0);
 
   // unused screens on side monitors for density
   addDesk(g, -2.4, 0, -2.2, 1.2);
   addMonitor(g, screens.codeJava, -2.4, 0.72, -2.25);
   addDesk(g, 2.4, 0, -2.2, 1.2);
   addMonitor(g, screens.codeBedrock, 2.4, 0.72, -2.25);
+  // side workbenches mid depth
+  addDesk(g, -2.5, 0, 0.6, 1.1);
+  addConsole(g, -2.5, 0.72, 0.7, '#3a4858');
+  addDesk(g, 2.5, 0, 0.6, 1.1);
+  addConsole(g, 2.5, 0.72, 0.7, '#5a6870');
 
   addCeilingBeam(g, 0, 3.95, -1.2, 7.5);
   addCeilingBeam(g, 0, 3.95, 0.5, 7.5);
@@ -598,12 +666,15 @@ function buildMerge(screens) {
 }
 
 function buildJava(screens) {
-  const g = boothShell('#5a4a40', '#b8a888');
-  // warm wood plank floor
-  for (let i = -3; i <= 3; i++) {
-    box(g, 0.95, 0.05, 6.5, i % 2 ? '#5a4030' : '#6a5040', i, 0.04, 0);
-  }
-  addRug(g, 0, 0, 0.3, 2.6, 1.8, '#6a3a30', '#8a5a48');
+  // slightly lighter floor shell — avoid coplanar plank stacks (z-fight = black scratch lines)
+  const g = boothShell('#6a5848', '#b8a888');
+  // single raised floor plate (no overlapping boards)
+  box(g, 7.6, 0.06, 6.6, '#7a6a58', 0, 0.05, 0);
+  // layered rugs — cover the visible floor band under the character
+  addRug(g, 0, 0.04, 0.6, 3.6, 2.8, '#6a3a30', '#8a5a48');
+  addRug(g, -1.0, 0.04, -1.0, 1.7, 1.3, '#4a3a28', '#6a5040');
+  addRug(g, 1.0, 0.04, 1.4, 1.6, 1.2, '#3a4858', '#5a6870');
+  addRug(g, 0, 0.04, -0.2, 2.0, 1.2, '#5a4030', '#7a5a48');
 
   // main desk + CRT
   addDesk(g, 0, 0, -1.5, 2.2);
@@ -620,16 +691,22 @@ function buildJava(screens) {
   cyl(g, 0.07, 0.06, 0.14, '#8a4a48', 1.1, 0.85, -1.5);
   box(g, 0.04, 0.08, 0.02, '#ebe4dc', -0.85, 0.85, -1.3);
 
-  // cable clutter
-  for (let i = 0; i < 10; i++) {
-    cyl(g, 0.012, 0.012, 0.6 + (i % 3) * 0.2, '#2a3038',
-      -1.2 + i * 0.28, 0.06, -0.8 + (i % 2) * 0.4, 0, 0, Math.PI / 2 + i * 0.08);
+  // paper stacks + folder piles IN FRAME (no thin cylinders on the floor)
+  for (let i = 0; i < 8; i++) {
+    box(g, 0.26, 0.03, 0.2, ['#ebe4dc', '#d0c4a8', '#c4a07a', '#f0e6d0', '#b8a888', '#e0d0b0', '#c8b898', '#f5ead0'][i],
+      -1.1 + (i % 4) * 0.28, 0.06 + Math.floor(i / 4) * 0.08, 0.55 + (i % 2) * 0.2, 0, 0.12, 0);
   }
+  // chunky cable trunk (box, not a thin line)
+  box(g, 0.9, 0.08, 0.12, '#8a6a40', 0, 0.08, -0.35, 0, 0.05, 0, { round: 0.03 });
+  box(g, 0.12, 0.08, 0.7, '#6a5040', -0.7, 0.08, 0.1, 0, 0, 0, { round: 0.03 });
+  box(g, 0.12, 0.08, 0.55, '#a08050', 0.7, 0.08, 0.05, 0, 0, 0, { round: 0.03 });
 
-  // side bookcase denser
+  // side bookcase denser + right wall match
   addShelf(g, -3.25, 0, -1.5);
   addShelf(g, -3.25, 0, 0.5);
+  addShelf(g, -3.25, 0, 1.8);
   addShelf(g, 3.25, 0, -1.5);
+  addShelf(g, 3.25, 0, 0.8);
   // more books on wall shelves
   addWallShelf(g, -1.8, 3.35, -3.1, 2.4);
   addWallShelf(g, 1.8, 3.35, -3.1, 2.4);
@@ -640,52 +717,94 @@ function buildJava(screens) {
         -3.5 + 0.08, 0.5 + row * 0.55, -0.6 + i * 0.22, 0, 0, 0, { round: 0.01 });
     }
   }
+  // right side wall book strips
+  for (let row = 0; row < 3; row++) {
+    for (let i = 0; i < 7; i++) {
+      box(g, 0.12, 0.26 + (i % 2) * 0.05, 0.16,
+        ['#c45848', '#4a8a98', '#c4a35a', '#6b8f6a', '#a87890', '#3a4858', '#8a6a40'][i],
+        3.5 - 0.08, 0.5 + row * 0.55, -0.4 + i * 0.24, 0, 0, 0, { round: 0.01 });
+    }
+  }
 
-  // second smaller monitor
+  // second smaller monitor desk
   addDesk(g, 2.2, 0, -0.4, 1.2);
   addMonitor(g, screens.codeJava, 2.2, 0.72, -0.45);
   addChair(g, 2.2, 0, 0.4);
+  // third desk on left for density
+  addDesk(g, -2.3, 0, 0.2, 1.15);
+  addCrt(g, screens.codeJava, -2.3, 0.72, 0.15, 0.85);
+  addChair(g, -2.2, 0, 1.0);
+  // papers / sticky piles on left desk
+  for (let i = 0; i < 4; i++) {
+    box(g, 0.22, 0.02, 0.18, '#ebe4dc', -2.5 + i * 0.12, 0.78 + i * 0.02, 0.35, 0, 0.1, 0);
+  }
 
-  // corkboard / sticky notes
-  box(g, 1.6, 1.1, 0.05, '#c4a07a', 0, 2.35, -3.1);
+  // corkboard / sticky notes — kept BELOW the wall signs so text stays readable
+  box(g, 1.6, 0.85, 0.05, '#c4a07a', 0, 1.95, -3.1);
   const notes = ['#e0c070', '#c45848', '#6b8f6a', '#4a8a98', '#a87890', '#ebe4dc'];
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < 8; i++) {
     box(g, 0.2, 0.2, 0.02, notes[i % notes.length],
-      -0.6 + (i % 4) * 0.4, 2.0 + Math.floor(i / 4) * 0.3, -3.05);
+      -0.6 + (i % 4) * 0.4, 1.7 + Math.floor(i / 4) * 0.3, -3.05);
   }
 
   // lamp glow warm
   addLamp(g, -2.6, 0, -2.2);
   addLamp(g, 2.8, 0, -2.0);
   addLamp(g, -2.8, 0, 1.5);
+  addLamp(g, 2.6, 0, 1.6);
   // desk lamp
   cyl(g, 0.04, 0.04, 0.4, '#3a3a40', 0.55, 1.0, -1.55);
   cyl(g, 0.12, 0.14, 0.1, '#f5e6c8', 0.55, 1.25, -1.4, 0.4, 0, 0, {
     mat: { emissive: '#f5e6c8', emissiveIntensity: 0.5 },
   });
 
-  addPlant(g, -3.0, 0, 2.0);
-  addPlant(g, 3.1, 0, 1.8);
-  addPlant(g, 1.5, 0, 1.6);
+  // plants beside / behind character lane — never overlapping the billboard
+  addPlant(g, -1.35, 0, 1.2);
+  addPlant(g, 1.35, 0, 1.2);
+  addPlant(g, -1.15, 0, 0.4);
+  addPlant(g, 1.15, 0, 0.4);
 
-  // floor crates of disks / tapes
-  for (let i = 0; i < 5; i++) {
-    box(g, 0.35, 0.2, 0.3, '#8a6a40', -1.6 + i * 0.4, 0.12, 1.5, 0, 0.1, 0, { round: 0.02 });
+  // floor crates IN the portrait frustum, clear of the character footprint
+  for (let i = 0; i < 3; i++) {
+    box(g, 0.35, 0.22, 0.3, '#8a6a40', -1.25 + i * 0.28, 0.13, 1.35, 0, 0.1, 0, { round: 0.02 });
+    box(g, 0.35, 0.22, 0.3, '#6a5848', 0.7 + i * 0.28, 0.13, 1.35, 0, -0.1, 0, { round: 0.02 });
+  }
+  box(g, 0.45, 0.35, 0.4, '#5a4030', -1.25, 0.2, 0.55, 0, 0.12, 0, { round: 0.03 });
+  box(g, 0.45, 0.35, 0.4, '#6a5848', 1.25, 0.2, 0.55, 0, -0.1, 0, { round: 0.03 });
+  box(g, 0.4, 0.28, 0.35, '#8a6a40', -1.15, 0.16, -0.35, 0, 0.08, 0, { round: 0.02 });
+  box(g, 0.4, 0.28, 0.35, '#5a4030', 1.15, 0.16, -0.35, 0, -0.08, 0, { round: 0.02 });
+  // disk/tape piles on crates
+  for (let i = 0; i < 4; i++) {
+    cyl(g, 0.08, 0.08, 0.02, ['#4a8a98', '#c45848', '#c4a35a'][i % 3],
+      -1.15 + i * 0.28, 0.3, 1.3);
+  }
+  // paper scatter on the rug
+  for (let i = 0; i < 6; i++) {
+    box(g, 0.24, 0.02, 0.18, ['#ebe4dc', '#f0e6d0', '#d0c4a8'][i % 3],
+      -0.9 + i * 0.3, 0.09, 0.85, 0, 0.2 * (i % 3), 0);
   }
 
-  const javaSign = makeSign('JAVA', 1.15, 0.32, '#2a3228', '#e0c070', '#c4a35a');
-  javaSign.position.set(-1.2, 2.55, -3.05);
+  // signs above corkboard, stacked near center
+  const javaSign = makeSign('JAVA', 0.85, 0.26, '#2a3228', '#e0c070', '#c4a35a');
+  javaSign.position.set(-0.5, 2.7, -3.05);
   g.add(javaSign);
-  const orig = makeSign('ORIGINAL CODE', 1.2, 0.28, '#1a2820', '#f0e6d0', '#6b8f6a');
-  orig.position.set(1.15, 2.55, -3.05);
+  const orig = makeSign('ORIGINAL CODE', 1.05, 0.26, '#1a2820', '#f0e6d0', '#6b8f6a');
+  orig.position.set(0.55, 2.7, -3.05);
   g.add(orig);
 
-  const poster = makePosterArt(0, 0.55, 0.8);
-  poster.position.set(-2.4, 2.2, -3.08);
+  // posters IN FRAME flanking corkboard (side walls are outside portrait FOV)
+  const poster = makePosterArt(0, 0.5, 0.7);
+  poster.position.set(-1.35, 2.0, -3.08);
   g.add(poster);
-  const poster2 = makePosterArt(1, 0.55, 0.8);
-  poster2.position.set(2.4, 2.2, -3.08);
+  const poster2 = makePosterArt(1, 0.5, 0.7);
+  poster2.position.set(1.35, 2.0, -3.08);
   g.add(poster2);
+  const poster3 = makePosterArt(2, 0.45, 0.6);
+  poster3.position.set(-1.35, 2.85, -3.08);
+  g.add(poster3);
+  const poster4 = makePosterArt(3, 0.45, 0.6);
+  poster4.position.set(1.35, 2.85, -3.08);
+  g.add(poster4);
 
   addCeilingBeam(g, 0, 3.95, -1.5, 7.5);
   addCeilingBeam(g, 0, 3.95, 0.2, 7.5);
@@ -709,7 +828,9 @@ function buildBedrock(screens) {
   box(g, 7.5, 0.05, 0.25, '#c4a35a', 0, 0.06, 0.2);
   box(g, 7.5, 0.05, 0.25, '#c4a35a', 0, 0.06, 1.4);
 
-  addRug(g, 0, 0, -0.3, 2.4, 1.6, '#4a6a50', '#6a8a68');
+  addRug(g, 0, 0, -0.3, 2.8, 1.9, '#4a6a50', '#6a8a68');
+  addRug(g, -1.8, 0, 1.2, 1.3, 1.0, '#3a5040', '#5a7060');
+  addRug(g, 1.8, 0, 1.2, 1.3, 1.0, '#3a5040', '#5a7060');
 
   // central workbench
   addDesk(g, 0, 0, -1.4, 2.4);
@@ -730,6 +851,20 @@ function buildBedrock(screens) {
     });
   }
 
+  // device stands IN FRAME (portrait frustum ~±1.2 at mid depth)
+  for (const [x, z, kind] of [
+    [-1.1, 0.55, 'phone'], [1.1, 0.55, 'tablet'],
+    [-0.85, 1.35, 'tablet'], [0.85, 1.35, 'phone'],
+  ]) {
+    box(g, 0.28, 0.45, 0.28, '#3a4048', x, 0.25, z, 0, 0, 0, { round: 0.02 });
+    box(g, 0.2, 0.04, 0.2, '#2a3038', x, 0.48, z);
+    if (kind === 'phone') addPhoneProp(g, screens.codeBedrock, x, 0.9, z, 0.55);
+    else addTablet(g, screens.farmOk, x, 0.75, z, 0.1);
+  }
+  // extra console / phone clutter on the central desk flanks
+  addConsole(g, -0.55, 0.72, -1.05, '#2a3840');
+  addPhoneProp(g, screens.farmBreak, 0.55, 1.15, -1.05, 0.5);
+
   // side device racks
   for (const side of [-1, 1]) {
     box(g, 0.7, 1.6, 0.45, '#4a5058', side * 2.6, 0.85, -2.2, 0, 0, 0, { round: 0.03 });
@@ -747,46 +882,78 @@ function buildBedrock(screens) {
   }
   box(g, 0.8, 1.2, 0.15, '#c4a35a', -3.3, 0.7, 0.2);
   box(g, 0.7, 0.15, 0.5, '#c4a35a', 3.1, 1.4, -1.0, 0, 0, 0, { round: 0.04 }); // hard hat
+  // hi-vis vest hung on wall peg
+  box(g, 0.55, 0.7, 0.08, '#c4a35a', 3.4, 1.6, 0.5, 0, 0, 0, { round: 0.02 });
+  box(g, 0.55, 0.12, 0.02, '#ebe4dc', 3.4, 1.85, 0.55);
 
   // more devices on side desks
   addDesk(g, -2.2, 0, 0.3, 1.3);
   addTablet(g, screens.farmOk, -2.2, 1.0, 0.35, 0.15);
   addPhoneProp(g, screens.farmBreak, -1.7, 1.15, 0.45, 0.55);
+  addConsole(g, -2.4, 0.72, 0.15, '#3a4858');
   addDesk(g, 2.2, 0, 0.3, 1.3);
   addConsole(g, 2.0, 0.72, 0.4, '#2a3840');
   addPhoneProp(g, screens.codeBedrock, 2.5, 1.15, 0.4, 0.55);
+  addTablet(g, screens.codeBedrock, 2.3, 1.0, 0.15, -0.15);
+  // back-corner desks
+  addDesk(g, -2.5, 0, -1.6, 1.15);
+  addMonitor(g, screens.codeBedrock, -2.5, 0.72, -1.65);
+  addPhoneProp(g, screens.farmBreak, -2.1, 1.15, -1.5, 0.5);
+  addDesk(g, 2.5, 0, -1.6, 1.15);
+  addMonitor(g, screens.farmOk, 2.5, 0.72, -1.65);
+  addTablet(g, screens.codeBedrock, 2.1, 1.0, -1.5, 0.2);
 
   addWallShelf(g, 0, 3.4, -3.1, 5.5);
+  addWallShelf(g, -2.2, 2.6, -3.1, 1.8);
+  addWallShelf(g, 2.2, 2.6, -3.1, 1.8);
   addShelf(g, -3.3, 0, 1.5);
   addShelf(g, 3.3, 0, 1.5);
+  addShelf(g, -3.3, 0, -0.5);
+  addShelf(g, 3.3, 0, -0.5);
 
-  // posters
+  // posters — denser wall collage
   const p1 = makePosterArt(2, 0.55, 0.75);
   p1.position.set(-2.2, 2.25, -3.08);
   g.add(p1);
   const p2 = makePosterArt(3, 0.55, 0.75);
   p2.position.set(2.2, 2.25, -3.08);
   g.add(p2);
+  const p3 = makePosterArt(0, 0.48, 0.65);
+  p3.position.set(-1.2, 1.85, -3.08);
+  g.add(p3);
+  const p4 = makePosterArt(1, 0.48, 0.65);
+  p4.position.set(1.2, 1.85, -3.08);
+  g.add(p4);
+  const p5 = makePosterArt(2, 0.5, 0.7);
+  p5.position.set(-3.85, 2.2, 0.2);
+  p5.rotation.y = Math.PI / 2;
+  g.add(p5);
+  const p6 = makePosterArt(3, 0.5, 0.7);
+  p6.position.set(3.85, 2.2, 0.2);
+  p6.rotation.y = -Math.PI / 2;
+  g.add(p6);
 
-  const bedSign = makeSign('BEDROCK', 1.15, 0.3, '#1a3040', '#a0d0e0', '#4a8a98');
-  bedSign.position.set(-1.15, 2.55, -3.05);
+  const bedSign = makeSign('BEDROCK', 0.9, 0.26, '#1a3040', '#a0d0e0', '#4a8a98');
+  bedSign.position.set(-0.5, 2.5, -3.05);
   g.add(bedSign);
-  const multi = makeSign('MULTI-DEVICE', 1.15, 0.28, '#2a3228', '#f0e6d0', '#c4a35a');
-  multi.position.set(1.15, 2.55, -3.05);
+  const multi = makeSign('MULTI-DEVICE', 1.05, 0.26, '#2a3228', '#f0e6d0', '#c4a35a');
+  multi.position.set(0.55, 2.5, -3.05);
   g.add(multi);
 
-  addLamp(g, -3.1, 0, -0.8);
-  addLamp(g, 3.1, 0, -0.8);
-  addPlant(g, -3.0, 0, 2.1);
-  addPlant(g, 3.0, 0, 2.1);
+  addLamp(g, -1.3, 0, 1.5);
+  addLamp(g, 1.3, 0, 1.5);
+  addPlant(g, -1.15, 0, 1.85);
+  addPlant(g, 1.15, 0, 1.85);
 
-  // floor crates on the sides only — clear center lane for the character
+  // floor crates IN FRAME — clear a narrow center lane for the character
   for (let i = 0; i < 3; i++) {
-    box(g, 0.35, 0.28, 0.3, ['#8a6a40', '#4a8a98', '#c4a35a'][i],
-      -2.4 + i * 0.4, 0.16, 1.7, 0, 0.08, 0, { round: 0.02 });
-    box(g, 0.35, 0.28, 0.3, ['#6b8f6a', '#3a4858', '#c45848'][i],
-      1.6 + i * 0.4, 0.16, 1.7, 0, -0.08, 0, { round: 0.02 });
+    box(g, 0.32, 0.26, 0.28, ['#8a6a40', '#4a8a98', '#c4a35a'][i],
+      -1.2 + i * 0.28, 0.15, 1.55, 0, 0.08, 0, { round: 0.02 });
+    box(g, 0.32, 0.26, 0.28, ['#6b8f6a', '#3a4858', '#c45848'][i],
+      0.65 + i * 0.28, 0.15, 1.55, 0, -0.08, 0, { round: 0.02 });
   }
+  box(g, 0.9, 0.04, 0.3, '#5a6058', -1.0, 0.06, 0.85, 0, 0, 0, { round: 0.01 });
+  box(g, 0.9, 0.04, 0.3, '#5a6058', 1.0, 0.06, 0.85, 0, 0, 0, { round: 0.01 });
 
   addCeilingBeam(g, 0, 3.95, -1.2, 7.5);
   addCeilingBeam(g, 0, 3.95, 0.5, 7.5);
@@ -853,12 +1020,12 @@ function buildYard(screens) {
   checklist.userData.signText = 'CHECKLIST';
   g.add(checklist);
 
-  // MUST MATCH / PARITY — flanking so they stay clear of the character head
-  const match = makeSign('MUST MATCH', 1.25, 0.3, '#2a3228', '#e0c070', '#c4a35a');
-  match.position.set(-1.15, 2.55, -3.05);
+  // MUST MATCH / PARITY — stacked dead-center above checklist (portrait FOV clips flanking signs)
+  const match = makeSign('MUST MATCH', 1.1, 0.28, '#2a3228', '#e0c070', '#c4a35a');
+  match.position.set(0, 2.55, -3.05);
   g.add(match);
-  const parity = makeSign('PARITY', 1.05, 0.28, '#1a3040', '#8ab0c8', '#4a8a98');
-  parity.position.set(1.2, 2.55, -3.05);
+  const parity = makeSign('PARITY', 0.95, 0.26, '#1a3040', '#8ab0c8', '#4a8a98');
+  parity.position.set(0, 2.95, -3.05);
   g.add(parity);
 
   // tool crates / barrels
@@ -990,11 +1157,18 @@ function buildLibrary(screens) {
       -1.6 + (i % 4) * 0.4, 0.12 + Math.floor(i / 4) * 0.22, 1.5, 0, 0.1, 0, { round: 0.015 });
   }
 
-  const worlds = makeSign('WORLDS & MODS', 1.35, 0.3, '#2a2030', '#e0c8f0', '#a87890');
-  worlds.position.set(-1.1, 2.6, -3.05);
+  // Shelf labels stacked center-front of the shelves (never behind pillars / frame edges)
+  const javaLib = makeSign('JAVA', 0.8, 0.22, '#2a3228', '#e0c070', '#c4a35a');
+  javaLib.position.set(-0.5, 3.0, -2.55);
+  g.add(javaLib);
+  const codeLib = makeSign('ORIGINAL CODE', 1.0, 0.22, '#1a2820', '#f0e6d0', '#6b8f6a');
+  codeLib.position.set(0.55, 3.0, -2.55);
+  g.add(codeLib);
+  const worlds = makeSign('WORLDS & MODS', 1.1, 0.26, '#2a2030', '#e0c8f0', '#a87890');
+  worlds.position.set(0, 2.6, -2.55);
   g.add(worlds);
-  const keep = makeSign('KEEP SAFE', 1.05, 0.26, '#1a3028', '#f0e6d0', '#6b8f6a');
-  keep.position.set(1.15, 2.6, -3.05);
+  const keep = makeSign('KEEP SAFE', 0.9, 0.22, '#1a3028', '#f0e6d0', '#6b8f6a');
+  keep.position.set(0, 2.25, -2.55);
   g.add(keep);
 
   addWallShelf(g, 0, 3.55, -3.1, 4.5);
@@ -1046,19 +1220,19 @@ function buildArena(screens) {
   // banners on back wall
   box(g, 2.8, 0.7, 0.08, '#3a2020', -1.4, 2.5, -3.1);
   box(g, 2.8, 0.7, 0.08, '#1a3040', 1.4, 2.5, -3.1);
-  const javaYell = makeSign('JAVA!', 1.1, 0.35, '#3a2020', '#f0e6d0', '#c45848');
-  javaYell.position.set(-1.1, 2.55, -3.0);
+  const javaYell = makeSign('JAVA!', 0.95, 0.3, '#3a2020', '#f0e6d0', '#c45848');
+  javaYell.position.set(-0.7, 2.45, -3.0);
   g.add(javaYell);
-  const bedYell = makeSign('BEDROCK!', 1.15, 0.35, '#1a3040', '#f0e6d0', '#4a8a98');
-  bedYell.position.set(1.1, 2.55, -3.0);
+  const bedYell = makeSign('BEDROCK!', 1.0, 0.3, '#1a3040', '#f0e6d0', '#4a8a98');
+  bedYell.position.set(0.7, 2.45, -3.0);
   g.add(bedYell);
 
-  // speech-bubble style boards mid sides
-  const bubL = makeSign('JAVA!', 0.85, 0.28, '#ebe4dc', '#3a2020', '#c45848');
-  bubL.position.set(-1.5, 1.8, -2.4);
+  // speech-bubble style boards mid sides — inset from frame edges
+  const bubL = makeSign('JAVA!', 0.75, 0.26, '#ebe4dc', '#3a2020', '#c45848');
+  bubL.position.set(-0.95, 1.75, -2.4);
   g.add(bubL);
-  const bubR = makeSign('BEDROCK!', 0.95, 0.28, '#ebe4dc', '#1a3040', '#4a8a98');
-  bubR.position.set(1.5, 1.8, -2.4);
+  const bubR = makeSign('BEDROCK!', 0.85, 0.26, '#ebe4dc', '#1a3040', '#4a8a98');
+  bubR.position.set(0.95, 1.75, -2.4);
   g.add(bubR);
 
   // overhead banners / string lights
@@ -1084,8 +1258,8 @@ function buildArena(screens) {
   addPlant(g, -3.0, 0, 2.2);
   addPlant(g, 3.0, 0, 2.2);
 
-  const fight = makeSign('STILL FIGHTING', 1.35, 0.28, '#2a3228', '#f0e6d0', '#c4a35a');
-  fight.position.set(0, 2.95, -3.05);
+  const fight = makeSign('STILL FIGHTING', 1.15, 0.26, '#2a3228', '#f0e6d0', '#c4a35a');
+  fight.position.set(0, 2.85, -3.05);
   g.add(fight);
 
   addCeilingBeam(g, 0, 3.95, -1.5, 7.5);
@@ -1195,11 +1369,11 @@ function buildStore(screens) {
   box(g, 1.2, 0.08, 0.6, '#5a4030', 2.2, 0.72, 0.2);
   addMonitor(g, screens.boxArt, 2.2, 0.72, 0.15, -0.3);
 
-  const oneBox = makeSign('ONE BOX / TWO CODES', 1.45, 0.3, '#2a3228', '#f0e6d0', '#c4a35a');
-  oneBox.position.set(0, 2.65, -3.05);
+  const oneBox = makeSign('ONE BOX / TWO CODES', 1.2, 0.28, '#2a3228', '#f0e6d0', '#c4a35a');
+  oneBox.position.set(0, 2.55, -3.05);
   g.add(oneBox);
-  const finale = makeSign('ONE GAME?', 1.05, 0.26, '#1a2820', '#e0c070', '#6b8f6a');
-  finale.position.set(0, 3.0, -3.05);
+  const finale = makeSign('ONE GAME?', 0.95, 0.24, '#1a2820', '#e0c070', '#6b8f6a');
+  finale.position.set(0, 2.9, -3.05);
   g.add(finale);
 
   addWallShelf(g, 0, 3.55, -3.1, 5.0);
@@ -1243,7 +1417,7 @@ export function buildRoom(screens) {
 
   const shadowCatch = new THREE.Mesh(
     new THREE.CircleGeometry(0.55, 24),
-    new THREE.MeshBasicMaterial({ color: '#000000', transparent: true, opacity: 0.28, depthWrite: false }),
+    new THREE.MeshBasicMaterial({ color: '#3a3028', transparent: true, opacity: 0.22, depthWrite: false }),
   );
   shadowCatch.rotation.x = -Math.PI / 2;
   shadowCatch.position.y = 0.04;
