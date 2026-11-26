@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <ellipse cx="300" cy="565" rx="125" ry="128" fill="#8ab0c0"/>
+  <!-- studio hoodie -->
+  <path d="M205,460 Q300,425 395,460 L405,645 Q300,675 195,645 Z" fill="#3a4858"/>
+  <path d="M230,485 Q300,450 370,485 L375,625 Q300,650 225,625 Z" fill="#4a5868"/>
+  <!-- GOLD MASTER sash across body -->
+  <path d="M195,470 L410,610 L385,640 L170,500 Z" fill="#e0c070"/>
+  <path d="M205,485 L390,610" fill="none" stroke="#c4a35a" stroke-width="3"/>
+  <rect x="240" y="520" width="70" height="14" rx="3" fill="#2a2118" transform="rotate(-32 275 527)"/>
+  <rect x="255" y="545" width="55" height="10" rx="2" fill="#2a2118" transform="rotate(-32 282 550)"/>
+  <!-- medal -->
+  <circle cx="255" cy="500" r="26" fill="#e8d080"/>
+  <circle cx="255" cy="500" r="18" fill="#c4a35a"/>
+  <path d="M255,485 L262,500 L255,515 L248,500 Z" fill="#f4f0ea"/>
+  <!-- head (rounded whale) -->
+  <ellipse cx="300" cy="285" rx="140" ry="120" fill="#a8c8d4"/>
+  <ellipse cx="300" cy="305" rx="110" ry="92" fill="#b8d4e0"/>
+  <!-- narwhal tusk -->
+  <path d="M300,175 L310,40 L290,40 Z" fill="#f4f0ea"/>
+  <path d="M295,160 L305,55" fill="none" stroke="#d8d0c0" stroke-width="3"/>
+  <!-- small ears / flipper nubs -->
+  <ellipse cx="175" cy="250" rx="22" ry="30" fill="#8ab0c0"/>
+  <ellipse cx="425" cy="250" rx="22" ry="30" fill="#8ab0c0"/>
+  <!-- soft muzzle -->
+  <ellipse cx="300" cy="345" rx="50" ry="30" fill="#d8e8f0"/>
+  <ellipse cx="290" cy="340" rx="6" ry="5" fill="#2a2118"/>
+  <ellipse cx="310" cy="340" rx="6" ry="5" fill="#2a2118"/>
+  <!-- gold-rimmed shades -->
+  <circle cx="260" cy="280" r="28" fill="#1a2428" opacity=".9"/>
+  <circle cx="340" cy="280" r="28" fill="#1a2428" opacity=".9"/>
+  <path d="M288,280 H312" stroke="#e0c070" stroke-width="5"/>
+  <circle cx="250" cy="272" r="6" fill="#e0c070" opacity=".35"/>
+  <!-- tiny gold crown hat -->
+  <path d="M240,195 L255,155 L275,185 L300,145 L325,185 L345,155 L360,195 Z" fill="#e0c070"/>
+  <ellipse cx="300" cy="195" rx="65" ry="12" fill="#c4a35a"/>
+  
+  <ellipse cx="260" cy="270" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="340" cy="270" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="260" cy="268" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="340" cy="268" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="300" cy="390" rx="16" ry="14" fill="#3a2a24"/><ellipse cx="300" cy="394" rx="10" ry="6" fill="#c47a7a"/>
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#a8c8d4"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#a8c8d4"/>
+  
+  <ellipse cx="410" cy="410.0" rx="22" ry="70.0" fill="#a8c8d4"/>
+  <ellipse cx="428" cy="340" rx="20" ry="16" fill="#a8c8d4"/>
+  
+  <ellipse cx="230" cy="710" rx="28" ry="16" fill="#8ab0c0"/>
+  <ellipse cx="370" cy="710" rx="28" ry="16" fill="#8ab0c0"/>
+  <ellipse cx="230" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+  <ellipse cx="370" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+
+</svg>

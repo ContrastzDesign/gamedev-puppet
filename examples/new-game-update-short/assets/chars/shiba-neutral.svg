@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <ellipse cx="300" cy="560" rx="118" ry="130" fill="#d8a878"/>
+  <!-- hoodie -->
+  <path d="M205,460 Q300,420 395,460 L410,650 Q300,680 190,650 Z" fill="#4a6a88"/>
+  <path d="M230,485 Q300,450 370,485 L375,630 Q300,655 225,630 Z" fill="#5a7a98"/>
+  <path d="M270,500 Q300,520 330,500" fill="none" stroke="#2a3848" stroke-width="6"/>
+  <ellipse cx="300" cy="455" rx="70" ry="28" fill="#3a5468"/>
+  <!-- sealed game case (L hand) -->
+  <rect x="120" y="500" width="78" height="100" rx="6" fill="#2a3848"/>
+  <rect x="128" y="510" width="62" height="70" rx="4" fill="#3a5868"/>
+  <rect x="140" y="530" width="38" height="10" rx="2" fill="#c4a35a"/>
+  <rect x="145" y="550" width="28" height="6" rx="2" fill="#8ab0c0"/>
+  <rect x="150" y="565" width="20" height="6" rx="2" fill="#6b8f6a"/>
+  <!-- head -->
+  <ellipse cx="300" cy="290" rx="135" ry="120" fill="#e0b888"/>
+  <ellipse cx="300" cy="310" rx="105" ry="90" fill="#e8c898"/>
+  <!-- shiba cheeks + muzzle -->
+  <ellipse cx="230" cy="320" rx="28" ry="20" fill="#f0a090" opacity=".55"/>
+  <ellipse cx="370" cy="320" rx="28" ry="20" fill="#f0a090" opacity=".55"/>
+  <ellipse cx="300" cy="345" rx="48" ry="32" fill="#f4e8d8"/>
+  <ellipse cx="300" cy="335" rx="16" ry="12" fill="#2a2118"/>
+  <!-- pointed shiba ears -->
+  <path d="M175,210 L155,110 L230,195 Z" fill="#d8a878"/>
+  <path d="M425,210 L445,110 L370,195 Z" fill="#d8a878"/>
+  <path d="M180,205 L168,130 L220,190 Z" fill="#f0c0a8"/>
+  <path d="M420,205 L432,130 L380,190 Z" fill="#f0c0a8"/>
+  <!-- gaming headset -->
+  <path d="M170,250 Q300,160 430,250" fill="none" stroke="#2a3038" stroke-width="16" stroke-linecap="round"/>
+  <rect x="145" y="255" width="42" height="70" rx="12" fill="#3a4048"/>
+  <rect x="413" y="255" width="42" height="70" rx="12" fill="#3a4048"/>
+  <rect x="150" y="265" width="32" height="50" rx="8" fill="#1a2028"/>
+  <rect x="418" y="265" width="32" height="50" rx="8" fill="#1a2028"/>
+  <path d="M187,310 Q250,360 300,355" fill="none" stroke="#2a3038" stroke-width="8" stroke-linecap="round"/>
+  <rect x="285" y="348" width="36" height="22" rx="8" fill="#4a5058"/>
+  <!-- round gamer shades -->
+  <circle cx="262" cy="285" r="28" fill="#1a2428" opacity=".9"/>
+  <circle cx="338" cy="285" r="28" fill="#1a2428" opacity=".9"/>
+  <path d="M290,285 H310" stroke="#5a7a98" stroke-width="5"/>
+  <circle cx="252" cy="278" r="6" fill="#8ab" opacity=".3"/>
+  <circle cx="328" cy="278" r="6" fill="#8ab" opacity=".3"/>
+  
+  <ellipse cx="262" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="338" cy="275" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="262" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="338" cy="273" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <path d="M282,385 Q300,401 318,385" fill="none" stroke="#3a2a24" stroke-width="5" stroke-linecap="round"/>
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#e0b888"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#e0b888"/>
+  
+  <ellipse cx="410" cy="515.0" rx="22" ry="55.0" fill="#e0b888"/>
+  <ellipse cx="410" cy="550" rx="20" ry="16" fill="#e0b888"/>
+  
+  <ellipse cx="230" cy="710" rx="28" ry="16" fill="#d8a878"/>
+  <ellipse cx="370" cy="710" rx="28" ry="16" fill="#d8a878"/>
+  <ellipse cx="230" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+  <ellipse cx="370" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+
+</svg>

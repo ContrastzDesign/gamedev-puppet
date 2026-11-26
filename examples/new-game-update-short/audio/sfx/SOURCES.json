@@ -1,0 +1,156 @@
+[
+  {
+    "file": "soft-pop.wav",
+    "sha256": "2ed6a0c7a89296c8e4970f9e3aa59140b47683b482d4aa759b60c0d31998bb90",
+    "bytes": 101726,
+    "license": "CC0",
+    "url": "https://freesound.org/s/541993/",
+    "freesound_id": 541993,
+    "user": "Rob_Marion",
+    "note": "trimmed preview"
+  },
+  {
+    "file": "whoosh-short.wav",
+    "sha256": "116d69bec7c0d30f0cf73a18f0baf6abc5bbfe5b324cc84a80458be6ae25bdd1",
+    "bytes": 192078,
+    "license": "CC0",
+    "url": "https://freesound.org/s/372519/",
+    "freesound_id": 372519,
+    "note": "trimmed"
+  },
+  {
+    "file": "whoosh-long.wav",
+    "sha256": "e509b9e7e4729b051fd92c71a2d74a1096e794b1dc5796838ba748085a01afc7",
+    "bytes": 192078,
+    "license": "CC0",
+    "url": "https://freesound.org/s/416054/",
+    "freesound_id": 416054,
+    "note": "trimmed"
+  },
+  {
+    "file": "ui-pop.wav",
+    "sha256": "2519c443b519476b50e746917a52c8f8fd90b34c1b35447e0f7197436c8e5d4c",
+    "bytes": 46120,
+    "license": "CC0",
+    "url": "https://freesound.org/s/878253/",
+    "freesound_id": 878253,
+    "user": "Qvantor"
+  },
+  {
+    "file": "shutter.wav",
+    "sha256": "82fa7b038adc34711b8a3f7945e429064f626144bc1570837a4c4325f20ac078",
+    "bytes": 86522,
+    "license": "CC0",
+    "url": "https://freesound.org/s/242501/",
+    "freesound_id": 242501,
+    "note": "trimmed preview"
+  },
+  {
+    "file": "swish-short.wav",
+    "sha256": "0b90f90b6db6cd4e1655568961eab7551053433bd3b9b734a7b79d952b3fba94",
+    "bytes": 192078,
+    "license": "CC0",
+    "url": "https://freesound.org/s/154648/",
+    "freesound_id": 154648,
+    "note": "trimmed"
+  },
+  {
+    "file": "kenney-click.wav",
+    "sha256": "8033834d66a86d802835dadf6df82b46de754d18d33ee91a9e7667d0b2493718",
+    "bytes": 51442,
+    "license": "CC0",
+    "url": "https://freesound.org/s/391660/",
+    "freesound_id": 391660,
+    "note": "CC0 UI click"
+  },
+  {
+    "file": "kenney-switch.wav",
+    "sha256": "472e387360d99e5c779213721bb1a74379b1b59f3d67737b21c09e71b84a72a4",
+    "bytes": 187626,
+    "license": "CC0",
+    "url": "https://freesound.org/s/264981/",
+    "freesound_id": 264981,
+    "note": "CC0 switch"
+  },
+  {
+    "file": "mouse-click.wav",
+    "sha256": "4c0eff6925ceba0eaa8615639c730ee948387d6f21b1bcf3efe7b91dd4aba320",
+    "bytes": 45228,
+    "license": "CC0",
+    "url": "https://freesound.org/s/534104/",
+    "freesound_id": 534104,
+    "user": "pbimal"
+  },
+  {
+    "file": "tick.wav",
+    "sha256": "2d7f7cedb13283bad5a9db88d358594402f9979884f33c9a4248fcc8c8baabf9",
+    "bytes": 117988,
+    "license": "CC0",
+    "url": "https://freesound.org/s/253886/",
+    "freesound_id": 253886,
+    "note": "trimmed preview"
+  },
+  {
+    "file": "chime-short.wav",
+    "sha256": "2487fc2386a997fe9fe09204ec6a4dfa2363a84cf97d90021942733ee694fd43",
+    "bytes": 192078,
+    "license": "CC0",
+    "url": "https://freesound.org/s/390863/",
+    "freesound_id": 390863,
+    "note": "trimmed"
+  },
+  {
+    "file": "cheer-short.wav",
+    "sha256": "e0ea275658dea4dcd3021cee0ced3f7ca6fe397af6220a4b033ed6c289343a02",
+    "bytes": 240078,
+    "license": "CC0",
+    "url": "https://freesound.org/s/450282/",
+    "freesound_id": 450282,
+    "note": "trimmed"
+  },
+  {
+    "file": "keyboard-short.wav",
+    "sha256": "e536dde539fa86dd744a1bf297d1cbf663f12796a781619bef3552f0f4a48d0d",
+    "bytes": 192078,
+    "license": "CC0",
+    "url": "https://freesound.org/s/511788/",
+    "freesound_id": 511788,
+    "note": "trimmed"
+  },
+  {
+    "file": "stamp.wav",
+    "sha256": "c7da14c86b7a47ead972affe67b252adeee4412b20eeff3b9b99b5246174ec74",
+    "bytes": 192078,
+    "license": "CC0",
+    "url": "https://freesound.org/s/31769/",
+    "freesound_id": 31769,
+    "note": "stamp thud trimmed"
+  },
+  {
+    "file": "factory-hum.wav",
+    "sha256": "efd248f6730e7d785f83ba9086e0af041e6defd2d8385aa6e67e34d6b47ca69f",
+    "bytes": 240078,
+    "license": "CC0",
+    "url": "https://freesound.org/s/411087/",
+    "freesound_id": 411087,
+    "note": "short machine trim"
+  },
+  {
+    "file": "can-set.wav",
+    "sha256": "726a8ad45d684ce72e8c946ab46d5d771d99e3e8f92985ae1b691bfd9247d524",
+    "bytes": 51958,
+    "license": "CC0",
+    "url": "https://freesound.org/s/511490/",
+    "freesound_id": 511490,
+    "note": "can set down"
+  },
+  {
+    "file": "disc-click.wav",
+    "sha256": "0a212eeae318a36fa3360c22fcbf9cfabdf83d03c2c385876bc900344968e15c",
+    "bytes": 192078,
+    "license": "CC0",
+    "url": "https://freesound.org/s/521947/",
+    "freesound_id": 521947,
+    "note": "plastic click"
+  }
+]
