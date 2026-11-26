@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+
+  <ellipse cx="300" cy="560" rx="100" ry="132" fill="#c9a070"/>
+  <!-- teal explorer hoodie -->
+  <path d="M210,465 Q300,425 390,465 L400,645 Q300,685 200,645 Z" fill="#4a8a88"/>
+  <path d="M225,480 Q300,450 375,480 L380,635 Q300,658 220,635 Z" fill="#5a9a98"/>
+  <!-- scarf -->
+  <path d="M220,455 Q300,490 380,455 Q360,520 300,535 Q240,520 220,455 Z" fill="#e0a060"/>
+  <path d="M310,520 L340,620 L300,610 Z" fill="#d09050"/>
+  <!-- head (long ferret face) -->
+  <ellipse cx="300" cy="280" rx="140" ry="130" fill="#d8b888"/>
+  <ellipse cx="300" cy="310" rx="100" ry="85" fill="#e4c8a0"/>
+  <!-- ears -->
+  <ellipse cx="185" cy="175" rx="28" ry="38" fill="#c9a070"/>
+  <ellipse cx="415" cy="175" rx="28" ry="38" fill="#c9a070"/>
+  <ellipse cx="185" cy="180" rx="12" ry="18" fill="#e8b4a0"/>
+  <ellipse cx="415" cy="180" rx="12" ry="18" fill="#e8b4a0"/>
+  <!-- portal goggles -->
+  <ellipse cx="260" cy="265" rx="36" ry="32" fill="#2a4048"/>
+  <ellipse cx="340" cy="265" rx="36" ry="32" fill="#2a4048"/>
+  <ellipse cx="260" cy="265" rx="24" ry="22" fill="#5ec8c0" opacity=".55"/>
+  <ellipse cx="340" cy="265" rx="24" ry="22" fill="#5ec8c0" opacity=".55"/>
+  <path d="M296,265 H304" stroke="#3a5058" stroke-width="8"/>
+  <path d="M160,250 Q150,200 300,185 Q450,200 440,250" fill="none" stroke="#3a5058" stroke-width="12" stroke-linecap="round"/>
+  <ellipse cx="300" cy="340" rx="48" ry="32" fill="#f0dcc4"/>
+  <ellipse cx="300" cy="328" rx="9" ry="7" fill="#2a2118"/>
+  
+  <ellipse cx="260" cy="265" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="340" cy="265" rx="7" ry="8" fill="#2a2118"/>
+  <ellipse cx="260" cy="263" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <ellipse cx="340" cy="263" rx="2.2" ry="2.2" fill="#f7f0e4" opacity=".85"/>
+  <path d="M282,360 Q300,376 318,360" fill="none" stroke="#3a2a24" stroke-width="5" stroke-linecap="round"/>
+  <!-- little backpack -->
+  <ellipse cx="400" cy="530" rx="28" ry="40" fill="#3a6a68"/>
+  <path d="M380,500 Q400,490 420,500" fill="none" stroke="#2a5050" stroke-width="6"/>
+  
+  <ellipse cx="190" cy="515.0" rx="22" ry="55.0" fill="#d8b888"/>
+  <ellipse cx="190" cy="550" rx="20" ry="16" fill="#d8b888"/>
+  
+  <ellipse cx="410" cy="515.0" rx="22" ry="55.0" fill="#d8b888"/>
+  <ellipse cx="410" cy="550" rx="20" ry="16" fill="#d8b888"/>
+  
+  <ellipse cx="230" cy="710" rx="28" ry="16" fill="#c9a070"/>
+  <ellipse cx="370" cy="710" rx="28" ry="16" fill="#c9a070"/>
+  <ellipse cx="230" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+  <ellipse cx="370" cy="706" rx="18" ry="8" fill="#000" opacity=".08"/>
+
+</svg>

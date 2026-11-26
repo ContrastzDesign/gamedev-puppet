@@ -1,0 +1,123 @@
+1
+00:00:00,000 --> 00:00:01,160
+Where should you build your
+
+2
+00:00:01,160 --> 00:00:01,460
+game
+
+3
+00:00:02,120 --> 00:00:03,540
+What’s the best platform for
+
+4
+00:00:03,540 --> 00:00:04,260
+making a game
+
+5
+00:00:04,980 --> 00:00:07,220
+Number one, Roblox Studio by
+
+6
+00:00:07,220 --> 00:00:09,000
+far the easiest platform to
+
+7
+00:00:09,000 --> 00:00:10,620
+get started on. It completely
+
+8
+00:00:10,620 --> 00:00:12,020
+free to start making games
+
+9
+00:00:12,020 --> 00:00:13,960
+and publishing, But Roblox does
+
+10
+00:00:13,960 --> 00:00:15,740
+take more than 70% of
+
+11
+00:00:15,740 --> 00:00:16,600
+your future earnings
+
+12
+00:00:17,220 --> 00:00:19,140
+Number two, Godot it’s the
+
+13
+00:00:19,140 --> 00:00:21,200
+complete opposite of roblox, you
+
+14
+00:00:21,200 --> 00:00:22,620
+can basically get everything for
+
+15
+00:00:22,620 --> 00:00:24,120
+free but it isn’t as
+
+16
+00:00:24,120 --> 00:00:25,160
+easy to publish your game
+
+17
+00:00:25,540 --> 00:00:26,380
+You still have to pay
+
+18
+00:00:26,380 --> 00:00:28,020
+publishing fees on any platform
+
+19
+00:00:28,020 --> 00:00:29,020
+you put your game on
+
+20
+00:00:29,500 --> 00:00:30,440
+And depending on how big
+
+21
+00:00:30,440 --> 00:00:31,660
+your game gets it can
+
+22
+00:00:31,660 --> 00:00:32,720
+get pretty expensive!
+
+23
+00:00:33,520 --> 00:00:35,340
+Number three, Nilo for a
+
+24
+00:00:35,340 --> 00:00:37,060
+playable 3D world in a
+
+25
+00:00:37,060 --> 00:00:39,460
+browser. Even non-developers can describe
+
+26
+00:00:39,460 --> 00:00:40,780
+a game, edit it, and
+
+27
+00:00:40,780 --> 00:00:41,420
+publish a link
+
+28
+00:00:41,780 --> 00:00:42,740
+That makes it a practical
+
+29
+00:00:42,740 --> 00:00:44,120
+choice when the first release
+
+30
+00:00:44,120 --> 00:00:45,560
+is a playtest people should
+
+31
+00:00:45,560 --> 00:00:46,780
+be able to join immediately

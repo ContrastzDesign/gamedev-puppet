@@ -1,0 +1,20 @@
+# build-game brief (Tab 43, t.wmd0fo6evstm) — content-short VERSION 1 (drawn SVG animals)
+
+On 2026-11-25 Ricardo dropped Version 2 (googly-eye toon 3D) and switched back to Version 1. Do NOT use googly-eye household objects, ink-outline toon shading, solid blue shadows or the reserved V2 signal colours.
+
+Title line: Where should you build your game?
+Length: 47.307755 s, video_end 1136 @ exactly 24 fps. 1080x1920.
+Script is spoken word for word (script/spoken.txt; no rewrite, no fact-check). "[Show logos of the platforms]" in the Doc is a visual direction, not spoken: show the three platforms as generic plain-lettered signs/cards (Roblox Studio, Godot, Nilo) — no real logos unless rights are clear, and no Roblox media.
+Use the supplied audio/vo.mp3 unchanged (ElevenLabs eleven_v4, generated fresh for this script; do NOT regenerate or call ElevenLabs — you have no credentials). Delivery tags exist only in audio/body.json. VO says "Neelo" phonetically; captions must read "Nilo". Captions follow script/spoken.txt words (vo-words.json), not the whisper transcript.
+Beats (frames, audio/vo-timing.json): 1 hook f1-36; 2 "What's the best platform" f52-103; 3 "Number one, Roblox Studio ... 70% of your future earnings" f121-399; 4 "Number two, Godot ... pretty expensive!" f414-786; 5 "Number three, Nilo ... publish a link." f805-995; 6 "That makes it a practical choice ... join immediately." f1004-1124 (hold to 1136).
+
+Style (Version 1, see attached content-short-v1-guide.zip: SKILL.md + references/drawn-characters.md, audio-captions.md, mac-render.md; if the repo has archive/content-short-v1-drawn-animals/, use it too):
+- Hand-draw ORIGINAL anthropomorphic animal characters as SVG (never image generators, no 3D puppets): oversized rounded head, small ears, simple muzzle, tiny dot eyes, chunky body, short paws, muted warm colours. Themed hats, sunglasses, funny outfits per beat (e.g. builder/blocky gear for Roblox Studio, open-source tinkerer for Godot with a pile of publishing-fee receipts, a cheerful browser-world explorer for Nilo). Pick species/outfits NOT used in earlier Shorts (gamer-sites used quokka, red panda, axolotl, pangolin, ring-tailed lemur; check repo history too).
+- Characters on camera-facing planes in the 3D scene with contact shadows, readable acting; never let foreground props/desks/chairs hide a character while it is the beat's focus.
+- Detailed full 3D environment in EVERY shot (e.g. a "game-maker's street" or workshop with three booths/stalls, one per platform: a blocky build studio with a 70% earnings jar being taken, a free open workshop with toll-booth publishing fees, a glowing browser-portal stall where a playable 3D world opens from a link), meaningful props, densely dressed sets, never plain/void backgrounds. Poly Haven / Poly Pizza CC0 props and HDRIs are allowed in V1.
+- Real gameplay/editor footage on in-scene screens only if rights are clear; otherwise original screen content (original editor-like UIs, original playable-world scenes). Generic plain lettering, no real logos.
+- Automatic word-exact captions timed to vo-words.json, hard-clamped inside an 80 px side safe zone (no caption may run off-screen; check the longest lines).
+- Sound: one cleared licensed bed (Kevin MacLeod CC BY 4.0, different from "Carefree" and "Sneaky Snitch" if possible) ducked under VO + real recorded CC0 SFX (Freesound/Kenney) only, no procedural stand-ins. VO dominant, ~-14 LUFS, true peak <= -1 dBTP.
+- Review the editable film on stills/short clips; fix all defects (caption overflow, occlusion, empty sets, off-model characters) before the final render.
+
+Final render: ONLINE in the cloud, GPU=0 software rendering, whole film deterministic at exactly 24 fps, 1080x1920, H.264 CRF 18 yuv420p + AAC. This overrides mac-render.md. Split the final into .mp4.part* files under ~10 MB each with checksums + REASSEMBLE.txt, plus build-game-CREDITS.md (paste-ready YouTube description block) and SOURCES.json, in /opt/cursor/artifacts/build-game-final/. Also commit the film source under a new project folder and open the PR on ContrastzDesign/gamedev-puppet. Do not post anything anywhere.
