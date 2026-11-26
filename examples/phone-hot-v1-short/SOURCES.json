@@ -14,8 +14,8 @@
     "loudness_lufs": -14.0,
     "true_peak_dbtp": -1.5,
     "renderer": "ANGLE SwiftShader GPU=0",
-    "sha256": "c541a2cfa4aef9dc16ce017bb569f4809dafe87083bc0f36cb6402af0534927a",
-    "bytes": 14973673
+    "sha256": "86a872f2761c4c8c6ddeac634a6f5d965ce5ca57f0a1c312d9fc2f026f4e8170",
+    "bytes": 15614338
   },
   "voiceover": {
     "file": "audio/vo.mp3",
@@ -84,7 +84,8 @@
       "densified gecko studio (desks, racks, sticky notes, whiteboard, floor props)",
       "captions fully opaque for whole on-screen window; finale caption holds to f939",
       "STILL HOT / cool-shot framing kept inside portrait edges",
-      "VO-timed camera landings with alternating kinds (push/pull/drop/crane/orbit/follow/low/whip/cut); drift between; dressed sets for crane/drop"
+      "VO-timed camera landings with alternating kinds (push/pull/drop/crane/orbit/follow/low/whip/cut); drift between; dressed sets for crane/drop",
+      "chip-world: clear SAFE MODE / THERMAL THROTTLING sightline; dress/light heat+throttle ceiling band"
     ],
     "artifacts": "/opt/cursor/artifacts/phone-hot-v1-final/"
   }

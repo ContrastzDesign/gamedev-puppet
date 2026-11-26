@@ -293,6 +293,101 @@ function addCeilingBeam(parent, x, y, z, w = 6) {
   box(parent, w, 0.18, 0.25, '#4a3020', x, y, z);
 }
 
+/** Warm practicals + cable trays + heat glow so chip-world ceiling band never reads as a void. */
+function addChipCeilingDress(parent, heat = true) {
+  // lit ceiling plane — kills the dark void in the top ~15% of portrait frames
+  box(parent, 7.8, 0.1, 6.6, '#4a5a50', 0, 4.05, 0, 0, 0, 0, {
+    mat: { emissive: '#7a8a70', emissiveIntensity: 0.7 },
+    noShadow: true,
+  });
+  // warm wash panels hanging into the top band (read as practical glow, not void)
+  for (const z of [-2.0, -0.5, 1.0]) {
+    box(parent, 7.0, 0.55, 0.08, '#f5e0b0', 0, 3.75, z, 0, 0, 0, {
+      mat: { transparent: true, opacity: 0.28, emissive: '#f5c878', emissiveIntensity: 0.85 },
+      noShadow: true,
+    });
+  }
+  // cable trays across the top band
+  for (const z of [-2.4, -1.2, 0.0, 1.2]) {
+    box(parent, 7.2, 0.1, 0.5, '#4a5560', 0, 3.82, z);
+    for (let i = 0; i < 10; i++) {
+      box(parent, 0.14, 0.08, 0.38, '#2a3038', -3.15 + i * 0.7, 3.72, z);
+      // warm LED strips along trays
+      box(parent, 0.55, 0.03, 0.06, '#f5e0b0', -3.0 + i * 0.7, 3.66, z + 0.15, 0, 0, 0, {
+        mat: { emissive: '#f5c878', emissiveIntensity: 0.9 },
+        noShadow: true,
+      });
+    }
+  }
+  // cross runners + hanging ducts
+  for (const x of [-2.6, -0.9, 0.9, 2.6]) {
+    box(parent, 0.14, 0.12, 5.8, '#5a6570', x, 3.88, -0.3);
+    cyl(parent, 0.12, 0.12, 4.5, '#6a7078', x, 3.55, -0.2, 0, 0, Math.PI / 2);
+  }
+  // warm hanging practicals — dense enough to light the whole top band
+  // keep the center clear above the SAFE MODE / THERMAL THROTTLING billboard
+  for (let i = 0; i < 8; i++) {
+    const x = -3.0 + i * 0.85;
+    for (const z of [-2.0, -0.5, 1.0]) {
+      if (Math.abs(x) < 1.25 && z > -1.2 && z < 0.2) continue;
+      cyl(parent, 0.045, 0.045, 0.4, '#5a4030', x, 3.5, z);
+      cyl(parent, 0.1, 0.12, 0.12, '#f5e0b0', x, 3.28, z, 0, 0, 0, {
+        mat: { emissive: '#f5c878', emissiveIntensity: 1.0 },
+        noShadow: true,
+      });
+    }
+  }
+  const warmA = new THREE.PointLight('#f5c878', 0.95, 12, 2);
+  warmA.position.set(-1.2, 3.55, 0.4);
+  parent.add(warmA);
+  const warmB = new THREE.PointLight('#f0e0c0', 0.8, 11, 2);
+  warmB.position.set(1.4, 3.5, -0.6);
+  parent.add(warmB);
+  const warmC = new THREE.PointLight('#ffe8c0', 0.55, 9, 2);
+  warmC.position.set(0, 3.7, 1.2);
+  parent.add(warmC);
+  if (heat) {
+    // soft heat-haze glow panels rising into the ceiling band
+    for (const x of [-1.4, 0, 1.4]) {
+      box(parent, 1.35, 0.7, 0.05, '#c45848', x, 3.6, -2.5, 0, 0, 0, {
+        mat: { transparent: true, opacity: 0.4, emissive: '#e08040', emissiveIntensity: 0.85 },
+        noShadow: true,
+      });
+    }
+    // volumetric-looking haze slabs near the beams
+    for (const z of [-1.0, 0.4]) {
+      box(parent, 5.5, 0.35, 0.8, '#c47848', 0, 3.7, z, 0, 0, 0, {
+        mat: { transparent: true, opacity: 0.18, emissive: '#e09050', emissiveIntensity: 0.55 },
+        noShadow: true,
+      });
+    }
+    const haze = new THREE.PointLight('#e08040', 0.85, 9, 2);
+    haze.position.set(0, 3.4, -1.0);
+    parent.add(haze);
+  }
+  // packed ceiling modules + glow tiles flush under the slab — fill the whole top band
+  for (let row = 0; row < 5; row++) {
+    for (let i = 0; i < 13; i++) {
+      const col = ['#3a4850', '#4a8a98', '#c45848', '#c4a35a', '#6b8f6a', '#a87890', '#ebe4dc'][(i + row) % 7];
+      box(parent, 0.4, 0.2, 0.3, col,
+        -3.5 + i * 0.55, 3.92, -2.4 + row * 1.05, 0, 0.04, 0, { round: 0.01 });
+      if ((i + row) % 3 === 0) {
+        box(parent, 0.28, 0.05, 0.22, '#f5e0b0',
+          -3.5 + i * 0.55, 3.78, -2.4 + row * 1.05, 0, 0, 0, {
+            mat: { emissive: '#f5c878', emissiveIntensity: 0.95 },
+            noShadow: true,
+          });
+      }
+    }
+  }
+  // light beams so they don't read as black bars
+  for (const z of [-1.5, 0.2, 1.6]) {
+    box(parent, 7.0, 0.14, 0.22, '#6a5848', 0, 3.88, z, 0, 0, 0, {
+      mat: { emissive: '#8a7050', emissiveIntensity: 0.25 },
+    });
+  }
+}
+
 function addPegboard(parent, x, y, z, w = 2.2, h = 1.4) {
   box(parent, w, h, 0.05, '#8a6a48', x, y, z);
   const tools = ['#3a4048', '#c45848', '#4a8a98', '#c4a35a', '#6b8f6a'];
@@ -689,7 +784,9 @@ function buildInterior(screens) {
   box(g, 0.2, 0.3, 6, '#4a8a98', -3.7, 3.7, 0);
   box(g, 0.2, 0.3, 6, '#4a8a98', 3.7, 3.7, 0);
   // ceiling slab + upper dress so crane / drop moves never show void
-  box(g, 8, 0.15, 7, '#121c18', 0, 4.15, 0);
+  box(g, 8, 0.15, 7, '#3a4a42', 0, 4.15, 0, 0, 0, 0, {
+    mat: { emissive: '#4a5a48', emissiveIntensity: 0.45 },
+  });
   addWallShelf(g, 0, 3.55, -3.1, 5.5);
   addUpperWallDressing(g, -3.1, -3.4, 3.4, 3.0);
   addStringLights(g, 3.45, -2.95, -3.0, 3.0, 12);
@@ -698,6 +795,7 @@ function buildInterior(screens) {
   }
   addCeilingBeam(g, 0, 3.95, -1, 7);
   addCeilingBeam(g, 0, 3.95, 1, 7);
+  addChipCeilingDress(g, true);
   return g;
 }
 
@@ -707,7 +805,9 @@ function buildRacetrack(screens) {
   box(g, 8, 4.2, 0.15, '#1a2820', 0, 2.1, -3.2);
   box(g, 0.15, 4.2, 7, '#1a2820', -4, 2.1, 0);
   box(g, 0.15, 4.2, 7, '#1a2820', 4, 2.1, 0);
-  box(g, 8, 0.15, 7, '#121c18', 0, 4.15, 0);
+  box(g, 8, 0.15, 7, '#3a4a42', 0, 4.15, 0, 0, 0, 0, {
+    mat: { emissive: '#4a5a48', emissiveIntensity: 0.45 },
+  });
   // PCB trace grid (circuit-trace roads under/around track)
   for (let i = -3; i <= 3; i++) {
     box(g, 0.14, 0.05, 6.5, '#2a5840', i * 1.05, 0.05, 0);
@@ -729,24 +829,25 @@ function buildRacetrack(screens) {
   lane.rotation.x = Math.PI / 2;
   lane.position.set(0, 0.15, -0.35);
   g.add(lane);
-  // capacitor / chip towers — dense motherboard city; keep a clear center aisle for signs
+  // capacitor / chip towers — short in the center so SAFE MODE / THERMAL THROTTLING stay fully readable
   for (let i = 0; i < 24; i++) {
     const x = -2.4 + (i % 8) * 0.7;
     const z = -2.5 + Math.floor(i / 8) * 0.85;
-    if (Math.abs(x) < 1.15 && z < -1.2) continue; // sightline to SAFE MODE / THERMAL THROTTLING
-    const h = 0.7 + (i % 5) * 0.4;
+    if (Math.abs(x) < 1.35 && z < -0.8) continue; // open aisle to the sign billboard
+    let h = 0.55 + (i % 4) * 0.22;
+    if (Math.abs(x) < 1.8) h = Math.min(h, 1.15); // never reach sign bottoms during orbit
     box(g, 0.45, h, 0.4, '#3a4850', x, h / 2, z, 0, 0, 0, { round: 0.02 });
     for (let p = 0; p < 3; p++) {
-      cyl(g, 0.05, 0.05, 0.22 + (p % 2) * 0.12, '#c4a35a', x - 0.12 + p * 0.12, h + 0.14, z + 0.08);
+      cyl(g, 0.05, 0.05, 0.18 + (p % 2) * 0.1, '#c4a35a', x - 0.12 + p * 0.12, h + 0.12, z + 0.08);
     }
   }
-  // mid towers flanking the track (fill void behind character)
+  // mid towers flanking the track — outboard + short so orbit never covers the signs
   for (let i = 0; i < 10; i++) {
     const side = i < 5 ? -1 : 1;
     const idx = i % 5;
-    const h = 1.1 + idx * 0.35;
-    box(g, 0.5, h, 0.45, '#455560', side * (1.5 + idx * 0.15), h / 2, -1.2 + idx * 0.35, 0, 0, 0, { round: 0.02 });
-    cyl(g, 0.08, 0.08, 0.35, '#e0c070', side * (1.5 + idx * 0.15), h + 0.2, -1.2 + idx * 0.35);
+    const h = Math.min(0.95, 0.55 + idx * 0.15);
+    box(g, 0.48, h, 0.42, '#455560', side * (1.95 + idx * 0.12), h / 2, -0.85 + idx * 0.28, 0, 0, 0, { round: 0.02 });
+    cyl(g, 0.07, 0.07, 0.22, '#e0c070', side * (1.95 + idx * 0.12), h + 0.14, -0.85 + idx * 0.28);
   }
   // low chip blocks flanking (not in front of character torso)
   for (let i = 0; i < 4; i++) {
@@ -776,14 +877,18 @@ function buildRacetrack(screens) {
       });
     }
   }
-  // SAFE MODE + THERMAL THROTTLING — forward of tower field so lettering stays fully clear
-  const safe = makeSign('SAFE MODE', 1.1, 0.32, '#c45848', '#f0e6d0', '#e0c070');
-  safe.position.set(0, 2.05, -2.05);
+  // SAFE MODE + THERMAL THROTTLING — above character head + tower tops for the whole camera move
+  box(g, 0.12, 3.0, 0.12, '#3a4048', -0.95, 1.55, -1.55);
+  box(g, 0.12, 3.0, 0.12, '#3a4048', 0.95, 1.55, -1.55);
+  box(g, 2.1, 0.1, 0.12, '#3a4048', 0, 3.1, -1.55);
+  box(g, 2.1, 0.08, 0.1, '#3a4048', 0, 2.45, -1.55);
+  const safe = makeSign('SAFE MODE', 1.2, 0.36, '#c45848', '#f0e6d0', '#e0c070');
+  safe.position.set(0, 2.7, -1.48);
   g.add(safe);
-  const thr = makeSign('THERMAL THROTTLING', 1.25, 0.28, '#2a3228', '#e0c070', '#c4a35a');
-  thr.position.set(0, 2.5, -2.05);
+  const thr = makeSign('THERMAL THROTTLING', 1.4, 0.32, '#2a3228', '#e0c070', '#c4a35a');
+  thr.position.set(0, 3.25, -1.48);
   g.add(thr);
-  addTv(g, screens.racetrack, 0, 3.25, -3.0, 0.55);
+  addTv(g, screens.racetrack, 0, 3.7, -3.0, 0.45);
   // wall signage + lights
   for (let i = 0; i < 6; i++) {
     box(g, 0.55, 0.22, 0.04, i % 2 ? '#c45848' : '#4a8a98', -2.8 + i * 1.1, 3.35, -3.08);
@@ -794,11 +899,13 @@ function buildRacetrack(screens) {
   }
   addStringLights(g, 3.5, -2.9, -3.2, 3.2, 14);
   addUpperWallDressing(g, -3.1, -3.4, 3.4, 3.05);
-  // denser midground towers so drop/crane never show bare PCB floor
+  addChipCeilingDress(g, true);
+  // denser midground towers — low only, never into the sign band
   for (let i = 0; i < 12; i++) {
     const x = -2.2 + (i % 6) * 0.85;
     const z = 0.35 + Math.floor(i / 6) * 0.55;
-    const h = 0.45 + (i % 4) * 0.2;
+    if (Math.abs(x) < 0.7) continue;
+    const h = 0.35 + (i % 3) * 0.12;
     box(g, 0.38, h, 0.32, '#3a4850', x, h / 2, z, 0, 0, 0, { round: 0.02 });
   }
   // finish flags — behind character plane
