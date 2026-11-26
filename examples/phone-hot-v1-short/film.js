@@ -1,7 +1,7 @@
 // Phone Hot Short — content-short VERSION 1 (drawn SVG animals in detailed 3D worlds).
 import * as THREE from 'three';
 import { FPS, FRAMES, SHOTS } from './beats.js';
-import { W, H, clamp, easeInOut, lin } from './core.js';
+import { W, H, clamp, easeInOut, easeIn, easeOut, lin } from './core.js';
 import { buildRoom } from './room.js';
 import { initOverlays, drawOverlays, captionInfo, assertCaptionSafeZone, captionBoxes } from './overlays.js';
 
@@ -161,68 +161,219 @@ function charLocal(shot) {
   return { side, z, scale };
 }
 
+/**
+ * Ricardo V1 camera rules (content-short camera excerpt):
+ * Fly to whatever the VO names; land 0–4 frames before the word.
+ * Move kinds alternate (never same twice in a row): push, pull, drop, crane,
+ * orbit, follow, low, whip, cut. Moves 12–30f eased; whips = EASE→ARC→land.
+ * Never stop: drift (slow push / rise / small turn) between landings; hold ≤12f.
+ * Framing: chest-up or full figure. Offsets are relative to the beat character.
+ *
+ * `f` = 0-based render frame. VO f_start is 1-based → land ≈ f_start-1 - {0..4}.
+ */
+const POSE_KEYS = ['dx', 'dy', 'dz', 'lx', 'ly', 'lz', 'fov'];
+
+// kind never repeats consecutive. vo = named word the camera flies to.
+const LANDINGS = [
+  // --- hook: Why Does Your Phone Get Hot Playing Games? ---
+  { f: 0,   dur: 1,  kind: 'cut',   vo: 'open',     dx: 0.55, dy: 1.85, dz: 5.4,  lx: 0.05, ly: 1.4,  lz: -0.35, fov: 44 },
+  { f: 12,  dur: 18, kind: 'push',  vo: 'Phone',    dx: 0.2,  dy: 1.55, dz: 4.15, lx: 0.35, ly: 1.25, lz: -0.15, fov: 42 }, // → phone prop
+  { f: 24,  dur: 16, kind: 'orbit', vo: 'Hot',      dx: -0.35, dy: 1.6, dz: 4.0,  lx: 0.45, ly: 1.2,  lz: -0.1,  fov: 40 },
+  { f: 41,  dur: 22, kind: 'pull',  vo: 'Games?',   dx: 0.1,  dy: 1.72, dz: 5.15, lx: 0.0,  ly: 1.55, lz: -1.4,  fov: 44 }, // → TV game
+
+  // --- great: phone game runs great, then slows to a crawl ---
+  { f: 69,  dur: 1,  kind: 'cut',   vo: 'Say',      dx: -0.45, dy: 1.7,  dz: 5.0,  lx: 0.1,  ly: 1.35, lz: -0.3,  fov: 42 },
+  { f: 91,  dur: 24, kind: 'low',   vo: 'great',    dx: 0.15, dy: 1.28, dz: 4.2,  lx: 0.0,  ly: 1.45, lz: -0.2,  fov: 40 },
+  { f: 115, dur: 20, kind: 'follow',vo: 'slows',    dx: 0.55, dy: 1.55, dz: 4.35, lx: -0.55, ly: 1.15, lz: -0.5,  fov: 41 }, // hot phone L
+  { f: 134, dur: 18, kind: 'push',  vo: 'crawl',    dx: 0.1,  dy: 1.48, dz: 3.95, lx: -0.4, ly: 1.1,  lz: -0.35, fov: 39 },
+
+  // --- cool: cool the phone down / why so hot? ---
+  { f: 158, dur: 1,  kind: 'cut',   vo: 'fix',       dx: -0.7, dy: 1.75, dz: 6.45, lx: 0.15, ly: 1.4,  lz: -0.5,  fov: 42 },
+  { f: 194, dur: 26, kind: 'crane', vo: 'cool',     dx: 0.15, dy: 2.05, dz: 6.15, lx: 0.0,  ly: 1.85, lz: -1.6,  fov: 41 }, // AC
+  { f: 226, dur: 18, kind: 'orbit', vo: 'phone',    dx: 0.65, dy: 1.6,  dz: 5.85, lx: 0.4,  ly: 1.2,  lz: -0.7,  fov: 41 },
+  { f: 253, dur: 22, kind: 'whip',  vo: 'hot?',     dx: -0.35, dy: 1.52, dz: 5.7,  lx: 0.55, ly: 1.15, lz: -0.55, fov: 40 },
+
+  // --- fan: Why not just add a fan? ---
+  // Keep ADD A FAN? + AIR HOLES fully inside the portrait frame.
+  { f: 275, dur: 1,  kind: 'cut',   vo: 'Why',      dx: 0.05, dy: 1.95, dz: 5.55, lx: 0.05, ly: 1.45, lz: -0.65, fov: 42 },
+  { f: 297, dur: 20, kind: 'drop',  vo: 'fan?',     dx: 0.1,  dy: 1.78, dz: 4.85, lx: 0.25, ly: 1.35, lz: -0.95, fov: 41 },
+
+  // --- holes: air holes / water / dust ---
+  { f: 319, dur: 1,  kind: 'cut',   vo: 'A',        dx: 0.25, dy: 1.85, dz: 5.35, lx: 0.0,  ly: 1.4,  lz: -0.5,  fov: 41 },
+  { f: 339, dur: 18, kind: 'orbit', vo: 'holes',    dx: -0.25, dy: 1.72, dz: 4.85, lx: 0.25, ly: 1.35, lz: -0.85, fov: 40 },
+  // Glance toward puddle without parking the character off-frame.
+  { f: 374, dur: 22, kind: 'whip',  vo: 'water',    dx: -0.45, dy: 1.55, dz: 5.05, lx: -0.35, ly: 0.85, lz: -0.25, fov: 42 },
+  { f: 389, dur: 16, kind: 'push',  vo: 'dust',     dx: 0.4,  dy: 1.58, dz: 4.75, lx: 0.45, ly: 0.95, lz: -0.2,  fov: 41 },
+
+  // --- seal: sealed / waterproof / heat nowhere ---
+  { f: 409, dur: 1,  kind: 'cut',   vo: 'So',       dx: 0.5,  dy: 1.55, dz: 5.55, lx: 0.0,  ly: 1.3,  lz: -0.6,  fov: 42 },
+  { f: 420, dur: 18, kind: 'pull',  vo: 'sealed',   dx: -0.2, dy: 1.9,  dz: 5.25, lx: 0.0,  ly: 1.7,  lz: -1.3,  fov: 43 }, // WATERPROOF
+  { f: 438, dur: 20, kind: 'crane', vo: 'waterproof', dx: 0.25, dy: 2.1, dz: 4.85, lx: 0.0, ly: 1.55, lz: -1.0, fov: 41 },
+  { f: 461, dur: 22, kind: 'follow',vo: 'heat',     dx: -0.45, dy: 1.65, dz: 4.55, lx: 0.15, ly: 1.2,  lz: -0.7,  fov: 40 },
+
+  // --- heat: chip slows itself down ---
+  { f: 501, dur: 1,  kind: 'cut',   vo: 'Then',     dx: 0.6,  dy: 2.0,  dz: 5.45, lx: -0.1, ly: 1.4,  lz: -0.7,  fov: 46 },
+  { f: 509, dur: 14, kind: 'low',   vo: 'chip',     dx: -0.15, dy: 1.35, dz: 4.55, lx: 0.0,  ly: 1.25, lz: -0.5,  fov: 44 },
+  { f: 527, dur: 20, kind: 'orbit', vo: 'slows',    dx: 0.5,  dy: 1.75, dz: 4.7,  lx: -0.2, ly: 1.15, lz: -0.85, fov: 45 },
+  { f: 547, dur: 18, kind: 'push',  vo: 'safe',     dx: 0.05, dy: 1.68, dz: 4.35, lx: 0.0,  ly: 1.3,  lz: -0.55, fov: 44 },
+
+  // --- throttle: thermal throttling ---
+  // Frontal enough that SAFE MODE + THERMAL THROTTLING stay fully inside frame.
+  { f: 569, dur: 1,  kind: 'cut',   vo: 'This',     dx: -0.25, dy: 1.7,  dz: 5.55, lx: 0.05, ly: 1.3,  lz: -0.7,  fov: 46 },
+  { f: 585, dur: 22, kind: 'drop',  vo: 'thermal',  dx: 0.05, dy: 2.05, dz: 5.35, lx: 0.0,  ly: 1.85, lz: -1.35, fov: 45 },
+  { f: 596, dur: 16, kind: 'orbit', vo: 'throttling', dx: 0.28, dy: 1.95, dz: 5.05, lx: 0.0, ly: 1.9, lz: -1.25, fov: 44 },
+
+  // --- dev: developers / graphics / frame rate / worse ---
+  { f: 623, dur: 1,  kind: 'cut',   vo: 'Now',      dx: -0.7, dy: 1.9,  dz: 5.65, lx: 0.15, ly: 1.4,  lz: -0.55, fov: 42 },
+  { f: 625, dur: 14, kind: 'follow',vo: 'developers', dx: 0.35, dy: 1.7, dz: 4.75, lx: 0.0, ly: 1.35, lz: -0.4, fov: 40 },
+  { f: 657, dur: 24, kind: 'whip',  vo: 'heat',     dx: -0.55, dy: 1.6,  dz: 4.9,  lx: -0.45, ly: 1.2,  lz: -1.0,  fov: 41 },
+  { f: 681, dur: 18, kind: 'crane', vo: 'game',     dx: 0.2,  dy: 1.95, dz: 5.05, lx: 0.25, ly: 1.5,  lz: -1.1,  fov: 42 },
+  { f: 706, dur: 22, kind: 'pull',  vo: 'graphics', dx: 0.55, dy: 1.75, dz: 5.25, lx: -0.3, ly: 1.35, lz: -1.2,  fov: 43 }, // sliders
+  { f: 729, dur: 18, kind: 'orbit', vo: 'frame',    dx: -0.4, dy: 1.65, dz: 4.85, lx: 0.35, ly: 1.3,  lz: -1.05, fov: 41 },
+  { f: 754, dur: 20, kind: 'push',  vo: 'worse',    dx: 0.1,  dy: 1.55, dz: 4.25, lx: 0.45, ly: 1.2,  lz: -0.95, fov: 39 },
+
+  // --- warmer: hand warmer / app store ---
+  { f: 780, dur: 1,  kind: 'cut',   vo: 'This',     dx: 0.5,  dy: 1.85, dz: 5.2,  lx: -0.1, ly: 1.4,  lz: -0.4,  fov: 42 },
+  { f: 805, dur: 24, kind: 'orbit', vo: 'hand',     dx: -0.4, dy: 1.6,  dz: 4.45, lx: 0.15, ly: 1.55, lz: -1.5,  fov: 41 }, // fireplace phone
+  { f: 827, dur: 20, kind: 'low',   vo: 'app',      dx: 0.2,  dy: 1.35, dz: 4.15, lx: 0.35, ly: 1.5,  lz: -1.35, fov: 40 },
+
+  // --- finale: harder / hotter ---
+  { f: 864, dur: 1,  kind: 'cut',   vo: 'The',      dx: -0.4, dy: 1.72, dz: 5.0,  lx: 0.05, ly: 1.38, lz: -0.3,  fov: 42 },
+  { f: 880, dur: 20, kind: 'drop',  vo: 'harder',   dx: 0.15, dy: 1.55, dz: 4.25, lx: 0.0,  ly: 1.35, lz: -0.25, fov: 40 },
+  { f: 901, dur: 18, kind: 'whip',  vo: 'phone',    dx: 0.45, dy: 1.5,  dz: 4.15, lx: 0.55, ly: 1.15, lz: -0.2,  fov: 40 },
+  { f: 919, dur: 22, kind: 'push',  vo: 'hotter',   dx: 0.05, dy: 1.45, dz: 3.9,  lx: 0.4,  ly: 1.05, lz: -0.15, fov: 38 },
+];
+
+function copyPose(p) {
+  const o = {};
+  for (const k of POSE_KEYS) o[k] = p[k];
+  return o;
+}
+
+function lerpPose(a, b, t) {
+  const o = {};
+  for (const k of POSE_KEYS) o[k] = lin(a[k], b[k], t);
+  return o;
+}
+
+/** Path from `from` → `to` for a given move kind. u in [0,1]. */
+function movePose(from, to, kind, u) {
+  if (kind === 'cut' || from === to) return copyPose(to);
+  const e = easeInOut(u);
+  if (kind === 'push' || kind === 'pull' || kind === 'follow') {
+    return lerpPose(from, to, e);
+  }
+  if (kind === 'orbit') {
+    // Arc sideways while easing into the land pose.
+    const mid = lerpPose(from, to, 0.5);
+    mid.dx += (to.dx >= from.dx ? 1 : -1) * 0.55;
+    mid.dy += 0.12;
+    mid.dz += 0.15;
+    if (u < 0.5) return lerpPose(from, mid, easeInOut(u * 2));
+    return lerpPose(mid, to, easeInOut((u - 0.5) * 2));
+  }
+  if (kind === 'crane') {
+    const mid = lerpPose(from, to, 0.45);
+    mid.dy = Math.max(from.dy, to.dy) + 0.45;
+    mid.dz = lin(from.dz, to.dz, 0.35);
+    if (u < 0.55) return lerpPose(from, mid, easeInOut(u / 0.55));
+    return lerpPose(mid, to, easeInOut((u - 0.55) / 0.45));
+  }
+  if (kind === 'drop') {
+    // Top-down → hero drop: start high, ease down into land.
+    const hi = copyPose(to);
+    hi.dy = to.dy + 1.15;
+    hi.dz = to.dz + 0.55;
+    hi.lx = to.lx; hi.ly = to.ly + 0.2; hi.lz = to.lz;
+    if (u < 0.35) return lerpPose(from, hi, easeOut(u / 0.35));
+    return lerpPose(hi, to, easeInOut((u - 0.35) / 0.65));
+  }
+  if (kind === 'low') {
+    const mid = lerpPose(from, to, 0.4);
+    mid.dy = Math.min(from.dy, to.dy) - 0.25;
+    mid.ly = to.ly + 0.15;
+    if (u < 0.45) return lerpPose(from, mid, easeInOut(u / 0.45));
+    return lerpPose(mid, to, easeInOut((u - 0.45) / 0.55));
+  }
+  if (kind === 'whip') {
+    // EASE → ARC → land (Ricardo whip recipe).
+    const side = (to.dx >= from.dx ? 1 : -1);
+    const arc = lerpPose(from, to, 0.5);
+    arc.dx += side * 1.35;
+    arc.dy += 0.25;
+    arc.dz = lin(from.dz, to.dz, 0.4) - 0.2;
+    arc.lx += side * 0.4;
+    if (u < 0.22) return lerpPose(from, lerpPose(from, arc, 0.35), easeIn(u / 0.22));
+    if (u < 0.72) return lerpPose(lerpPose(from, arc, 0.35), arc, easeInOut((u - 0.22) / 0.5));
+    return lerpPose(arc, to, easeOut((u - 0.72) / 0.28));
+  }
+  return lerpPose(from, to, e);
+}
+
+/** Continuous drift so holds never exceed ~12f. */
+function driftPose(pose, f, landF) {
+  const age = Math.max(0, f - landF);
+  const o = copyPose(pose);
+  const turn = Math.sin((f + landF) * 0.045) * 0.012;
+  const rise = age * 0.0045;
+  const push = age * 0.007;
+  o.dx += turn;
+  o.dy += Math.min(0.18, rise);
+  o.dz = Math.max(3.6, o.dz - Math.min(0.35, push));
+  o.lx += turn * 0.25;
+  return o;
+}
+
+function resolveOffsets(shot, f) {
+  // Find previous landing at or before f, and next landing after f.
+  let prev = LANDINGS[0], prevI = 0, next = null;
+  for (let i = 0; i < LANDINGS.length; i++) {
+    if (LANDINGS[i].f <= f) { prev = LANDINGS[i]; prevI = i; }
+    else { next = LANDINGS[i]; break; }
+  }
+  // Prefer landings that belong to the active shot window when evaluating cuts.
+  // (Cuts at shot.f0 define the opening pose; earlier landings are previous shot.)
+  if (prev.f < shot.f0) {
+    // Snap to the shot-opening cut if present, else keep prev as start of move into next.
+    const open = LANDINGS.find((L) => L.f === shot.f0);
+    if (open && f >= shot.f0) { prev = open; prevI = LANDINGS.indexOf(open); }
+  }
+
+  if (next && next.kind !== 'cut') {
+    const start = next.f - next.dur;
+    if (f >= start && f <= next.f) {
+      // Moving toward next landing.
+      const from = (start <= prev.f) ? prev : driftPose(prev, start, prev.f);
+      const u = (f - start) / Math.max(1, next.dur);
+      return movePose(from, next, next.kind, clamp(u));
+    }
+  }
+
+  // After a landing: drift (never park longer than ~12f without motion).
+  if (next && next.kind === 'cut' && f >= next.f) {
+    return copyPose(next);
+  }
+  return driftPose(prev, f, prev.f);
+}
+
 function cameraFor(shot, f) {
   const booth = room.boothMeta[shot.booth];
-  const t = easeInOut(clamp((f - shot.f0) / Math.max(1, shot.f1 - shot.f0 - 1)));
   const cl = charLocal(shot);
   const charX = booth.x + cl.side;
   const charZ = booth.z + cl.z;
-  const wantFov = (shot.id === 'hook' || shot.id === 'great' || shot.id === 'finale') ? 42
-    : (shot.id === 'throttle' || shot.id === 'heat') ? 46
-    : 40;
-  if (camera.fov !== wantFov) {
+  const r = resolveOffsets(shot, f);
+  const wantFov = r.fov || 40;
+  if (Math.abs(camera.fov - wantFov) > 0.05) {
     camera.fov = wantFov;
     camera.updateProjectionMatrix();
   }
-  if (shot.id === 'hook' || shot.id === 'great' || shot.id === 'finale' || shot.id === 'warmer') {
-    return {
-      x: lin(charX + 0.28, charX + 0.08, t),
-      y: lin(1.7, 1.55, t),
-      z: lin(charZ + 4.7, charZ + 4.1, t),
-      lx: charX - 0.02,
-      ly: 1.35,
-      lz: charZ - 0.25,
-    };
-  }
-  if (shot.id === 'cool') {
-    // Wide, centered pull-back so wall signs stay fully inside the portrait frame.
-    return {
-      x: lin(charX, charX, t),
-      y: lin(1.68, 1.55, t),
-      z: lin(charZ + 6.6, charZ + 5.9, t),
-      lx: charX,
-      ly: 1.35,
-      lz: charZ - 0.35,
-    };
-  }
-  if (shot.id === 'heat' || shot.id === 'throttle') {
-    return {
-      x: lin(charX + 0.15, charX, t),
-      y: lin(1.95, 1.75, t),
-      z: lin(charZ + 5.4, charZ + 4.7, t),
-      lx: charX,
-      ly: 1.4,
-      lz: charZ - 0.6,
-    };
-  }
-  if (shot.id === 'fan' || shot.id === 'holes') {
-    return {
-      x: lin(charX - 0.3, charX - 0.05, t),
-      y: lin(1.85, 1.7, t),
-      z: lin(charZ + 5.3, charZ + 4.5, t),
-      lx: charX + 0.05,
-      ly: 1.4,
-      lz: charZ - 0.5,
-    };
-  }
-  // seal / dev
   return {
-    x: lin(charX + 0.3, charX + 0.1, t),
-    y: lin(1.9, 1.72, t),
-    z: lin(charZ + 5.5, charZ + 4.6, t),
-    lx: charX,
-    ly: 1.4,
-    lz: charZ - 0.55,
+    x: charX + r.dx,
+    y: r.dy,
+    z: charZ + r.dz,
+    lx: charX + r.lx,
+    ly: r.ly,
+    lz: charZ + r.lz,
   };
 }
 
@@ -304,12 +455,18 @@ export function assertCharacterVisible(frames) {
   const results = [];
   const fails = [];
   for (const shot of SHOTS) {
-    const samples = [
+    const samples = new Set([
       shot.f0,
       Math.floor((shot.f0 + shot.f1 - 1) / 2),
       shot.f1 - 1,
-    ];
-    for (const f of samples) {
+    ]);
+    // Sample every VO landing (and mid-move) inside this shot.
+    for (const L of LANDINGS) {
+      if (L.f < shot.f0 || L.f >= shot.f1) continue;
+      samples.add(L.f);
+      if (L.dur > 1) samples.add(Math.max(shot.f0, L.f - Math.floor(L.dur / 2)));
+    }
+    for (const f of [...samples].sort((a, b) => a - b)) {
       if (frames && !frames.includes(f) && frames !== 'all') continue;
       const cam = cameraFor(shot, f);
       camera.position.set(cam.x, cam.y, cam.z);
