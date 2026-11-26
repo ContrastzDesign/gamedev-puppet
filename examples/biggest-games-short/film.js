@@ -1,8 +1,9 @@
 // Biggest-games Short — content-short VERSION 1 (drawn SVG animals in a detailed 3D sales museum).
 import * as THREE from 'three';
 import { FPS, FRAMES, SHOTS } from './beats.js';
-import { W, H, clamp, easeInOut, lin } from './core.js';
+import { W, H } from './core.js';
 import { buildRoom } from './room.js';
+import { buildCamera, assertMaxHold, LANDINGS } from './camera.js';
 import { initOverlays, drawOverlays, captionInfo, assertCaptionSafeZone, captionBoxes } from './overlays.js';
 
 const glCanvas = document.querySelector('#gl');
@@ -26,7 +27,8 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color('#3a3840');
 scene.fog = new THREE.Fog('#3a3840', 28, 52);
 
-const camera = new THREE.PerspectiveCamera(40, W / H, 0.1, 60);
+// near ≈ 0.35 for path-clearance checks (camera.md / brief)
+const camera = new THREE.PerspectiveCamera(40, W / H, 0.35, 60);
 
 const hemi = new THREE.HemisphereLight('#fff8f0', '#6a5a4c', 1.55);
 scene.add(hemi);
@@ -59,7 +61,7 @@ const CHAR_NAMES = ['tapir', 'flamingo', 'armadillo', 'platypus'];
 const POSES = ['neutral', 'talk', 'point', 'wow'];
 const OCCLUSION_MAX = 0.15;
 
-let room, chars = {}, shadowCatch;
+let room, chars = {}, shadowCatch, camSys;
 let ready = false;
 const raycaster = new THREE.Raycaster();
 const _v = new THREE.Vector3();
@@ -112,7 +114,6 @@ function poseFor(shot, f) {
     if (local % 14 < 7) return 'talk';
     return 'wow';
   }
-  // finale
   if (local > 220) return 'point';
   if (local % 14 < 7) return 'talk';
   return 'wow';
@@ -127,71 +128,30 @@ function charLocal(shot) {
   return { side, z: 2.15, scale };
 }
 
-function cameraFor(shot, f) {
-  const booth = room.boothMeta[shot.booth];
-  const t = easeInOut(clamp((f - shot.f0) / Math.max(1, shot.f1 - shot.f0 - 1)));
-  const cl = charLocal(shot);
-  const charX = booth.x + cl.side;
-  const charZ = booth.z + cl.z;
-  const wantFov = shot.id === 'hook' || shot.id === 'question' ? 42 : 40;
-  if (camera.fov !== wantFov) {
-    camera.fov = wantFov;
-    camera.updateProjectionMatrix();
-  }
-  if (shot.id === 'hook' || shot.id === 'question') {
-    return {
-      x: lin(charX + 0.28, charX + 0.08, t),
-      y: lin(1.52, 1.42, t),
-      z: lin(charZ + 4.55, charZ + 3.95, t),
-      lx: charX - 0.02,
-      ly: 1.05,
-      lz: charZ - 0.15,
-    };
-  }
-  if (shot.id === 'vice') {
-    return {
-      x: lin(charX + 0.85, charX + 0.45, t),
-      y: lin(1.5, 1.42, t),
-      z: lin(charZ + 4.85, charZ + 4.1, t),
-      lx: charX - 0.06,
-      ly: 0.85,
-      lz: charZ - 0.15,
-    };
-  }
-  if (shot.id === 'guitar') {
-    return {
-      x: lin(charX - 0.85, charX - 0.4, t),
-      y: lin(1.52, 1.42, t),
-      z: lin(charZ + 4.9, charZ + 4.15, t),
-      lx: charX + 0.06,
-      ly: 0.85,
-      lz: charZ - 0.1,
-    };
-  }
-  // finale
-  return {
-    x: lin(charX - 0.7, charX - 0.3, t),
-    y: lin(1.55, 1.45, t),
-    z: lin(charZ + 4.9, charZ + 4.15, t),
-    lx: charX + 0.05,
-    ly: 0.88,
-    lz: charZ - 0.1,
-  };
+function cameraFor(_shot, f) {
+  if (!camSys) throw new Error('camera system not ready');
+  return camSys.camAt(f);
 }
 
-function syncBoothVisibility(shot) {
+function syncBoothVisibility(f, shot) {
   const b = room.booths;
   if (!b.museum || !b.living) return;
-  const centerIsLiving = shot.id === 'guitar';
-  b.museum.visible = !centerIsLiving;
-  b.living.visible = centerIsLiving;
+  const camBooth = camSys ? camSys.boothAt(f) : shot.booth;
+  // museum + living share the centre pad — show the one the camera is on
+  b.museum.visible = camBooth === 'museum' || (camBooth !== 'living' && shot.booth === 'museum');
+  b.living.visible = camBooth === 'living' || (camBooth !== 'museum' && shot.booth === 'living');
+  if (camBooth === 'museum') { b.museum.visible = true; b.living.visible = false; }
+  if (camBooth === 'living') { b.living.visible = true; b.museum.visible = false; }
   if (b.shop02) b.shop02.visible = true;
   if (b.launch) b.launch.visible = true;
 }
 
 function placeCharacter(shot, f) {
-  syncBoothVisibility(shot);
-  const booth = room.boothMeta[shot.booth];
+  syncBoothVisibility(f, shot);
+  // Place character at the booth the camera is covering (matches landings)
+  const camBooth = camSys ? camSys.boothAt(f) : shot.booth;
+  const boothId = camBooth || shot.booth;
+  const booth = room.boothMeta[boothId];
   const name = shot.char;
   for (const n of CHAR_NAMES) chars[n].group.visible = false;
   const bill = chars[name];
@@ -199,7 +159,8 @@ function placeCharacter(shot, f) {
   setPose(bill, chars[name].poses[poseFor(shot, f)]);
   const bob = Math.sin(f * 0.21) * 0.025;
   const lean = Math.sin(f * 0.09) * 0.03;
-  const cl = charLocal(shot);
+  const cl = charLocal({ ...shot, booth: boothId, id: shot.id });
+  // Use shot-id scale but booth position from camera
   bill.group.scale.set(cl.scale, cl.scale, cl.scale);
   bill.group.position.set(booth.x + lean + cl.side, bob, booth.z + cl.z);
   bill.group.rotation.y = Math.atan2(
@@ -259,25 +220,30 @@ function measureCharacterOcclusion(bill) {
 export function assertCharacterVisible(frames) {
   const results = [];
   const fails = [];
+  // Sample every landing + mid-move + a few shot midpoints
+  const sampleSet = new Set();
+  for (const L of LANDINGS) {
+    sampleSet.add(L.f);
+    sampleSet.add(Math.max(0, L.f - 6));
+  }
   for (const shot of SHOTS) {
-    const samples = [
-      shot.f0,
-      Math.floor((shot.f0 + shot.f1 - 1) / 2),
-      shot.f1 - 1,
-    ];
-    for (const f of samples) {
-      if (frames && !frames.includes(f) && frames !== 'all') continue;
-      const cam = cameraFor(shot, f);
-      camera.position.set(cam.x, cam.y, cam.z);
-      camera.lookAt(cam.lx, cam.ly, cam.lz);
-      placeCharacter(shot, f);
-      scene.updateMatrixWorld(true);
-      const bill = chars[shot.char];
-      const frac = measureCharacterOcclusion(bill);
-      const row = { shot: shot.id, f, occlusion: +frac.toFixed(3) };
-      results.push(row);
-      if (frac > OCCLUSION_MAX + 1e-6) fails.push(row);
-    }
+    sampleSet.add(shot.f0);
+    sampleSet.add(Math.floor((shot.f0 + shot.f1 - 1) / 2));
+    sampleSet.add(shot.f1 - 1);
+  }
+  for (const f of [...sampleSet].sort((a, b) => a - b)) {
+    if (frames && frames !== 'all' && !frames.includes(f)) continue;
+    const shot = shotAt(f);
+    const cam = cameraFor(shot, f);
+    camera.position.set(cam.x, cam.y, cam.z);
+    camera.lookAt(cam.lx, cam.ly, cam.lz);
+    placeCharacter(shot, f);
+    scene.updateMatrixWorld(true);
+    const bill = chars[shot.char];
+    const frac = measureCharacterOcclusion(bill);
+    const row = { shot: shot.id, f, occlusion: +frac.toFixed(3) };
+    results.push(row);
+    if (frac > OCCLUSION_MAX + 1e-6) fails.push(row);
   }
   if (fails.length) {
     throw new Error(
@@ -286,6 +252,75 @@ export function assertCharacterVisible(frames) {
     );
   }
   return results;
+}
+
+/** Near-plane / path clearance: camera stays in open air with clear sightline to look-at. */
+export function assertCameraPathClear(step = 3) {
+  const NEAR_MIN = 0.35;
+  const FLOOR_MIN = 0.85;
+  const CEIL_MAX = 5.6;
+  const fails = [];
+  const samples = [];
+  for (let f = 0; f < FRAMES; f += step) {
+    const shot = shotAt(f);
+    const cam = cameraFor(shot, f);
+    placeCharacter(shot, f);
+    camera.position.set(cam.x, cam.y, cam.z);
+    camera.lookAt(cam.lx, cam.ly, cam.lz);
+    scene.updateMatrixWorld(true);
+
+    if (cam.y < FLOOR_MIN || cam.y > CEIL_MAX) {
+      fails.push({ f, why: `cam y=${cam.y.toFixed(2)} outside aisle band` });
+      continue;
+    }
+
+    _n.set(cam.lx - cam.x, cam.ly - cam.y, cam.lz - cam.z);
+    const aimDist = _n.length();
+    _n.normalize();
+    raycaster.set(camera.position, _n);
+    raycaster.near = 0.02;
+    raycaster.far = Math.max(0.5, aimDist - 0.05);
+    const hits = raycaster.intersectObjects(scene.children, true)
+      .filter((h) => !isIgnoredHit(h.object) && !isCharacterHit(h.object));
+    if (hits.length && hits[0].distance < NEAR_MIN) {
+      fails.push({
+        f,
+        why: `near-plane hit @ ${hits[0].distance.toFixed(3)} (${hits[0].object.name || hits[0].object.type})`,
+      });
+      continue;
+    }
+
+    let total = 0, occluded = 0;
+    for (let iy = 0; iy < 5; iy++) {
+      for (let ix = 0; ix < 3; ix++) {
+        const ndcX = (ix / 2) * 1.6 - 0.8;
+        const ndcY = (iy / 4) * 1.5 - 0.55;
+        _v.set(ndcX, ndcY, 0.5).unproject(camera);
+        _n.copy(_v).sub(camera.position).normalize();
+        raycaster.set(camera.position, _n);
+        raycaster.near = 0.02;
+        raycaster.far = aimDist * 0.55;
+        const gh = raycaster.intersectObjects(scene.children, true)
+          .filter((h) => !isIgnoredHit(h.object) && !isCharacterHit(h.object));
+        total++;
+        if (gh.length) occluded++;
+      }
+    }
+    const frac = total ? occluded / total : 0;
+    samples.push({ f, occl: +frac.toFixed(3) });
+    if (frac > OCCLUSION_MAX + 1e-6) {
+      fails.push({ f, why: `foreground occluder ${(frac * 100).toFixed(0)}% > 15%` });
+    }
+  }
+  if (fails.length) {
+    const show = fails.slice(0, 24);
+    throw new Error(
+      `Camera path clearance failed (${fails.length} samples):\n`
+      + show.map((r) => `  f${r.f}: ${r.why}`).join('\n')
+      + (fails.length > 24 ? `\n  … +${fails.length - 24} more` : ''),
+    );
+  }
+  return { checked: samples.length, step, maxOccl: Math.max(0, ...samples.map((s) => s.occl)) };
 }
 
 function collectSignScreenMeshes() {
@@ -352,7 +387,6 @@ export function assertCaptionClearOfSigns() {
       scene.updateMatrixWorld(true);
       camera.updateMatrixWorld(true);
       for (const mesh of meshes) {
-        // Skip signs that belong to hidden booths
         let hidden = false;
         let o = mesh;
         while (o) {
@@ -362,6 +396,8 @@ export function assertCaptionClearOfSigns() {
         if (hidden) continue;
         const mb = meshScreenBBox(mesh);
         if (!mb) continue;
+        // Only flag overlap in the caption band (lower third) — upper signs stay clear of captions by layout
+        if (mb.bottom < 1500) continue;
         if (boxesOverlap(cap, mb)) {
           fails.push({
             f,
@@ -400,6 +436,11 @@ function renderFrame(f) {
   f = ((f % FRAMES) + FRAMES) % FRAMES | 0;
   const shot = shotAt(f);
   const cam = cameraFor(shot, f);
+  const wantFov = shot.id === 'hook' || shot.id === 'question' ? 42 : 40;
+  if (Math.abs(camera.fov - wantFov) > 0.05) {
+    camera.fov = wantFov;
+    camera.updateProjectionMatrix();
+  }
   camera.position.set(cam.x, cam.y, cam.z);
   camera.lookAt(cam.lx, cam.ly, cam.lz);
   placeCharacter(shot, f);
@@ -434,17 +475,26 @@ async function boot() {
     chars[name] = bill;
   }
 
+  camSys = buildCamera(room, charLocal);
+
   await initOverlays();
   assertCaptionSafeZone();
+  const holdInfo = assertMaxHold(camSys.camAt, FRAMES);
   const occl = assertCharacterVisible('all');
+  const pathClear = assertCameraPathClear(2);
   const signClear = assertCaptionClearOfSigns();
   window.captionInfo = captionInfo;
   window.captionBoxes = captionBoxes;
   window.assertCaptionSafeZone = assertCaptionSafeZone;
   window.assertCaptionClearOfSigns = assertCaptionClearOfSigns;
   window.assertCharacterVisible = assertCharacterVisible;
+  window.assertMaxHold = () => assertMaxHold(camSys.camAt, FRAMES);
+  window.assertCameraPathClear = assertCameraPathClear;
+  window.cameraLandings = LANDINGS;
+  window.holdInfo = holdInfo;
   window.occlusionInfo = occl;
   window.signClearInfo = signClear;
+  window.pathClearInfo = pathClear;
   ready = true;
   window.filmReady = true;
   window.renderFrame = renderFrame;

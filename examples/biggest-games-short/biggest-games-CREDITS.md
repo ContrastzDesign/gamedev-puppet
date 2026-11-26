@@ -9,6 +9,9 @@
 ## Set
 Sales-chart museum labeled SALES MUSEUM, with stations 2002 SHOP (CRT open-world drive + shelves), 2007 LIVING (rhythm highway TV + $99 guitar-controller bundle), 2011 LAUNCH (military shooter + fantasy mountain screens side by side, three genre trophies). Neighbouring desks, racks, posters, lamps. Original screen UIs; generic plain lettering only. No Rockstar/Activision/Bethesda/EA footage or logos.
 
+## Camera rework (this build)
+Free-moving camera per content-short `camera.md`: lands 0–4 frames before each named VO word; each landing uses a different move kind (push-in, pull-out, top-down, crane, orbit, fly-through, low-hero, whip, cut) with no consecutive repeat; 12–30 frame eased moves; never stops (max hold ≤ 12 frames, code-asserted); path-clearance assertion (near ≈ 0.35, no camera inside set geometry, foreground occluders ≤ ~15%). Captions fully opaque, max 2 lines, bbox bottom ≤ y=1840.
+
 ## Technical
 1080×1920, 24 fps, 1247 frames, H.264 CRF 18 yuv420p + AAC. Integrated loudness −14.0 LUFS, true peak ≤ −1 dBTP. Rendered online with GPU=0 (SwiftShader). Captions sit in one lower band below the character’s feet, hard-clamped to an 80 px side safe zone (max line render width 920 px), and fail boot if any caption box overlaps a sign/screen mesh. Captions spell **Grand Theft Auto: Vice City**, **Madden NFL 2003**, **Guitar Hero III: Legends of Rock**, **Madden NFL 08**, **Call of Duty: Modern Warfare 3**, **The Elder Scrolls V: Skyrim**, **2002**, **2007**, **2011**.
 
